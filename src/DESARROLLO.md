@@ -143,12 +143,12 @@ propios tres archivos. Es el mismo criterio que usa React, pero sin React.
     │   ├── main.js             # global: init, menú, footer
     │   ├── carrito.js          # global: carrito en localStorage
     │   └── auth.js             # global: estado de usuario
-      ├── assets/                 # compartido entre todas las páginas
-      │   ├── img/
-      │   ├── fonts/
-      │   └── icons/
-      └── DESARROLLO.md           # esta guía
-  ```
+    ├── assets/                 # compartido entre todas las páginas
+    │   ├── img/
+    │   ├── fonts/
+    │   └── icons/
+    └── DESARROLLO.md           # esta guía
+```
 
 El `README.md` vive en la raíz del repositorio, junto a `.gitignore`, porque es
 la puerta de entrada del proyecto.
