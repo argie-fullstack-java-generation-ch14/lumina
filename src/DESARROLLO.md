@@ -2,8 +2,8 @@
 Guía técnica del equipo: cómo está organizado el proyecto, cómo se carga el CSS
 y el JavaScript, cómo se instala Bootstrap y cómo trabajar con Git.
 
-El modelo de negocio (qué es Lumina y qué hace cada página) está en
-[README.md](README.md).
+El modelo de negocio (qué es Lumina y qué hace cada página) está en el
+[README.md](../README.md), en la raíz del repositorio.
 
 El tablero del equipo, donde se asignan las tareas y se lleva el seguimiento del
 proyecto, está en [Trello — Lumina](https://trello.com/b/NQBY1NXR/lumina).
@@ -143,13 +143,15 @@ propios tres archivos. Es el mismo criterio que usa React, pero sin React.
     │   ├── main.js             # global: init, menú, footer
     │   ├── carrito.js          # global: carrito en localStorage
     │   └── auth.js             # global: estado de usuario
-    ├── assets/                 # compartido entre todas las páginas
-    │   ├── img/
-    │   ├── fonts/
-    │   └── icons/
-    ├── DESARROLLO.md
-    └── README.md
-```
+      ├── assets/                 # compartido entre todas las páginas
+      │   ├── img/
+      │   ├── fonts/
+      │   └── icons/
+      └── DESARROLLO.md           # esta guía
+  ```
+
+El `README.md` vive en la raíz del repositorio, junto a `.gitignore`, porque es
+la puerta de entrada del proyecto.
 
 Cuatro cosas a tener en cuenta:
 
