@@ -1,0 +1,26 @@
+# EditorConfig ayuda a los editores a mantener el mismo formato
+# de archivo en todos los computadores del equipo.
+# https://editorconfig.org
+
+root = true
+
+# Reglas para todos los archivos del proyecto.
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+tab_width = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Markdown usa dos espacios al final de una línea para forzar un salto
+# de línea, así que ese es el único caso donde no se limpian.
+[*.md]
+trim_trailing_whitespace = false
+
+[*.json]
+indent_size = 2
+
+[*.{yml,yaml}]
+indent_size = 2
