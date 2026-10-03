@@ -106,6 +106,7 @@ propios tres archivos. Es el mismo criterio que usa React, pero sin React.
 ```
 .
 ├── .gitignore          # raíz del repo, junto a src/
+├── .editorconfig       # formato del código: 2 espacios, LF, UTF-8
 └── src/
     ├── tienda/                 # todas las páginas públicas cuelgan aquí
     │   ├── inicio/             # ruta /tienda/inicio/
@@ -658,62 +659,54 @@ no hay que reaprender nada después.
 
 ### Cómo configurar VS Code
 
-Esto hay que hacerlo **una vez** por computador. Después queda siempre.
+La sangría de este proyecto **no se configura a mano**: la define el archivo
+`.editorconfig` de la raíz. Pero VS Code **no lo lee por sí solo**, así que hace
+falta una extensión. Esto se hace **una vez** por computador.
 
-#### En Windows
+#### Instala la extensión EditorConfig
 
-1. Abre VS Code.
-2. Presiona **`Ctrl + ,`** para abrir la Configuración.
-3. En el buscador escribe `tab size`. Busca **Editor: Tab Size** y ponlo en **2**.
-4. Borra la búsqueda y escribe `insert spaces`. Busca **Editor: Insert Spaces** y
-   **marca** la casilla.
-5. Borra la búsqueda y escribe `detect indentation`. Busca **Editor: Detect
-   Indentation** y **desmarca** la casilla.
-6. Cierra la pestaña de Configuración. Ya está.
+1. Presiona `Ctrl + Shift + X` (`Cmd + Shift + X` en Mac) para abrir Extensiones.
+2. Escribe `EditorConfig` en el buscador.
+3. Instala la que publica **EditorConfig**. Es la oficial, y es la misma que vas
+   a encontrar en cualquier otro editor.
+4. Reinicia VS Code si te lo pide.
 
-#### En macOS
+Listo. Al abrir cualquier archivo de este proyecto, VS Code aplica las reglas del
+`.editorconfig`: 2 espacios, finales de línea LF y UTF-8. No hay que tocar nada
+más.
 
-1. Abre VS Code.
-2. Presiona **`Cmd + ,`** para abrir la Configuración.
-3. En el buscador escribe `tab size`. Busca **Editor: Tab Size** y ponlo en **2**.
-4. Borra la búsqueda y escribe `insert spaces`. Busca **Editor: Insert Spaces** y
-   **marca** la casilla.
-5. Borra la búsqueda y escribe `detect indentation`. Busca **Editor: Detect
-   Indentation** y **desmarca** la casilla.
-6. Cierra la pestaña de Configuración. Ya está.
+Sin la extensión, VS Code ignora el archivo y sigue con su valor por defecto, que
+casi siempre son 4 espacios. Ese olvido es hoy la causa más probable de que la
+sangría se te desalinee.
 
-#### La forma rápida
+#### Cómo comprobar que funciona
 
-En la barra inferior derecha de VS Code aparece un texto que dice `Spaces: 4` o
-`Tab Size: 4`. Haz clic ahí y elige **Indent Using Spaces** → **2**. Es más rápido
-que el camino largo, pero solo aplica a la ventana abierta, así que úsala para
-comprobar, no para configurar de verdad.
+Abre cualquier archivo del proyecto y mira la barra inferior derecha: debe decir
+**`Spaces: 2`**. Si dice `Spaces: 4`, la extensión no está instalada o no se ha
+cargado todavía: reinicia VS Code.
 
-#### Por qué es importante desmarcar "Detect Indentation"
-
-Ese ajuste es el que rompe la regla sin que te des cuenta. Con él activado, VS
-Code **mira cada archivo que abres** y adivina su sangría. Si un archivo tiene
-tabs, VS Code cambia a tabs solo; si tiene 4 espacios, cambia a 4 solo.
-
-O sea: puedes tener bien configurado todo, abrir un archivo que alguien te mandó
-con 4 espacios, y sin hacer nada quedaste escribiendo con 4.
+VS Code trae además un ajuste llamado **Detect Indentation** que, al abrir un
+archivo, mira su contenido y adivina la sangría. La extensión vuelve a aplicar el
+`.editorconfig` cada vez que cambias de pestaña o vuelves a la ventana, así que
+dentro de este proyecto la regla manda. Puedes desmarcarlo en Configuración
+(`Ctrl + ,` / `Cmd + ,`) por si acaso; cuesta nada.
 
 ### Antes de subir cambios: verificar la sangría
+
+**El `.editorconfig` no arregla un archivo por ti.** Le dice a tu editor cómo
+indentar lo que escribas a partir de ahora, pero **no re-indenta lo que ya está
+adentro**. Si pegas un bloque con tabulaciones o abres un archivo hecho con 4
+espacios, el contenido sigue igual hasta que lo formatees tú.
+
+Y `end_of_line`, `insert_final_newline` y `trim_trailing_whitespace` solo actúan
+al guardar desde el editor, así que un archivo tocado desde otra herramienta
+puede quedar sin ellos.
+
+Por eso estos pasos siguen siendo obligatorios.
 
 **Este es el paso que más se olvida, y el que más problemas trae.** Revisar antes
 de hacer `git push` toma un minuto y evita subir un archivo con 4 espacios o con
 tabs que después genera conflictos a todo el equipo.
-
-#### Buscar tabulaciones
-
-Es el paso más importante. En Windows `Ctrl + F`, en Mac `Cmd + F`. En el
-buscador, haz clic en el botón `.*` para activar las expresiones regulares, escribe
-`\t` y mira el contador de la derecha.
-
-| Resultado | Qué hacer |
-|---|---|
-| **No results** | Perfecto, no hay tabs. |
-| **N resultados** | Hay tabulaciones. Corrige antes de subir. |
 
 #### Ver los espacios de verdad
 
