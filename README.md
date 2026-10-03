@@ -6,7 +6,7 @@ Fase 1: HTML/CSS/JS sin servidor. Fase 2: API Java/Spring Boot + MySQL.
 
 Este documento es el **modelo de negocio**: qué es Lumina, qué páginas tiene y
 qué hace cada una. Para la parte técnica —estructura de carpetas, CSS, Bootstrap
-y reglas del equipo con Git— ver [DESARROLLO.md](DESARROLLO.md).
+y reglas del equipo con Git— ver [src/DESARROLLO.md](src/DESARROLLO.md).
 
 ## Cómo verlo
 
@@ -48,18 +48,18 @@ muestra `Perfil`**.
 
 | Acción | Ocurre en |
 |---|---|
-| Agregar al carrito | `tienda/producto/index.html`, `tienda/crea-tu-vela/index.html` |
-| Editar cantidad / eliminar | `tienda/carrito/index.html` |
-| Confirmar pedido (modal) | `tienda/carrito/index.html` |
+| Agregar al carrito | `src/tienda/producto/index.html`, `src/tienda/crea-tu-vela/index.html` |
+| Editar cantidad / eliminar | `src/tienda/carrito/index.html` |
+| Confirmar pedido (modal) | `src/tienda/carrito/index.html` |
 
 ### Panel admin
 
 | Sección | Archivo |
 |---|---|
-| Panel | `admin/panel/index.html` |
-| Productos | `admin/productos/index.html` |
-| Crear / actualizar | `admin/producto-formulario/index.html` |
-| Pedidos | `admin/pedidos/index.html` |
+| Panel | `src/admin/panel/index.html` |
+| Productos | `src/admin/productos/index.html` |
+| Crear / actualizar | `src/admin/producto-formulario/index.html` |
+| Pedidos | `src/admin/pedidos/index.html` |
 
 ## Dos fases de arquitectura
 
@@ -88,7 +88,7 @@ llamar endpoints. El resto del frontend no se toca.
 
 ## Wizard "Crea tu vela"
 
-Los 5 pasos son un flujo dentro de `tienda/crea-tu-vela/index.html`, no 5 archivos HTML:
+Los 5 pasos son un flujo dentro de `src/tienda/crea-tu-vela/index.html`, no 5 archivos HTML:
 
 ```
 intención → aroma → color/diseño → mensaje → vista previa → agregar al carrito
