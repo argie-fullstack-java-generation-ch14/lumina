@@ -65,7 +65,7 @@ No hay build ni dependencias, no hay package.json, no hay npm install, no hay qu
 
 17. [`git pull` antes de empezar, `git push` al terminar, y **nunca** `git push --force` sobre `main`.](#flujo-diario)
 18. [Si dos personas necesitan el mismo archivo compartido al mismo tiempo, la segunda espera a que la primera haga `pull` y `push`, o trabaja en una rama aparte.](#ramas-y-commits)
-19. [Toda rama se llama `nombre-pagina-iniciales`, todo en minúsculas y con guiones. Ejemplos: `sobre-nosotros-arr`, `carrito-compras-psq`, `catalogo-mcb`.](#como-se-nombran-nuestras-ramas)
+19. [Toda rama se llama `iniciales/nombre-pagina`, todo en minúsculas, se agregan las iniciales del integrante separado con un slash (/) y se agrega el nombre de ka pagina o feature que se le asignó separado con guiones. Ejemplos: `arr/sobre-nosotros`, `psq/carrito-compras`, `mcb/catalogo`.](#como-se-nombran-nuestras-ramas)
 20. [Todo commit empieza con un prefijo: `feat:`, `fix:`, `docs:`, `style:` o `refactor:`.](#prefijos-de-los-commits)
 
 Si alguna vez una regla estorba, se avisa al equipo y se cambia aquí. No se salta por cuenta propia.
@@ -831,13 +831,13 @@ La forma de resolverlo está en [Ramas y commits](#ramas-y-commits).
 ```bash
 git checkout main
 git pull
-git checkout -b inicio-mis-iniciales
+git checkout -b arr/sobre-nosotros
 
 # editar SOLO tus archivos
 
-git add tienda/inicio/
-git commit -m "feat: agregar banner y productos destacados en inicio"
-git push --set-upstream origin inicio-mis-iniciales
+git add tienda/sobre-nosotros/
+git commit -m "feat: agregar banner y productos destacados en sobre-nosotros"
+git push --set-upstream origin arr/sobre-nosotros
 ```
 
 Después se abre un Pull Request desde esa rama hacia `main`, y alguien más lo
@@ -864,19 +864,18 @@ entienda de un vistazo qué cambió y quién lo hizo, sin tener que abrir el có
 ### Cómo nombrar nuestras ramas
 
 ```
-nombre-de-la-pagina-iniciales-del-integrante
+iniciales-del-integrante/nombre-de-la-pagina
 ```
 
 Todo en minúsculas, separado por guiones.
 
 | Ejemplo | Qué significa |
 |---|---|
-| `sobre-nosotros-ar` | la página Nosotros, de Ana Rodríguez |
-| `carrito-compras-ps` | la página Carrito, de Pedro Sánchez |
-| `catalogo-mcb` | la página Catálogo, de María Clara Boutista |
+| `arr/sobre-nosotros` | la página Nosotros, de Argie Rincón Rodríguez |
+| `psq/carrito-compras` | la página Carrito, de Pedro Saravia Quispe |
+| `mcb/catalogo` | la página Catálogo, de María Camila Berrío |
 
-Como la rama empieza con el nombre de la página, se ve de un vistazo a quién le
-tocaba. Y como termina con las iniciales, se sabe rápido quién la creó.
+Como la rama empieza con las iniciales, se sabe rápido quién la creó. Y como termina con el nombre de la página, se sabe rápido qué tarea se trabajó allí.
 
 Para crear una rama:
 
