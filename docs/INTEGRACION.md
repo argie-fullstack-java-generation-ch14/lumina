@@ -41,6 +41,7 @@ Cuando hayas finalizado una tarea o funcionalidad en tu máquina local, sigue es
 ---
 
 ## 2. Resolución de Conflictos
+
 Si GitHub indica que tu Pull Request tiene conflictos con la rama `main` que impiden el merge automático:
 
 ![Haz clic en **New pull request**.](./flujo-pr/paso-8.png)
