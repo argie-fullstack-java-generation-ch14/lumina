@@ -10,18 +10,27 @@ Cuando hayas finalizado una tarea o funcionalidad en tu máquina local, sigue es
 
 1. **Subir cambios a GitHub:** Haz push de tu rama local a la rama remota correspondiente en GitHub.
 2. **Navegar a GitHub:** Ve al repositorio del proyecto en GitHub y dirígete a la pestaña **Pull requests**.
+   ![Haz clic en **New pull request**.](./FLUJO%20PRS/paso-1.png)
 3. **Crear el Pull Request:**
    * Haz clic en **New pull request**.
+   ![Haz clic en **New pull request**.](./FLUJO%20PRS/paso-2.png)
    * Selecciona la rama origen (tu rama de trabajo) y la rama destino (`main`).
+   ![Haz clic en **New pull request**.](./FLUJO%20PRS/paso-3.png)
 4. **Completar la información:**
    * **Título y Descripción:** Escribe una descripción breve pero clara explicando qué cambios, correcciones o funcionalidades estás integrando a `main`.
+   ![Haz clic en **New pull request**.](./FLUJO%20PRS/paso-4.png)
    * **Asignar Revisor (Code Reviewer):** Selecciona al compañero(a) de equipo responsable de revisar tu código.
+   ![Haz clic en **New pull request**.](./FLUJO%20PRS/paso-5.png)
+   ![Haz clic en **New pull request**.](./FLUJO%20PRS/paso-6.png)
+   * Crear el Pull Request
+   ![Haz clic en **New pull request**.](./FLUJO%20PRS/paso-7.png)
 
 ---
 
 ## 2. Resolución de Conflictos
-
 Si GitHub indica que tu Pull Request tiene conflictos con la rama `main` que impiden el merge automático:
+
+![Haz clic en **New pull request**.](./FLUJO%20PRS/paso-8.png)
 
 > ⚠️ **IMPORTANTE (Primera vez que ocurra un conflicto):**  
 > Cuando se presente un conflicto por primera vez en el proyecto, no te alarmes, los conflictos son parte habitual del trabajo en equipo incluso en un entorno laborar real. Como estamos en proceso de aprendizaje, avisa al equipo en cuanto ocurra. Realizaremos una sesión en vivo para revisar el paso a paso para su resolución. El objetivo de esa sesió es que todos nos familiaricemos con la dinámica descrita a continuación y la tomemos como guía para resolver futuros conflictos de forma autónoma.
