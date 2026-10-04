@@ -8,7 +8,7 @@ El modelo de negocio (qué es Lumina y qué hace cada página) está en el
 El tablero del equipo, donde se asignan las tareas y se lleva el seguimiento del
 proyecto, está en [Trello — Lumina](https://trello.com/b/NQBY1NXR/lumina).
 
-‼️ El flujo de integración de cambios es por **Pull Requests**, el flujo detallado está en [INTEGRACION.md](../src/INTEGRACION.md)
+‼️ El flujo de integración de cambios es por **Pull Requests**, el flujo detallado está en [INTEGRACION.md](INTEGRACION.md)
 
 No hay build ni dependencias, no hay package.json, no hay npm install, no hay que compilar. Se abren los HTML directo en el navegador.
 
@@ -109,6 +109,9 @@ propios tres archivos. Es el mismo criterio que usa React, pero sin React.
 .
 ├── .gitignore          # raíz del repo, junto a src/
 ├── .editorconfig       # formato del código: 2 espacios, LF, UTF-8
+├── docs/               # documentación del equipo
+│   ├── DESARROLLO.md   # esta guía
+│   └── INTEGRACION.md  # flujo de Pull Requests
 └── src/
     ├── tienda/                 # todas las páginas públicas cuelgan aquí
     │   ├── inicio/             # ruta /tienda/inicio/
@@ -146,11 +149,10 @@ propios tres archivos. Es el mismo criterio que usa React, pero sin React.
     │   ├── main.js             # global: init, menú, footer
     │   ├── carrito.js          # global: carrito en localStorage
     │   └── auth.js             # global: estado de usuario
-    ├── assets/                 # compartido entre todas las páginas
-    │   ├── img/
-    │   ├── fonts/
-    │   └── icons/
-    └── DESARROLLO.md           # esta guía
+    └── assets/                 # compartido entre todas las páginas
+        ├── img/
+        ├── fonts/
+        └── icons/
 ```
 
 El `README.md` vive en la raíz del repositorio, junto a `.gitignore`, porque es

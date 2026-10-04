@@ -6,7 +6,7 @@ Fase 1: HTML/CSS/JS sin servidor. Fase 2: API Java/Spring Boot + MySQL.
 
 Este documento es el **modelo de negocio**: qué es Lumina, qué páginas tiene y
 qué hace cada una. Para la parte técnica —estructura de carpetas, CSS, Bootstrap
-y reglas del equipo con Git— ver [src/DESARROLLO.md](src/DESARROLLO.md).
+y reglas del equipo con Git— ver [docs/DESARROLLO.md](docs/DESARROLLO.md).
 
 ## Cómo verlo
 
