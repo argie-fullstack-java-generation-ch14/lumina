@@ -9,20 +9,33 @@ Para mantener la estabilidad y calidad de la rama principal (`main`), todos los 
 Cuando hayas finalizado una tarea o funcionalidad en tu máquina local, sigue estos pasos:
 
 1. **Subir cambios a GitHub:** Haz push de tu rama local a la rama remota correspondiente en GitHub.
+
 2. **Navegar a GitHub:** Ve al repositorio del proyecto en GitHub y dirígete a la pestaña **Pull requests**.
+
    ![Haz clic en **New pull request**.](./flujo-pr/paso-1.png)
+
 3. **Crear el Pull Request:**
    * Haz clic en **New pull request**.
+
    ![Haz clic en **New pull request**.](./flujo-pr/paso-2.png)
+
    * Selecciona la rama origen (tu rama de trabajo) y la rama destino (`main`).
+
    ![Haz clic en **New pull request**.](./flujo-pr/paso-3.png)
+
 4. **Completar la información:**
+
    * **Título y Descripción:** Escribe una descripción breve pero clara explicando qué cambios, correcciones o funcionalidades estás integrando a `main`.
+
    ![Haz clic en **New pull request**.](./flujo-pr/paso-4.png)
+
    * **Asignar Revisor (Code Reviewer):** Selecciona al compañero(a) de equipo responsable de revisar tu código.
+
    ![Haz clic en **New pull request**.](./flujo-pr/paso-5.png)
    ![Haz clic en **New pull request**.](./flujo-pr/paso-6.png)
+
    * Crear el Pull Request
+   
    ![Haz clic en **New pull request**.](./flujo-pr/paso-7.png)
 
 ---
