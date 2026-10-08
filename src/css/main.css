@@ -2,3 +2,22 @@
  * Global: variables, tipografía, layout.
  * NO lleva reset: lo aporta el Reboot de Bootstrap.
  */
+
+/* --- PALETA DE COLORES LUMINA --- */
+:root {
+  /* Verdes */
+  --verde-amarillento: #E9EAE5;
+  --verde-claro: #D1DCCA;
+  --verde-apagado: #7C9474;
+  --celeste-apagado: #374F59;
+
+  /* Naranjas */
+  --naranja-claro: #F9F1E8;
+  --naranja-acentuado: #DBCBBF;
+  --naranja-pastel: #CBB3A1;
+  --naranja-apagado: #AD784E;
+
+  /* Oscuros */
+  --negro-relajacion: #33302D;
+  --negro-acentuado: #13120F;
+}
