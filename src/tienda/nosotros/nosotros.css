@@ -5,3 +5,45 @@
  * Lo compartido va en css/main.css o css/components.css, nunca aquí.
  * Clases en inglés y kebab-case: .product-card, no .productCard.
  */
+
+.card-size-img {
+  height: 18rem;
+  object-fit: cover;
+}
+
+.dev-card {
+  width: 18rem;
+  height: 530px;
+}
+
+.dev-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.dev-info-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.dev-info-header p {
+  margin-top: 1rem;
+}
+
+.dev-info-header h5,
+.dev-info-header h6 {
+  margin: 0;
+}
+
+.dev-info-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
