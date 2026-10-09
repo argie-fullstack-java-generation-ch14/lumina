@@ -20,10 +20,10 @@ const team = [
   {
     name: "Nicole Betancourt",
     role: "Full Stack Developer",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed dolor finibus, mattis urna sit amet, porta quam.",
-    photo: "",
-    linkedin: "https://www.linkedin.com/in/[TU USUARIO]/",
-    github: "https://github.com/[TU USUARIO]"
+    description: "Aprendiendo Full Stack con Java. Me apasionan la música y aprender algo nuevo cada día. Me gusta convertir ideas en código.",
+    photo: "../../image/nicole.jpg",
+    linkedin: "https://www.linkedin.com/in/nicole-betancourt-alvarez-nba/",
+    github: "https://github.com/NBA-Nicole"
   },
   {
     name: "Nayant Gonzalez",
