@@ -13,7 +13,7 @@ const team = [
     name: "Argie Rincón",
     role: "Full Stack Developer",
     description: "Apasionada de la arquitectura de software y la creación de experiencias digitales enfocadas en el usuario.",
-    photo: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1791498080/generation/argie_pomua3.jpg",
+    photo: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1791561044/IMG_1545_2_zw8gnn.jpg",
     linkedin: "https://www.linkedin.com/in/argierincon/",
     github: "https://github.com/argierincon"
   },
