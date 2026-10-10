@@ -21,17 +21,17 @@ const team = [
     name: "Nicole Betancourt",
     role: "Full Stack Developer",
     description: "Aprendiendo Full Stack con Java. Me apasionan la música y aprender algo nuevo cada día. Me gusta convertir ideas en código.",
-    photo: "../../image/nicole.jpg",
+    photo: "./image/nicole.jpg",
     linkedin: "https://www.linkedin.com/in/nicole-betancourt-alvarez-nba/",
     github: "https://github.com/NBA-Nicole"
   },
   {
     name: "Nayant Gonzalez",
     role: "UI Designer / Full Stack Developer",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed dolor finibus, mattis urna sit amet, porta quam. ",
-    photo: "",
-    linkedin: "https://www.linkedin.com/in/[TU USUARIO]/",
-    github: "https://github.com/[TU USUARIO]"
+    description: "Apasionada por el UI y el diseño, aprendiendo Full Stack para crear soluciones web funcionales, intuitivas y atractivas. ",
+    photo: "./image/naya.jpeg",
+    linkedin: "https://www.linkedin.com/in/nayagonzalezd/",
+    github: "https://github.com/nayagonzalezd"
   }
 ];
 
