@@ -12,7 +12,6 @@ const headerTemplate = `
   <div class="site-header-inner container">
     <a class="site-brand" href="${base}index.html">Lumina</a>
     <nav class="site-nav">
-      <a class="site-nav-link" href="${base}tienda/inicio/index.html">Inicio</a>
       <a class="site-nav-link" href="${base}tienda/catalogo/index.html">Catálogo</a>
       <a class="site-nav-link" href="${base}tienda/nosotros/index.html">Nosotros</a>
       <a class="site-nav-link" href="${base}tienda/contacto/index.html">Contacto</a>
