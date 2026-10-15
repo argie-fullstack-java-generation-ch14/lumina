@@ -1,5 +1,8 @@
 // Lumina · about-us.js
 
+// !TODO - Cargar fotos e CLoudinary
+const imageBase = /\/(tienda|admin)\//.test(window.location.pathname) ? '../../' : './';
+
 const team = [
   {
     name: "Pedro Saravia",
@@ -21,7 +24,7 @@ const team = [
     name: "Nicole Betancourt",
     role: "Full Stack Developer",
     description: "Aprendiendo Full Stack con Java. Me apasionan la música y aprender algo nuevo cada día. Me gusta convertir ideas en código.",
-    photo: "./image/nicole.jpg",
+    photo: `${imageBase}image/nicole.jpg`,
     linkedin: "https://www.linkedin.com/in/nicole-betancourt-alvarez-nba/",
     github: "https://github.com/NBA-Nicole"
   },
@@ -29,7 +32,7 @@ const team = [
     name: "Nayant Gonzalez",
     role: "UI Designer / Full Stack Developer",
     description: "Apasionada por el UI y el diseño, aprendiendo Full Stack para crear soluciones web funcionales, intuitivas y atractivas. ",
-    photo: "./image/naya.jpeg",
+    photo: `${imageBase}image/naya.jpeg`,
     linkedin: "https://www.linkedin.com/in/nayagonzalezd/",
     github: "https://github.com/nayagonzalezd"
   }
