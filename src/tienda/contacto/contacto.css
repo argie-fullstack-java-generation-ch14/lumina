@@ -5,3 +5,552 @@
  * Lo compartido va en css/main.css o css/components.css, nunca aquí.
  * Clases en inglés y kebab-case: .product-card, no .productCard.
  */
+
+/* --- Estructura de la página --- */
+.contact-page {
+  padding-top: 3rem;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+/* En tablet grande y escritorio: el texto a la izquierda y el formulario a la derecha */
+@media (min-width: 992px) {
+  .contact-layout {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 4rem;
+  }
+}
+
+/* --- Título y texto de arriba --- */
+/* El equipo todavía no ha eligió una fuente, por eso uso estas*/
+.contact-title {
+  margin: 0 0 1rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.25rem;
+  line-height: 1.15;
+  color: var(--celeste-apagado);
+}
+
+.contact-lead {
+  margin: 0;
+  max-width: 28rem;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--negro-relajacion);
+}
+
+@media (min-width: 992px) {
+  .contact-title {
+    font-size: 3rem;
+  }
+}
+
+/* --- Caja donde van el formulario, el hámster y el mensaje de gracias --- */
+.contact-panel {
+  padding: 1.5rem;
+  background-color: var(--naranja-claro);
+  border: 1px solid var(--naranja-acentuado);
+  border-radius: 12px;
+}
+
+@media (min-width: 576px) {
+  .contact-panel {
+    padding: 2rem;
+  }
+}
+
+/* --- Formulario --- */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.contact-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--negro-relajacion);
+}
+
+.contact-input {
+  width: 100%;
+  padding: 0.75rem 0.875rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--negro-acentuado);
+  background-color: var(--naranja-claro);
+  border: 1px solid var(--celeste-apagado);
+  border-radius: 8px;
+}
+
+.contact-input::placeholder {
+  color: var(--celeste-apagado);
+  opacity: 0.8;
+}
+
+.contact-input:focus-visible {
+  outline: 2px solid var(--celeste-apagado);
+  outline-offset: 2px;
+}
+
+.contact-textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+/* Campo con error: borde naranja (de 2px, lo hago con una sombra para que el campo no se mueva) y el mensaje debajo */
+.has-error .contact-input {
+  border-color: var(--naranja-apagado);
+  box-shadow: inset 0 0 0 1px var(--naranja-apagado);
+}
+
+.contact-error {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--negro-relajacion);
+}
+
+.contact-error:empty {
+  display: none;
+}
+
+.contact-error::before {
+  content: "";
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--naranja-apagado);
+}
+
+.contact-form-error {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  color: var(--negro-relajacion);
+  background-color: var(--naranja-acentuado);
+  border-radius: 8px;
+}
+
+.contact-form-error:empty {
+  display: none;
+}
+
+.contact-button {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.75rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--naranja-claro);
+  background-color: var(--celeste-apagado);
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.contact-button:hover {
+  background-color: var(--negro-relajacion);
+}
+
+.contact-button:focus-visible {
+  outline: 2px solid var(--celeste-apagado);
+  outline-offset: 3px;
+}
+
+@media (min-width: 576px) {
+  .contact-button {
+    width: auto;
+    align-self: flex-start;
+  }
+}
+
+/* --- Vista de "enviando"--- */
+.contact-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.contact-state[hidden] {
+  display: none;
+}
+
+.contact-state-title {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.5rem;
+  color: var(--celeste-apagado);
+}
+
+.contact-state-title:focus {
+  outline: none;
+}
+
+.contact-state-text {
+  margin: 0;
+  max-width: 24rem;
+  color: var(--negro-relajacion);
+}
+
+/* --- Hámster --- */
+.hamster-wheel-box {
+  --dur: 1s;
+  position: relative;
+  width: 12em;
+  height: 12em;
+  font-size: 14px;
+}
+
+.hamster-wheel,
+.hamster,
+.hamster-part,
+.hamster-spoke {
+  position: absolute;
+}
+
+.hamster-wheel,
+.hamster-spoke {
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hamster-wheel {
+  background: radial-gradient(100% 100% at center, transparent 47.8%, var(--verde-apagado) 48%);
+  z-index: 2;
+}
+
+.hamster {
+  animation: hamster-run var(--dur) ease-in-out infinite;
+  top: 50%;
+  left: calc(50% - 3.5em);
+  width: 7em;
+  height: 3.75em;
+  transform: rotate(4deg) translate(-0.8em, 1.85em);
+  transform-origin: 50% 0;
+  z-index: 1;
+}
+
+.hamster-head {
+  animation: hamster-head var(--dur) ease-in-out infinite;
+  background: var(--naranja-apagado);
+  border-radius: 70% 30% 0 100% / 40% 25% 25% 60%;
+  box-shadow: 0 -0.25em 0 var(--naranja-pastel) inset,
+    0.75em -1.55em 0 var(--naranja-acentuado) inset;
+  top: 0;
+  left: -2em;
+  width: 2.75em;
+  height: 2.5em;
+  transform-origin: 100% 50%;
+}
+
+.hamster-ear {
+  animation: hamster-ear var(--dur) ease-in-out infinite;
+  background: var(--naranja-acentuado);
+  border-radius: 50%;
+  box-shadow: -0.25em 0 var(--naranja-apagado) inset;
+  top: -0.25em;
+  right: -0.25em;
+  width: 0.75em;
+  height: 0.75em;
+  transform-origin: 50% 75%;
+}
+
+.hamster-eye {
+  animation: hamster-eye var(--dur) linear infinite;
+  background-color: var(--negro-acentuado);
+  border-radius: 50%;
+  top: 0.375em;
+  left: 1.25em;
+  width: 0.5em;
+  height: 0.5em;
+}
+
+.hamster-nose {
+  background: var(--naranja-acentuado);
+  border-radius: 35% 65% 85% 15% / 70% 50% 50% 30%;
+  top: 0.75em;
+  left: 0;
+  width: 0.2em;
+  height: 0.25em;
+}
+
+.hamster-body {
+  animation: hamster-body var(--dur) ease-in-out infinite;
+  background: var(--naranja-pastel);
+  border-radius: 50% 30% 50% 30% / 15% 60% 40% 40%;
+  box-shadow: 0.1em 0.75em 0 var(--naranja-apagado) inset,
+    0.15em -0.5em 0 var(--naranja-acentuado) inset;
+  top: 0.25em;
+  left: 2em;
+  width: 4.5em;
+  height: 3em;
+  transform-origin: 17% 50%;
+  transform-style: preserve-3d;
+}
+
+.hamster-limb-fr,
+.hamster-limb-fl {
+  clip-path: polygon(0 0, 100% 0, 70% 80%, 60% 100%, 0% 100%, 40% 80%);
+  top: 2em;
+  left: 0.5em;
+  width: 1em;
+  height: 1.5em;
+  transform-origin: 50% 0;
+}
+
+.hamster-limb-fr {
+  animation: hamster-limb-fr var(--dur) linear infinite;
+  background: linear-gradient(var(--naranja-apagado) 80%, var(--naranja-pastel) 80%);
+  transform: rotate(15deg) translateZ(-1px);
+}
+
+.hamster-limb-fl {
+  animation: hamster-limb-fl var(--dur) linear infinite;
+  background: linear-gradient(var(--naranja-pastel) 80%, var(--naranja-acentuado) 80%);
+  transform: rotate(15deg);
+}
+
+.hamster-limb-br,
+.hamster-limb-bl {
+  border-radius: 0.75em 0.75em 0 0;
+  clip-path: polygon(0 0, 100% 0, 100% 30%, 70% 90%, 70% 100%, 30% 100%, 40% 90%, 0% 30%);
+  top: 1em;
+  left: 2.8em;
+  width: 1.5em;
+  height: 2.5em;
+  transform-origin: 50% 30%;
+}
+
+.hamster-limb-br {
+  animation: hamster-limb-br var(--dur) linear infinite;
+  background: linear-gradient(var(--naranja-apagado) 90%, var(--naranja-pastel) 90%);
+  transform: rotate(-25deg) translateZ(-1px);
+}
+
+.hamster-limb-bl {
+  animation: hamster-limb-bl var(--dur) linear infinite;
+  background: linear-gradient(var(--naranja-pastel) 90%, var(--naranja-acentuado) 90%);
+  transform: rotate(-25deg);
+}
+
+.hamster-tail {
+  animation: hamster-tail var(--dur) linear infinite;
+  background: var(--naranja-acentuado);
+  border-radius: 0.25em 50% 50% 0.25em;
+  box-shadow: 0 -0.2em 0 var(--naranja-pastel) inset;
+  top: 1.5em;
+  right: -0.5em;
+  width: 1em;
+  height: 0.5em;
+  transform: rotate(30deg) translateZ(-1px);
+  transform-origin: 0.25em 0.25em;
+}
+
+.hamster-spoke {
+  animation: hamster-spoke var(--dur) linear infinite;
+  background: radial-gradient(100% 100% at center, var(--verde-apagado) 4.8%, transparent 5%),
+    linear-gradient(transparent 46.9%, var(--verde-claro) 47% 52.9%, transparent 53%) 50% 50% / 99% 99% no-repeat;
+}
+
+@keyframes hamster-run {
+  from,
+  to {
+    transform: rotate(4deg) translate(-0.8em, 1.85em);
+  }
+
+  50% {
+    transform: rotate(0) translate(-0.8em, 1.85em);
+  }
+}
+
+@keyframes hamster-head {
+  from,
+  25%,
+  50%,
+  75%,
+  to {
+    transform: rotate(0);
+  }
+
+  12.5%,
+  37.5%,
+  62.5%,
+  87.5% {
+    transform: rotate(8deg);
+  }
+}
+
+@keyframes hamster-eye {
+  from,
+  90%,
+  to {
+    transform: scaleY(1);
+  }
+
+  95% {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes hamster-ear {
+  from,
+  25%,
+  50%,
+  75%,
+  to {
+    transform: rotate(0);
+  }
+
+  12.5%,
+  37.5%,
+  62.5%,
+  87.5% {
+    transform: rotate(12deg);
+  }
+}
+
+@keyframes hamster-body {
+  from,
+  25%,
+  50%,
+  75%,
+  to {
+    transform: rotate(0);
+  }
+
+  12.5%,
+  37.5%,
+  62.5%,
+  87.5% {
+    transform: rotate(-2deg);
+  }
+}
+
+@keyframes hamster-limb-fr {
+  from,
+  25%,
+  50%,
+  75%,
+  to {
+    transform: rotate(50deg) translateZ(-1px);
+  }
+
+  12.5%,
+  37.5%,
+  62.5%,
+  87.5% {
+    transform: rotate(-30deg) translateZ(-1px);
+  }
+}
+
+@keyframes hamster-limb-fl {
+  from,
+  25%,
+  50%,
+  75%,
+  to {
+    transform: rotate(-30deg);
+  }
+
+  12.5%,
+  37.5%,
+  62.5%,
+  87.5% {
+    transform: rotate(50deg);
+  }
+}
+
+@keyframes hamster-limb-br {
+  from,
+  25%,
+  50%,
+  75%,
+  to {
+    transform: rotate(-60deg) translateZ(-1px);
+  }
+
+  12.5%,
+  37.5%,
+  62.5%,
+  87.5% {
+    transform: rotate(20deg) translateZ(-1px);
+  }
+}
+
+@keyframes hamster-limb-bl {
+  from,
+  25%,
+  50%,
+  75%,
+  to {
+    transform: rotate(20deg);
+  }
+
+  12.5%,
+  37.5%,
+  62.5%,
+  87.5% {
+    transform: rotate(-60deg);
+  }
+}
+
+@keyframes hamster-tail {
+  from,
+  25%,
+  50%,
+  75%,
+  to {
+    transform: rotate(30deg) translateZ(-1px);
+  }
+
+  12.5%,
+  37.5%,
+  62.5%,
+  87.5% {
+    transform: rotate(10deg) translateZ(-1px);
+  }
+}
+
+@keyframes hamster-spoke {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(-1turn);
+  }
+}
+
+/* Si la persona pidió menos animaciones en su sistema, el hámster se queda quieto */
+@media (prefers-reduced-motion: reduce) {
+  .hamster,
+  .hamster-part,
+  .hamster-spoke {
+    animation: none;
+  }
+
+  .contact-button {
+    transition: none;
+  }
+}
