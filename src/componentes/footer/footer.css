@@ -16,6 +16,17 @@
   gap: 1rem;
 }
 
+.site-footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Reusamos .site-brand del header, pero con el color claro del footer. */
+.site-footer .site-brand {
+  color: var(--naranja-claro);
+}
+
 .site-footer-text {
   margin: 0;
 }
