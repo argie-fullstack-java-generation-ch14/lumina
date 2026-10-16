@@ -64,17 +64,23 @@ function createCardTemplate(person) {
   `;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function renderTeam() {
   const aboutUsContainer = document.getElementById("about-us");
+  if (!aboutUsContainer) return;
 
-  if (aboutUsContainer) {
-    const cardsMarkup = team.map(person => createCardTemplate(person)).join("");
+  const cardsMarkup = team.map(person => createCardTemplate(person)).join("");
 
-    aboutUsContainer.innerHTML = `
-      <h2 class="text-center mb-4">SOBRE NOSOTROS</h2>
-      <div id="cards-container" class="d-flex flex-wrap gap-3 justify-content-between">
-        ${cardsMarkup}
-      </div>
-    `;
-  }
-});
+  aboutUsContainer.innerHTML = `
+    <div id="cards-container" class="d-flex flex-wrap gap-3 justify-content-between">
+      ${cardsMarkup}
+    </div>
+  `;
+}
+
+// Al inyectarse en la home (después de DOMContentLoaded) el evento ya ocurrió,
+// así que ejecutamos de inmediato; en su propia página esperamos al evento.
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", renderTeam);
+} else {
+  renderTeam();
+}
