@@ -1,0 +1,36 @@
+/* Lumina · componente Footer */
+
+.site-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  background-color: var(--negro-relajacion);
+  color: var(--naranja-claro);
+}
+
+.site-footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-footer-text {
+  margin: 0;
+}
+
+.site-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.site-footer-link {
+  color: var(--naranja-claro);
+  text-decoration: none;
+}
+
+.site-footer-link:hover {
+  color: var(--naranja-pastel);
+}

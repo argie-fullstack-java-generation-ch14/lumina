@@ -10,7 +10,7 @@ proyecto, está en [Trello — Lumina](https://trello.com/b/NQBY1NXR/lumina).
 
 ‼️ El flujo de integración de cambios es por **Pull Requests**, el flujo detallado está en [INTEGRACION.md](INTEGRACION.md)
 
-No hay build ni dependencias, no hay package.json, no hay npm install, no hay que compilar. Se abren los HTML directo en el navegador.
+No hay build ni dependencias, no hay package.json, no hay npm install, no hay que compilar. El header y el footer se inyectan con `fetch()`, así que hay que servir el sitio por HTTP (por ejemplo `python3 -m http.server 8000 --directory src`); abrir el HTML directo con `file://` deja las páginas sin header ni footer.
 
 ## Reglas para un desarrollo ordenado
 
@@ -26,9 +26,9 @@ No hay build ni dependencias, no hay package.json, no hay npm install, no hay qu
 
 4. [`main.css` y `components.css` los edita **una sola persona por vez**](#git-reglas-para-reducir-conflictos-de-merge). Luego de decidir el diseño y colores, estos archivos serán los primeros a editar antes de comenzar a trabajar en cualquier rama para que cuando estas otras ramas se creen  ya cuenten con estos estilos compartidos, evitando duplicar estilos.
 5. [Antes de tocar un archivo compartido, avisa en el chat y espera el visto bueno, por favor.](#git-reglas-para-reducir-conflictos-de-merge)
-6. [Los archivos compartidos son estos cinco, y hay que avisar antes de editarlos.](#archivos-compartidos)
+6. [Los archivos compartidos son estos seis, y hay que avisar antes de editarlos.](#archivos-compartidos)
    - **CSS:** `css/main.css` y `css/components.css`
-   - **JS:** `js/main.js`, `js/carrito.js` y `js/auth.js`
+   - **JS:** `js/ui.js`, `js/main.js`, `js/carrito.js` y `js/auth.js`
 
    Bootstrap (`css/bootstrap.min.css` y `js/bootstrap.bundle.min.js`) también es
    de todos, pero **no se toca**.
@@ -144,8 +144,16 @@ propios tres archivos. Es el mismo criterio que usa React, pero sin React.
     │   ├── bootstrap.min.css   # de Bootstrap, NO se edita
     │   ├── main.css            # global: variables, tipografía, layout
     │   └── components.css      # global: header, footer, botones, cards, forms, modal
+    ├── componentes/            # componentes compartidos por todas las páginas
+    │   ├── header/
+    │   │   ├── header.html     # markup del header (una sola fuente, relativo a src/)
+    │   │   └── header.css
+    │   └── footer/
+    │       ├── footer.html     # markup del footer (una sola fuente, relativo a src/)
+    │       └── footer.css
     ├── js/
     │   ├── bootstrap.bundle.min.js  # de Bootstrap, NO se edita
+    │   ├── ui.js               # global: inyecta los componentes (header y footer)
     │   ├── main.js             # global: init, menú, footer
     │   ├── carrito.js          # global: carrito en localStorage
     │   └── auth.js             # global: estado de usuario
@@ -222,7 +230,7 @@ cinco personas que están aprendiendo editan el mismo repo al mismo tiempo.
 
 | Problema típico | Cómo lo resuelve esta estructura |
 |---|---|
-| "Alguien editó `css/main.css` y generó conflictos que tomaron mas horas resolver que la tarea que fue asignada" | Casi nadie toca `main.css`: cada quien tiene su CSS. Los archivos compartidos son cinco y están asignados a un dueño. |
+| "Alguien editó `css/main.css` y generó conflictos que tomaron mas horas resolver que la tarea que fue asignada" | Casi nadie toca `main.css`: cada quien tiene su CSS. Los archivos compartidos son seis y están asignados a un dueño. |
 | No sé qué archivos son míos | La carpeta. `tienda/carrito/` es de quien hace el carrito. |
 | Alguien rompió el CSS de otra página | No podría, los archivos están separados por carpeta. |
 | ¿Qué archivo abro para arreglar esto? | El de la carpeta donde está el problema. No hay que buscar en un archivo de 2000 líneas. |
@@ -325,16 +333,18 @@ las mismas rutas.
 Y los scripts, al final del `<body>`:
 
 ```html
-<!-- página pública: main, carrito compartido y el suyo -->
+<!-- página pública: ui, main, carrito compartido y el suyo -->
 <script src="../../js/bootstrap.bundle.min.js"></script>
+<script src="../../js/ui.js"></script>
 <script src="../../js/main.js"></script>
 <script src="../../js/carrito.js"></script>
 <script src="inicio.js"></script>
 ```
 
 ```html
-<!-- panel: main, auth y el suyo. No carga el carrito -->
+<!-- panel: ui, main, auth y el suyo. No carga el carrito -->
 <script src="../../js/bootstrap.bundle.min.js"></script>
+<script src="../../js/ui.js"></script>
 <script src="../../js/main.js"></script>
 <script src="../../js/auth.js"></script>
 <script src="panel.js"></script>
@@ -348,6 +358,7 @@ que los archivos compartidos se piden con `../../` y Bootstrap con `../../../`.
 lumina/                 ← raíz del repo
 └── src/                ← ../../
     ├── css/main.css    ← ../../css/main.css
+    ├── js/ui.js        ← ../../js/ui.js
     ├── js/main.js      ← ../../js/main.js
     ├── tienda/         ← ../
     │   └── inicio/     ← ../../
@@ -784,13 +795,14 @@ mayoría de los conflictos al integrar los cambios de los 5 integrantes en una s
 
 ### Archivos compartidos
 
-De todos los archivos del proyecto, **cinco son los únicos que puede tocar más de
+De todos los archivos del proyecto, **seis son los únicos que puede tocar más de
 una persona.** Todo lo demás es de una sola persona y nunca da problemas de merge.
 
 | Archivo | Tipo | Qué hace | ¿Puede chocar? |
 |---|---|---|---|
 | `css/main.css` | CSS | Variables, tipografía, layout | **Sí** |
 | `css/components.css` | CSS | Header, footer, botones, cards, forms, modal | **Sí** |
+| `js/ui.js` | JS | Inyecta los componentes (header y footer) | **Sí** |
 | `js/main.js` | JS | Init, menú, footer | **Sí** |
 | `js/carrito.js` | JS | Carrito en `localStorage` | **Sí** |
 | `js/auth.js` | JS | Estado de usuario | **Sí** |
@@ -818,8 +830,8 @@ Y dos archivos que **no se editan nunca**, porque son de Bootstrap:
 
 ### Lo que este esquema NO arregla
 
-Si todos a la vez editamos los archivos `main.css`, `components.css`,
-`carrito.js` o `auth.js`, los merges **sí chocarán**.
+Si todos a la vez editamos los archivos `main.css`, `components.css`, `ui.js`,
+`main.js`, `carrito.js` o `auth.js`, los merges **sí chocarán**.
 
 Cuando necesites un estilo compartido, **no lo crees en el CSS de tu página**:
 avisa en el chat y una sola persona lo agrega a `components.css`. Lo mismo con
@@ -1034,6 +1046,26 @@ fuente ni `@font-face`. Cuando se decida, la variable va en `:root` y los
 archivos en `assets/fonts/`.
 
 ## Notas técnicas
+
+### Header y footer compartidos
+
+El header y el footer se escriben una sola vez, en `src/componentes/header/header.html`
+y `src/componentes/footer/footer.html`. Cada página solo aporta sus contenedores
+vacíos `<header id="header"></header>` y `<footer id="footer"></footer>`, y
+`js/ui.js` los rellena con `fetch()`:
+
+```js
+// js/main.js
+document.addEventListener("DOMContentLoaded", async () => {
+  await renderPartial("#header", "header/header.html");
+  await renderPartial("#footer", "footer/footer.html");
+});
+```
+
+`ui.js` calcula la base del sitio desde su propia ubicación y reescribe las rutas
+relativas del componente. Por eso los componentes escriben sus enlaces relativo a
+`src/` (`tienda/catalogo/index.html`), sin `../` ni prefijos. **Como usa `fetch`,
+requiere servir el sitio por HTTP** (ver "Cómo verlo" en el README).
 
 ### Carrito compartido entre páginas
 
