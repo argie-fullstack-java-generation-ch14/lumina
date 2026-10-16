@@ -36,7 +36,7 @@ muestra `Perfil`**.
 |---|---|---|
 | Inicio | `src/tienda/inicio/index.html` | Menú |
 | Catálogo | `src/tienda/catalogo/index.html` | Menú |
-| Detalle de producto | `src/tienda/producto/index.html?id=1` | Inicio, Catálogo |
+| Detalle de producto | `src/tienda/catalogo/producto/index.html?id=1` | Inicio, Catálogo |
 | Crea tu vela | `src/tienda/crea-tu-vela/index.html` | Menú |
 | Carrito | `src/tienda/carrito/index.html` | Menú |
 | Nosotros | `src/tienda/nosotros/index.html` | Menú |
@@ -51,7 +51,7 @@ muestra `Perfil`**.
 
 | Acción | Ocurre en |
 |---|---|
-| Agregar al carrito | `src/tienda/producto/index.html`, `src/tienda/crea-tu-vela/index.html` |
+| Agregar al carrito | `src/tienda/catalogo/producto/index.html`, `src/tienda/crea-tu-vela/index.html` |
 | Editar cantidad / eliminar | `src/tienda/carrito/index.html` |
 | Confirmar pedido (modal) | `src/tienda/carrito/index.html` |
 

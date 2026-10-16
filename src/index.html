@@ -12,10 +12,9 @@
 
   <link rel="stylesheet" href="./css/main.css">
   <link rel="stylesheet" href="./css/components.css">
-  <link rel="stylesheet" href="./tienda/nosotros/nosotros.css">
 </head>
 
-<body>
+<body data-page="home">
 
   <header id="header"></header>
 
@@ -25,25 +24,12 @@
       <p class="lead">Bienvenido a Lumina, velas personalizadas para tu bienestar.</p>
     </section>
 
-    <section class="container my-5">
-      <div id="inicio"></div>
-    </section>
-
-    <section class="container my-5">
-      <div id="catalogo"></div>
-    </section>
-
-    <section class="container my-5">
-      <div id="crea-tu-lumina"></div>
-    </section>
-
-    <section class="container my-5">
-      <div id="about-us"></div>
-    </section>
-
-    <section class="container my-5">
-      <div id="contacto"></div>
-    </section>
+    <!-- El contenido de cada página se inyecta aquí (ver js/main.js y js/ui.js) -->
+    <!-- Lo que se modifique en los html de cada modulo aparecera automaticamente aqui :) -->
+    <section id="inicio"></section>
+    <section id="catalogo"></section>
+    <section id="nosotros"></section>
+    <section id="contacto"></section>
   </main>
 
   <footer id="footer"></footer>
@@ -53,10 +39,6 @@
   <script src="./js/ui.js"></script>
   <script src="./js/main.js"></script>
   <script src="./js/carrito.js"></script>
-  <script src="./tienda/inicio/inicio.js"></script>
-  <script src="./tienda/catalogo/catalogo.js"></script>
-  <script src="./tienda/nosotros/nosotros.js"></script>
-  <script src="./tienda/contacto/contacto.js"></script>
 </body>
 
 </html>

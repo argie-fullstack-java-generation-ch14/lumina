@@ -113,6 +113,7 @@ propios tres archivos. Es el mismo criterio que usa React, pero sin React.
 │   ├── DESARROLLO.md   # esta guía
 │   └── INTEGRACION.md  # flujo de Pull Requests
 └── src/
+    ├── index.html              # home: reúne el contenido de cada página
     ├── tienda/                 # todas las páginas públicas cuelgan aquí
     │   ├── inicio/             # ruta /tienda/inicio/
     │   │   ├── index.html      # el HTML de la página
@@ -121,8 +122,8 @@ propios tres archivos. Es el mismo criterio que usa React, pero sin React.
     │   ├── catalogo/
     │   │   ├── index.html
     │   │   ├── catalogo.css
-    │   │   └── catalogo.js
-    │   ├── producto/
+    │   │   ├── catalogo.js
+    │   │   └── producto/       # el detalle vive dentro del catálogo
     │   ├── crea-tu-vela/
     │   ├── carrito/
     │   ├── nosotros/
@@ -153,7 +154,7 @@ propios tres archivos. Es el mismo criterio que usa React, pero sin React.
     │       └── footer.css
     ├── js/
     │   ├── bootstrap.bundle.min.js  # de Bootstrap, NO se edita
-    │   ├── ui.js               # global: inyecta los componentes (header y footer)
+    │   ├── ui.js               # global: inyecta header, footer y las secciones de la home
     │   ├── main.js             # global: init, menú, footer
     │   ├── carrito.js          # global: carrito en localStorage
     │   └── auth.js             # global: estado de usuario
@@ -278,8 +279,8 @@ vamos a reconocer esta misma estructura de carpetas, este mismo árbol.
 ## Rutas entre archivos
 
 Las páginas públicas son hermanas entre sí, todas dentro de `tienda/` y a un
-mismo nivel. Ninguna carpeta está dentro de otra: el detalle de producto es
-`tienda/producto/`, no `tienda/catalogo/producto/`.
+mismo nivel. La excepción es el detalle de producto, que vive dentro del catálogo
+porque es parte de la misma página: `tienda/catalogo/producto/`.
 
 Admin es la excepción: sus módulos viven bajo `admin/`, también a un mismo nivel
 entre sí.
@@ -287,8 +288,8 @@ entre sí.
 Las dos zonas quedan al mismo nivel una de otra:
 
 ```
-src/tienda/producto/index.html    # pública
-src/admin/panel/index.html        # interna
+src/tienda/catalogo/producto/index.html    # pública
+src/admin/panel/index.html                 # interna
 ```
 
 Y desde cualquiera de las dos, los archivos compartidos se alcanzan con `../`:
@@ -802,7 +803,7 @@ una persona.** Todo lo demás es de una sola persona y nunca da problemas de mer
 |---|---|---|---|
 | `css/main.css` | CSS | Variables, tipografía, layout | **Sí** |
 | `css/components.css` | CSS | Header, footer, botones, cards, forms, modal | **Sí** |
-| `js/ui.js` | JS | Inyecta los componentes (header y footer) | **Sí** |
+| `js/ui.js` | JS | Inyecta header, footer y las secciones de la home | **Sí** |
 | `js/main.js` | JS | Init, menú, footer | **Sí** |
 | `js/carrito.js` | JS | Carrito en `localStorage` | **Sí** |
 | `js/auth.js` | JS | Estado de usuario | **Sí** |
@@ -1056,16 +1057,56 @@ vacíos `<header id="header"></header>` y `<footer id="footer"></footer>`, y
 
 ```js
 // js/main.js
-document.addEventListener("DOMContentLoaded", async () => {
-  await renderPartial("#header", "header/header.html");
-  await renderPartial("#footer", "footer/footer.html");
-});
+await renderPartial("#header", "header/header.html");
+await renderPartial("#footer", "footer/footer.html");
 ```
 
 `ui.js` calcula la base del sitio desde su propia ubicación y reescribe las rutas
 relativas del componente. Por eso los componentes escriben sus enlaces relativo a
 `src/` (`tienda/catalogo/index.html`), sin `../` ni prefijos. **Como usa `fetch`,
 requiere servir el sitio por HTTP** (ver "Cómo verlo" en el README).
+
+### Inicio que reúne las páginas
+
+El `src/index.html` raíz es la home. El `<body>` lleva `data-page="home"` y, en vez
+de repetir el contenido de cada página, tiene una sección vacía por página:
+
+```html
+<body data-page="home">
+  ...
+  <section id="inicio"></section>
+  <section id="catalogo"></section>
+  <section id="nosotros"></section>
+  <section id="contacto"></section>
+</body>
+```
+
+`js/main.js` detecta `data-page="home"` y pide el contenido de cada página con
+`renderSection()`, que inyecta su `<main>` (no su header ni su footer) y también su
+CSS y su JS:
+
+```js
+// js/main.js
+if (document.body.dataset.page !== "home") return;
+
+const routes = {
+  "#inicio": "tienda/inicio/index.html",
+  "#catalogo": "tienda/catalogo/index.html",
+  "#nosotros": "tienda/nosotros/index.html",
+  "#contacto": "tienda/contacto/index.html",
+};
+
+Object.entries(routes).forEach(([selector, path]) => {
+  renderSection(selector, path);
+});
+```
+
+Las rutas son relativas a `src/`, igual que en los componentes. El CSS y el JS de
+cada página se cargan una sola vez: `injectStyles()` e `injectScripts()` ignoran lo
+que ya está en la página. Por eso cada módulo envuelve su contenido en un `<main>`
+y su script arranca con la guarda `document.readyState` (ver
+`tienda/nosotros/nosotros.js`): al inyectarse, el evento `DOMContentLoaded` ya
+ocurrió.
 
 ### Carrito compartido entre páginas
 
