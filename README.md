@@ -10,13 +10,16 @@ y reglas del equipo con Git— ver [docs/DESARROLLO.md](docs/DESARROLLO.md).
 
 ## Cómo verlo
 
+El header y el footer se inyectan con `fetch()`, así que el sitio hay que servirlo
+por HTTP (no abrir el HTML directo con `file://`).
+
 ```bash
-open src/tienda/inicio/index.html
+python3 -m http.server 8000 --directory src
 ```
 
-Con esta estructura, cada página es una carpeta con su propio HTML, CSS y JS
-(como en React). El navegador muestra `/tienda/inicio/index.html` en la barra de
-direcciones.
+Luego abre <http://localhost:8000/> en el navegador. Con esta estructura, cada
+página es una carpeta con su propio HTML, CSS y JS (como en React). La barra de
+direcciones muestra `/tienda/inicio/index.html`.
 
 ## Mapa de navegación
 

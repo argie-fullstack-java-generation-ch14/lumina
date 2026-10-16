@@ -1,77 +1,8 @@
 /* Lumina · components
- * Global: header, footer, botones, cards, forms, modal.
+ * Componentes globales compartidos. El CSS de cada componente vive en
+ * componentes/<nombre>/<nombre>.css; aquí se importa para que las páginas
+ * sigan cargando un único archivo CSS.
  */
 
-/* --- Header / Navbar --- */
-.site-header {
-  background-color: var(--naranja-claro);
-  border-bottom: 1px solid var(--naranja-acentuado);
-}
-
-.site-header-inner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
-.site-brand {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--negro-relajacion);
-  text-decoration: none;
-}
-
-.site-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-}
-
-.site-nav-link {
-  color: var(--negro-relajacion);
-  text-decoration: none;
-}
-
-.site-nav-link:hover {
-  color: var(--naranja-apagado);
-}
-
-/* --- Footer --- */
-.site-footer {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  background-color: var(--negro-relajacion);
-  color: var(--naranja-claro);
-}
-
-.site-footer-inner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.site-footer-text {
-  margin: 0;
-}
-
-.site-footer-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-}
-
-.site-footer-link {
-  color: var(--naranja-claro);
-  text-decoration: none;
-}
-
-.site-footer-link:hover {
-  color: var(--naranja-pastel);
-}
+@import url('../componentes/header/header.css');
+@import url('../componentes/footer/footer.css');

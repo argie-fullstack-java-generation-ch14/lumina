@@ -1,0 +1,38 @@
+/* Lumina · componente Header */
+
+.site-header {
+  background-color: var(--naranja-claro);
+  border-bottom: 1px solid var(--naranja-acentuado);
+}
+
+.site-header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.site-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--negro-relajacion);
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.site-nav-link {
+  color: var(--negro-relajacion);
+  text-decoration: none;
+}
+
+.site-nav-link:hover {
+  color: var(--naranja-apagado);
+}
