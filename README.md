@@ -8,18 +8,67 @@ Este documento es el **modelo de negocio**: qué es Lumina, qué páginas tiene 
 qué hace cada una. Para la parte técnica —estructura de carpetas, CSS, Bootstrap
 y reglas del equipo con Git— ver [docs/DESARROLLO.md](docs/DESARROLLO.md).
 
-## Cómo verlo
+## Cómo verlo (con Live Server)
 
-El header y el footer se inyectan con `fetch()`, así que el sitio hay que servirlo
-por HTTP (no abrir el HTML directo con `file://`).
+El sitio es HTML/CSS/JS puro, pero el header y el footer se inyectan con
+`fetch()`, por lo que **no se puede abrir con doble clic en el `.html`**: el
+navegador bloquea ese `fetch()` bajo `file://`. Se sirve por HTTP con la
+extensión **Live Server** de VS Code.
+
+> ⚠️ **Importante:** en VS Code se debe abrir la **carpeta raíz del repo**
+> (`lumina`, la que contiene `README.md` y `src/`), nunca una subcarpeta. De
+> ahí dependen las rutas relativas de estilos y scripts; si se sirve desde
+> otra carpeta, se obtienen errores `404 Not Found` y la página sin estilos.
+
+### Paso 1 — Descargar el repo
 
 ```bash
-python3 -m http.server 8000 --directory src
+git clone git@github.com:argie-fullstack-java-generation-ch14/lumina.git
+cd lumina
 ```
 
-Luego abre <http://localhost:8000/> en el navegador. Con esta estructura, cada
-página es una carpeta con su propio HTML, CSS y JS (como en React). La barra de
-direcciones muestra `/tienda/inicio/index.html`.
+### Paso 2 — Abrir la carpeta `lumina` en VS Code
+
+1. Abrir VS Code.
+2. **File → Open Folder...** (en algunas versiones el primer menú se llama
+   **Code**). Atajo: `Ctrl + K`, `Ctrl + O`.
+3. Seleccionar la carpeta **`lumina`** y hacer clic en **Open** / **Abrir**.
+
+**Verificación:** en el explorador de VS Code, en el nivel superior, debe
+aparecer:
+
+```
+lumina/
+├── README.md
+├── docs/
+└── src/
+```
+
+### Paso 3 — Instalar la extensión Live Server
+
+1. **View → Extensions** (atajo: `Ctrl + Shift + X`).
+2. Buscar `Live Server`.
+3. Instalar.
+
+### Paso 4 — Levantar Live Server desde el index
+
+1. En el explorador, abrir **`src/index.html`**.
+2. Clic en **"Go Live"** (extremo inferior derecho de la barra de estado). Si
+   el botón no aparece: clic derecho en el archivo → **Open with Live Server**.
+3. El navegador se abre solo.
+
+**URL esperada:**
+
+```
+http://127.0.0.1:5500/src/index.html
+```
+
+Si la URL **no** contiene `/src/` antes del archivo (p. ej.
+`/index.html` o `/tienda/...`), se está sirviendo desde una carpeta
+intermedia: repetir el Paso 2.
+
+> El puerto puede variar (5500 por defecto; si está ocupado, Live Server usa
+> otro). Lo relevante es que la ruta contenga `/src/`.
 
 ## Mapa de navegación
 
