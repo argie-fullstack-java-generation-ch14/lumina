@@ -70,6 +70,24 @@ intermedia: repetir el Paso 2.
 > El puerto puede variar (5500 por defecto; si está ocupado, Live Server usa
 > otro). Lo relevante es que la ruta contenga `/src/`.
 
+### Alternativa: npx serve (requiere Node)
+
+Desde la carpeta `lumina` (la raíz del repo):
+
+```bash
+npx serve
+```
+
+Luego abrir <http://localhost:3000/> y entrar a `src/`, o directamente
+<http://localhost:3000/src/>.
+
+> El repo incluye un `serve.json` con `"trailingSlash": true` para que las
+> carpetas se sirvan siempre con `/` al final. Sin esa configuración, `serve`
+> responde `200` en `/src` sin redirigir, el navegador toma `/src` como base
+> y pide los estilos a `/css/...` y `/js/...` (404). Si se trabaja con una
+> copia del repo anterior a este archivo, se debe escribir la URL con la
+> barra final: `http://localhost:3000/src/`.
+
 ## Mapa de navegación
 
 ### Sitio público
