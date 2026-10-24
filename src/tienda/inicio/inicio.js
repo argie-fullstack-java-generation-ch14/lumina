@@ -4,12 +4,11 @@
 // Banner de la página de inicio. Hace tres cosas:
 //   1) La imagen se abre (se expande) mientras haces scroll.
 //   2) El título aparece letra por letra, como humo que se condensa, y la frase
-//      de bienvenida sube letra por letra (inspirado en SplitText de React Bits,
-//      pero hecho solo con CSS y JS, sin GSAP).
+//      de bienvenida sube letra por letra.
 //   3) Humo suave que sigue al cursor (el motor está en splash-cursor.js).
 //
 // Nota: en la home este archivo se carga DESPUÉS de que el HTML ya existe,
-// por eso no usamos DOMContentLoaded: arrancamos directo.
+// por eso no uso DOMContentLoaded: arrancamos directo.
 
 (function initHeroBanner() {
   const banner = document.getElementById("hero-banner");
