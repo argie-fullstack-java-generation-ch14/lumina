@@ -10,6 +10,13 @@
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+  <!-- Tipografías: Montserrat para textos y botones.
+       Fraunces es solo un respaldo parecido a Recoleta mientras no esté el archivo de Recoleta
+       en src/assets/fonts/ (ver @font-face en inicio.css). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Fraunces:wght@400&display=swap">
+
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="../../css/components.css">
   <link rel="stylesheet" href="inicio.css">
@@ -19,11 +26,39 @@
 
   <header id="header"></header>
 
-  <main class="container my-5">
+  <main>
 
-    <section class="container my-5">
-      <h1 class="main-title">Find your light, find your wellness</h1>
-      <p class="lead">Bienvenido a Lumina, velas personalizadas para tu bienestar.</p>
+    <!-- ============ BANNER (scroll expand) ============ -->
+    <section class="hero-banner" id="hero-banner" aria-label="Bienvenida a Lumina">
+      <div class="hero-track">
+        <div class="hero-stage">
+
+          <div class="hero-frame">
+            <img class="hero-media"
+                 src="../../assets/img/vela-ambiente.jpg"
+                 alt="Vela encendida en un frasco de vidrio rojo, con luces cálidas desenfocadas al fondo"
+                 draggable="false">
+            <div class="hero-scrim"></div>
+            <div class="hero-scrim-bottom"></div>
+
+            <!-- Humo que sigue al cursor (lo dibuja splash-cursor.js) -->
+            <canvas class="hero-smoke" id="hero-smoke" aria-hidden="true"></canvas>
+
+            <!-- Aparece cuando la imagen ya se expandió -->
+            <div class="hero-overlay">
+              <p class="hero-lead" data-split>
+                Bienvenido a Lumina, velas personalizadas para tu bienestar.
+              </p>
+              <a class="hero-button hero-rise" href="../catalogo/index.html">Ver la colección</a>
+            </div>
+          </div>
+
+          <!-- inicio.js separa este título en letras para el efecto "smoke" -->
+          <h1 class="hero-title" data-smoke-type>Find your light,<br>find your wellness</h1>
+
+          <p class="hero-hint" aria-hidden="true">Desliza</p>
+        </div>
+      </div>
     </section>
 
   </main>
@@ -35,6 +70,7 @@
   <script src="../../js/ui.js"></script>
   <script src="../../js/main.js"></script>
   <script src="../../js/carrito.js"></script>
+  <script src="splash-cursor.js"></script>
   <script src="inicio.js"></script>
 </body>
 

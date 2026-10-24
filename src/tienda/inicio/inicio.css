@@ -5,3 +5,316 @@
  * Lo compartido va en css/main.css o css/components.css, nunca aquí.
  * Clases en inglés y kebab-case: .product-card, no .productCard.
  */
+
+/* ==========================================================
+ * BANNER · imagen que se expande al hacer scroll
+ * ========================================================== */
+
+/* Recoleta es la tipografía de identidad de Lumina (títulos y frases importantes).
+ * Es de pago, por eso el archivo no viene en el repo: se guarda en src/assets/fonts/
+ * con estos nombres. Mientras no esté, el navegador usa Fraunces (parecida). */
+@font-face {
+  font-family: "Recoleta";
+  src: local("Recoleta"),
+       local("Recoleta Regular"),
+       url("../../assets/fonts/recoleta-regular.woff2") format("woff2"),
+       url("../../assets/fonts/recoleta-regular.otf") format("opentype"),
+       url("../../assets/fonts/recoleta-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.hero-banner {
+  /* Fuentes: Recoleta para títulos, Montserrat para textos y botones */
+  --hero-font-title: "Recoleta", "Fraunces", Georgia, serif;
+  --hero-font-text: "Montserrat", system-ui, sans-serif;
+
+  --hero-paper: var(--naranja-claro, #f9f1e8);
+  --hero-ink: var(--negro-relajacion, #33302d);
+  --hero-cream: #f9f1e8;
+  --hero-smoke: #b8a6ee;   /* morado del humo (solo lo usa el título al aparecer) */
+
+  margin: 0;
+  padding: 0;
+  background: var(--hero-paper);
+}
+
+/* Pista de scroll: su alto lo calcula inicio.js (pantalla + recorrido) */
+.hero-track {
+  position: relative;
+  min-height: 240vh;
+}
+
+.hero-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: var(--hero-paper);
+}
+
+/* Marco: sin JS se ve completo; con JS se recorta y crece */
+.hero-frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #33302d; /* si la foto no carga, nunca se ve blanco */
+  will-change: clip-path;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 32%;
+  transform-origin: 50% 50%;
+  will-change: transform;
+  user-select: none;
+  color: transparent; /* oculta el texto alternativo si la foto no carga */
+  font-size: 0;
+}
+
+/* Capa oscura fija: asegura que el título se lea sobre la cera clara */
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(19, 18, 15, 0.3);
+}
+
+/* Degradado inferior: crece con el scroll para el texto final */
+.hero-scrim-bottom {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(19, 18, 15, 0.62) 0%, rgba(19, 18, 15, 0) 55%);
+  opacity: 0;
+}
+
+/* Canvas del humo */
+.hero-smoke {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ---------- Título ---------- */
+
+.hero-title {
+  position: relative;
+  z-index: 3;
+  margin: 0;
+  padding: 0 1.25rem;
+  text-align: center;
+  font-family: var(--hero-font-title);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 5.4vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--hero-cream);
+  text-shadow: 0 2px 30px rgba(19, 18, 15, 0.35);
+  pointer-events: none;
+}
+
+.hero-title .smoke-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* inicio.js agrega .is-smoke-ready; sin JS el título se ve normal */
+.hero-title.is-smoke-ready .smoke-char {
+  display: inline-block;
+  opacity: 0;
+  animation: smoke-condense 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  animation-delay: calc(0.4s + var(--i) * 0.05s);
+  will-change: opacity, transform, filter;
+}
+
+@keyframes smoke-condense {
+  0% {
+    opacity: 0;
+    filter: blur(16px);
+    transform: translateY(0.4em) scale(1.2);
+    color: var(--hero-smoke);
+  }
+  60% {
+    opacity: 0.8;
+    filter: blur(4px);
+    color: #dcd2f4;
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+    color: var(--hero-cream);
+  }
+}
+
+/* ---------- Texto final (aparece al expandir) ---------- */
+
+.hero-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4.5rem;
+}
+
+/* Frase de bienvenida: Recoleta (frase importante) */
+.hero-lead {
+  max-width: 17em;
+  margin: 0;
+  font-family: var(--hero-font-title);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  line-height: 1.3;
+  color: var(--hero-cream);
+}
+
+.hero-button {
+  display: inline-block;
+  padding: 0.85rem 1.9rem;
+  font-family: var(--hero-font-text);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: var(--hero-cream);
+  border: 1px solid rgba(249, 241, 232, 0.7);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.hero-button:hover,
+.hero-button:focus-visible {
+  color: #13120f;
+  background: var(--hero-cream);
+}
+
+/* ---------- Animación de letras (tipo SplitText) ----------
+ * inicio.js parte la frase en letras (.split-char) y, cuando la imagen ya
+ * se abrió, le pone .is-playing al overlay. Cada letra sube desde abajo
+ * con un pequeño retraso respecto a la anterior.
+ */
+
+.hero-lead {
+  overflow: hidden;            /* las letras salen "desde abajo" de una línea invisible */
+  padding-bottom: 0.15em;      /* para que no se corten la g, la p, la j... */
+}
+
+.hero-lead .split-word {
+  display: inline-block;
+  white-space: nowrap;         /* una palabra nunca se parte entre dos líneas */
+}
+
+.hero-lead .split-char {
+  display: inline-block;
+}
+
+/* Antes de reproducir, todo está oculto (solo cuando JS está activo) */
+.hero-banner.is-scroll-expand .hero-lead .split-char,
+.hero-banner.is-scroll-expand .hero-rise {
+  opacity: 0;
+}
+
+.hero-overlay.is-playing .split-char,
+.hero-overlay.is-playing .hero-rise {
+  animation: split-rise 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+  animation-delay: calc(var(--i, 0) * 35ms);
+}
+
+@keyframes split-rise {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Pista "Desliza" ---------- */
+
+.hero-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 5.5rem;
+  z-index: 3;
+  transform: translateX(-50%);
+  margin: 0;
+  padding-bottom: 2.2rem;
+  font-family: var(--hero-font-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--hero-ink);
+}
+
+.hero-hint::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 1px;
+  height: 1.6rem;
+  background: currentColor;
+  transform-origin: top;
+  animation: hero-hint-line 2.2s ease-in-out infinite;
+}
+
+@keyframes hero-hint-line {
+  0%   { transform: scaleY(0); opacity: 0; }
+  40%  { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+/* ---------- Con JS activo: estado inicial recortado ---------- */
+
+.hero-banner.is-scroll-expand .hero-frame {
+  clip-path: inset(19% 28% 19% 28% round 24px);
+}
+
+.hero-banner:not(.is-scroll-expand) .hero-hint,
+.hero-banner:not(.is-scroll-expand) .hero-scrim-bottom {
+  display: none;
+}
+
+/* ---------- Móvil ---------- */
+
+@media (max-width: 860px) {
+  .hero-overlay {
+    padding-bottom: 3.5rem;
+  }
+
+  .hero-hint {
+    bottom: 4rem;
+  }
+}
+
+/* ---------- Accesibilidad: menos movimiento ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-banner.is-scroll-expand .hero-lead .split-char,
+  .hero-banner.is-scroll-expand .hero-rise {
+    opacity: 1;
+  }
+
+  .hero-overlay.is-playing .split-char,
+  .hero-overlay.is-playing .hero-rise,
+  .hero-hint::after {
+    animation: none;
+  }
+}
