@@ -124,22 +124,6 @@
   content: "";
 }
 
-.crear-form-status {
-  margin: 0;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  color: var(--negro-relajacion);
-  font-size: 0.9375rem;
-}
-
-.crear-form-status {
-  background-color: var(--verde-claro);
-}
-
-.crear-form-status:empty {
-  display: none;
-}
-
 .crear-button {
   align-self: flex-end;
   min-height: 48px;

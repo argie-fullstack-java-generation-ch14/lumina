@@ -1,9 +1,14 @@
 // Lumina · crear vela
 
+function createSlug(name) {
+  return name.trim().toLowerCase().replace(/\s+/g, "-");
+}
+
 function initCandleForm() {
   const form = document.querySelector("#crear-form");
-  const formStatus = document.querySelector("#crear-form-status");
-  if (!form || !formStatus) return;
+  if (!form) return;
+
+  const catalogo = [];
 
   const fields = [
     {
@@ -53,6 +58,7 @@ function initCandleForm() {
       }
     }
   ];
+  const [nameField, scentField, categoryField, weightField, priceField, descriptionField] = fields;
 
   function showError(input, message) {
     const wrapper = input.closest(".crear-field");
@@ -84,22 +90,32 @@ function initCandleForm() {
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    formStatus.textContent = "";
 
     if (!checkForm()) return;
 
-    formStatus.textContent = "Los datos son válidos. El guardado todavía no está conectado.";
+    catalogo.push({
+      id: catalogo.length + 1,
+      name: nameField.input.value.trim(),
+      slug: createSlug(nameField.input.value),
+      img: "https://gstatic.com/images",
+      scent: scentField.input.value.trim(),
+      category: categoryField.input.selectedOptions[0].textContent.trim(),
+      weight: Number(weightField.input.value),
+      description: descriptionField.input.value.trim(),
+      price: Number(priceField.input.value)
+    });
+
+    console.log(JSON.stringify({ catalogo }, null, 2));
+    form.reset();
   });
 
   fields.forEach((field) => {
     field.input.addEventListener("input", () => {
-      formStatus.textContent = "";
       if (field.input.closest(".crear-field").classList.contains("has-error")) {
         checkField(field);
       }
     });
     field.input.addEventListener("change", () => {
-      formStatus.textContent = "";
       if (field.input.closest(".crear-field").classList.contains("has-error")) {
         checkField(field);
       }
