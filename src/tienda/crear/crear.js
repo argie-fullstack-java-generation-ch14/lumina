@@ -93,7 +93,7 @@ function initCandleForm() {
 
     if (!checkForm()) return;
 
-    catalogo.push({
+    const nuevaVela = {
       id: catalogo.length + 1,
       name: nameField.input.value.trim(),
       slug: createSlug(nameField.input.value),
@@ -103,9 +103,13 @@ function initCandleForm() {
       weight: Number(weightField.input.value),
       description: descriptionField.input.value.trim(),
       price: Number(priceField.input.value)
-    });
+    };
+    catalogo.push(nuevaVela);
 
-    console.log(JSON.stringify({ catalogo }, null, 2));
+    console.log("Vela creada:", nuevaVela);
+    console.log("Velas creadas en esta sesión:", catalogo);
+    console.log(`Total de velas creadas: ${catalogo.length}`);
+
     form.reset();
   });
 
