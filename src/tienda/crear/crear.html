@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel administrador · Lumina</title>
+
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link rel="stylesheet" href="crear.css">
+</head>
+
+<body>
+  <header id="header"></header>
+
+  <main class="crear-page">
+    <div class="container crear-layout">
+      <section class="crear-intro" aria-labelledby="crear-title">
+        <h1 class="crear-title" id="crear-title">Agregar vela</h1>
+        <p class="crear-promo">
+          10 % de descuento en tu próxima compra utilizando el código: LUMINA20
+        </p>
+      </section>
+
+      <section class="crear-panel" aria-label="Formulario para agregar una vela">
+        <form class="crear-form" id="crear-form" novalidate>
+          <div class="crear-field">
+            <label class="crear-label" for="crear-nombre">Nombre</label>
+            <input class="crear-input" id="crear-nombre" name="nombre" type="text" maxlength="60" placeholder="Ej.: Vela de calma" aria-describedby="crear-nombre-error" required>
+            <p class="crear-error" id="crear-nombre-error"></p>
+          </div>
+
+          <div class="crear-field">
+            <label class="crear-label" for="crear-aroma">Aroma</label>
+            <input class="crear-input" id="crear-aroma" name="aroma" type="text" maxlength="50" placeholder="Ej.: Lavanda" aria-describedby="crear-aroma-error" required>
+            <p class="crear-error" id="crear-aroma-error"></p>
+          </div>
+
+          <div class="crear-field">
+            <label class="crear-label" for="crear-categoria">Categoría</label>
+            <select class="crear-input" id="crear-categoria" name="categoria" aria-describedby="crear-categoria-error" required>
+              <option value="">Selecciona una categoría</option>
+              <option value="bienestar">Bienestar</option>
+              <option value="descanso">Descanso</option>
+              <option value="mindfulness">Mindfulness</option>
+              <option value="amor-propio">Amor propio</option>
+              <option value="intencion">Intención</option>
+              <option value="halloween">Halloween</option>
+              <option value="navidad">Navidad</option>
+            </select>
+            <p class="crear-error" id="crear-categoria-error"></p>
+          </div>
+
+          <div class="crear-field">
+            <label class="crear-label" for="crear-peso">Peso</label>
+            <select class="crear-input" id="crear-peso" name="peso" aria-describedby="crear-peso-error" required>
+              <option value="">Selecciona un peso</option>
+              <option value="100">100 g</option>
+              <option value="200">200 g</option>
+              <option value="300">300 g</option>
+            </select>
+            <p class="crear-error" id="crear-peso-error"></p>
+          </div>
+
+          <div class="crear-field">
+            <label class="crear-label" for="crear-precio">Precio</label>
+            <input class="crear-input" id="crear-precio" name="precio" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="Ej.: 19.90" aria-describedby="crear-precio-error" required>
+            <p class="crear-error" id="crear-precio-error"></p>
+          </div>
+
+          <div class="crear-field">
+            <label class="crear-label" for="crear-descripcion">Descripción</label>
+            <textarea class="crear-input crear-textarea" id="crear-descripcion" name="descripcion" rows="5" minlength="10" maxlength="500" placeholder="Describe la vela (mínimo 10 caracteres)" aria-describedby="crear-descripcion-error" required></textarea>
+            <p class="crear-error" id="crear-descripcion-error"></p>
+          </div>
+
+          <button class="crear-button" type="submit">Agregar vela</button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer id="footer"></footer>
+
+  <script src="../../js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/ui.js"></script>
+  <script src="../../js/main.js"></script>
+  <script src="../../js/carrito.js"></script>
+  <script src="crear.js"></script>
+</body>
+
+</html>
