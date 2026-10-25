@@ -1,5 +1,10 @@
 /* Lumina - Catalogo de velas */
 
+// Carpeta de este script: resuelve rutas correctamente en su propia pagina
+// y cuando el modulo se inyecta en la home, en cualquier servidor.
+const CATALOGO_DIR = new URL(".", document.currentScript.src).href;
+const PRODUCTO_URL = new URL("producto/", CATALOGO_DIR).href;
+
 // Datos de los productos del catalogo.
 const catalogo = {
     catalogo: [
@@ -7,7 +12,7 @@ const catalogo = {
             id: 1,
             name: "Renacer",
             slug: "renacer",
-            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624150/generation/lumina/RENACER_ulhbzr.png",
+            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624150/generation/lumina/catalogo/RENACER_ulhbzr.png",
             scent: "Floral",
             category: "Bienestar",
             weight: 200,
@@ -18,7 +23,7 @@ const catalogo = {
             id: 2,
             name: "Relajacion",
             slug: "relajacion",
-            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624148/generation/lumina/RELAJACION_pr3hrs.png",
+            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624148/generation/lumina/catalogo/RELAJACION_pr3hrs.png",
             scent: "Lavanda",
             category: "Descanso",
             weight: 200,
@@ -29,7 +34,7 @@ const catalogo = {
             id: 3,
             name: "Equilibrio",
             slug: "equilibrio",
-            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624147/generation/lumina/EQUILIBRIO_vdvulk.png",
+            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624147/generation/lumina/catalogo/EQUILIBRIO_vdvulk.png",
             scent: "Lavanda - Manzanilla",
             category: "Mindfulness",
             weight: 200,
@@ -40,7 +45,7 @@ const catalogo = {
             id: 4,
             name: "Luna Nueva",
             slug: "luna-nueva",
-            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624148/generation/lumina/LUNA_NUEVA_xmjx2p.png",
+            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624148/generation/lumina/catalogo/LUNA_NUEVA_xmjx2p.png",
             scent: "Amaderado",
             category: "Intencion",
             weight: 200,
@@ -51,7 +56,7 @@ const catalogo = {
             id: 5,
             name: "Pausa",
             slug: "pausa",
-            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624147/generation/lumina/PAUSA_gyci9x.png",
+            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624147/generation/lumina/catalogo/PAUSA_gyci9x.png",
             scent: "Lavanda - Manzanilla",
             category: "Amor propio",
             weight: 200,
@@ -62,7 +67,7 @@ const catalogo = {
             id: 6,
             name: "Conexion",
             slug: "conexion",
-            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624147/generation/lumina/CONEXION_mpjl1u.png",
+            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624147/generation/lumina/catalogo/CONEXION_mpjl1u.png",
             scent: "Dulce",
             category: "Amor propio",
             weight: 200,
@@ -73,7 +78,7 @@ const catalogo = {
             id: 7,
             name: "Atardecer",
             slug: "atardecer",
-            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624147/generation/lumina/ATARDECER_jyisey.png",
+            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624147/generation/lumina/catalogo/ATARDECER_jyisey.png",
             scent: "Citrico",
             category: "Bienestar",
             weight: 200,
@@ -84,7 +89,7 @@ const catalogo = {
             id: 8,
             name: "Claridad",
             slug: "claridad",
-            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624147/generation/lumina/CLARIDAD_fx1nsz.png",
+            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624147/generation/lumina/catalogo/CLARIDAD_fx1nsz.png",
             scent: "Herbal",
             category: "Mindfulness",
             weight: 200,
@@ -95,7 +100,7 @@ const catalogo = {
             id: 9,
             name: "Armonia",
             slug: "armonia",
-            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624147/generation/lumina/ARMONIA_ofbr1l.png",
+            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624147/generation/lumina/catalogo/ARMONIA_ofbr1l.png",
             scent: "Floral",
             category: "Intencion",
             weight: 200,
@@ -106,7 +111,7 @@ const catalogo = {
             id: 10,
             name: "Aura",
             slug: "aura",
-            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624147/generation/lumina/AURA_slwuq8.png",
+            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792624147/generation/lumina/catalogo/AURA_slwuq8.png",
             scent: "Lavanda - Manzanilla",
             category: "Mindfulness",
             weight: 200,
@@ -119,7 +124,7 @@ const catalogo = {
             id: 11,
             name: "Noche de Paz",
             slug: "noche-de-paz",
-            img: "./images/nochedepaz.png",
+            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792899666/generation/lumina/catalogo/NAVIDAD/NOCHE_DE_PAZ_kco6mt.png",
             scent: "Vainilla",
             category: "Navidad",
             weight: 200,
@@ -130,7 +135,7 @@ const catalogo = {
             id: 12,
             name: "Pinos del Bosque",
             slug: "pinos-del-bosque",
-            img: "./images/pinos.png",
+            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792899667/generation/lumina/catalogo/NAVIDAD/PINOS_DEL_BOSQUE_jnep5t.png",
             scent: "Pino y cedro",
             category: "Navidad",
             weight: 200,
@@ -141,7 +146,7 @@ const catalogo = {
             id: 13,
             name: "Magia",
             slug: "magia",
-            img: "./images/magia.png",
+            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792899666/generation/lumina/catalogo/NAVIDAD/MAGIA_qkngud.png",
             scent: "Frutos rojos",
             category: "Navidad",
             weight: 200,
@@ -152,7 +157,7 @@ const catalogo = {
             id: 14,
             name: "Canela Dorada",
             slug: "canela-dorada",
-            img: "./images/caneladorada.png",
+            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792899666/generation/lumina/catalogo/NAVIDAD/CANELA_DORADA_ncvwlo.png",
             scent: "Canela y naranja",
             category: "Navidad",
             weight: 200,
@@ -163,7 +168,7 @@ const catalogo = {
             id: 15,
             name: "Brillo",
             slug: "brillo",
-            img: "./images/brillo.png",
+            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792899665/generation/lumina/catalogo/NAVIDAD/BRILLO_vamisc.png",
             scent: "Jazmin y ambar",
             category: "Navidad",
             weight: 200,
@@ -174,7 +179,7 @@ const catalogo = {
             id: 16,
             name: "Celebracion",
             slug: "celebracion",
-            img: "./images/celebracion.png",
+            img: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1792899666/generation/lumina/catalogo/NAVIDAD/CELEBRACIO%CC%81N_mt1hkf.png",
             scent: "Naranja y canela",
             category: "Navidad",
             weight: 200,
@@ -211,7 +216,7 @@ function crearVela(vela) {
 
             <a
                 class="candle-link"
-                href="producto/index.html?slug=${encodeURIComponent(vela.slug)}"
+                href="${PRODUCTO_URL}?slug=${encodeURIComponent(vela.slug)}"
                 aria-label="Ver detalles de ${vela.name}">
 
                 <img
