@@ -30,12 +30,6 @@
   const hint = banner.querySelector(".hero-hint");
 
 
-  /* ==========================================================
-   * 1) PARTIR TEXTO EN LETRAS
-   * Convierte "Hola mundo" en <span palabra><span letra>H</span>...</span>
-   * Cada letra recibe --i (su número) para escalonar la animación en CSS.
-   * Respeta etiquetas como <br> para no perder los saltos de línea.
-   * ========================================================== */
   function splitIntoChars(root) {
     let count = 0;
 
