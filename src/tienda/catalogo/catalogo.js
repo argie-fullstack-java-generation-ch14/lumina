@@ -185,6 +185,73 @@ const catalogo = {
             weight: 200,
             description: "Aromas que reunen lo mas importante.",
             price: 12000
+        },
+        { 
+        id: 17,
+        name: "Noche de Brujas",
+        slug: "noche-de-brujas",
+        img: "https://res.cloudinary.com/zj7mojiw/image/upload/v1793039456/13.png",
+        scent: "Vainilla oscura, sándalo y ámbar",
+        category: "Halloween",
+        weight: 200,
+        description: "Un toque de misterio para iluminar tus noches.",
+        price: 12000
+        },
+        
+        {
+        id: 18,
+        name: "Calabaza Dorada",
+        slug: "calabaza-dorada",
+        img: "https://res.cloudinary.com/zj7mojiw/image/upload/v1793039457/12.png",
+        scent: "Calabaza especiada, canela y naranja",
+        category: "Halloween",
+        weight: 200,
+        description: "Calidez y dulzura para abrazar tus momentos favoritos.",
+        price: 12000
+        },
+        {
+        id: 19,
+        name: "Hechizo de Luna",
+        slug: "hechizo-de-luna",
+        img: "https://res.cloudinary.com/zj7mojiw/image/upload/v1793039460/11.png",
+        scent: "Lavanda, cedro y hierbas aromáticas",
+        category: "Halloween",
+        weight: 200,
+        description: "Una pausa mágica para reconectar contigo misma.",
+        price: 12000
+        },
+        {
+        id: 20,
+        name: "Rosa de Medianoche",
+        slug: "rosa-de-medianoche",
+        img: "https://res.cloudinary.com/zj7mojiw/image/upload/v1793039460/10.png",
+        scent: "Rosa, frutos rojos y pachulí",
+        category: "Halloween",
+        weight: 200,
+        description: "Un aroma misterioso para celebrar tu esencia.",
+        price: 12000
+        },
+        {
+        id: 21,
+        name: "Bosque Encantado",
+        slug: "bosque-encantado",
+        img: "https://res.cloudinary.com/zj7mojiw/image/upload/v1793039456/9.png",
+        scent: "Pino, cedro y tierra húmeda",
+        category: "Halloween",
+        weight: 200,
+        description: "Un respiro de naturaleza en medio de la magia.",
+        price: 12000
+        },
+        {
+        id: 22,
+        name: "Último Suspiro",
+        slug: "ultimo-suspiro",
+        img: "https://res.cloudinary.com/zj7mojiw/image/upload/v1793039460/8.png",
+        scent: "Incienso, vainilla y madera ahumada",
+        category: "Halloween",
+        weight: 200,
+        description: "Suelta lo que pesa y enciende la luz de un nuevo comienzo.",
+        price: 12000
         }
     ]
 };

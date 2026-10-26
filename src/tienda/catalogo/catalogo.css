@@ -1126,3 +1126,9 @@
 .candle-image.navidad {
     transform: scale(1.2);
 }
+
+/* Ajustar el tamaño de las imágenes de Halloween */
+.catalog-grid .candle-card:has(.category-halloween) .candle-image {
+    object-fit: contain;
+    transform: scale(2.2) !important;
+}
