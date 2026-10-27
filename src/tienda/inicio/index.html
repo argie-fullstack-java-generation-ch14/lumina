@@ -6,16 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inicio · Lumina</title>
 
-  <!-- Bootstrap va primero: su Reboot no debe pisar los estilos -->
+  <!-- Bootstrap va primero: su Reboot no debe pisar tus estilos -->
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Tipografías: Montserrat para textos y botones.
-       Fraunces es solo un respaldo parecido a Recoleta mientras no esté el archivo de Recoleta
-       en src/assets/fonts/ (ver @font-face en inicio.css). -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Fraunces:wght@400&display=swap">
 
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="../../css/components.css">
@@ -28,36 +21,33 @@
 
   <main>
 
-    <!-- ============ BANNER (scroll expand) ============ -->
-    <section class="hero-banner" id="hero-banner" aria-label="Bienvenida a Lumina">
-      <div class="hero-track">
-        <div class="hero-stage">
+    <!-- ============ BANNER ============ -->
+    <section class="home-hero" id="home-hero" aria-label="Bienvenida a Lumina">
+      <!-- Foto de las velas: queda fija a la derecha y se difumina hacia la izquierda -->
+      <div class="home-hero-photo" aria-hidden="true">
+        <img class="home-hero-img"
+             src="../../assets/img/velas-lumina.jpg"
+             alt="" draggable="false">
+        <!-- Brillo de cada llama (--x e --y son su posición dentro de la foto) -->
+        <span class="candles-flame" style="--x: 65.3%; --y: 14%; --d: 0s"></span>
+        <span class="candles-flame" style="--x: 36.4%; --y: 40.8%; --d: -0.9s"></span>
+        <span class="candles-flame" style="--x: 85.3%; --y: 46.3%; --d: -1.7s"></span>
+        <span class="candles-flame" style="--x: 55.5%; --y: 61.1%; --d: -0.4s"></span>
+      </div>
 
-          <div class="hero-frame">
-            <img class="hero-media"
-                 src="../../assets/img/vela-ambiente.jpg"
-                 alt="Vela encendida en un frasco de vidrio rojo, con luces cálidas desenfocadas al fondo"
-                 draggable="false">
-            <div class="hero-scrim"></div>
-            <div class="hero-scrim-bottom"></div>
+      <div class="home-hero-inner">
 
-            <!-- Humo que sigue al cursor (lo dibuja splash-cursor.js) -->
-            <canvas class="hero-smoke" id="hero-smoke" aria-hidden="true"></canvas>
+        <!-- Textos -->
+        <div class="home-hero-copy">
+          <!-- inicio.js separa el título en letras para el efecto de humo -->
+          <h1 class="home-hero-title" data-smoke-type>Find Your Light, Feel your Wellness</h1>
 
-            <!-- Aparece cuando la imagen ya se expandió -->
-            <div class="hero-overlay">
-              <p class="hero-lead" data-split>
-                Bienvenido a Lumina, velas personalizadas para tu bienestar.
-              </p>
-              <a class="hero-button hero-rise" href="../catalogo/index.html">Ver la colección</a>
-            </div>
-          </div>
+          <!-- inicio.js separa esta frase en letras para que suban una por una -->
+          <p class="home-hero-lead" data-split>Bienvenido a Lumina, velas personalizadas para tu bienestar.</p>
 
-          <!-- inicio.js separa este título en letras para el efecto "smoke" -->
-          <h1 class="hero-title" data-smoke-type>Find your light,<br>find your wellness</h1>
-
-          <p class="hero-hint" aria-hidden="true">Desliza</p>
+          <a class="home-hero-button" href="../catalogo/index.html">Descubre más</a>
         </div>
+
       </div>
     </section>
 

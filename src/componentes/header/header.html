@@ -1,11 +1,48 @@
-<!-- Componente Header — se inyecta en #header por ui.js. Rutas relativas a src/. -->
+<!-- Componente Header — se inyecta en #header por ui.js. Rutas relativas a src/.
+     Sigue el prototipo de Figma: barra de aviso, logo, menú, carrito, favoritos y cuenta.
+     En pantallas pequeñas el menú se esconde y se abre con el botón de las tres rayas
+     (usa el "collapse" de Bootstrap, que ya está cargado en todas las páginas). -->
+<div class="site-promo">10 % de descuento en tu próxima compra utilizando el código: LUMINA20</div>
+
 <div class="site-header">
-  <div class="site-header-inner container">
-    <a class="site-brand" href="index.html">Lumina</a>
-    <nav class="site-nav">
-      <a class="site-nav-link" href="tienda/catalogo/index.html">Catálogo</a>
-      <a class="site-nav-link" href="tienda/nosotros/index.html">Nosotros</a>
-      <a class="site-nav-link" href="tienda/contacto/index.html">Contacto</a>
-    </nav>
+  <div class="site-header-inner">
+
+    <a class="site-logo" href="index.html" aria-label="Lumina, ir al inicio">
+    <img class="site-logo-img" src="assets/img/logo.png" alt="Lumina">
+    </a>
+
+    <button class="site-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#site-menu"
+      aria-controls="site-menu" aria-expanded="false" aria-label="Abrir menú">
+      <span class="site-toggle-line"></span>
+      <span class="site-toggle-line"></span>
+      <span class="site-toggle-line"></span>
+    </button>
+
+    <div class="site-menu collapse" id="site-menu">
+
+      <nav class="site-nav" aria-label="Principal">
+        <a class="site-nav-link" href="tienda/catalogo/index.html" data-page="catalogo">Catálogo</a>
+        <a class="site-nav-link" href="tienda/crear/index.html" data-page="crear">Crea tu Lumina</a>
+        <a class="site-nav-link" href="tienda/nosotros/index.html" data-page="nosotros">Nosotros</a>
+        <!-- El blog todavía no tiene página -->
+        <a class="site-nav-link" href="#" data-page="blog" title="Próximamente">Blog</a>
+        <a class="site-nav-link" href="tienda/contacto/index.html" data-page="contacto">Contáctanos</a>
+      </nav>
+
+      <!-- Carrito, favoritos y cuenta todavía no tienen página: por ahora son botones -->
+      <div class="site-actions">
+        <button class="site-icon" type="button" aria-label="Carrito">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.5 3.5h2.4l2.2 11.2h10.6l2-8.2H6"/><circle cx="9" cy="19.2" r="1.4"/><circle cx="17" cy="19.2" r="1.4"/></svg>
+          <span class="site-cart-count" id="cart-count" hidden>0</span>
+        </button>
+        <button class="site-icon" type="button" aria-label="Favoritos">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20.5S3.5 15.4 3.5 9.6A4.6 4.6 0 0 1 12 7.2a4.6 4.6 0 0 1 8.5 2.4C20.5 15.4 12 20.5 12 20.5Z"/></svg>
+        </button>
+        <button class="site-icon" type="button" aria-label="Mi cuenta">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c.9-4 3.8-6 7.5-6s6.6 2 7.5 6"/></svg>
+        </button>
+      </div>
+
+    </div>
   </div>
 </div>

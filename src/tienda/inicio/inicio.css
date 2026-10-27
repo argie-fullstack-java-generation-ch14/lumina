@@ -7,230 +7,141 @@
  */
 
 /* ==========================================================
- * BANNER · imagen que se expande al hacer scroll
+ * BANNER
  * ========================================================== */
 
-/* Recoleta es la tipografía de identidad de Lumina (títulos y frases importantes).
- * Es de pago, por eso el archivo no viene en el repo: se guarda en src/assets/fonts/
- * con estos nombres. Mientras no esté, el navegador usa Fraunces (parecida). */
-@font-face {
-  font-family: "Recoleta";
-  src: local("Recoleta"),
-       local("Recoleta Regular"),
-       url("../../assets/fonts/recoleta-regular.woff2") format("woff2"),
-       url("../../assets/fonts/recoleta-regular.otf") format("opentype"),
-       url("../../assets/fonts/recoleta-regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+.home-hero {
+  /* Mismo tono de la pared de la foto: así los bordes de la foto se funden con el fondo */
+  --hero-bg: #ECE3DD;
+  --hero-ink: var(--cafe-lumina, #3B2C2C);
+  --hero-smoke: #B8A6EE;     /* morado con el que aparece el título */
 
-.hero-banner {
-  /* Fuentes: Recoleta para títulos, Montserrat para textos y botones */
-  --hero-font-title: "Recoleta", "Fraunces", Georgia, serif;
-  --hero-font-text: "Montserrat", system-ui, sans-serif;
-
-  --hero-paper: var(--naranja-claro, #f9f1e8);
-  --hero-ink: var(--negro-relajacion, #33302d);
-  --hero-cream: #f9f1e8;
-  --hero-smoke: #b8a6ee;   /* morado del humo (solo lo usa el título al aparecer) */
-
-  margin: 0;
-  padding: 0;
-  background: var(--hero-paper);
-}
-
-/* Pista de scroll: su alto lo calcula inicio.js (pantalla + recorrido) */
-.hero-track {
   position: relative;
-  min-height: 240vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-height: clamp(520px, calc(100vh - 9rem), 760px);
+  background:
+    radial-gradient(60% 80% at 75% 55%, rgba(255, 255, 255, 0.45), transparent 70%),
+    var(--hero-bg);
+  color: var(--hero-ink);
 }
 
-.hero-stage {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  height: 100svh;
-  overflow: hidden;
+.home-hero-inner {
+  position: relative;
+  z-index: 1;               /* encima de la foto */
   display: grid;
-  place-items: center;
-  background: var(--hero-paper);
-}
-
-/* Marco: sin JS se ve completo; con JS se recorta y crece */
-.hero-frame {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  background: #33302d; /* si la foto no carga, nunca se ve blanco */
-  will-change: clip-path;
-}
-
-.hero-media {
-  position: absolute;
-  inset: 0;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 1rem;
+  align-items: center;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 32%;
-  transform-origin: 50% 50%;
-  will-change: transform;
-  user-select: none;
-  color: transparent; /* oculta el texto alternativo si la foto no carga */
-  font-size: 0;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 2.5rem clamp(1rem, 4vw, 3rem);
 }
 
-/* Capa oscura fija: asegura que el título se lea sobre la cera clara */
-.hero-scrim {
-  position: absolute;
-  inset: 0;
-  background: rgba(19, 18, 15, 0.3);
-}
+/* ---------- Textos ---------- */
 
-/* Degradado inferior: crece con el scroll para el texto final */
-.hero-scrim-bottom {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(19, 18, 15, 0.62) 0%, rgba(19, 18, 15, 0) 55%);
-  opacity: 0;
-}
-
-/* Canvas del humo */
-.hero-smoke {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-/* ---------- Título ---------- */
-
-.hero-title {
-  position: relative;
-  z-index: 3;
-  margin: 0;
-  padding: 0 1.25rem;
-  text-align: center;
-  font-family: var(--hero-font-title);
+.home-hero-title {
+  max-width: 8.3em;
+  margin: 0 0 1.5rem;
+  font-family: var(--fuente-titulos, Georgia, serif);
   font-weight: 400;
-  font-size: clamp(2.5rem, 5.4vw, 5rem);
-  line-height: 1.05;
+  font-size: clamp(2.6rem, 5.2vw, 4.7rem);
+  line-height: 1.08;
   letter-spacing: -0.01em;
-  color: var(--hero-cream);
-  text-shadow: 0 2px 30px rgba(19, 18, 15, 0.35);
-  pointer-events: none;
+  color: var(--hero-ink);
 }
 
-.hero-title .smoke-word {
+.home-hero-title .smoke-word {
   display: inline-block;
   white-space: nowrap;
 }
 
 /* inicio.js agrega .is-smoke-ready; sin JS el título se ve normal */
-.hero-title.is-smoke-ready .smoke-char {
+.home-hero-title.is-smoke-ready .smoke-char {
   display: inline-block;
   opacity: 0;
   animation: smoke-condense 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
-  animation-delay: calc(0.4s + var(--i) * 0.05s);
+  animation-delay: calc(0.2s + var(--i) * 0.045s);
   will-change: opacity, transform, filter;
 }
 
 @keyframes smoke-condense {
   0% {
     opacity: 0;
-    filter: blur(16px);
+    filter: blur(14px);
     transform: translateY(0.4em) scale(1.2);
     color: var(--hero-smoke);
   }
   60% {
     opacity: 0.8;
     filter: blur(4px);
-    color: #dcd2f4;
+    color: #8F7BC9;
   }
   100% {
     opacity: 1;
     filter: blur(0);
     transform: translateY(0) scale(1);
-    color: var(--hero-cream);
+    color: var(--hero-ink);
   }
 }
 
-/* ---------- Texto final (aparece al expandir) ---------- */
-
-.hero-overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.4rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem 4.5rem;
-}
-
 /* Frase de bienvenida: Recoleta (frase importante) */
-.hero-lead {
-  max-width: 17em;
-  margin: 0;
-  font-family: var(--hero-font-title);
+.home-hero-lead {
+  max-width: 22em;
+  margin: 0 0 2rem;
+  padding-bottom: 0.15em;   /* para que no se corten la g, la p, la j... */
+  overflow: hidden;         /* las letras suben desde una línea invisible */
+  font-family: var(--fuente-titulos, Georgia, serif);
   font-weight: 400;
-  font-size: clamp(1.4rem, 2.2vw, 2rem);
-  line-height: 1.3;
-  color: var(--hero-cream);
+  font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+  line-height: 1.35;
+  color: var(--hero-ink);
 }
 
-.hero-button {
+.home-hero-lead .split-word {
   display: inline-block;
-  padding: 0.85rem 1.9rem;
-  font-family: var(--hero-font-text);
-  font-size: 0.85rem;
+  white-space: nowrap;      /* una palabra nunca se parte entre dos líneas */
+}
+
+.home-hero-lead .split-char {
+  display: inline-block;
+}
+
+/* Botón del prototipo: píldora oscura, texto en Montserrat */
+.home-hero-button {
+  display: inline-block;
+  padding: 0.9rem 1.9rem;
+  border-radius: 999px;
+  background-color: var(--hero-ink);
+  color: var(--naranja-claro, #F9F1E8);
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
+  font-size: 0.95rem;
   font-weight: 500;
-  letter-spacing: 0.04em;
   text-decoration: none;
-  color: var(--hero-cream);
-  border: 1px solid rgba(249, 241, 232, 0.7);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
 }
 
-.hero-button:hover,
-.hero-button:focus-visible {
-  color: #13120f;
-  background: var(--hero-cream);
+.home-hero-button:hover,
+.home-hero-button:focus-visible {
+  color: var(--naranja-claro, #F9F1E8);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px -12px rgba(59, 44, 44, 0.6);
 }
 
-/* ---------- Animación de letras (tipo SplitText) ----------
- * inicio.js parte la frase en letras (.split-char) y, cuando la imagen ya
- * se abrió, le pone .is-playing al overlay. Cada letra sube desde abajo
- * con un pequeño retraso respecto a la anterior.
- */
-
-.hero-lead {
-  overflow: hidden;            /* las letras salen "desde abajo" de una línea invisible */
-  padding-bottom: 0.15em;      /* para que no se corten la g, la p, la j... */
+.home-hero-button:active {
+  transform: translateY(0) scale(0.97);
 }
 
-.hero-lead .split-word {
-  display: inline-block;
-  white-space: nowrap;         /* una palabra nunca se parte entre dos líneas */
-}
-
-.hero-lead .split-char {
-  display: inline-block;
-}
-
-/* Antes de reproducir, todo está oculto (solo cuando JS está activo) */
-.hero-banner.is-scroll-expand .hero-lead .split-char,
-.hero-banner.is-scroll-expand .hero-rise {
+/* Con JS, las letras de la frase y el botón esperan oculto hasta su turno */
+.home-hero.is-animated .home-hero-lead .split-char,
+.home-hero.is-animated .home-hero-button {
   opacity: 0;
 }
 
-.hero-overlay.is-playing .split-char,
-.hero-overlay.is-playing .hero-rise {
+.home-hero.is-playing .home-hero-lead .split-char,
+.home-hero.is-playing .home-hero-button {
   animation: split-rise 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) both;
   animation-delay: calc(var(--i, 0) * 35ms);
 }
@@ -246,75 +157,104 @@
   }
 }
 
-/* ---------- Pista "Desliza" ---------- */
+/* ---------- Velas flotando ---------- */
 
-.hero-hint {
+/* Foto a la derecha, tan alta como el banner (así no se estira ni se ve borrosa).
+ * La máscara la va borrando hacia la izquierda hasta que solo quedan los textos. */
+.home-hero-photo {
   position: absolute;
-  left: 50%;
-  bottom: 5.5rem;
-  z-index: 3;
-  transform: translateX(-50%);
-  margin: 0;
-  padding-bottom: 2.2rem;
-  font-family: var(--hero-font-text);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--hero-ink);
-}
-
-.hero-hint::after {
-  content: "";
-  position: absolute;
-  left: 50%;
+  top: 0;
+  right: 0;
   bottom: 0;
-  width: 1px;
-  height: 1.6rem;
-  background: currentColor;
-  transform-origin: top;
-  animation: hero-hint-line 2.2s ease-in-out infinite;
+  height: 100%;
+  aspect-ratio: 832 / 821;
+  max-width: 100%;
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.55) 28%, #000 55%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.55) 28%, #000 55%);
 }
 
-@keyframes hero-hint-line {
-  0%   { transform: scaleY(0); opacity: 0; }
-  40%  { transform: scaleY(1); opacity: 1; }
-  100% { transform: scaleY(1); opacity: 0; }
+.home-hero-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
 }
 
-/* ---------- Con JS activo: estado inicial recortado ---------- */
-
-.hero-banner.is-scroll-expand .hero-frame {
-  clip-path: inset(19% 28% 19% 28% round 24px);
+/* Brillo de cada llama: solo parpadea, no se mueve */
+.candles-flame {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 13%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+      rgba(255, 238, 200, 0.85) 0%,
+      rgba(255, 196, 110, 0.42) 28%,
+      rgba(255, 170, 80, 0) 68%);
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: flame-flicker 2.4s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
 }
 
-.hero-banner:not(.is-scroll-expand) .hero-hint,
-.hero-banner:not(.is-scroll-expand) .hero-scrim-bottom {
-  display: none;
+@keyframes flame-flicker {
+  0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(0.9); }
+  35%      { opacity: 1;    transform: translate(-50%, -50%) scale(1.12); }
+  60%      { opacity: 0.7;  transform: translate(-50%, -50%) scale(0.96); }
 }
 
-/* ---------- Móvil ---------- */
+/* ---------- Humo que sigue al cursor ---------- */
 
-@media (max-width: 860px) {
-  .hero-overlay {
-    padding-bottom: 3.5rem;
+/* Canvas fijo: cubre toda la ventana y deja pasar los clics.
+ * z-index bajo el de los modales de Bootstrap (1055) para no taparlos. */
+.page-smoke {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1040;
+  pointer-events: none;
+}
+
+/* ---------- Celular y tablet ---------- */
+
+@media (max-width: 991px) {
+  .home-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
-  .hero-hint {
-    bottom: 4rem;
+  /* en celular la foto va detrás, a todo el ancho, y se difumina hacia arriba */
+  .home-hero-photo {
+    left: 0;
+    top: auto;
+    height: auto;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(0deg, #000 35%, rgba(0, 0, 0, 0.5) 65%, transparent 100%);
+    mask-image: linear-gradient(0deg, #000 35%, rgba(0, 0, 0, 0.5) 65%, transparent 100%);
   }
 }
 
 /* ---------- Accesibilidad: menos movimiento ---------- */
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-banner.is-scroll-expand .hero-lead .split-char,
-  .hero-banner.is-scroll-expand .hero-rise {
+  .candles-flame {
+    animation: none;
+  }
+
+  .home-hero.is-animated .home-hero-lead .split-char,
+  .home-hero.is-animated .home-hero-button {
     opacity: 1;
   }
 
-  .hero-overlay.is-playing .split-char,
-  .hero-overlay.is-playing .hero-rise,
-  .hero-hint::after {
+  .home-hero.is-playing .home-hero-lead .split-char,
+  .home-hero.is-playing .home-hero-button {
     animation: none;
   }
 }
