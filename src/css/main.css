@@ -3,6 +3,26 @@
  * NO lleva reset: lo aporta el Reboot de Bootstrap.
  */
 
+/* --- TIPOGRAFÍAS LUMINA ---
+ * Recoleta: identidad, títulos y frases importantes.
+ * Montserrat: textos, botones y contenido.
+ * Recoleta es de pago: el archivo se guarda en src/assets/fonts/ (ver @font-face).
+ * Mientras no esté, se usa Fraunces, que es parecida.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Montserrat:wght@400;500;600&display=swap");
+
+@font-face {
+  font-family: "Recoleta";
+  src: local("Recoleta"),
+       local("Recoleta Regular"),
+       url("../assets/fonts/recoleta-regular.woff2") format("woff2"),
+       url("../assets/fonts/recoleta-regular.otf") format("opentype"),
+       url("../assets/fonts/recoleta-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* --- PALETA DE COLORES LUMINA --- */
 :root {
   /* Verdes */
@@ -20,4 +40,12 @@
   /* Oscuros */
   --negro-relajacion: #33302D;
   --negro-acentuado: #13120F;
+
+  /* Del prototipo de Figma */
+  --cafe-lumina: #3B2C2C;       /* texto, logo y botones */
+  --gris-barra: #F7F6F4;        /* fondo de la barra del header */
+
+  /* Tipografías */
+  --fuente-titulos: "Recoleta", "Fraunces", Georgia, serif;
+  --fuente-texto: "Montserrat", system-ui, sans-serif;
 }
