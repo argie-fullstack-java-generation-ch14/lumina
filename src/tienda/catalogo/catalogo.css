@@ -946,3 +946,295 @@
     object-fit: contain;
     transform: scale(2.2) !important;
 }
+/* Tarjeta de compromiso sostenible */
+.sustainability-card {
+    width: 100%;
+    min-height: 450px;
+    margin-top: 28px;
+    padding: 24px 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+
+    /* Fotografía como fondo de toda la tarjeta */
+    background-image: url("https://res.cloudinary.com/zj7mojiw/image/upload/v1793070538/Frascos_sostenibles_entre_eucaliptos_y_flores_blancas.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenido encima de la fotografía */
+.sustainability-content {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Logo de Lumina */
+.sustainability-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.sustainability-logo img {
+    display: block;
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Título de sostenibilidad */
+.sustainability-card h3 {
+    font-family: Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 16px;
+}
+
+/* Descripción */
+.sustainability-card p {
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+/* Adaptación para celulares */
+@media (max-width: 768px) {
+    .sustainability-card {
+        min-height: 450px;
+        max-width: 320px;
+        margin: 28px auto 0;
+        padding: 24px 18px;
+    }
+
+    .sustainability-card h3 {
+        font-size: 1.6rem;
+    }
+}
+
+/* Tarjeta de compromiso sostenible */
+.sustainability-card {
+    width: 100%;
+    min-height: 500px;
+    margin-top: 28px;
+    padding: 30px 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 250, 240, 0.30),
+            rgba(255, 250, 240, 0.30)
+        ),
+        url("https://res.cloudinary.com/zj7mojiw/image/upload/v1793070538/Frascos_sostenibles_entre_eucaliptos_y_flores_blancas.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Contenido más arriba */
+.sustainability-content {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding-top: 10px;
+}
+
+/* Logo de Lumina */
+.sustainability-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.sustainability-logo img {
+    display: block;
+    width: 100%;
+    max-width: 130px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Título */
+.sustainability-card h3 {
+    margin-top: 0;
+    margin-bottom: 14px;
+    font-family: Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* Descripción */
+.sustainability-card p {
+    margin-bottom: 0;
+    line-height: 1.7;
+}
+
+/* Adaptación a celulares */
+@media (max-width: 768px) {
+    .sustainability-card {
+        min-height: 500px;
+        max-width: 320px;
+        margin: 28px auto 0;
+        padding: 24px 18px;
+    }
+
+    .sustainability-content {
+        padding-top: 8px;
+    }
+
+    .sustainability-card h3 {
+        font-size: 1.6rem;
+    }
+}
+
+/* Tarjeta de compromiso sostenible */
+.sustainability-card {
+    width: 100%;
+    min-height: 500px;
+    margin-top: 28px;
+
+    /* Mover la tarjeta un poquito a la derecha */
+    margin-left: 10px;
+
+    padding: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+
+    /* Fotografía de fondo con transparencia */
+    background-image:
+        linear-gradient(
+            rgba(255, 250, 240, 0.45),
+            rgba(255, 250, 240, 0.45)
+        ),
+        url("https://res.cloudinary.com/zj7mojiw/image/upload/v1793070538/Frascos_sostenibles_entre_eucaliptos_y_flores_blancas.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Contenido más arriba */
+.sustainability-content {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+
+    /* Ajusta este valor para subir o bajar las letras */
+    padding-top: 0;
+    margin-top: -10px;
+}
+
+/* Logo de Lumina */
+.sustainability-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.sustainability-logo img {
+    display: block;
+    width: 100%;
+    max-width: 130px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Título */
+.sustainability-card h3 {
+    margin-top: 0;
+    margin-bottom: 14px;
+    font-family: inherit;
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* Descripción */
+.sustainability-card p {
+    margin-bottom: 0;
+    line-height: 1.7;
+}
+
+/* Adaptación para celulares */
+@media (max-width: 768px) {
+    .sustainability-card {
+        min-height: 500px;
+        max-width: 320px;
+        margin: 28px auto 0;
+        padding: 20px 18px;
+    }
+
+    .sustainability-content {
+        margin-top: -10px;
+    }
+
+    .sustainability-card h3 {
+        font-size: 1.6rem;
+    }
+}
+
+/* Mover la tarjeta un poquito a la izquierda */
+.sustainability-card {
+    margin-left: 20px;
+}
+
+/* Bajar solamente el logo de Lumina */
+.sustainability-logo {
+    margin-top: 55px;
+}
+/* Subir el título */
+.sustainability-card h3 {
+    transform: translateY(-25px);
+}
+
+/* Subir el texto descriptivo */
+.sustainability-card p {
+    transform: translateY(-20px);
+}
+/* Mover la tarjeta hacia la izquierda */
+.sustainability-card {
+    position: relative;
+    left: -20px;
+}
+/* Fuente del título Compromiso sostenible */
+.sustainability-card h3 {
+    font-family: Georgia, serif !important;
+    font-size: 1.3rem !important;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-top: 0;
+    margin-bottom: 14px;
+}
+
+/* Texto descriptivo del compromiso sostenible */
+.sustainability-card p {
+    font-size: 0.75rem  !important;
+    text-align: justify;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
