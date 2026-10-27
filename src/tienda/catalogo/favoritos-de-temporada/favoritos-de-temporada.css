@@ -1,5 +1,5 @@
 .season-favorites {
-    padding: 36px 28px 48px;
+    padding: 36px 28px 0 48px;
     overflow: hidden;
     background-color: #FFFFFF;
 }
@@ -7,7 +7,6 @@
 .section-eyebrow {
     display: none;
 }
-
 
 /* CARRUSEL DE FAVORITAS */
 .favorites-grid {
@@ -41,8 +40,7 @@
 }
 
 
-/* FAVORITAS DE TEMPORADA
-   Una sola fila horizontal*/
+/* FAVORITAS DE TEMPORADA */
 .favorites-grid {
     display: flex;
     flex-wrap: nowrap;
