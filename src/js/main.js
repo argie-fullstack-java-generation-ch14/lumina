@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const routes = {
     "#inicio": "tienda/inicio/index.html",
+    "#favs-de-temporada": "tienda/catalogo/favoritos-de-temporada/favoritos-de-temporada.html",
     "#catalogo": "tienda/catalogo/index.html",
     "#nosotros": "tienda/nosotros/index.html",
     "#contacto": "tienda/contacto/index.html",
