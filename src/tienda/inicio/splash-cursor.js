@@ -1,7 +1,6 @@
 // Lumina · inicio · splash-cursor.js
 // Humo / tinta de fluido que sigue al cursor (simulación WebGL2).
-// Adaptado a JavaScript vainilla desde el componente SplashCursor de React Bits
-// (sin React, sin build). Uso:
+// JavaScript puro, sin build. Uso:
 //   const humo = createSplashCursor(canvas, { colors: ["#b8a6ee"], intensity: 0.4 });
 //   humo.destroy();   // para apagarlo
 
