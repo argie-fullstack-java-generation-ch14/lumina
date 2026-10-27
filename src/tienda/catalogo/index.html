@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,8 +8,7 @@
     <title>Catálogo | Lumina</title>
 
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../css/main.css">
     <link rel="stylesheet" href="../../css/components.css">
     <link rel="stylesheet" href="catalogo.css">
@@ -22,43 +20,15 @@
 
     <main class="catalog-page">
 
-        <!-- Favoritas de temporada -->
-        <section class="season-favorites"
-            aria-labelledby="favorites-title">
-
-            <div class="section-heading">
-                <h1 id="favorites-title">Favoritas de temporada</h1>
-
-                <a href="index.html"
-                    class="view-all-link">
-                    Explora todo el catálogo
-                    <i class="fa-solid fa-arrow-right"
-                        aria-hidden="true"></i>
-                </a>
-            </div>
-
-            <div
-                id="favorites-container"
-                class="favorites-grid"
-                aria-label="Velas favoritas de temporada">
-            </div>
-
-        </section>
-
         <!-- Catálogo completo -->
-        <section
-            id="catalogo-completo"
-            class="catalog-section"
-            aria-labelledby="catalog-title">
+        <section id="catalogo-completo" class="catalog-section" aria-labelledby="catalog-title">
 
             <div class="catalog-heading">
                 <h2 id="catalog-title">Catálogo</h2>
 
-                <a href="index.html"
-                    class="view-all-link">
+                <a href="index.html" class="view-all-link">
                     Explora todo el catálogo
-                    <i class="fa-solid fa-arrow-right"
-                        aria-hidden="true"></i>
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </a>
             </div>
 
@@ -79,37 +49,27 @@
                             <h4>Experiencias</h4>
 
                             <label class="filter-option">
-                                <input type="checkbox"
-                                    name="category"
-                                    value="bienestar">
+                                <input type="checkbox" name="category" value="bienestar">
                                 Bienestar
                             </label>
 
                             <label class="filter-option">
-                                <input type="checkbox"
-                                    name="category"
-                                    value="descanso">
+                                <input type="checkbox" name="category" value="descanso">
                                 Descanso
                             </label>
 
                             <label class="filter-option">
-                                <input type="checkbox"
-                                    name="category"
-                                    value="mindfulness">
+                                <input type="checkbox" name="category" value="mindfulness">
                                 Mindfulness
                             </label>
 
                             <label class="filter-option">
-                                <input type="checkbox"
-                                    name="category"
-                                    value="intencion">
+                                <input type="checkbox" name="category" value="intencion">
                                 Intención
                             </label>
 
                             <label class="filter-option">
-                                <input type="checkbox"
-                                    name="category"
-                                    value="amor propio">
+                                <input type="checkbox" name="category" value="amor propio">
                                 Amor propio
                             </label>
 
@@ -121,25 +81,18 @@
                             <h4>Temporadas</h4>
 
                             <label class="filter-option">
-                                <input type="checkbox"
-                                    name="category"
-                                    value="halloween">
+                                <input type="checkbox" name="category" value="halloween">
                                 Halloween
                             </label>
 
                             <label class="filter-option">
-                                <input type="checkbox"
-                                    name="category"
-                                    value="navidad">
+                                <input type="checkbox" name="category" value="navidad">
                                 Navidad
                             </label>
 
                         </div>
 
-                        <button
-                            type="button"
-                            id="clear-filters"
-                            class="clear-filters">
+                        <button type="button" id="clear-filters" class="clear-filters">
                             Limpiar filtros
                         </button>
 
@@ -147,8 +100,7 @@
 
                     <!-- Imagen original de compromiso sostenible -->
                     <div class="sustainability-card">
-                        <img
-                            src="./images/compromiso-sostenible.png"
+                        <img src="./images/compromiso-sostenible.png"
                             alt="Compromiso sostenible de Lumina: frascos de vidrio 100 % reutilizables."
                             loading="lazy">
                     </div>
@@ -158,16 +110,10 @@
                 <!-- Productos del catálogo -->
                 <div class="catalog-products">
 
-                    <div
-                        id="catalog-container"
-                        class="catalog-grid"
-                        aria-label="Productos del catálogo">
+                    <div id="catalog-container" class="catalog-grid" aria-label="Productos del catálogo">
                     </div>
 
-                    <p
-                        id="empty-results"
-                        class="empty-results"
-                        hidden>
+                    <p id="empty-results" class="empty-results" hidden>
                         No encontramos velas con estos filtros.
                         Intenta seleccionar otras opciones.
                     </p>
@@ -187,6 +133,7 @@
     <script src="../../js/ui.js"></script>
     <script src="../../js/main.js"></script>
     <script src="../../js/carrito.js"></script>
+    <script src="../../js/velas.js"></script>
     <script src="catalogo.js"></script>
 
 </body>

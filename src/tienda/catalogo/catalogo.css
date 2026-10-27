@@ -8,15 +8,6 @@
 }
 
 
-/*    FAVORITAS DE TEMPORADA */ 
-
-
-.season-favorites {
-    padding: 36px 28px 48px;
-    overflow: hidden;
-    background-color: #FFFFFF;
-}
-
 .section-heading,
 .catalog-heading {
     display: flex;
@@ -37,13 +28,7 @@
     line-height: 1.2;
 }
 
-.section-eyebrow {
-    display: none;
-}
-
-
 /* Enlace para explorar el catálogo */
-
 .view-all-link {
     display: inline-flex;
     align-items: center;
@@ -72,24 +57,6 @@
     border-radius: 50%;
     background-color: var(--celeste-apagado, #374F59);
     color: #FFFFFF;
-}
-
-
-/* CARRUSEL DE FAVORITAS */
-
-.favorites-grid {
-    display: flex;
-    gap: 24px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 0 0 8px;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-}
-
-.favorites-grid::-webkit-scrollbar {
-    display: none;
 }
 
 
@@ -738,10 +705,6 @@
 
 /* CELULARES */
 @media (max-width: 600px) {
-    .season-favorites {
-        padding: 28px 16px 36px;
-    }
-
     .section-heading,
     .catalog-heading {
         align-items: center;
@@ -762,15 +725,6 @@
     .view-all-link i {
         width: 24px;
         height: 24px;
-    }
-
-    .favorites-grid {
-        gap: 16px;
-    }
-
-    .favorites-grid .candle-card {
-        flex-basis: 240px;
-        height: 350px;
     }
 
     .catalog-section {
@@ -877,8 +831,7 @@
 }
 
 /* Tarjetas verticales del catalogo */
-.catalog-grid,
-.favorites-grid {
+.catalog-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(210px, 240px));
     justify-content: center;
@@ -965,8 +918,7 @@
 
 /* Ajustes para celulares */
 @media (max-width: 480px) {
-    .catalog-grid,
-    .favorites-grid {
+    .catalog-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
     }
@@ -984,144 +936,6 @@
     }
 }
 
-/* Recuperar la visualizacion de Favoritas de temporada */
-.season-favorites {
-    display: block;
-    width: 100%;
-}
-
-.favorites-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(210px, 240px));
-    justify-content: center;
-    align-items: stretch;
-    gap: 24px;
-    width: 100%;
-}
-
-.favorites-grid .candle-card {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    min-width: 0;
-    height: 100%;
-}
-
-
-/* FAVORITAS DE TEMPORADA
-   Una sola fila horizontal*/
-
-.favorites-grid {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: stretch;
-    gap: 24px;
-    width: 100%;
-    height: auto;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 0 0 12px;
-    scroll-snap-type: x mandatory;
-}
-
-/* Tamaño de cada vela de temporada */
-.favorites-grid .candle-card {
-    flex: 0 0 270px;
-    width: 270px;
-    min-width: 270px;
-    height: 395px;
-    scroll-snap-align: start;
-}
-
-/* Mantener el diseño original de las tarjetas */
-.favorites-grid .candle-link {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    display: block;
-}
-
-/* La imagen ocupa la tarjeta como en el diseño original */
-.favorites-grid .candle-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Conservar el efecto original de la tarjeta */
-.favorites-grid .candle-card::after {
-    display: block;
-}
-
-/* Conservar el texto sobre la imagen */
-.favorites-grid .candle-content {
-    position: absolute;
-    right: 16px;
-    bottom: 18px;
-    left: 16px;
-    z-index: 2;
-    color: white;
-}
-
-
-/* Quitar el botón de comprar solo en temporada */
-.favorites-grid .add-to-cart {
-    display: none !important;
-}
-
-.favorites-grid .candle-content {
-    position: absolute;
-    right: 16px;
-    bottom: 18px;
-    left: 16px;
-    z-index: 2;
-    color: #FFFFFF;
-    text-align: left;
-}
-
-/* Recuperar el diseño original de favoritas */
-.season-favorites .favorites-grid .candle-card {
-    position: relative;
-    overflow: hidden;
-    height: 395px;
-}
-
-.season-favorites .favorites-grid .candle-link {
-    position: absolute;
-    inset: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-}
-
-.season-favorites .favorites-grid .candle-image {
-    position: absolute;
-    inset: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transform: scale(1.08);
-}
-
-.season-favorites .favorites-grid .candle-card::after {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.season-favorites .favorites-grid .candle-content {
-    position: absolute;
-    right: 32px;
-    bottom: 22px;
-    left: 5px;
-    z-index: 2;
-    color: #FFFFFF;
-}
 /* Más zoom para las imágenes navideñas */
 .candle-image.navidad {
     transform: scale(1.2);

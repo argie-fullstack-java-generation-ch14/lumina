@@ -16,10 +16,12 @@
 
   <link rel="preload" href="tienda/inicio/inicio.css" as="style" onload="this.rel='stylesheet'">
   <link rel="preload" href="tienda/catalogo/catalogo.css" as="style" onload="this.rel='stylesheet'">
+  <link rel="preload" href="tienda/catalogo/favoritos-de-temporada/favoritos-de-temporada.css" as="style" onload="this.rel='stylesheet'">
   <link rel="preload" href="tienda/nosotros/nosotros.css" as="style" onload="this.rel='stylesheet'">
   <link rel="preload" href="tienda/contacto/contacto.css" as="style" onload="this.rel='stylesheet'">
   <link rel="preload" href="componentes/header/header.css" as="style" onload="this.rel='stylesheet'">
   <link rel="preload" href="componentes/footer/footer.css" as="style" onload="this.rel='stylesheet'">
+  <link rel="preload" href="componentes/carrusel/carrusel.css" as="style" onload="this.rel='stylesheet'">
 </head>
 
 <body data-page="home">
@@ -31,6 +33,7 @@
     <!-- El contenido de cada página se inyecta aquí (ver js/main.js y js/ui.js) -->
     <!-- Lo que se modifique en los html de cada modulo aparecera automaticamente aqui :) -->
     <section id="inicio"></section>
+    <section id="favs-de-temporada"></section>
     <section id="catalogo"></section>
     <section id="nosotros"></section>
     <section id="contacto"></section>
@@ -43,6 +46,8 @@
   <script src="./js/ui.js"></script>
   <script src="./js/main.js"></script>
   <script src="./js/carrito.js"></script>
+  <script src="./js/velas.js"></script>
+  <script src="./componentes/carrusel/carrusel.js"></script>
 </body>
 
 </html>
