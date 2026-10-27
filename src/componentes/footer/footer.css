@@ -1,47 +1,153 @@
+
 /* Lumina · componente Footer */
 
 .site-footer {
   margin-top: 3rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  background-color: var(--negro-relajacion);
-  color: var(--naranja-claro);
+  padding-top: 1rem;
+  padding-bottom: 0;
+  background-color: #fff;
+  background-image: url("https://res.cloudinary.com/zj7mojiw/image/upload/v1793053108/Footer_1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #302824;
+  border-top: 1px solid #e7e1dc;
 }
 
+/* Contenido principal */
 .site-footer-inner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 170px 170px;
+  align-items: start;
   gap: 1rem;
+  padding: 0 0 0.75rem;
 }
 
+/* Logo y descripción */
 .site-footer-brand {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  align-items: flex-start;
+  gap: 0;
 }
 
-/* Reusamos .site-brand del header, pero con el color claro del footer. */
+/* Enlace del logo */
 .site-footer .site-brand {
-  color: var(--naranja-claro);
-}
-
-.site-footer-text {
+  display: inline-block;
+  width: 120px;
+  max-width: 120px;
   margin: 0;
+  padding: 0;
+  text-decoration: none;
+  line-height: 0;
 }
 
+/* Imagen del logo */
+.site-footer .site-footer-logo {
+  display: block;
+  width: 120px;
+  max-width: 120px;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  object-fit: contain;
+}
+
+/* Frase de la marca */
+.site-footer-text {
+  margin: -12px 0 0;
+  padding: 0;
+  color: #625852;
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+/* Redes sociales */
+.site-footer-social {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.2rem;
+}
+
+.site-footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #302824;
+  font-size: 1.15rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.site-footer-social a:hover {
+  color: #9a7866;
+}
+
+/* Columnas de navegación */
 .site-footer-nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
 }
 
+/* Títulos de las columnas */
+.site-footer-nav h3 {
+  margin: 0 0 0.2rem;
+  color: #302824;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Enlaces */
 .site-footer-link {
-  color: var(--naranja-claro);
+  color: #514943;
+  font-size: 0.85rem;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .site-footer-link:hover {
-  color: var(--naranja-pastel);
+  color: #9a7866;
+}
+
+/* Línea inferior y derechos reservados */
+.site-footer-bottom {
+  padding: 0.4rem 0.5rem;
+  border-top: 1px solid #d9d2cc;
+  text-align: center;
+}
+
+.site-footer-bottom p {
+  margin: 0;
+  color: #514943;
+  font-size: 0.75rem;
+}
+
+/* Adaptación a celulares */
+@media (max-width: 600px) {
+  .site-footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 0 1rem 1rem;
+  }
+
+  .site-footer-brand {
+    grid-column: auto;
+  }
+
+  .site-footer .site-brand {
+    width: 75px;
+    max-width: 75px;
+  }
+
+  .site-footer .site-footer-logo {
+    width: 75px;
+    max-width: 75px;
+  }
+
+  .site-footer-text {
+    margin-top: -8px;
+  }
 }

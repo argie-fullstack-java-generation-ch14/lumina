@@ -1,16 +1,15 @@
+
 /* Lumina - Catalogo de velas */
 
-// Carpeta de este script: resuelve rutas correctamente en su propia pagina
-// y cuando el modulo se inyecta en la home, en cualquier servidor.
+// Carpeta de este script: resuelve rutas correctamente
+// en su propia pagina y cuando se inyecta en la home.
 const CATALOGO_DIR = new URL(".", document.currentScript.src).href;
 const PRODUCTO_URL = new URL("producto/", CATALOGO_DIR).href;
-
 
 // Datos de los productos del catalogo: viven en js/velas.js, que se carga
 // antes de este script (misma estructura de datos para el carrusel de la
 // home y el modulo de favoritas de temporada).
 const catalogo = { catalogo: velas };
-
 
 
 // Crear la tarjeta de una vela.
@@ -115,6 +114,11 @@ const selectorOrden = document.getElementById(
 );
 
 
+// Detectar si el catálogo está dentro de la página principal.
+const esPaginaPrincipal =
+    document.body.dataset.page === "home";
+
+
 // Aplicar filtros y ordenamiento.
 function actualizarCatalogo() {
     if (!contenedorCatalogo) {
@@ -174,22 +178,31 @@ function actualizarCatalogo() {
         );
     }
 
-    contenedorCatalogo.innerHTML = productosFiltrados
+    // En la pagina principal mostrar solo 8 productos.
+    // En las demas paginas mostrar todos los productos filtrados.
+    const productosVisibles = esPaginaPrincipal
+        ? productosFiltrados.slice(0, 8)
+        : productosFiltrados;
+
+    // Mostrar los productos en pantalla.
+    contenedorCatalogo.innerHTML = productosVisibles
         .map(crearVela)
         .join("");
 
+    // Actualizar el contador de productos visibles.
     if (contadorProductos) {
         contadorProductos.textContent =
-            `${productosFiltrados.length} velas encontradas`;
+            `${productosVisibles.length} velas encontradas`;
     }
 
+    // Mostrar mensaje si no hay productos.
     if (mensajeVacio) {
-        mensajeVacio.hidden = productosFiltrados.length > 0;
+        mensajeVacio.hidden = productosVisibles.length > 0;
     }
 }
 
 
-// Mostrar el catalogo completo al cargar la pagina.
+// Mostrar los productos al cargar la pagina.
 actualizarCatalogo();
 
 
