@@ -87,16 +87,12 @@
   background-color: var(--celeste-apagado);
   color: #FFFFFF;
   font-family: var(--fuente-texto);
+  font-size: 14px;
   font-weight: 600;
   border-radius: 40px;
   border: none;
   padding: 0.7rem 1rem;
-  transition: background-color 0.2s ease;
-}
-
-.btn-apply:hover {
-  background-color: var(--negro-relajacion);
-  color: #FFFFFF;
+  cursor: pointer;
 }
 
 .btn-checkout {
@@ -104,19 +100,9 @@
   color: #FFFFFF;
   font-family: var(--fuente-texto);
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 15px;
   border-radius: 40px;
   border: none;
-  /* Bootstrap no define estas variables en la clase base .btn: sin ellas,
-     hover/active/focus dejan el fondo y el texto transparentes. */
-  --bs-btn-hover-color: #FFFFFF;
-  --bs-btn-hover-bg: var(--naranja-apagado);
-  --bs-btn-hover-border-color: var(--naranja-apagado);
-  --bs-btn-active-color: #FFFFFF;
-  --bs-btn-active-bg: var(--naranja-apagado);
-  --bs-btn-active-border-color: var(--naranja-apagado);
-  --bs-btn-focus-box-shadow: none;
-  transition: opacity 0.2s ease, transform 0.1s ease, background-color 0.2s ease;
 }
 
 .btn-checkout:hover,

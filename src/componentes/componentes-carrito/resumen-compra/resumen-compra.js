@@ -56,7 +56,7 @@ function crearResumenCompra(totales) {
                             placeholder="Ingresar código del cupón">
                     </div>
                     <div class="col-12 col-sm-4 col-lg-12 col-xl-4">
-                        <button type="button" class="btn btn-apply w-100">Aplicar</button>
+                        <button type="button" class="btn-apply w-100">Aplicar</button>
                     </div>
                 </div>
           </div>
