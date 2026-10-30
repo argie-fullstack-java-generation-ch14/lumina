@@ -4,20 +4,20 @@
 // (ver calcularTotales en js/carrito.js) y el cupón activo.
 
 function crearResumenCompra(totales) {
-  const { cantidad, subtotal, descuento, iva, total } = totales;
-  const fmt = (valor) => valor.toLocaleString("es-CO");
+	const { cantidad, subtotal, descuento, iva, total } = totales;
+	const fmt = (valor) => valor.toLocaleString("es-CO");
 
-  // Solo se muestra la fila de descuento si hay cupón aplicado.
-  const filaDescuento = descuento
-    ? `
+	// Solo se muestra la fila de descuento si hay cupón aplicado
+	const filaDescuento = descuento
+		? `
       <div class="d-flex justify-content-between align-items-center mb-3">
           <span class="summary-descuento">Cupón ${cuponAplicado} (-10 %)</span>
           <span class="summary-value">- $ ${fmt(descuento)}</span>
       </div>
       `
-    : "";
+		: "";
 
-  return `
+	return `
       <div class="card summary-card p-4 mb-4">
           <h2 class="summary-title mb-4">Resumen de la compra</h2>
 
@@ -49,16 +49,16 @@ function crearResumenCompra(totales) {
                   <span>Ingresar cupón de descuento</span>
               </label>
 
-              <div class="row g-2">
-                  <div class="col-12 col-sm-8">
-                      <input type="text" id="couponInput" class="form-control coupon-input"
-                          value="${cuponAplicado ?? ""}"
-                          placeholder="Ingresar código del cupón">
-                  </div>
-                  <div class="col-12 col-sm-4">
-                      <button type="button" class="btn btn-apply w-100">Aplicar</button>
-                  </div>
-              </div>
+                <div class="row g-2">
+                    <div class="col-12 col-sm-8 col-lg-12 col-xl-8">
+                        <input type="text" id="couponInput" class="form-control coupon-input"
+                            value="${cuponAplicado ?? ""}"
+                            placeholder="Ingresar código del cupón">
+                    </div>
+                    <div class="col-12 col-sm-4 col-lg-12 col-xl-4">
+                        <button type="button" class="btn btn-apply w-100">Aplicar</button>
+                    </div>
+                </div>
           </div>
 
           <button type="button" class="btn btn-checkout w-100 py-3">

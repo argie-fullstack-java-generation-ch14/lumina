@@ -136,6 +136,12 @@
   }
 }
 
+@media screen and (min-width: 992px) and (max-width: 1199.98px) {
+  .coupon-label {
+    font-size: 14px;
+  }
+}
+
 @media screen and (min-width: 1024px) {
 
   .summary-row {
