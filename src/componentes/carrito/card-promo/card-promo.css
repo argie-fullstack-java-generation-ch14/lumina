@@ -86,6 +86,13 @@
   }
 }
 
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .promo-card {
+    min-height: 300px;
+  }
+}
+
+
 @media screen and (min-width: 768px) and (max-width: 1200px) {
   .promo-img {
     opacity: 0.85;
