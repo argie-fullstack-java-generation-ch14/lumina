@@ -22,7 +22,7 @@
   border-radius: 20px;
   background-color: #FFFFFF;
   overflow: hidden;
-  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.16) !important;
+  box-shadow: 1px 1px 6px 1px rgba(115, 115, 115, 0.4) !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
