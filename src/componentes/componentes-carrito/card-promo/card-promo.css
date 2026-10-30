@@ -10,7 +10,7 @@
 }
 
 .promo-logo {
-  height: 40px;
+  height: 25px;
   width: auto;
 }
 
@@ -20,6 +20,15 @@
   font-size: 30px;
   color: var(--cafe-lumina);
   line-height: 1.15;
+}
+
+@media screen and (min-width: 1024px) {
+  .promo-title {
+    width: fit-content;
+    max-width: 170px;
+    margin-inline: auto;
+    text-align: left;
+  }
 }
 
 .promo-subtitle {
