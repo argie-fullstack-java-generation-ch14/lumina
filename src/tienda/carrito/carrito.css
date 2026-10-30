@@ -26,6 +26,19 @@
   opacity: 0.8;
 }
 
+/* --- CARRITO VACÍO --- */
+.cart-empty {
+  border: 1.5px dashed var(--verde-apagado);
+  border-radius: 16px;
+  background-color: #FFFFFF;
+  box-shadow: none;
+}
+
+.cart-empty i {
+  font-size: 2.5rem;
+  color: var(--naranja-apagado);
+}
+
 /* --- CARRUSEL DE PRODUCTOS RELACIONADOS CON SCROLL --- */
 .related-scroll {
   scroll-behavior: smooth;
