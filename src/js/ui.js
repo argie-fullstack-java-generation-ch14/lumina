@@ -65,7 +65,7 @@ function injectStyles(doc, path) {
   });
 }
 
-function injectScripts(doc, path) {
+function injectScripts(doc, path, force = false) {
   const base = new URL(path, APP_BASE).href;
 
   doc.querySelectorAll("script[src]").forEach((script) => {
@@ -73,9 +73,15 @@ function injectScripts(doc, path) {
     if (!src) return;
 
     const absolute = new URL(src, base).href;
-    const alreadyLoaded = Array.from(document.querySelectorAll("script[src]"))
-      .some((existing) => existing.src === absolute);
-    if (alreadyLoaded) return;
+
+    if (force) {
+      const existing = document.querySelector(`script[src="${absolute}"]`);
+      if (existing) existing.remove();
+    } else {
+      const alreadyLoaded = Array.from(document.querySelectorAll("script[src]"))
+        .some((existing) => existing.src === absolute);
+      if (alreadyLoaded) return;
+    }
 
     const element = document.createElement("script");
     Array.from(script.attributes).forEach((attribute) => {
@@ -112,7 +118,7 @@ function initBootstrapComponents(container) {
   });
 }
 
-async function renderSection(selector, path) {
+async function renderSection(selector, path, options = {}) {
   const container = document.querySelector(selector);
   if (!container) return;
 
@@ -127,7 +133,7 @@ async function renderSection(selector, path) {
     container.innerHTML = main ? main.innerHTML : doc.body.innerHTML;
 
     resolveModulePaths(container, path);
-    injectScripts(doc, path);
+    injectScripts(doc, path, options.forceScripts);
     initBootstrapComponents(container);
   } catch (error) {
     container.innerHTML = '<div class="alert alert-danger">No se pudo cargar el contenido.</div>';

@@ -11,18 +11,28 @@ document.addEventListener("DOMContentLoaded", async () => {
   // coincidiría y se re-inyectaría.
   if (document.body.dataset.page !== "home") return;
 
-  const routes = {
-    "#inicio": "tienda/inicio/index.html",
-    "#favs-de-temporada": "tienda/catalogo/favoritos-de-temporada/favoritos-de-temporada.html",
-    "#catalogo": "tienda/catalogo/index.html",
-    "#nosotros": "tienda/nosotros/index.html",
-    "#contacto": "tienda/contacto/index.html",
-  };
-
-  Object.entries(routes).forEach(([selector, path]) => {
-    renderSection(selector, path);
-  });
+  renderHomeSections();
 });
+
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted && document.body.dataset.page === "home") {
+    renderHomeSections();
+  }
+});
+
+const routes = {
+  "#inicio": "tienda/inicio/index.html",
+  "#favs-de-temporada": "tienda/catalogo/favoritos-de-temporada/favoritos-de-temporada.html",
+  "#catalogo": "tienda/catalogo/index.html",
+  "#nosotros": "tienda/nosotros/index.html",
+  "#contacto": "tienda/contacto/index.html",
+};
+
+function renderHomeSections() {
+  Object.entries(routes).forEach(([selector, path]) => {
+    renderSection(selector, path, { forceScripts: true });
+  });
+}
 
 /* ==========================================================
  * HEADER
