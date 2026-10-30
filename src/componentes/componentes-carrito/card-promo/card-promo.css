@@ -9,16 +9,9 @@
   justify-content: center;
 }
 
-.promo-brand {
-  font-family: var(--fuente-titulos);
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--cafe-lumina);
-  letter-spacing: -0.5px;
-}
-
-.brand-crescent {
-  color: var(--naranja-apagado);
+.promo-logo {
+  height: 40px;
+  width: auto;
 }
 
 .promo-title {
