@@ -15,6 +15,9 @@ const CUPONES = {
 
 let cuponAplicado = null;
 
+// Decide aleatoriamente si se mostrará la card de promo o la de recicla para esta visita
+const tipoCardAleatoria = Math.random() < 0.5 ? "promo" : "recicla";
+
 // Items del carrito: `id` referencia a velas del catálogo (js/velas.js)
 // y `quantity` son las unidades agregadas
 let carrito = [
@@ -133,14 +136,14 @@ function renderCarrito() {
     contenedorResumen.innerHTML = crearResumenCompra(totales);
   }
 
-  // Card promocional (desactivada temporalmente)
-  // if (contenedorPromo) {
-  //   contenedorPromo.innerHTML = crearCardPromo();
-  // }
+  // Card promocional (se muestra solo si el azar eligió 'promo')
+  if (contenedorPromo) {
+    contenedorPromo.innerHTML = (tipoCardAleatoria === "promo") ? crearCardPromo() : "";
+  }
 
-  // Card recicla
+  // Card recicla (se muestra solo si el azar eligió 'recicla')
   if (contenedorRecicla) {
-    contenedorRecicla.innerHTML = crearCardRecicla();
+    contenedorRecicla.innerHTML = (tipoCardAleatoria === "recicla") ? crearCardRecicla() : "";
   }
 
   // Globito del header con la cantidad del carrito (definido en js/main.js)
