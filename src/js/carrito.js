@@ -82,7 +82,15 @@ function cambiarCantidad(id, delta) {
   const item = carrito.find((item) => item.id === Number(id));
   if (!item) return;
 
-  item.quantity = Math.min(99, Math.max(1, item.quantity + delta));
+  const nuevaCantidad = item.quantity + delta;
+
+  // Al llegar a 0 con el menos, el producto sale del carrito.
+  if (nuevaCantidad < 1) {
+    eliminarItem(id);
+    return;
+  }
+
+  item.quantity = Math.min(99, nuevaCantidad);
 
   renderCarrito();
 }
