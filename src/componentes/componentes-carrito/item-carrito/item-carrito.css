@@ -34,21 +34,20 @@
   color: var(--naranja-apagado);
 }
 
-.btn-qty {
+.icon-btn-qty {
   color: var(--naranja-apagado);
   border: none;
   background: transparent;
   font-size: 1.25rem;
   line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.15s ease, color 0.15s ease;
+  cursor: pointer;
 }
 
-.btn-qty:hover {
-  color: var(--cafe-lumina);
-  transform: scale(1.15);
+.icon-btn-delete {
+  color: var(--naranja-apagado);
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 .qty-number {
@@ -60,17 +59,6 @@
   font-family: var(--fuente-texto);
   font-weight: 700;
   font-size: 1.4rem;
-  color: var(--cafe-lumina);
-}
-
-.btn-delete {
-  color: var(--naranja-apagado);
-  border: none;
-  background: transparent;
-  transition: color 0.2s ease;
-}
-
-.btn-delete:hover {
   color: var(--cafe-lumina);
 }
 

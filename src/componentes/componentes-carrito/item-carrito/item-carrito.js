@@ -31,7 +31,7 @@ function crearItemCarrito(item) {
           <div class="col-4 col-md-2 col-lg-2">
               <div class="d-flex align-items-center justify-content-md-center gap-3 quantity-control">
                   <button
-                      class="btn btn-qty p-0"
+                      class="icon-btn-qty p-0"
                       type="button"
                       data-action="decrease"
                       aria-label="Disminuir cantidad">
@@ -39,7 +39,7 @@ function crearItemCarrito(item) {
                   </button>
                   <span class="fw-semibold qty-number">${item.quantity}</span>
                   <button
-                      class="btn btn-qty p-0"
+                      class="icon-btn-qty p-0"
                       type="button"
                       data-action="increase"
                       aria-label="Aumentar cantidad">
@@ -56,7 +56,7 @@ function crearItemCarrito(item) {
 
           <div class="col-2 col-md-1 col-lg-1 d-flex justify-content-center align-items-center">
               <button
-                  class="btn btn-delete p-0"
+                  class="icon-btn-delete p-0"
                   type="button"
                   data-action="delete"
                   aria-label="Eliminar producto">
