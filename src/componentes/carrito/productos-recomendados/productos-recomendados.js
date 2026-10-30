@@ -36,7 +36,7 @@ function crearSeccionRecomendados(velasRecomendadas) {
         </h3>
 
         <!-- Contenedor con scroll horizontal (flex-nowrap y overflow-x) -->
-        <div class="d-flex flex-row flex-nowrap overflow-x-auto gap-3 pb-1 related-scroll">
+        <div class="d-flex flex-row flex-nowrap overflow-x-auto gap-3 px-2 pb-2 related-scroll">
             ${velasRecomendadas.map(crearCardRecomendada).join("")}
         </div>
   `;
