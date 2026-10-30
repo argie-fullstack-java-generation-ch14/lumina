@@ -1,0 +1,124 @@
+/* --- COMPONENTE RESUMEN DE LA COMPRA --- */
+.summary-card {
+  background-color: var(--naranja-claro);
+  border: 1px solid var(--naranja-acentuado);
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(59, 44, 44, 0.05);
+}
+
+.summary-title {
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--cafe-lumina);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.summary-text-muted {
+  font-family: var(--fuente-texto);
+  font-size: 16px;
+  color: var(--negro-relajacion);
+  font-weight: 500;
+}
+
+.summary-value {
+  font-family: var(--fuente-texto);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--negro-relajacion);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.summary-divider {
+  border: 0;
+  border-top: 1px solid var(--verde-apagado);
+  opacity: 0.35;
+}
+
+.summary-total-label {
+  font-family: var(--fuente-texto);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--celeste-apagado);
+}
+
+.summary-total-value {
+  font-family: var(--fuente-texto);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--celeste-apagado);
+}
+
+.coupon-label {
+  font-family: var(--fuente-texto);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--celeste-apagado);
+}
+
+.coupon-input {
+  background-color: #FFFFFF;
+  border: 1px solid var(--celeste-apagado);
+  border-radius: 12px;
+  padding: 0.7rem 1rem;
+  font-size: 0.9rem;
+  color: var(--negro-relajacion);
+}
+
+.coupon-input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(55, 79, 89, 0.15);
+}
+
+.btn-apply {
+  background-color: var(--celeste-apagado);
+  color: #FFFFFF;
+  font-family: var(--fuente-texto);
+  font-weight: 600;
+  border-radius: 40px;
+  border: none;
+  padding: 0.7rem 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-apply:hover {
+  background-color: var(--negro-relajacion);
+  color: #FFFFFF;
+}
+
+.btn-checkout {
+  background-color: var(--cafe-lumina);
+  color: #FFFFFF;
+  font-family: var(--fuente-texto);
+  font-weight: 600;
+  font-size: 1.05rem;
+  border-radius: 40px;
+  border: none;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.btn-checkout:hover {
+  color: #FFFFFF;
+  background-color: var(--naranja-apagado);
+}
+
+@media screen and (min-width: 768px) {
+
+  .coupon-label {
+    font-size: 15px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+
+  .summary-row {
+    grid-template-columns: 0.6fr 0.4fr;
+  }
+
+}
