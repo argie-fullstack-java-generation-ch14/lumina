@@ -12,9 +12,10 @@
 
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="../../css/components.css">
-  <link rel="stylesheet" href="../../componentes/componentes-carrito/item-carrito/item-carrito.css">
-  <link rel="stylesheet" href="../../componentes/componentes-carrito/resumen-compra/resumen-compra.css">
-  <link rel="stylesheet" href="../../componentes/componentes-carrito/card-promo/card-promo.css">
+  <link rel="stylesheet" href="../../componentes/carrito/item-carrito/item-carrito.css">
+  <link rel="stylesheet" href="../../componentes/carrito/resumen-compra/resumen-compra.css">
+  <link rel="stylesheet" href="../../componentes/carrito/card-promo/card-promo.css">
+  <link rel="stylesheet" href="../../componentes/carrito/productos-recomendados/productos-recomendados.css">
   <link rel="stylesheet" href="carrito.css">
 </head>
 
@@ -41,216 +42,34 @@
       <!-- COLUMNA IZQUIERDA -->
       <section class="col-lg-8">
 
-        <!-- Lista de artículos del carrito
-         Se llena con template strings desde componentes-carrito/item-carrito -->
+        <!-- Lista de artículos del carrito.
+             Se llena con template strings desde componentes/carrito/item-carrito. -->
         <div id="cart-items-container" class="d-flex flex-column gap-3 cart-items-container"></div>
 
-        <!-- SECCIÓN DE PRODUCTOS RELACIONADOS (posición original, solo desktop ≥992px) -->
-        <div class="d-none d-lg-block mt-4">
-
-          <h3 class="mb-4"
-            style="font-family: var(--fuente-titulos); font-weight: 700; color: var(--cafe-lumina); font-size: 1.8rem;">
-            Productos relacionados para ti
-          </h3>
-
-          <!-- Contenedor con scroll horizontal (flex-nowrap y overflow-x) -->
-          <div class="d-flex flex-row flex-nowrap overflow-x-auto gap-3 pb-3 related-scroll">
-
-            <!-- Card 1 -->
-            <article class="card lumina-product-card border-0 shadow-sm flex-shrink-0 product-card-fixed">
-              <div class="card-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&q=80&w=600"
-                  alt="Vela Equilibrio Aura" class="card-img-top product-card-img">
-              </div>
-              <div class="card-body p-3">
-                <h2 class="product-card-title mb-2 fs-5">Aura</h2>
-                <div class="d-flex align-items-center justify-content-between mb-3 product-specs">
-                  <div class="d-flex align-items-center gap-1">
-                    <i class="fa-solid fa-pump-soap product-spec-icon"></i>
-                    <span class="product-aroma small">Lavanda - Manz.</span>
-                  </div>
-                  <span class="product-weight">200g</span>
-                </div>
-                <p class="product-card-desc mb-3 small">Ideal para desconectarte del ruido del día...</p>
-                <div class="product-card-price fs-5">$ 12.000</div>
-              </div>
-            </article>
-
-            <!-- Card 2 -->
-            <article class="card lumina-product-card border-0 shadow-sm flex-shrink-0 product-card-fixed">
-              <div class="card-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&q=80&w=600"
-                  alt="Vela Claridad" class="card-img-top product-card-img">
-              </div>
-              <div class="card-body p-3">
-                <h2 class="product-card-title mb-2 fs-5">Claridad</h2>
-                <div class="d-flex align-items-center justify-content-between mb-3 product-specs">
-                  <div class="d-flex align-items-center gap-1">
-                    <i class="fa-solid fa-pump-soap product-spec-icon"></i>
-                    <span class="product-aroma small">Lavanda - Manz.</span>
-                  </div>
-                  <span class="product-weight">200g</span>
-                </div>
-                <p class="product-card-desc mb-3 small">Escucha lo que llevas dentro...</p>
-                <div class="product-card-price fs-5">$ 12.000</div>
-              </div>
-            </article>
-
-            <!-- Card 3 -->
-            <article class="card lumina-product-card border-0 shadow-sm flex-shrink-0 product-card-fixed">
-              <div class="card-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&q=80&w=600"
-                  alt="Vela Armonía" class="card-img-top product-card-img">
-              </div>
-              <div class="card-body p-3">
-                <h2 class="product-card-title mb-2 fs-5">Armonía</h2>
-                <div class="d-flex align-items-center justify-content-between mb-3 product-specs">
-                  <div class="d-flex align-items-center gap-1">
-                    <i class="fa-solid fa-pump-soap product-spec-icon"></i>
-                    <span class="product-aroma small">Lavanda - Manz.</span>
-                  </div>
-                  <span class="product-weight">200g</span>
-                </div>
-                <p class="product-card-desc mb-3 small">Haz espacio para lo que te hace bien...</p>
-                <div class="product-card-price fs-5">$ 12.000</div>
-              </div>
-            </article>
-
-            <!-- Card 4 -->
-            <article class="card lumina-product-card border-0 shadow-sm flex-shrink-0 product-card-fixed">
-              <div class="card-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&q=80&w=600"
-                  alt="Vela Pausa" class="card-img-top product-card-img">
-              </div>
-              <div class="card-body p-3">
-                <h2 class="product-card-title mb-2 fs-5">Pausa</h2>
-                <div class="d-flex align-items-center justify-content-between mb-3 product-specs">
-                  <div class="d-flex align-items-center gap-1">
-                    <i class="fa-solid fa-pump-soap product-spec-icon"></i>
-                    <span class="product-aroma small">Lavanda - Manz.</span>
-                  </div>
-                  <span class="product-weight">200g</span>
-                </div>
-                <p class="product-card-desc mb-3 small">Un respiro en medio de todo...</p>
-                <div class="product-card-price fs-5">$ 12.000</div>
-              </div>
-            </article>
-
-          </div>
-
-        </div>
+        <!-- Productos recomendados (posición original). Solo se ve en desktop (≥992px).
+             Se llena desde componentes/carrito/productos-recomendados. -->
+        <div id="productos-recomendados" class="d-none d-lg-block mt-4"></div>
 
       </section>
 
       <!-- COLUMNA DERECHA (Resumen de compra y Promo Card) -->
       <section class="col-lg-4">
 
-        <!-- Resumen de la compra. Se llena desde componentes-carrito/resumen-compra. -->
+        <!-- Resumen de la compra. Se llena desde componentes/carrito/resumen-compra. -->
         <div id="resumen-compra"></div>
 
-        <!-- Promo Card. Se llena desde componentes-carrito/card-promo. -->
+        <!-- Promo Card. Se llena desde componentes/carrito/card-promo. -->
         <div id="card-promo"></div>
 
       </section>
 
     </div>
 
-    <!-- FILA 3: SECCIÓN DE PRODUCTOS RELACIONADOS CON SCROLL -->
-    <!-- Copia para mobile (<992px): así aparecen al final, después del resumen de compra -->
+    <!-- FILA 3: Productos recomendados. Copia para mobile (<992px): aparece así
+         al final, después del resumen de compra.
+         Se llena desde componentes/carrito/productos-recomendados. -->
     <div class="row g-4 mt-1 d-lg-none">
-      <section class="col-lg-8">
-
-        <h3 class="mb-4"
-          style="font-family: var(--fuente-titulos); font-weight: 700; color: var(--cafe-lumina); font-size: 1.8rem;">
-          Productos relacionados para ti
-        </h3>
-
-        <!-- Contenedor con scroll horizontal (flex-nowrap y overflow-x) -->
-        <div class="d-flex flex-row flex-nowrap overflow-x-auto gap-3 pb-3 related-scroll">
-
-          <!-- Card 1 -->
-          <article class="card lumina-product-card border-0 shadow-sm flex-shrink-0 product-card-fixed">
-            <div class="card-img-wrapper">
-              <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&q=80&w=600"
-                alt="Vela Equilibrio Aura" class="card-img-top product-card-img">
-            </div>
-            <div class="card-body p-3">
-              <h2 class="product-card-title mb-2 fs-5">Aura</h2>
-              <div class="d-flex align-items-center justify-content-between mb-3 product-specs">
-                <div class="d-flex align-items-center gap-1">
-                  <i class="fa-solid fa-pump-soap product-spec-icon"></i>
-                  <span class="product-aroma small">Lavanda - Manz.</span>
-                </div>
-                <span class="product-weight">200g</span>
-              </div>
-              <p class="product-card-desc mb-3 small">Ideal para desconectarte del ruido del día...</p>
-              <div class="product-card-price fs-5">$ 12.000</div>
-            </div>
-          </article>
-
-          <!-- Card 2 -->
-          <article class="card lumina-product-card border-0 shadow-sm flex-shrink-0 product-card-fixed">
-            <div class="card-img-wrapper">
-              <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&q=80&w=600"
-                alt="Vela Claridad" class="card-img-top product-card-img">
-            </div>
-            <div class="card-body p-3">
-              <h2 class="product-card-title mb-2 fs-5">Claridad</h2>
-              <div class="d-flex align-items-center justify-content-between mb-3 product-specs">
-                <div class="d-flex align-items-center gap-1">
-                  <i class="fa-solid fa-pump-soap product-spec-icon"></i>
-                  <span class="product-aroma small">Lavanda - Manz.</span>
-                </div>
-                <span class="product-weight">200g</span>
-              </div>
-              <p class="product-card-desc mb-3 small">Escucha lo que llevas dentro...</p>
-              <div class="product-card-price fs-5">$ 12.000</div>
-            </div>
-          </article>
-
-          <!-- Card 3 -->
-          <article class="card lumina-product-card border-0 shadow-sm flex-shrink-0 product-card-fixed">
-            <div class="card-img-wrapper">
-              <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&q=80&w=600"
-                alt="Vela Armonía" class="card-img-top product-card-img">
-            </div>
-            <div class="card-body p-3">
-              <h2 class="product-card-title mb-2 fs-5">Armonía</h2>
-              <div class="d-flex align-items-center justify-content-between mb-3 product-specs">
-                <div class="d-flex align-items-center gap-1">
-                  <i class="fa-solid fa-pump-soap product-spec-icon"></i>
-                  <span class="product-aroma small">Lavanda - Manz.</span>
-                </div>
-                <span class="product-weight">200g</span>
-              </div>
-              <p class="product-card-desc mb-3 small">Haz espacio para lo que te hace bien...</p>
-              <div class="product-card-price fs-5">$ 12.000</div>
-            </div>
-          </article>
-
-          <!-- Card 4 -->
-          <article class="card lumina-product-card border-0 shadow-sm flex-shrink-0 product-card-fixed">
-            <div class="card-img-wrapper">
-              <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&q=80&w=600"
-                alt="Vela Pausa" class="card-img-top product-card-img">
-            </div>
-            <div class="card-body p-3">
-              <h2 class="product-card-title mb-2 fs-5">Pausa</h2>
-              <div class="d-flex align-items-center justify-content-between mb-3 product-specs">
-                <div class="d-flex align-items-center gap-1">
-                  <i class="fa-solid fa-pump-soap product-spec-icon"></i>
-                  <span class="product-aroma small">Lavanda - Manz.</span>
-                </div>
-                <span class="product-weight">200g</span>
-              </div>
-              <p class="product-card-desc mb-3 small">Un respiro en medio de todo...</p>
-              <div class="product-card-price fs-5">$ 12.000</div>
-            </div>
-          </article>
-
-        </div>
-
-      </section>
+      <div id="productos-recomendados-mobile" class="col-12"></div>
     </div>
 
   </main>
@@ -262,9 +81,10 @@
   <script src="../../js/ui.js"></script>
 
   <!-- Componentes del carrito (template strings) -->
-  <script src="../../componentes/componentes-carrito/item-carrito/item-carrito.js"></script>
-  <script src="../../componentes/componentes-carrito/resumen-compra/resumen-compra.js"></script>
-  <script src="../../componentes/componentes-carrito/card-promo/card-promo.js"></script>
+  <script src="../../componentes/carrito/item-carrito/item-carrito.js"></script>
+  <script src="../../componentes/carrito/resumen-compra/resumen-compra.js"></script>
+  <script src="../../componentes/carrito/card-promo/card-promo.js"></script>
+  <script src="../../componentes/carrito/productos-recomendados/productos-recomendados.js"></script>
 
   <script src="../../js/main.js"></script>
   <script src="../../js/velas.js"></script>
