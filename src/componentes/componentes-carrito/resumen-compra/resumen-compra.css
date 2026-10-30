@@ -107,12 +107,26 @@
   font-size: 1.05rem;
   border-radius: 40px;
   border: none;
-  transition: opacity 0.2s ease, transform 0.1s ease;
+  /* Bootstrap no define estas variables en la clase base .btn: sin ellas,
+     hover/active/focus dejan el fondo y el texto transparentes. */
+  --bs-btn-hover-color: #FFFFFF;
+  --bs-btn-hover-bg: var(--naranja-apagado);
+  --bs-btn-hover-border-color: var(--naranja-apagado);
+  --bs-btn-active-color: #FFFFFF;
+  --bs-btn-active-bg: var(--naranja-apagado);
+  --bs-btn-active-border-color: var(--naranja-apagado);
+  --bs-btn-focus-box-shadow: none;
+  transition: opacity 0.2s ease, transform 0.1s ease, background-color 0.2s ease;
 }
 
-.btn-checkout:hover {
+.btn-checkout:hover,
+.btn-checkout:active,
+.btn-checkout:focus-visible {
   color: #FFFFFF;
   background-color: var(--naranja-apagado);
+  border-color: var(--naranja-apagado);
+  box-shadow: none;
+  outline: none;
 }
 
 @media screen and (min-width: 768px) {
