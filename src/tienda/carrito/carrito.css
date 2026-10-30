@@ -1,0 +1,49 @@
+/* --- COMPONENTE CART ITEM --- */
+.cart-container {
+  max-width: 960px;
+}
+
+.cart-title {
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: var(--cafe-lumina);
+}
+
+.btn-clear-cart {
+  color: var(--naranja-apagado);
+  font-family: var(--fuente-texto);
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  padding: 0;
+  transition: opacity 0.2s ease;
+}
+
+
+.btn-clear-cart:hover {
+  color: var(--cafe-lumina);
+  opacity: 0.8;
+}
+
+/* --- CARRITO VACÍO --- */
+.cart-empty {
+  border: 1.5px dashed var(--verde-apagado);
+  border-radius: 16px;
+  background-color: #FFFFFF;
+  box-shadow: none;
+}
+
+.cart-empty i {
+  font-size: 2.5rem;
+  color: var(--verde-apagado);
+}
+
+.btn-catalogo {
+  display: block;
+  min-width: 200px;
+  max-width: 200px;
+  padding: 10px;
+  margin-inline: auto;
+  background-color: var(--celeste-apagado);
+}

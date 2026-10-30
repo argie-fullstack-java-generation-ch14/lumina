@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito · Lumina</title>
+
+  <!-- Bootstrap va primero: su Reboot no debe pisar tus estilos -->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link rel="stylesheet" href="../../componentes/carrito/item-carrito/item-carrito.css">
+  <link rel="stylesheet" href="../../componentes/carrito/resumen-compra/resumen-compra.css">
+  <link rel="stylesheet" href="../../componentes/carrito/card-promo/card-promo.css">
+  <link rel="stylesheet" href="../../componentes/carrito/productos-recomendados/productos-recomendados.css">
+  <link rel="stylesheet" href="carrito.css">
+</head>
+
+<body>
+
+  <header id="header"></header>
+
+  <main class="container my-5">
+
+    <!-- FILA 1: Título "Carrito" y Botón "Vaciar carrito" (Alineados arriba al ancho de las 8 columnas) -->
+    <div class="row mb-4">
+      <div class="col-lg-8 d-flex justify-content-between align-items-center">
+        <h1 class="cart-title m-0">Carrito</h1>
+        <button type="button" class="btn btn-clear-cart d-flex align-items-center gap-2">
+          <i class="fa-solid fa-trash-can"></i>
+          <span>Vaciar carrito</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- FILA 2: Contenido principal (Izquierda 8 / Derecha 4) -->
+    <div class="row g-4 align-items-start">
+
+      <!-- COLUMNA IZQUIERDA -->
+      <section class="col-lg-8">
+
+        <!-- Lista de artículos del carrito.
+             Se llena con template strings desde componentes/carrito/item-carrito. -->
+        <div id="cart-items-container" class="d-flex flex-column gap-3 cart-items-container"></div>
+
+        <!-- Productos recomendados (posición original). Solo se ve en desktop (≥992px).
+             Se llena desde componentes/carrito/productos-recomendados. -->
+        <div id="productos-recomendados" class="d-none d-lg-block mt-4"></div>
+
+      </section>
+
+      <!-- COLUMNA DERECHA (Resumen de compra y Promo Card) -->
+      <section class="col-lg-4">
+
+        <!-- Resumen de la compra. Se llena desde componentes/carrito/resumen-compra. -->
+        <div id="resumen-compra"></div>
+
+        <!-- Promo Card. Se llena desde componentes/carrito/card-promo. -->
+        <div id="card-promo"></div>
+
+      </section>
+
+    </div>
+
+    <!-- FILA 3: Productos recomendados. Copia para mobile (<992px): aparece así
+         al final, después del resumen de compra.
+         Se llena desde componentes/carrito/productos-recomendados. -->
+    <div class="row g-4 mt-1 d-lg-none">
+      <div id="productos-recomendados-mobile" class="col-12"></div>
+    </div>
+
+  </main>
+
+  <footer id="footer"></footer>
+
+  <!-- Scripts -->
+  <script src="../../js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/ui.js"></script>
+
+  <!-- Componentes del carrito (template strings) -->
+  <script src="../../componentes/carrito/item-carrito/item-carrito.js"></script>
+  <script src="../../componentes/carrito/resumen-compra/resumen-compra.js"></script>
+  <script src="../../componentes/carrito/card-promo/card-promo.js"></script>
+  <script src="../../componentes/carrito/productos-recomendados/productos-recomendados.js"></script>
+
+  <script src="../../js/main.js"></script>
+  <script src="../../js/velas.js"></script>
+  <script src="../../js/carrito.js"></script>
+</body>
+
+</html>
