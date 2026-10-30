@@ -61,7 +61,7 @@ function crearResumenCompra(totales) {
                 </div>
           </div>
 
-          <button type="button" class="btn-checkout w-100 py-3">
+          <button type="button" class="btn-checkout w-100">
               Finalizar compra
           </button>
       </div>

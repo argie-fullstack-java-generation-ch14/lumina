@@ -97,6 +97,7 @@
 
 .btn-checkout {
   display: inline-block;
+  padding-block: 10px;
   background-color: var(--cafe-lumina);
   color: #FFFFFF;
   font-family: var(--fuente-texto);
