@@ -152,7 +152,7 @@ function estadoCarritoVacio() {
       <i class="fa-solid fa-cart-shopping mb-3" aria-hidden="true"></i>
       <h2 class="product-title mb-2">Carrito vacío</h2>
       <p class="product-info mb-4">Encuentra tu vela ideal en el catálogo.</p>
-      <a href="${catalogoUrl}" class="btn btn-checkout px-4">Ir al catálogo</a>
+      <a href="${catalogoUrl}" class="btn-checkout px-4">Ir al catálogo</a>
     </article>
   `;
 }

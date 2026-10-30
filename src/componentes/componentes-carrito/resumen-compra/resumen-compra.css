@@ -96,23 +96,18 @@
 }
 
 .btn-checkout {
+  display: inline-block;
   background-color: var(--cafe-lumina);
   color: #FFFFFF;
   font-family: var(--fuente-texto);
   font-weight: 600;
   font-size: 15px;
+  line-height: 1.5;
+  text-decoration: none;
+  text-align: center;
   border-radius: 40px;
   border: none;
-}
-
-.btn-checkout:hover,
-.btn-checkout:active,
-.btn-checkout:focus-visible {
-  color: #FFFFFF;
-  background-color: var(--naranja-apagado);
-  border-color: var(--naranja-apagado);
-  box-shadow: none;
-  outline: none;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
