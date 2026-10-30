@@ -116,6 +116,7 @@ function renderCarrito() {
   const contenedorItems = document.getElementById("cart-items-container");
   const contenedorResumen = document.getElementById("resumen-compra");
   const contenedorPromo = document.getElementById("card-promo");
+  const contenedorRecicla = document.getElementById("card-recicla");
 
   const productos = obtenerProductosCarrito();
   const totales = calcularTotales(productos);
@@ -132,9 +133,14 @@ function renderCarrito() {
     contenedorResumen.innerHTML = crearResumenCompra(totales);
   }
 
-  // Card promocional
-  if (contenedorPromo) {
-    contenedorPromo.innerHTML = crearCardPromo();
+  // Card promocional (desactivada temporalmente)
+  // if (contenedorPromo) {
+  //   contenedorPromo.innerHTML = crearCardPromo();
+  // }
+
+  // Card recicla
+  if (contenedorRecicla) {
+    contenedorRecicla.innerHTML = crearCardRecicla();
   }
 
   // Globito del header con la cantidad del carrito (definido en js/main.js)
