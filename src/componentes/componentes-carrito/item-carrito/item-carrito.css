@@ -1,6 +1,6 @@
 /* --- COMPONENTE ITEM CARRITO --- */
 .cart-item-card {
-  border: 1.5px solid var(--verde-apagado);
+  border: 1px solid var(--verde-apagado);
   border-radius: 16px;
   background-color: #FFFFFF;
   box-shadow: none;

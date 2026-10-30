@@ -3,9 +3,9 @@
 // Espera: item con la misma estructura de velas.js (id, name, img, scent,
 // weight, price) + quantity.
 
-function crearItemCarrito(item, index) {
-	return `
-    <article class="card cart-item-card p-3" data-item-index="${index}">
+function crearItemCarrito(item) {
+  return `
+    <article class="card cart-item-card p-3" data-item-id="${item.id}">
 
       <div class="row align-items-center g-3">
 
