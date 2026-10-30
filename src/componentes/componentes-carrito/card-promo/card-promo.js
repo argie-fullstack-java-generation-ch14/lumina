@@ -19,8 +19,8 @@ function crearCardPromo() {
                           class="promo-logo"
                           loading="lazy">
                   </div>
-                  <h1 class="promo-title mb-4">Combina y Ahorra</h1>
-                  <h2 class="promo-subtitle mb-3">Arma tu Kit Personalizado</h2>
+                  <h3 class="promo-title mb-4">Combina y Ahorra</h3>
+                  <h4 class="promo-subtitle mb-3">Arma tu Kit Personalizado</h4>
                   <p class="promo-desc mb-0">Lleva 3 velas por un precio especial</p>
               </div>
           </div>
