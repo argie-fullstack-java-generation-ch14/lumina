@@ -1,14 +1,21 @@
 // Lumina · resumen-compra
 // Componente: resumen de la compra (subtotal, IVA, total y cupón).
-// Espera: cantidad de productos y subtotal del carrito.
+// Espera: objeto totales con { cantidad, subtotal, descuento, iva, total }
+// (ver calcularTotales en js/carrito.js) y el cupón activo.
 
-const IVA_TASA = 0.19;
-
-function crearResumenCompra(cantidadProductos, subtotal) {
-  const iva = Math.round(subtotal * IVA_TASA);
-  const total = subtotal + iva;
-
+function crearResumenCompra(totales) {
+  const { cantidad, subtotal, descuento, iva, total } = totales;
   const fmt = (valor) => valor.toLocaleString("es-CO");
+
+  // Solo se muestra la fila de descuento si hay cupón aplicado.
+  const filaDescuento = descuento
+    ? `
+      <div class="d-flex justify-content-between align-items-center mb-3">
+          <span class="summary-descuento">Cupón ${cuponAplicado} (-10 %)</span>
+          <span class="summary-value">- $ ${fmt(descuento)}</span>
+      </div>
+      `
+    : "";
 
   return `
       <div class="card summary-card p-4 mb-4">
@@ -16,9 +23,11 @@ function crearResumenCompra(cantidadProductos, subtotal) {
 
           <!-- Subtotal con Flexbox seguro -->
           <div class="summary-row">
-              <span class="summary-text-muted">Subtotal (${cantidadProductos} productos)</span>
+              <span class="summary-text-muted">Subtotal (${cantidad} productos)</span>
               <span class="summary-value">$ ${fmt(subtotal)}</span>
           </div>
+
+          ${filaDescuento}
 
           <div class="d-flex justify-content-between align-items-center mb-3">
               <span class="summary-text-muted">IVA</span>
@@ -43,6 +52,7 @@ function crearResumenCompra(cantidadProductos, subtotal) {
               <div class="row g-2">
                   <div class="col-12 col-sm-8">
                       <input type="text" id="couponInput" class="form-control coupon-input"
+                          value="${cuponAplicado ?? ""}"
                           placeholder="Ingresar código del cupón">
                   </div>
                   <div class="col-12 col-sm-4">

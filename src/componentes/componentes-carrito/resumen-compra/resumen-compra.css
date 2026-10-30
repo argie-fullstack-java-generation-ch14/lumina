@@ -27,6 +27,13 @@
   font-weight: 500;
 }
 
+.summary-descuento {
+  font-family: var(--fuente-texto);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--naranja-apagado);
+}
+
 .summary-value {
   font-family: var(--fuente-texto);
   font-weight: 600;
