@@ -80,6 +80,7 @@ function crearVela(vela) {
                     <button
                         class="add-to-cart"
                         type="button"
+                        data-product-id="${vela.id}"
                         aria-label="Agregar ${vela.name} al carrito">
                         Agregar al carrito
                     </button>
@@ -268,4 +269,19 @@ document.addEventListener("click", function (evento) {
 
     icono.classList.toggle("fa-regular", esFavorito);
     icono.classList.toggle("fa-solid", !esFavorito);
+});
+
+// Agregar productos al carrito desde el catálogo.
+document.addEventListener("click", function (evento) {
+    const boton = evento.target.closest("#catalog-container .add-to-cart");
+
+    if (!boton) {
+        return;
+    }
+
+    const idProducto = boton.dataset.productId;
+
+    if (typeof agregarAlCarrito === "function") {
+        agregarAlCarrito(idProducto);
+    }
 });
