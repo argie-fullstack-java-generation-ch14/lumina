@@ -141,6 +141,7 @@
 /* Adaptación a celulares */
 @media (max-width: 600px) {
   .site-footer {
+  background-image: none;
     padding-top: 1.5rem;
   }
 
