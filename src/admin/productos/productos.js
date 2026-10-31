@@ -1,6 +1,7 @@
 // Lumina · admin/productos
 
 (() => {
+	const PRODUCTS_STORAGE_KEY = "lumina-productos";
 	const mount = document.querySelector("#productFormModalMount");
 	const productList = document.querySelector("#product-list");
 
@@ -13,6 +14,25 @@
 		Mindfulness: "category-mindfulness",
 		Navidad: "category-navidad"
 	};
+
+	function loadProducts() {
+		try {
+			const savedProducts = localStorage.getItem(PRODUCTS_STORAGE_KEY);
+			const parsedProducts = savedProducts ? JSON.parse(savedProducts) : [];
+			return Array.isArray(parsedProducts) ? parsedProducts : [];
+		} catch (error) {
+			console.error("No se pudieron recuperar los productos:", error);
+			return [];
+		}
+	}
+
+	function saveProducts() {
+		try {
+			localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
+		} catch (error) {
+			console.error("No se pudieron guardar los productos:", error);
+		}
+	}
 
 	function createTextElement(tagName, className, text) {
 		const element = document.createElement(tagName);
@@ -65,7 +85,19 @@
 		productList.append(card);
 	}
 
-	window.addEventListener("product-created", (event) => renderProduct(event.detail));
+	const products = loadProducts();
+	products.forEach(renderProduct);
+
+	window.addEventListener("product-created", (event) => {
+		const product = {
+			...event.detail,
+			id: products.length + 1
+		};
+
+		products.push(product);
+		saveProducts();
+		renderProduct(product);
+	});
 
 	if (!mount) return;
 

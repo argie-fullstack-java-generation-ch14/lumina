@@ -5,7 +5,6 @@ window.initProductForm = () => {
 	const form = modal?.querySelector("#product-form");
 	if (!modal || !form) return;
 
-	const products = [];
 	const fields = [
 		{
 			input: modal.querySelector("#product-name"),
@@ -99,7 +98,6 @@ window.initProductForm = () => {
 
 		const name = fields[0].input.value.trim();
 		const product = {
-			id: products.length + 1,
 			name,
 			slug: name.toLowerCase().replace(/\s+/g, "-"),
 			img: fields[6].input.value.trim(),
@@ -110,9 +108,7 @@ window.initProductForm = () => {
 			description: fields[5].input.value.trim()
 		};
 
-		products.push(product);
 		console.log("Vela creada:", product);
-		console.log("Velas creadas en esta sesión:", products);
 		window.dispatchEvent(new CustomEvent("product-created", { detail: product }));
 		bootstrap.Modal.getOrCreateInstance(modal).hide();
 	});
