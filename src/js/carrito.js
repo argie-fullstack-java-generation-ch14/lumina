@@ -116,6 +116,48 @@ function aplicarCupon(codigo) {
   return true;
 }
 
+// Notificación cuando se agrega una vela al carrito
+function mostrarNotificacionCarrito(vela) {
+  let notificacion = document.getElementById("cart-toast");
+
+  if (!notificacion) {
+    notificacion = document.createElement("div");
+    notificacion.id = "cart-toast";
+    notificacion.className = "cart-toast";
+    document.body.appendChild(notificacion);
+  }
+
+  notificacion.innerHTML = `
+    <div class="cart-toast-header">
+      <i class="fa-solid fa-circle-check"></i>
+      <strong>¡Añadido a tu carrito!</strong>
+      <button type="button" class="cart-toast-close" aria-label="Cerrar">
+        &times;
+      </button>
+    </div>
+
+    <div class="cart-toast-content">
+      <img src="${vela.img}" alt="${vela.name}">
+      <div>
+        <strong>${vela.name}</strong>
+        <p>Tu momento especial comienza aquí.</p>
+      </div>
+    </div>
+  `;
+
+  notificacion.classList.add("show");
+
+  clearTimeout(notificacion.timeoutId);
+
+  notificacion.timeoutId = setTimeout(() => {
+    notificacion.classList.remove("show");
+  }, 4000);
+
+  notificacion.querySelector(".cart-toast-close").addEventListener("click", () => {
+    notificacion.classList.remove("show");
+  });
+}
+
 // Agregar productos al carrito
 function agregarAlCarrito(id) {
   const idProducto = Number(id);
@@ -144,6 +186,12 @@ function agregarAlCarrito(id) {
 
   guardarCarrito();
   renderCarrito();
+
+  const velaAgregada = velas.find(
+  vela => vela.id === idProducto
+);
+
+mostrarNotificacionCarrito(velaAgregada);
 }
 
 // Cambios en el carrito
