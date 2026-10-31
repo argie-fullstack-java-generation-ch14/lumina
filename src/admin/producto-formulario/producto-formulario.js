@@ -113,6 +113,7 @@ window.initProductForm = () => {
 		products.push(product);
 		console.log("Vela creada:", product);
 		console.log("Velas creadas en esta sesión:", products);
+		window.dispatchEvent(new CustomEvent("product-created", { detail: product }));
 		bootstrap.Modal.getOrCreateInstance(modal).hide();
 	});
 
