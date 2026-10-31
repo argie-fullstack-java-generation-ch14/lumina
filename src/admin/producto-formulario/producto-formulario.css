@@ -1,7 +1,82 @@
-/* Lumina · admin/producto-formulario
- * Estilos SOLO de esta página.
- *
- * Regla del equipo: cada persona edita únicamente el CSS de su página.
- * Lo compartido va en css/main.css o css/components.css, nunca aquí.
- * Clases en inglés y kebab-case: .product-card, no .productCard.
- */
+/* Lumina · admin/producto-formulario */
+
+.product-form-modal .modal-content {
+	background-color: var(--naranja-claro);
+	border: 1px solid var(--naranja-acentuado);
+	border-radius: 12px;
+}
+
+.product-form-modal .modal-header {
+	border-bottom-color: var(--naranja-acentuado);
+}
+
+.product-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.product-form-field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.375rem;
+}
+
+.product-form-label {
+	color: var(--negro-relajacion);
+	font-size: 0.875rem;
+	font-weight: 600;
+}
+
+.product-form-input {
+	width: 100%;
+	min-height: 48px;
+	padding: 0.625rem 0.875rem;
+	color: var(--negro-acentuado);
+	background-color: #fff;
+	border: 1px solid var(--celeste-apagado);
+	border-radius: 8px;
+	font-size: 1rem;
+	line-height: 1.5;
+}
+
+.product-form-input::placeholder {
+	color: var(--celeste-apagado);
+	opacity: 0.8;
+}
+
+.product-form-input:focus-visible {
+	outline: 2px solid var(--celeste-apagado);
+	outline-offset: 2px;
+}
+
+.product-form-textarea {
+	min-height: 8.5rem;
+	resize: vertical;
+}
+
+.product-form-field.has-error .product-form-input {
+	border-color: var(--naranja-apagado);
+	box-shadow: inset 0 0 0 1px var(--naranja-apagado);
+}
+
+.product-form-error {
+	margin: 0;
+	color: var(--negro-relajacion);
+	font-size: 0.875rem;
+	line-height: 1.4;
+}
+
+.product-form-error:empty {
+	display: none;
+}
+
+.product-form-error::before {
+	display: inline-block;
+	width: 0.5rem;
+	height: 0.5rem;
+	margin-right: 0.5rem;
+	border-radius: 50%;
+	background-color: var(--naranja-apagado);
+	content: "";
+}
