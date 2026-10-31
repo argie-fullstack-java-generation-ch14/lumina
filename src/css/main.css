@@ -49,3 +49,85 @@
   --fuente-titulos: "Recoleta", "Fraunces", Georgia, serif;
   --fuente-texto: "Montserrat", system-ui, sans-serif;
 }
+
+/* Notificación de producto agregado al carrito */
+.cart-toast {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  z-index: 9999;
+  width: 340px;
+  max-width: calc(100% - 30px);
+  padding: 18px;
+  background: #403332;
+  color: #f4eee8;
+  border: 1px solid #806d65;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(30px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.cart-toast.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.cart-toast-header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 15px;
+  color: #ead7c4;
+}
+
+.cart-toast-header i {
+  font-size: 1.2rem;
+}
+
+.cart-toast-header strong {
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.cart-toast-close {
+  background: none;
+  border: none;
+  color: #f4eee8;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.cart-toast-content {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 16px;
+}
+
+.cart-toast-content img {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cart-toast-content strong {
+  font-size: 0.95rem;
+}
+
+.cart-toast-content p {
+  margin: 5px 0 0;
+  color: #e0d3ca;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 600px) {
+  .cart-toast {
+    top: 15px;
+    right: 15px;
+  }
+}
