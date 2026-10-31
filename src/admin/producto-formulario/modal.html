@@ -1,0 +1,74 @@
+<div class="modal fade product-form-modal" id="productFormModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="productFormModalLabel">Agregar vela</h2>
+        <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form class="product-form" id="product-form" novalidate>
+          <div class="product-form-field">
+            <label class="product-form-label" for="product-name">Nombre</label>
+            <input class="product-form-input" id="product-name" name="nombre" type="text" maxlength="60" placeholder="Ej.: Vela de calma" required>
+            <p class="product-form-error" id="product-name-error"></p>
+          </div>
+
+          <div class="product-form-field">
+            <label class="product-form-label" for="product-scent">Aroma</label>
+            <input class="product-form-input" id="product-scent" name="aroma" type="text" maxlength="50" placeholder="Ej.: Lavanda" required>
+            <p class="product-form-error" id="product-scent-error"></p>
+          </div>
+
+          <div class="product-form-field">
+            <label class="product-form-label" for="product-category">Categoría</label>
+            <select class="product-form-input" id="product-category" name="categoria" required>
+              <option value="">Selecciona una categoría</option>
+              <option value="bienestar">Bienestar</option>
+              <option value="descanso">Descanso</option>
+              <option value="mindfulness">Mindfulness</option>
+              <option value="amor-propio">Amor propio</option>
+              <option value="intencion">Intención</option>
+              <option value="halloween">Halloween</option>
+              <option value="navidad">Navidad</option>
+            </select>
+            <p class="product-form-error" id="product-category-error"></p>
+          </div>
+
+          <div class="product-form-field">
+            <label class="product-form-label" for="product-weight">Peso</label>
+            <select class="product-form-input" id="product-weight" name="peso" required>
+              <option value="">Selecciona un peso</option>
+              <option value="100">100 g</option>
+              <option value="200">200 g</option>
+              <option value="300">300 g</option>
+            </select>
+            <p class="product-form-error" id="product-weight-error"></p>
+          </div>
+
+          <div class="product-form-field">
+            <label class="product-form-label" for="product-price">Precio</label>
+            <input class="product-form-input" id="product-price" name="precio" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="Ej.: 19.90" required>
+            <p class="product-form-error" id="product-price-error"></p>
+          </div>
+
+          <div class="product-form-field">
+            <label class="product-form-label" for="product-description">Descripción</label>
+            <textarea class="product-form-input product-form-textarea" id="product-description" name="descripcion" rows="5" minlength="10" maxlength="500" placeholder="Describe la vela (mínimo 10 caracteres)" required></textarea>
+            <p class="product-form-error" id="product-description-error"></p>
+          </div>
+
+          <div class="product-form-field">
+            <label class="product-form-label" for="product-image">URL de la imagen</label>
+            <input class="product-form-input" id="product-image" name="imagen" type="url" placeholder="https://ejemplo.com/vela.jpg" required>
+            <p class="product-form-error" id="product-image-error"></p>
+          </div>
+
+          <div class="d-flex justify-content-end gap-2 pt-2">
+            <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancelar</button>
+            <button class="btn btn-dark" type="submit">Agregar vela</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

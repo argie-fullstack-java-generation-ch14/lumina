@@ -10,13 +10,28 @@
 
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="../../css/components.css">
+  <link rel="stylesheet" href="../../tienda/catalogo/catalogo.css">
   <link rel="stylesheet" href="productos.css">
+  <link rel="stylesheet" href="../producto-formulario/producto-formulario.css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
   <header id="header"></header>
 
-  <!-- Contenido de Productos -->
+  <main class="container py-4 flex-grow-1">
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+      <div>
+        <h1 class="h2 mb-1">Productos</h1>
+        <p class="mb-0">Administra las velas de Lumina.</p>
+      </div>
+      <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#productFormModal">
+        Agregar vela
+      </button>
+    </div>
+    <div class="catalog-grid" id="product-list"></div>
+  </main>
+
+  <div id="productFormModalMount"></div>
 
   <footer id="footer"></footer>
 
@@ -25,6 +40,7 @@
   <script src="../../js/ui.js"></script>
   <script src="../../js/main.js"></script>
   <script src="../../js/auth.js"></script>
+  <script src="../producto-formulario/producto-formulario.js"></script>
   <script src="productos.js"></script>
 </body>
 </html>
