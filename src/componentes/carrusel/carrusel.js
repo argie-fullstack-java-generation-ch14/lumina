@@ -55,7 +55,11 @@ function crearCardCarrusel(vela) {
             $ ${vela.price.toLocaleString("es-CO")}
           </p>
 
-          <button class="add-to-cart" type="button" aria-label="Agregar ${vela.name} al carrito">
+          <button
+            class="add-to-cart"
+            type="button"
+            data-product-id="${vela.id}"
+            aria-label="Agregar ${vela.name} al carrito">
             Agregar al carrito
           </button>
         </div>
@@ -236,3 +240,24 @@ function crearCarrusel(selector, opciones = {}) {
     anterior: () => retroceder(pista, anchoCiclo, paso(pista))
   };
 }
+
+// Agregar productos al carrito desde el carrusel.
+document.addEventListener("click", function (evento) {
+  const boton = evento.target.closest(".add-to-cart");
+
+  if (!boton) {
+    return;
+  }
+
+  const carrusel = boton.closest(".carousel-item");
+
+  if (!carrusel) {
+    return;
+  }
+
+  const idProducto = boton.dataset.productId;
+
+  if (typeof agregarAlCarrito === "function") {
+    agregarAlCarrito(idProducto);
+  }
+});

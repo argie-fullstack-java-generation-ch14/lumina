@@ -20,11 +20,47 @@ const tipoCardAleatoria = Math.random() < 0.5 ? "promo" : "recicla";
 
 // Items del carrito: `id` referencia a velas del catálogo (js/velas.js)
 // y `quantity` son las unidades agregadas
-let carrito = [
-  { id: 10, quantity: 1 }, // Aura
-  { id: 2, quantity: 1 }, // Relajacion
-  { id: 4, quantity: 1 }, // Luna Nueva
-];
+const CLAVE_CARRITO = "lumina-carrito";
+
+function cargarCarrito() {
+  try {
+    const carritoGuardado = localStorage.getItem(CLAVE_CARRITO);
+
+    if (!carritoGuardado) {
+      return [];
+    }
+
+    const datos = JSON.parse(carritoGuardado);
+
+    if (!Array.isArray(datos)) {
+      return [];
+    }
+
+    return datos
+      .filter(item =>
+        velas.some(vela => vela.id === Number(item.id)) &&
+        Number.isInteger(Number(item.quantity)) &&
+        Number(item.quantity) > 0
+      )
+      .map(item => ({
+        id: Number(item.id),
+        quantity: Math.min(99, Number(item.quantity))
+      }));
+
+  } catch (error) {
+    console.error("Error al recuperar el carrito:", error);
+    return [];
+  }
+}
+
+function guardarCarrito() {
+  localStorage.setItem(
+    CLAVE_CARRITO,
+    JSON.stringify(carrito)
+  );
+}
+
+let carrito = cargarCarrito();
 
 // Asocia cada item del carrito con los datos del catálogo (js/velas.js)
 function obtenerProductosCarrito() {
@@ -80,6 +116,36 @@ function aplicarCupon(codigo) {
   return true;
 }
 
+// Agregar productos al carrito
+function agregarAlCarrito(id) {
+  const idProducto = Number(id);
+
+  const velaExiste = velas.some(
+    vela => vela.id === idProducto
+  );
+
+  if (!velaExiste) {
+    console.error("El producto no existe en el catálogo.");
+    return;
+  }
+
+  const item = carrito.find(
+    producto => producto.id === idProducto
+  );
+
+  if (item) {
+    item.quantity = Math.min(99, item.quantity + 1);
+  } else {
+    carrito.push({
+      id: idProducto,
+      quantity: 1
+    });
+  }
+
+  guardarCarrito();
+  renderCarrito();
+}
+
 // Cambios en el carrito
 function cambiarCantidad(id, delta) {
   const item = carrito.find((item) => item.id === Number(id));
@@ -95,6 +161,7 @@ function cambiarCantidad(id, delta) {
 
   item.quantity = Math.min(99, nuevaCantidad);
 
+  guardarCarrito();
   renderCarrito();
 }
 
@@ -104,6 +171,7 @@ function eliminarItem(id) {
 
   carrito.splice(index, 1);
 
+  guardarCarrito();
   renderCarrito();
 }
 
@@ -111,6 +179,7 @@ function vaciarCarrito() {
   carrito = [];
   cuponAplicado = null;
 
+  guardarCarrito();
   renderCarrito();
 }
 
