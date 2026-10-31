@@ -8,7 +8,7 @@ const team = [
     name: "Pedro Saravia",
     role: "Frontend Developer",
     description: "Interesado en explorar cómo la tecnología puede ayudarnos a resolver problemas.",
-    photo: "https://media.licdn.com/dms/image/v2/D4E03AQHrpKo2mP_wDw/profile-displayphoto-scale_400_400/B4EaDVOVPOIgAg-/0/1790283703833?e=1793232000&v=beta&t=2q0yrxdpz9BMr2G-fw-oUpOnVGdZkINdas3m656hbPY",
+    photo: "https://res.cloudinary.com/cxhfqd0n/image/upload/v1793467475/cropped_photo.jpg",
     linkedin: "https://www.linkedin.com/in/pedrosq/",
     github: "https://github.com/psaraviaq"
   },
