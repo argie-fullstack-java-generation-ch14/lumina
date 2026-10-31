@@ -52,6 +52,21 @@ window.initProductForm = () => {
 				if (value.length < 10) return "La descripción debe tener al menos 10 caracteres.";
 				return "";
 			}
+		},
+		{
+			input: modal.querySelector("#product-image"),
+			validate(value) {
+				if (value === "") return "Escribe la URL de la imagen.";
+				try {
+					const imageUrl = new URL(value);
+					if (imageUrl.protocol !== "http:" && imageUrl.protocol !== "https:") {
+						return "La URL debe comenzar con http o https.";
+					}
+				} catch {
+					return "Escribe una URL válida para la imagen.";
+				}
+				return "";
+			}
 		}
 	];
 
@@ -87,7 +102,7 @@ window.initProductForm = () => {
 			id: products.length + 1,
 			name,
 			slug: name.toLowerCase().replace(/\s+/g, "-"),
-			img: "https://gstatic.com/images",
+			img: fields[6].input.value.trim(),
 			scent: fields[1].input.value.trim(),
 			category: fields[2].input.selectedOptions[0].textContent.trim(),
 			weight: Number(fields[3].input.value),
