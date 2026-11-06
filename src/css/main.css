@@ -125,6 +125,28 @@
   font-size: 0.8rem;
 }
 
+/* Botón CTA de los toasts (ej. "Ver favoritos") */
+.cart-toast-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background-color: #ead7c4;
+  color: #403332;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.cart-toast-cta:hover {
+  background-color: #d9c2ac;
+  color: #403332;
+}
+
 @media (max-width: 600px) {
   .cart-toast {
     top: 15px;
