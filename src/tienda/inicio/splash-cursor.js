@@ -285,6 +285,7 @@ function createSplashCursor(canvas, options) {
   const introEnabled = o.intro;
 
   let dispose = null;
+  let splashAt = null;
 
   function start() {
         const gl = canvas.getContext('webgl2', {
@@ -859,6 +860,13 @@ function createSplashCursor(canvas, options) {
           wake();
         };
 
+        splashAt = (clientX, clientY) => {
+          const point = locate(clientX, clientY);
+          if (!point) return;
+          bursts.push(point);
+          wake();
+        };
+
         const onPointerMove = event => {
           if (event.pointerType !== 'touch') track(`p${event.pointerId}`, event.clientX, event.clientY);
         };
@@ -928,6 +936,9 @@ function createSplashCursor(canvas, options) {
   dispose = start();
 
   return {
+    splash(x, y) {
+      if (splashAt) splashAt(x, y);
+    },
     destroy() {
       if (dispose) dispose();
       dispose = null;
