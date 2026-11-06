@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro · Lumina</title>
+
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link rel="stylesheet" href="registro.css">
+</head>
+
+<body>
+
+  <header id="header"></header>
+
+  <main class="register-page">
+    <div class="container">
+
+      <div class="register-layout" id="register-layout">
+
+        <div class="register-intro">
+          <h1 class="register-title">Crea tu cuenta en Lumina</h1>
+          <p class="register-lead">
+            Regístrate para guardar tus favoritos y seguir tus pedidos de velas.
+          </p>
+        </div>
+
+        <div class="register-panel">
+
+          <div id="register-alert"></div>
+
+          <form class="register-form" id="register-form" novalidate>
+
+            <div class="register-field">
+              <label class="register-label" for="register-name">Nombre completo</label>
+              <input class="register-input" id="register-name" name="nombreCompleto" type="text" autocomplete="name" maxlength="60" placeholder="Ej: Laura Gómez">
+            </div>
+
+            <div class="register-field">
+              <label class="register-label" for="register-phone">Número de teléfono</label>
+              <input class="register-input" id="register-phone" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="Ej: 300 123 4567">
+            </div>
+
+            <div class="register-field">
+              <label class="register-label" for="register-email">Correo electrónico</label>
+              <input class="register-input" id="register-email" name="email" type="email" autocomplete="email" maxlength="100" placeholder="nombre@correo.com">
+              <p class="register-help">Este correo será tu nombre de usuario.</p>
+            </div>
+
+            <div class="register-field">
+              <label class="register-label" for="register-password">Contraseña</label>
+              <input class="register-input" id="register-password" name="contrasena" type="password" autocomplete="new-password" maxlength="40" placeholder="Mínimo 8 caracteres">
+              <p class="register-help">Usa letras y números.</p>
+            </div>
+
+            <div class="register-field">
+              <label class="register-label" for="register-confirm">Confirmar contraseña</label>
+              <input class="register-input" id="register-confirm" name="confirmarContrasena" type="password" autocomplete="new-password" maxlength="40" placeholder="Repite tu contraseña">
+            </div>
+
+            <button class="register-button" id="register-submit" type="submit">Registrarme</button>
+          </form>
+
+        </div>
+      </div>
+
+      <div class="register-done" id="register-done" hidden>
+        <h2 class="register-done-title" id="register-done-title" tabindex="-1"></h2>
+      </div>
+
+    </div>
+  </main>
+
+  <canvas class="register-stars" id="register-stars" aria-hidden="true"></canvas>
+
+  <footer id="footer"></footer>
+
+  <script src="../../js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/ui.js"></script>
+  <script src="../../js/main.js"></script>
+  <script src="../../js/carrito.js"></script>
+  <script src="../inicio/splash-cursor.js"></script>
+  <script src="estrellas.js"></script>
+  <script src="registro.js"></script>
+</body>
+
+</html>
