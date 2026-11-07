@@ -1,7 +1,3 @@
-// Lumina · vista favoritos
-// Renderiza los favoritos en tienda/favoritos. El estado vive globalmente en
-// js/favoritos.js (localStorage: "lumina-favoritos").
-
 function renderFavoritos() {
   const contenedorItems = document.getElementById("favoritos-items-container");
 

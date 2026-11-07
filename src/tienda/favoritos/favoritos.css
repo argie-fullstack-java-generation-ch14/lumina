@@ -1,5 +1,3 @@
-/* --- Título "Favoritos" y botón "Vaciar favoritos" ---
-   Mismos estilos de la sección equivalente en la vista del carrito. */
 .cart-title {
   font-family: var(--fuente-titulos);
   font-weight: 700;
