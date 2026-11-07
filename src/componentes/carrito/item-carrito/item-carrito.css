@@ -4,6 +4,14 @@
   border-radius: 16px;
   background-color: #FFFFFF;
   box-shadow: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Desvanecimiento al eliminar un artículo */
+.cart-item-card.fade-out {
+  opacity: 0;
+  transform: translateX(24px);
+  pointer-events: none;
 }
 
 .product-img {

@@ -6,6 +6,16 @@
 const CATALOGO_DIR = new URL(".", document.currentScript.src).href;
 const PRODUCTO_URL = new URL("producto/", CATALOGO_DIR).href;
 
+// El enlace "Explora todo el catálogo" solo tiene sentido cuando el catálogo
+// se muestra desde el inicio; en esta misma página se oculta.
+// (En la home el catálogo se inyecta pero el pathname es del index raíz.)
+// La clase "pagina-catalogo" permite estilos exclusivos cuando la ruta
+// contiene "catalogo".
+if (location.pathname.includes("catalogo")) {
+    document.querySelector(".view-all-link")?.remove();
+    document.getElementById("catalogo-completo")?.classList.add("catalogo-margin");
+}
+
 // Datos de los productos del catalogo: viven en js/velas.js, que se carga
 // antes de este script (misma estructura de datos para el carrusel de la
 // home y el modulo de favoritas de temporada).
@@ -36,10 +46,11 @@ function crearVela(vela) {
             <button
                 class="favorite-button"
                 type="button"
-                aria-label="Agregar ${vela.name} a favoritos"
-                aria-pressed="false">
+                data-product-id="${vela.id}"
+                aria-label="${esFavorito(vela.id) ? `Quitar ${vela.name} de favoritos` : `Agregar ${vela.name} a favoritos`}"
+                aria-pressed="${esFavorito(vela.id)}">
 
-                <i class="fa-regular fa-heart"
+                <i class="fa-${esFavorito(vela.id) ? "solid" : "regular"} fa-heart"
                    aria-hidden="true"></i>
 
             </button>
@@ -122,7 +133,14 @@ const esPaginaPrincipal =
 
 // Aplicar filtros y ordenamiento.
 function actualizarCatalogo() {
-    if (!contenedorCatalogo) {
+    // Reintenta encontrar el contenedor: en la home este script puede
+    // ejecutarse antes de que la sección del catálogo se termine de
+    // inyectar (el módulo de favoritas de temporada también lo carga),
+    // y una captura única con null dejaría el grid vacío hasta recargar.
+    const contenedor = contenedorCatalogo ||
+        document.getElementById("catalog-container");
+
+    if (!contenedor) {
         return;
     }
 
@@ -186,7 +204,7 @@ function actualizarCatalogo() {
         : productosFiltrados;
 
     // Mostrar los productos en pantalla.
-    contenedorCatalogo.innerHTML = productosVisibles
+    contenedor.innerHTML = productosVisibles
         .map(crearVela)
         .join("");
 
@@ -242,34 +260,8 @@ if (botonLimpiar) {
 }
 
 
-// Activar o desactivar el corazon de favoritos.
-document.addEventListener("click", function (evento) {
-    const boton = evento.target.closest(".favorite-button");
-
-    if (!boton) {
-        return;
-    }
-
-    const icono = boton.querySelector("i");
-
-    const esFavorito =
-        boton.getAttribute("aria-pressed") === "true";
-
-    boton.setAttribute(
-        "aria-pressed",
-        String(!esFavorito)
-    );
-
-    boton.setAttribute(
-        "aria-label",
-        esFavorito
-            ? "Agregar a favoritos"
-            : "Quitar de favoritos"
-    );
-
-    icono.classList.toggle("fa-regular", esFavorito);
-    icono.classList.toggle("fa-solid", !esFavorito);
-});
+// El corazón de favoritos se maneja globalmente en js/favoritos.js
+// (guarda la vela en "lumina-favoritos" y pinta el corazón).
 
 // Agregar productos al carrito desde el catálogo.
 document.addEventListener("click", function (evento) {

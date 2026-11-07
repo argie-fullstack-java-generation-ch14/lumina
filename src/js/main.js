@@ -5,6 +5,13 @@
 document.addEventListener("DOMContentLoaded", async () => {
   await renderPartial("#header", "header/header.html");
   initHeader();
+
+  // La burbujita del carrito puede haberse quedado sin pintar si
+  // renderCarrito corrió antes de que el header existiera (recargas).
+  if (typeof refrescarBurbujaCarrito === "function") {
+    refrescarBurbujaCarrito();
+  }
+
   await renderPartial("#footer", "footer/footer.html");
 
   // Las secciones solo aplican en el index raíz; en los módulos el id

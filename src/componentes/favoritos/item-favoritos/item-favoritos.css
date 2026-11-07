@@ -1,0 +1,103 @@
+/* --- COMPONENTE ITEM CARRITO --- */
+.cart-item-card {
+  border: 1px solid var(--verde-apagado);
+  border-radius: 16px;
+  background-color: #FFFFFF;
+  box-shadow: none;
+  padding-right: 30px !important;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Desvanecimiento al quitar un favorito */
+.cart-item-card.fade-out {
+  opacity: 0;
+  transform: translateX(24px);
+  pointer-events: none;
+}
+
+/* Botón agregar al carrito (adaptado del catálogo/carrusel) */
+.cart-item-card .add-to-cart {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  border: 1px solid #FFFFFF;
+  border-radius: 22px;
+  background-color: #3B2D2D;
+  color: #FFFFFF;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.cart-item-card .add-to-cart:hover {
+  background-color: #554342;
+  color: #FFFFFF;
+}
+
+.product-img {
+  width: 100%;
+  max-width: 130px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.product-title {
+  font-family: var(--fuente-titulos);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--cafe-lumina);
+}
+
+.product-info {
+  font-size: 0.9rem;
+  color: var(--negro-relajacion);
+}
+
+.product-info strong {
+  color: var(--negro-acentuado);
+}
+
+.quantity-control {
+  color: var(--naranja-apagado);
+}
+
+.icon-btn-qty {
+  color: var(--naranja-apagado);
+  border: none;
+  background: transparent;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.icon-btn-delete {
+  color: var(--naranja-apagado);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.qty-number {
+  font-size: 1.1rem;
+  color: var(--cafe-lumina);
+}
+
+.product-price {
+  font-family: var(--fuente-texto);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--cafe-lumina);
+}
+
+@media screen and (min-width: 1024px) {
+  .cart-items-container {
+    min-height: 450px;
+    height: auto;
+  }
+}

@@ -15,6 +15,13 @@ const CUPONES = {
 
 let cuponAplicado = null;
 
+// Carpeta de este script: resuelve la ruta de la vista del carrito
+// correctamente en todas las páginas donde se comparte
+const CARRITO_URL = new URL(
+  "../tienda/carrito/index.html",
+  new URL(".", document.currentScript.src).href
+).href;
+
 // Decide aleatoriamente si se mostrará la card de promo o la de recicla para esta visita
 const tipoCardAleatoria = Math.random() < 0.5 ? "promo" : "recicla";
 
@@ -143,6 +150,11 @@ function mostrarNotificacionCarrito(vela) {
         <p>Tu momento especial comienza aquí.</p>
       </div>
     </div>
+
+    <a class="cart-toast-cta" href="${CARRITO_URL}">
+      Ver carrito
+      <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+    </a>
   `;
 
   notificacion.classList.add("show");
@@ -283,6 +295,17 @@ function estadoCarritoVacio() {
   `;
 }
 
+// Re-pinta la burbujita del header con lo guardado en localStorage.
+// Se necesita porque al recargar, renderCarrito del DOMContentLoaded corre
+// antes de que el header (inyectado por fetch) exista en el DOM.
+function refrescarBurbujaCarrito() {
+  if (typeof setCartCount !== "function") return;
+
+  const totales = calcularTotales(obtenerProductosCarrito());
+
+  setCartCount(totales.cantidad);
+}
+
 // Eventos de los botones para la cantidad, eliminar, vaciar carrito
 document.addEventListener("click", (evento) => {
   const boton = evento.target.closest("[data-action]");
@@ -301,7 +324,11 @@ document.addEventListener("click", (evento) => {
 
   if (action === "increase") cambiarCantidad(itemId, 1);
   if (action === "decrease") cambiarCantidad(itemId, -1);
-  if (action === "delete") eliminarItem(itemId);
+  if (action === "delete") {
+    // Desvanecer la tarjeta y eliminar del carrito al terminar la animación
+    card.classList.add("fade-out");
+    setTimeout(() => eliminarItem(itemId), 300);
+  }
 });
 
 // Aplicar el cupón de descuento del resumen
