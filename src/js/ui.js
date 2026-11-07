@@ -93,6 +93,19 @@ function applyMainAttributes(container, main) {
   main.classList.forEach((cls) => container.classList.add(cls));
 }
 
+async function loadComponentCss(name) {
+  const href = COMPONENTS_BASE + name;
+  const absolute = new URL(href, APP_BASE).href;
+  const alreadyLoaded = Array.from(document.head.querySelectorAll('link[rel="stylesheet"]'))
+    .some((existing) => existing.href === absolute);
+  if (alreadyLoaded) return;
+
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = href;
+  document.head.appendChild(link);
+}
+
 async function renderPartial(selector, name) {
   const container = document.querySelector(selector);
   if (!container) return;
@@ -100,6 +113,9 @@ async function renderPartial(selector, name) {
   try {
     container.innerHTML = await fetchPage(COMPONENTS_BASE + name);
     resolveLinks(container);
+
+    const cssName = name.replace(/\.html$/, ".css");
+    await loadComponentCss(cssName);
   } catch (error) {
     console.error(error);
   }
