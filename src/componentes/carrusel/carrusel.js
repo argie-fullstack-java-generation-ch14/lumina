@@ -15,10 +15,11 @@ function crearCardCarrusel(vela) {
       <button
         class="favorite-button"
         type="button"
-        aria-label="Agregar ${vela.name} a favoritos"
-        aria-pressed="false">
+        data-product-id="${vela.id}"
+        aria-label="${esFavorito(vela.id) ? `Quitar ${vela.name} de favoritos` : `Agregar ${vela.name} a favoritos`}"
+        aria-pressed="${esFavorito(vela.id)}">
 
-        <i class="fa-regular fa-heart"
+        <i class="fa-${esFavorito(vela.id) ? "solid" : "regular"} fa-heart"
            aria-hidden="true"></i>
 
       </button>
