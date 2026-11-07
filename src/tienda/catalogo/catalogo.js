@@ -6,6 +6,16 @@
 const CATALOGO_DIR = new URL(".", document.currentScript.src).href;
 const PRODUCTO_URL = new URL("producto/", CATALOGO_DIR).href;
 
+// El enlace "Explora todo el catálogo" solo tiene sentido cuando el catálogo
+// se muestra desde el inicio; en esta misma página se oculta.
+// (En la home el catálogo se inyecta pero el pathname es del index raíz.)
+// La clase "pagina-catalogo" permite estilos exclusivos cuando la ruta
+// contiene "catalogo".
+if (location.pathname.includes("catalogo")) {
+    document.querySelector(".view-all-link")?.remove();
+    document.getElementById("catalogo-completo")?.classList.add("catalogo-margin");
+}
+
 // Datos de los productos del catalogo: viven en js/velas.js, que se carga
 // antes de este script (misma estructura de datos para el carrusel de la
 // home y el modulo de favoritas de temporada).
