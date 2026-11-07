@@ -295,6 +295,17 @@ function estadoCarritoVacio() {
   `;
 }
 
+// Re-pinta la burbujita del header con lo guardado en localStorage.
+// Se necesita porque al recargar, renderCarrito del DOMContentLoaded corre
+// antes de que el header (inyectado por fetch) exista en el DOM.
+function refrescarBurbujaCarrito() {
+  if (typeof setCartCount !== "function") return;
+
+  const totales = calcularTotales(obtenerProductosCarrito());
+
+  setCartCount(totales.cantidad);
+}
+
 // Eventos de los botones para la cantidad, eliminar, vaciar carrito
 document.addEventListener("click", (evento) => {
   const boton = evento.target.closest("[data-action]");
