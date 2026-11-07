@@ -56,9 +56,17 @@ function initCandleForm() {
         if (value.length < 10) return "La descripción debe tener al menos 10 caracteres.";
         return "";
       }
+    },
+    {
+      input: document.querySelector("#crear-color"),
+      validate(value) {
+        if (value === "") return "Escribe el color de la vela.";
+        if (value.length < 2) return "El color debe tener al menos 2 caracteres.";
+        return "";
+      }
     }
   ];
-  const [nameField, scentField, categoryField, weightField, priceField, descriptionField] = fields;
+  const [nameField, scentField, categoryField, weightField, priceField, descriptionField, colorField] = fields;
 
   function showError(input, message) {
     const wrapper = input.closest(".crear-field");
@@ -99,6 +107,7 @@ function initCandleForm() {
       slug: createSlug(nameField.input.value),
       img: "https://gstatic.com/images",
       scent: scentField.input.value.trim(),
+      color: colorField.input.value.trim(),
       category: categoryField.input.selectedOptions[0].textContent.trim(),
       weight: Number(weightField.input.value),
       description: descriptionField.input.value.trim(),

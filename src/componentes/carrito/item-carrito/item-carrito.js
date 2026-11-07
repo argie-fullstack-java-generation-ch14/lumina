@@ -1,7 +1,7 @@
 // Lumina · item-carrito
 // Componente: tarjeta de un artículo del carrito.
 // Espera: item con la misma estructura de velas.js (id, name, img, scent,
-// weight, price) + quantity.
+// weight, color, price) + quantity.
 
 function crearItemCarrito(item) {
   return `
@@ -23,8 +23,11 @@ function crearItemCarrito(item) {
               <p class="product-info mb-1">
                   <strong>Aroma:</strong> ${item.scent}
               </p>
-              <p class="product-info mb-0">
+              <p class="product-info mb-1">
                   <strong>Peso:</strong> ${item.weight}g
+              </p>
+              <p class="product-info mb-1">
+                  <strong>Color:</strong> ${item.color}
               </p>
           </div>
 

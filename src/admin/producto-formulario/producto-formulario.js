@@ -66,6 +66,14 @@ window.initProductForm = () => {
 				}
 				return "";
 			}
+		},
+		{
+			input: modal.querySelector("#product-color"),
+			validate(value) {
+				if (value === "") return "Escribe el color de la vela.";
+				if (value.length < 2) return "El color debe tener al menos 2 caracteres.";
+				return "";
+			}
 		}
 	];
 
@@ -101,6 +109,7 @@ window.initProductForm = () => {
 			name,
 			slug: name.toLowerCase().replace(/\s+/g, "-"),
 			img: fields[6].input.value.trim(),
+			color: fields[7].input.value.trim(),
 			scent: fields[1].input.value.trim(),
 			category: fields[2].input.selectedOptions[0].textContent.trim(),
 			weight: Number(fields[3].input.value),

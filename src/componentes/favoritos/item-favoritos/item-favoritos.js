@@ -1,7 +1,7 @@
 // Lumina · item-favoritos
 // Componente: tarjeta de un artículo de favoritos.
 // Espera: item con la estructura de velas.js (id, name, img, scent,
-// weight, price). Los favoritos no manejan cantidad.
+// weight, color, price). Los favoritos no manejan cantidad.
 
 function crearItemFavorito(item) {
   return `
@@ -25,6 +25,9 @@ function crearItemFavorito(item) {
               </p>
               <p class="product-info mb-1">
                   <strong>Peso:</strong> ${item.weight}g
+              </p>
+              <p class="product-info mb-1">
+                  <strong>Color:</strong> ${item.color}
               </p>
               <p class="product-info mb-0">
                   <strong>Precio:</strong> $ ${item.price.toLocaleString("es-CO")}

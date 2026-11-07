@@ -7,6 +7,7 @@ const velas = [
     scent: "Floral",
     category: "Bienestar",
     weight: 200,
+    color: "Blanca con destellos rosados",
     description: "Un momento para renovar tu energia.",
     price: 12000
   },
@@ -18,6 +19,7 @@ const velas = [
     scent: "Lavanda",
     category: "Descanso",
     weight: 200,
+    color: "Lavanda pastel",
     description: "Ideal para desconectarte y descansar.",
     price: 12000
   },
@@ -29,6 +31,7 @@ const velas = [
     scent: "Lavanda - Manzanilla",
     category: "Mindfulness",
     weight: 200,
+    color: "Verde menta",
     description: "Encuentra tu propio centro.",
     price: 12000
   },
@@ -40,6 +43,7 @@ const velas = [
     scent: "Amaderado",
     category: "Intencion",
     weight: 200,
+    color: "Plateado oscuro",
     description: "Un nuevo comienzo para ti.",
     price: 12000
   },
@@ -51,6 +55,7 @@ const velas = [
     scent: "Lavanda - Manzanilla",
     category: "Amor propio",
     weight: 200,
+    color: "Verde salvia",
     description: "Ideal para desconectarte del ruido del dia y crear un ambiente relajante.",
     price: 12000
   },
@@ -62,6 +67,7 @@ const velas = [
     scent: "Dulce",
     category: "Amor propio",
     weight: 200,
+    color: "Rosa palo",
     description: "Conecta contigo y con tu esencia.",
     price: 12000
   },
@@ -73,6 +79,7 @@ const velas = [
     scent: "Citrico",
     category: "Bienestar",
     weight: 200,
+    color: "Naranja melocoton",
     description: "Disfruta la tranquilidad del momento.",
     price: 12000
   },
@@ -84,6 +91,7 @@ const velas = [
     scent: "Herbal",
     category: "Mindfulness",
     weight: 200,
+    color: "Verde hierba",
     description: "Crea un espacio para tus ideas.",
     price: 12000
   },
@@ -95,6 +103,7 @@ const velas = [
     scent: "Floral",
     category: "Intencion",
     weight: 200,
+    color: "Rosa claro",
     description: "Encuentra armonia en tu espacio.",
     price: 12000
   },
@@ -106,6 +115,7 @@ const velas = [
     scent: "Lavanda - Manzanilla",
     category: "Mindfulness",
     weight: 200,
+    color: "Lila pastel",
     description: "Desconecta del ruido y regalate calma.",
     price: 12000
   },
@@ -119,6 +129,7 @@ const velas = [
     scent: "Vainilla",
     category: "Navidad",
     weight: 200,
+    color: "Crema",
     description: "Calma que ilumina tu hogar.",
     price: 12000
   },
@@ -130,6 +141,7 @@ const velas = [
     scent: "Pino y cedro",
     category: "Navidad",
     weight: 200,
+    color: "Verde bosque",
     description: "Un respiro de naturaleza en tu espacio.",
     price: 12000
   },
@@ -141,6 +153,7 @@ const velas = [
     scent: "Frutos rojos",
     category: "Navidad",
     weight: 200,
+    color: "Rosa intenso",
     description: "Pequenos momentos que se sienten grandes.",
     price: 12000
   },
@@ -152,6 +165,7 @@ const velas = [
     scent: "Canela y naranja",
     category: "Navidad",
     weight: 200,
+    color: "Dorado",
     description: "Tradiciones que abrazan el alma.",
     price: 12000
   },
@@ -163,6 +177,7 @@ const velas = [
     scent: "Jazmin y ambar",
     category: "Navidad",
     weight: 200,
+    color: "Ambar",
     description: "Luz para nuevos comienzos.",
     price: 12000
   },
@@ -174,6 +189,7 @@ const velas = [
     scent: "Naranja y canela",
     category: "Navidad",
     weight: 200,
+    color: "Coral",
     description: "Aromas que reunen lo mas importante.",
     price: 12000
   },
@@ -185,6 +201,7 @@ const velas = [
     scent: "Vainilla oscura, sándalo y ámbar",
     category: "Halloween",
     weight: 200,
+    color: "Purpura oscuro",
     description: "Un toque de misterio para iluminar tus noches.",
     price: 12000
   },
@@ -197,6 +214,7 @@ const velas = [
     scent: "Calabaza especiada, canela y naranja",
     category: "Halloween",
     weight: 200,
+    color: "Naranja calabaza",
     description: "Calidez y dulzura para abrazar tus momentos favoritos.",
     price: 12000
   },
@@ -208,7 +226,8 @@ const velas = [
     scent: "Lavanda, cedro y hierbas aromáticas",
     category: "Halloween",
     weight: 200,
-    description: "Una pausa mágica para reconectar contigo misma.",
+    color: "Violeta",
+    description: "Una pausa magica para reconectar contigo misma.",
     price: 12000
   },
   {
@@ -216,9 +235,10 @@ const velas = [
     name: "Rosa de Medianoche",
     slug: "rosa-de-medianoche",
     img: "https://res.cloudinary.com/zj7mojiw/image/upload/v1793039460/10.png",
-    scent: "Rosa, frutos rojos y pachulí",
+    scent: "Rosa, frutos rojos y pachuli",
     category: "Halloween",
     weight: 200,
+    color: "Burdeos",
     description: "Un aroma misterioso para celebrar tu esencia.",
     price: 12000
   },
@@ -227,20 +247,22 @@ const velas = [
     name: "Bosque Encantado",
     slug: "bosque-encantado",
     img: "https://res.cloudinary.com/zj7mojiw/image/upload/v1793039456/9.png",
-    scent: "Pino, cedro y tierra húmeda",
+    scent: "Pino, cedro y tierra humeda",
     category: "Halloween",
     weight: 200,
+    color: "Verde esmeralda",
     description: "Un respiro de naturaleza en medio de la magia.",
     price: 12000
   },
   {
     id: 22,
-    name: "Último Suspiro",
+    name: "Ultimo Suspiro",
     slug: "ultimo-suspiro",
     img: "https://res.cloudinary.com/zj7mojiw/image/upload/v1793039460/8.png",
     scent: "Incienso, vainilla y madera ahumada",
     category: "Halloween",
     weight: 200,
+    color: "Gris ceniza",
     description: "Suelta lo que pesa y enciende la luz de un nuevo comienzo.",
     price: 12000
   }
