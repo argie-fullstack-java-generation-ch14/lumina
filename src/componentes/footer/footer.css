@@ -5,10 +5,8 @@
   margin-top: 3rem;
   padding: 2rem 0 1.5rem;
   background-color: #403332;
-  background-image: url("https://res.cloudinary.com/zj7mojiw/image/upload/v1793053108/Footer_1.png");
-  background-size: cover;
+  background-image: url(../../assets/img/vector-footer.svg);
   background-position: center;
-  background-repeat: no-repeat;
   color: #f4eee8;
   border-top: 1px solid #5b4b48;
 }
@@ -141,7 +139,6 @@
 /* Adaptación a celulares */
 @media (max-width: 600px) {
   .site-footer {
-  background-image: none;
     padding-top: 1.5rem;
   }
 

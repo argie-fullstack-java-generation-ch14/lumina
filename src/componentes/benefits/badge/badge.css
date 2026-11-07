@@ -1,6 +1,8 @@
 .badges-container {
   width: 100%;
   background-color: #F7F6F4;
+  background-image: url(../../../assets/img/vector-badge.svg);
+  background-position: center;
   padding: 20px;
 }
 
