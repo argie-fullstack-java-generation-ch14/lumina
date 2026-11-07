@@ -21,7 +21,12 @@ function crearCardRecomendada(vela) {
               <span class="product-weight">${vela.weight}g</span>
             </div>
             <p class="product-card-desc mb-2 small">${vela.description}</p>
-            <div class="product-card-price">$ ${vela.price.toLocaleString("es-CO")}</div>
+            <div class="product-card-price">
+              <p class="mb-0">$ ${vela.price.toLocaleString("es-CO")}</p>
+              <button class="add-to-cart" type="button" data-product-id="${vela.id}" aria-label="Agregar ${vela.name} al carrito">
+                <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+              </button>
+            </div>
           </div>
         </article>
   `;
@@ -63,5 +68,20 @@ function renderProductosRecomendados() {
     if (contenedor) contenedor.innerHTML = seccion;
   });
 }
+
+// Agregar productos al carrito desde las cards recomendadas
+document.addEventListener("click", function (evento) {
+  const boton = evento.target.closest(".product-card-price .add-to-cart");
+
+  if (!boton) {
+    return;
+  }
+
+  const idProducto = boton.dataset.productId;
+
+  if (typeof agregarAlCarrito === "function") {
+    agregarAlCarrito(idProducto);
+  }
+});
 
 document.addEventListener("DOMContentLoaded", renderProductosRecomendados);
