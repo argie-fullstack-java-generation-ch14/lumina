@@ -15,6 +15,13 @@ const CUPONES = {
 
 let cuponAplicado = null;
 
+// Carpeta de este script: resuelve la ruta de la vista del carrito
+// correctamente en todas las páginas donde se comparte
+const CARRITO_URL = new URL(
+  "../tienda/carrito/index.html",
+  new URL(".", document.currentScript.src).href
+).href;
+
 // Decide aleatoriamente si se mostrará la card de promo o la de recicla para esta visita
 const tipoCardAleatoria = Math.random() < 0.5 ? "promo" : "recicla";
 
@@ -143,6 +150,11 @@ function mostrarNotificacionCarrito(vela) {
         <p>Tu momento especial comienza aquí.</p>
       </div>
     </div>
+
+    <a class="cart-toast-cta" href="${CARRITO_URL}">
+      Ver carrito
+      <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+    </a>
   `;
 
   notificacion.classList.add("show");
@@ -301,7 +313,11 @@ document.addEventListener("click", (evento) => {
 
   if (action === "increase") cambiarCantidad(itemId, 1);
   if (action === "decrease") cambiarCantidad(itemId, -1);
-  if (action === "delete") eliminarItem(itemId);
+  if (action === "delete") {
+    // Desvanecer la tarjeta y eliminar del carrito al terminar la animación
+    card.classList.add("fade-out");
+    setTimeout(() => eliminarItem(itemId), 300);
+  }
 });
 
 // Aplicar el cupón de descuento del resumen
