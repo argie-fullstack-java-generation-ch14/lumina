@@ -5,3 +5,11 @@
  * Lo compartido va en css/main.css o css/components.css, nunca aquí.
  * Clases en inglés y kebab-case: .product-card, no .productCard.
  */
+
+/* Espacio mínimo para la zona de cards (promo / recicla) a partir de 1024px */
+@media (min-width: 1024px) {
+  .col-lg-4 > #card-promo,
+  .col-lg-4 > #card-recicla {
+    min-width: 300px;
+  }
+}

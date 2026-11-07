@@ -1,0 +1,12 @@
+#v-pills-tab {
+  background-color: var(--verde-amarillento);
+}
+
+#v-pills-tab .nav-link {
+  color: var(--celeste-apagado);
+}
+
+#v-pills-tab .nav-link.active {
+  background-color: var(--celeste-apagado);
+  color: var(--gris-barra);
+}

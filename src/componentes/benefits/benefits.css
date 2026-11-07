@@ -1,0 +1,169 @@
+.benefits {
+  width: 100%;
+  overflow-x: clip;
+}
+
+.benefits>.container {
+  flex-direction: column;
+  padding-inline: 0;
+}
+
+.benefits-card {
+  position: relative;
+  padding-block: 30px;
+  color: #F7F6F4;
+  padding-left: 20px;
+  font-weight: 300;
+}
+
+.benefits-card-div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+/* Franja celeste full-bleed: desde el borde izquierdo de la pantalla
+   hasta la card (el container la mantiene centrada; el pseudo la cruza) */
+.benefits-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -100vw;
+  right: 0;
+  z-index: -1;
+  background-color: var(--celeste-apagado);
+}
+
+.benefits-items-section {
+  position: relative;
+  padding: 20px;
+}
+
+/* Franja verde-claro full-bleed: desde la sección hasta el borde derecho */
+.benefits-items-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: -100vw;
+  z-index: -1;
+  background-color: var(--verde-claro);
+}
+
+.benefits-items-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .benefits-card {
+    padding-left: 0px;
+  }
+
+  .benefits-items-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 1023.98px) {
+  .benefits>.container {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Botón "Descubrir colecciones": versión invertida del
+   .view-all-link del catálogo (sobre la card celeste los roles de
+   fondo/texto se intercambian) */
+.benefits-cta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
+  color: var(--gris-barra);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.benefits-cta i {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--gris-barra);
+  color: var(--gris-barra);
+}
+
+.benefits-cta:hover {
+  color: var(--verde-amarillento, #E9EAE5);
+}
+
+.benefits-cta:hover i {
+  border-color: var(--verde-amarillento, #E9EAE5);
+  color: var(--verde-amarillento, #E9EAE5);
+}
+
+@media screen and (min-width: 1024px) {
+
+  /* Desktop: container centrado de Bootstrap y las dos mitades lado a lado */
+  .benefits>.container {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .benefits-card {
+    flex: 0 0 240px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .benefits-items-section {
+    flex: 1;
+    padding: 40px 0 40px 40px;
+  }
+
+  .benefits-items-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .benefits-card {
+    flex: 0 0 300px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+/* Solo 1024px–1099px: tipografía compacta de la card; desde 1100
+   vuelven los tamaños del texto */
+@media screen and (min-width: 1024px) and (max-width: 1099.98px) {
+  .benefits-card h3 {
+    font-size: 20px;
+  }
+
+  .benefits-card p {
+    font-size: 14px;
+  }
+}
+
+/* Compacto solo <768px: reutiliza la tipografía de la card de 1024–1099 */
+@media screen and (max-width: 767.98px) {
+  .benefits-card h3 {
+    font-size: 20px;
+  }
+
+  .benefits-card p {
+    font-size: 14px;
+  }
+}

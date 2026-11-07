@@ -111,8 +111,8 @@ muestra `Perfil`**.
 | Login | `src/tienda/login/index.html` | Menú (sin sesión), perfil |
 | Registro | `src/tienda/registro/index.html` | Login |
 | Recuperar contraseña | `src/tienda/recuperar-contrasena/index.html` | Login |
-| Perfil | `src/tienda/perfil/index.html` | Menú (con sesión) |
-| Pedidos | `src/tienda/pedidos/index.html` | Perfil |
+| Perfil | `src/tienda/mi-cuenta/perfil/index.html` | Menú (con sesión) |
+| Pedidos | `src/tienda/mi-cuenta/pedidos/index.html` | Perfil |
 
 ### Acciones dentro de una página (no son páginas)
 
