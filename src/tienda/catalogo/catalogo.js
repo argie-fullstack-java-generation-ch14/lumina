@@ -133,7 +133,14 @@ const esPaginaPrincipal =
 
 // Aplicar filtros y ordenamiento.
 function actualizarCatalogo() {
-    if (!contenedorCatalogo) {
+    // Reintenta encontrar el contenedor: en la home este script puede
+    // ejecutarse antes de que la sección del catálogo se termine de
+    // inyectar (el módulo de favoritas de temporada también lo carga),
+    // y una captura única con null dejaría el grid vacío hasta recargar.
+    const contenedor = contenedorCatalogo ||
+        document.getElementById("catalog-container");
+
+    if (!contenedor) {
         return;
     }
 
@@ -197,7 +204,7 @@ function actualizarCatalogo() {
         : productosFiltrados;
 
     // Mostrar los productos en pantalla.
-    contenedorCatalogo.innerHTML = productosVisibles
+    contenedor.innerHTML = productosVisibles
         .map(crearVela)
         .join("");
 
