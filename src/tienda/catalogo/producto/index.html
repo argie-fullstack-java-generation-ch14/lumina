@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="../../../css/main.css">
   <link rel="stylesheet" href="../../../css/components.css">
   <link rel="stylesheet" href="producto.css">
+  <link rel="stylesheet" href="../../../componentes/carrito/card-promo/card-promo.css">
 </head>
 
 <body>
@@ -20,8 +21,35 @@
   <header id="header"></header>
 
   <main class="container my-5">
-    <h2 class="text-center mb-4">Detalle de producto</h2>
-    <!-- Contenido de Detalle de producto -->
+
+    <div class="container my-5">
+      <div class="row align-items-center g-4">
+
+        <!-- BLOQUE 1: Imagen Principal (Columna Izquierda) -->
+        <!-- En móvil ocupa todo el ancho, en lg (desktop) ocupa 4 columnas -->
+        <div class="col-12 col-lg-4">
+          <div class="p-3 border rounded bg-light text-center" style="min-height: 400px;">
+            <span class="text-muted">[ Skeleton: Componente de Imagen ]</span>
+          </div>
+        </div>
+
+        <!-- BLOQUE 2: Información del Producto, Precio y Botón (Columna Central) -->
+        <!-- En móvil ocupa todo el ancho, en lg (desktop) ocupa 5 columnas -->
+        <div class="col-12 col-lg-5">
+          <div class="p-3 border rounded bg-light" style="min-height: 400px;">
+            <span class="text-muted">[ Skeleton: Componente de Detalles, Precio y CTA ]</span>
+          </div>
+        </div>
+
+        <!-- BLOQUE 3: Cards Promo y Recicla (Columna Derecha) -->
+        <!-- En móvil ocupa todo el ancho, en lg (desktop) ocupa 3 columnas -->
+        <div class="col-12 col-lg-3">
+          <div id="card-promo"></div>
+          <div id="card-recicla"></div>
+        </div>
+
+      </div>
+    </div>
   </main>
 
   <footer id="footer"></footer>
@@ -30,6 +58,8 @@
   <script src="../../../js/bootstrap.bundle.min.js"></script>
   <script src="../../../js/ui.js"></script>
   <script src="../../../js/main.js"></script>
+  <script src="../../../componentes/carrito/card-promo/card-promo.js"></script>
+  <script src="../../../componentes/carrito/card-promo/card-recicla.js"></script>
   <script src="../../../js/carrito.js"></script>
   <script src="producto.js"></script>
 </body>
