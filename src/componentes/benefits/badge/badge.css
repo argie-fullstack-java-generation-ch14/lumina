@@ -1,0 +1,82 @@
+.badges-container {
+  width: 100%;
+  background-color: #F7F6F4;
+  padding: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .badges-container {
+    padding-block: 30px;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  #badges-fila {
+    gap: 20px;
+  }
+}
+
+.badge-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  text-align: left;
+}
+
+.badge-item i {
+  font-size: 30px;
+  color: var(--celeste-apagado);
+}
+
+.badge-item p {
+  font-size: 14px;
+  color: var(--celeste-apagado);
+  margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .badge-item {
+
+    --ancho-badge: 108px;
+
+    width: var(--ancho-badge);
+    flex: 0 0 var(--ancho-badge);
+    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .badge-item i {
+    font-size: 40px;
+  }
+
+  .badge-item p {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width:1024px) {
+  .badges-container {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .badge-item {
+    --ancho-badge: 140px;
+
+    width: var(--ancho-badge);
+    flex: 0 0 var(--ancho-badge);
+  }
+
+  .badge-grid {
+    justify-content: space-between !important;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .badge-linea-2 {
+    display: block;
+  }
+}
