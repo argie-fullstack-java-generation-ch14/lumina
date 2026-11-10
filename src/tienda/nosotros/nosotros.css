@@ -1,7 +1,5 @@
 
-/* ========================================
-   LUMINA - PAGINA SOBRE NOSOTROS
-======================================== */
+/* LUMINA - PAGINA SOBRE NOSOTROS*/
 
 /* Contenedor principal */
 .about-page {
@@ -13,9 +11,7 @@
   color: #403332;
 }
 
-/* ========================================
-   TITULO PRINCIPAL
-======================================== */
+/* TITULO PRINCIPAL */
 
 .about-title {
   margin-bottom: 2rem;
@@ -31,9 +27,7 @@
   line-height: 1.3;
 }
 
-/* ========================================
-   EQUIPO LUMINA
-======================================== */
+/* EQUIPO LUMINA */
 
 .team-section {
   width: 100%;
@@ -45,8 +39,8 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: start;
   justify-items: center;
-  gap: 1.2rem;
-  max-width: 850px;
+  gap: 1.5rem;
+  max-width: 1100px;
   margin: 0 auto;
   background: transparent;
 }
@@ -61,7 +55,7 @@
 /* Fotografías */
 .team-photo {
   width: 100%;
-  max-width: 210px;
+  max-width: 260px;
   aspect-ratio: 1 / 1;
   margin: 0 auto 0.7rem;
   overflow: visible;
@@ -90,9 +84,7 @@
   line-height: 1.3;
 }
 
-/* ========================================
-   VISION - LOGO - MISION
-======================================== */
+/* VISION - LOGO - MISION */
 
 .about-purpose {
   display: grid;
@@ -131,9 +123,7 @@
   text-align: justify;
 }
 
-/* ========================================
-   LOGO Y ESLOGAN
-======================================== */
+/* LOGO Y ESLOGAN*/
 
 .about-logo {
   display: flex;
@@ -167,14 +157,13 @@
   letter-spacing: 0.3px;
   z-index: 1;
 }
+
 /* Texto en inglés */
 .about-tagline {
   font-family: "Calibri", sans-serif;
 }
 
-/* ========================================
-   TABLETAS
-======================================== */
+/* TABLETAS */
 
 @media (max-width: 768px) {
 
@@ -185,10 +174,11 @@
   .team-container {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2rem 1.5rem;
+    max-width: 700px;
   }
 
   .team-photo {
-    max-width: 190px;
+    max-width: 280px;
   }
 
   .team-member h2 {
@@ -223,9 +213,7 @@
   }
 }
 
-/* ========================================
-   CELULARES
-======================================== */
+/* CELULARES */
 
 @media (max-width: 480px) {
 
@@ -247,7 +235,7 @@
   }
 
   .team-photo {
-    max-width: 160px;
+    max-width: 190px;
   }
 
   .team-member h2 {
@@ -287,9 +275,7 @@
   }
 }
 
-/* ========================================
-   PANTALLAS MUY PEQUEÑAS
-======================================== */
+/* PANTALLAS MUY PEQUEÑAS */
 
 @media (max-width: 350px) {
 
@@ -298,7 +284,7 @@
   }
 
   .team-photo {
-    max-width: 190px;
+    max-width: 210px;
   }
 
   .team-member h2 {
@@ -306,10 +292,7 @@
   }
 }
 
-
-/* ========================================
-   MODAL - INFORMACION DEL EQUIPO LUMINA
-======================================== */
+/*MODAL - INFORMACION DEL EQUIPO LUMINA */
 
 .member-modal {
   display: none;
@@ -450,9 +433,7 @@
   transform: translateY(-2px);
 }
 
-/* ========================================
-   MODAL - TABLETAS Y CELULARES
-======================================== */
+/* TABLETAS Y CELULARES */
 
 @media (max-width: 600px) {
 
