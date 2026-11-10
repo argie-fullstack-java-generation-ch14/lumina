@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión · Lumina</title>
+
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+  <header id="header"></header>
+
+  <main class="login-page">
+    <section class="login-card">
+      <h1>Bienvenido a Lumina</h1>
+      <p>Inicia sesión y continúa disfrutando de tu espacio de bienestar.</p>
+
+      <div id="login-alert"></div>
+
+      <form id="login-form" novalidate>
+        <div class="login-field">
+          <label for="login-email">Correo electrónico</label>
+          <input id="login-email" type="email" placeholder="nombre@correo.com" required>
+        </div>
+
+        <div class="login-field">
+          <label for="login-password">Contraseña</label>
+          <input id="login-password" type="password" placeholder="Tu contraseña" required>
+        </div>
+
+        <button type="submit">Iniciar sesión</button>
+      </form>
+
+      <p class="login-register">
+        ¿Aún no tienes cuenta?
+        <a href="../registro/index.html">Regístrate aquí</a>
+      </p>
+    </section>
+  </main>
+
+  <footer id="footer"></footer>
+
+  <script src="../../js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/ui.js"></script>
+  <script src="../../js/main.js"></script>
+  <script src="../../js/carrito.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

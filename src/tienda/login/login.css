@@ -1,0 +1,94 @@
+
+.login-page {
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  background: #faf7f3;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 2.5rem;
+  background: #fff;
+  border: 1px solid #e9dcd2;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(64, 51, 50, 0.10);
+}
+
+.login-card h1 {
+  color: #403332;
+  font-family: "Recoleta", Georgia, serif;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.login-card > p {
+  color: #806d65;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1.3rem 0;
+}
+
+.login-field label {
+  color: #403332;
+  font-weight: 600;
+}
+
+.login-field input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid #d9c9be;
+  border-radius: 9px;
+  outline: none;
+}
+
+.login-field input:focus {
+  border-color: #806d65;
+  box-shadow: 0 0 0 3px rgba(128, 109, 101, 0.12);
+}
+
+#login-form button {
+  width: 100%;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 9px;
+  background: #403332;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#login-form button:hover {
+  background: #806d65;
+}
+
+.login-register {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.login-register a {
+  color: #806d65;
+  font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 1.7rem;
+  }
+
+  .login-card h1 {
+    font-size: 1.65rem;
+  }
+}

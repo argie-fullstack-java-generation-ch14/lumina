@@ -1,3 +1,4 @@
+
 // Lumina · main
 // Global: header y footer compartidos y, en la home, inyección del contenido
 // de cada página dentro de su sección.
@@ -33,21 +34,82 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 /* ==========================================================
- * HEADER
- *  - Marca el enlace de la página donde estás (el puntito del menú).
- *  - setCartCount(3) muestra un 3 en el carrito; setCartCount(0) lo oculta.
- * ========================================================== */
+   HEADER
+   - Marca el enlace de la página donde estás.
+   - Muestra el nombre del usuario si inició sesión.
+   - Actualiza el destino del icono de cuenta.
+   - Permite cerrar sesión.
+========================================================== */
+
 function initHeader() {
+  // Marca la página actual en el menú.
   document.querySelectorAll(".site-nav-link[data-page]").forEach((link) => {
     if (location.pathname.includes(`/tienda/${link.dataset.page}/`)) {
       link.setAttribute("aria-current", "page");
     }
   });
+
+  // Elementos de la cuenta.
+  const accountLink = document.getElementById("site-account-link");
+  const accountName = document.getElementById("site-account-name");
+  const logoutButton = document.getElementById("site-logout-button");
+
+  if (!accountLink || !accountName || !logoutButton) return;
+
+  // Rutas desde la carpeta src/.
+  const loginUrl = new URL("tienda/login/index.html", APP_BASE).href;
+  const accountUrl = new URL("tienda/mi-cuenta/index.html", APP_BASE).href;
+
+  // Recupera el usuario que inició sesión.
+  let user = null;
+
+  try {
+    user = JSON.parse(localStorage.getItem("usuarioActivo") || "null");
+  } catch (error) {
+    console.error("Error al recuperar el usuario:", error);
+  }
+
+  if (user && user.nombreCompleto) {
+    const partesNombre = user.nombreCompleto.trim().split(/\s+/);
+    const nombre = partesNombre[0];
+
+    const inicialApellido = partesNombre.length > 1
+      ? partesNombre[1].charAt(0).toUpperCase()
+      : "";
+
+    // Muestra el nombre en el Header.
+    accountName.textContent = `${nombre} ${inicialApellido}`;
+
+    // Al hacer clic en el nombre, va a Mi cuenta.
+    accountLink.href = accountUrl;
+    accountLink.setAttribute("aria-label", `Mi cuenta de ${nombre}`);
+
+    // Muestra el botón Cerrar sesión.
+    logoutButton.hidden = false;
+
+  } else {
+    // Si no hay sesión activa, muestra solo el acceso al login.
+    accountName.textContent = "";
+    accountLink.href = loginUrl;
+    accountLink.setAttribute("aria-label", "Iniciar sesión");
+
+    logoutButton.hidden = true;
+  }
+
+  // Acción para cerrar sesión.
+  logoutButton.onclick = () => {
+    localStorage.removeItem("usuarioActivo");
+    window.location.href = loginUrl;
+  };
 }
+
+/* CARRITO */
 
 function setCartCount(total) {
   const badge = document.getElementById("cart-count");
+
   if (!badge) return;
+
   badge.textContent = total;
   badge.hidden = !total;
 }
