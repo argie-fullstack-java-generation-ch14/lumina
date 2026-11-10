@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: center;
   padding: 10px 22px;
-  border: 1px solid #FFFFFF;
+  border: none;
   border-radius: 22px;
   background-color: #3B2D2D;
   color: #FFFFFF;
@@ -31,7 +31,6 @@
   text-align: center;
   white-space: nowrap;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .cart-item-card .add-to-cart:hover {

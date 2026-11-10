@@ -56,18 +56,30 @@
         </a>
 
         <!-- Cuenta / Inicio de sesión -->
-        <a class="site-icon site-account-link"
-           id="site-account-link"
-           href="tienda/login/index.html"
-           aria-label="Iniciar sesión">
+        <div class="dropdown site-account">
 
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <circle cx="12" cy="8" r="4"/>
-            <path d="M4.5 20.5c.9-4 3.8-6 7.5-6s6.6 2 7.5 6"/>
-          </svg>
+          <button class="site-icon site-account-link"
+                  id="site-account-link"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  data-bs-auto-close="true"
+                  aria-expanded="false"
+                  aria-label="Cuenta">
 
-          <span id="site-account-name"></span>
-        </a>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M4.5 20.5c.9-4 3.8-6 7.5-6s6.6 2 7.5 6"/>
+            </svg>
+
+            <span id="site-account-name"></span>
+          </button>
+
+          <ul class="dropdown-menu dropdown-menu-end site-account-menu" id="site-account-menu">
+            <li><a class="dropdown-item" id="site-account-login" href="tienda/login/index.html">Iniciar sesión</a></li>
+            <li><a class="dropdown-item" id="site-account-register" href="tienda/registro/index.html">Registrarse</a></li>
+            <li><a class="dropdown-item" id="site-account-profile" href="tienda/mi-cuenta/index.html" hidden>Mi cuenta</a></li>
+          </ul>
+        </div>
 
         <!-- Botón Cerrar sesión -->
         <button
