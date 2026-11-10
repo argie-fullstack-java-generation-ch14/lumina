@@ -8,7 +8,7 @@ const velas = [
     scent: "Floral",
     category: "Bienestar",
     weight: 200,
-    color: "Blanco perlado con destellos rosa",
+    color: "Blanco con destellos rosa",
     description: "Un momento para renovar tu energia.",
     price: 12000
   },
@@ -56,7 +56,7 @@ const velas = [
     scent: "Lavanda - Manzanilla",
     category: "Amor propio",
     weight: 200,
-    color: "Verde salvia empolvado",
+    color: "Verde salvia",
     description: "Ideal para desconectarte del ruido del dia y crear un ambiente relajante.",
     price: 12000
   },
@@ -141,7 +141,7 @@ const velas = [
     scent: "Pino y cedro",
     category: "Navidad",
     weight: 200,
-    color: "Verde pino profundo",
+    color: "Verde pino",
     description: "Un respiro de naturaleza en tu espacio.",
     price: 12000
   },
@@ -165,7 +165,7 @@ const velas = [
     scent: "Canela y naranja",
     category: "Navidad",
     weight: 200,
-    color: "Oro champan",
+    color: "Oro",
     description: "Tradiciones que abrazan el alma.",
     price: 12000
   },
