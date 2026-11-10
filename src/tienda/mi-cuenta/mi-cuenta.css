@@ -15,6 +15,7 @@
   min-height: 60vh;
 }
 
+#v-pills-account h3,
 #v-pills-orders h3,
 #v-pills-favorites h3 {
   color: var(--cafe-lumina, #3B2C2C);

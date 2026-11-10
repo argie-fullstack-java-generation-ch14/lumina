@@ -7,12 +7,6 @@
   border-radius: 15px;
 }
 
-/* Título */
-.info-cuenta h3 {
-  color: var(--cafe-lumina, #3B2C2C);
-  font-family: var(--fuente-titulos, Georgia, serif);
-}
-
 /* Etiquetas */
 .info-cuenta .form-label {
   color: var(--cafe-lumina, #3B2C2C);
