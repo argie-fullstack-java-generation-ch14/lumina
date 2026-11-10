@@ -1,5 +1,81 @@
-<!-- Fragmento del tab "Información de la cuenta". Se inyecta en src/tienda/mi-cuenta/index.html. -->
-<div>
+<!-- Lumina - Información de la cuenta -->
+
+<div class="info-cuenta">
+
   <h3 class="mb-4 fw-bold">Información de la cuenta</h3>
-  <p class="text-muted">Aquí aparecerá el listado de tus pedidos recientes.</p>
+
+  <form id="form-info-cuenta">
+
+    <!-- Nombre completo -->
+    <div class="mb-3">
+      <label for="info-nombre" class="form-label">
+        Nombre completo
+      </label>
+
+      <input
+        type="text"
+        class="form-control"
+        id="info-nombre"
+        readonly
+      >
+    </div>
+
+    <!-- Correo electrónico -->
+    <div class="mb-3">
+      <label for="info-email" class="form-label">
+        Correo electrónico
+      </label>
+
+      <input
+        type="email"
+        class="form-control"
+        id="info-email"
+        readonly
+      >
+    </div>
+
+    <!-- Número de teléfono -->
+    <div class="mb-3">
+      <label for="info-telefono" class="form-label">
+        Número de teléfono
+      </label>
+
+      <input
+        type="tel"
+        class="form-control"
+        id="info-telefono"
+        readonly
+      >
+    </div>
+
+    <!-- Contraseña -->
+    <div class="mb-3">
+      <label for="info-password" class="form-label">
+        Contraseña
+      </label>
+
+      <div class="password-container">
+
+        <input
+          type="password"
+          class="form-control"
+          id="info-password"
+          readonly
+        >
+
+        <button
+          type="button"
+          id="toggle-password"
+          class="password-toggle"
+          aria-label="Mostrar contraseña"
+          title="Mostrar contraseña"
+        >
+          <i class="ri-eye-line" id="password-eye"></i>
+        </button>
+
+      </div>
+    </div>
+
+  </form>
+
 </div>

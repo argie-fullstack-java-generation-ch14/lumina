@@ -1,0 +1,77 @@
+/* Lumina - Estilos de información de la cuenta */
+
+.info-cuenta {
+  width: 100%;
+  padding: 1.5rem;
+  background-color: #F7F1E9;
+  border-radius: 15px;
+}
+
+/* Título */
+.info-cuenta h3 {
+  color: var(--cafe-lumina, #3B2C2C);
+  font-family: var(--fuente-titulos, Georgia, serif);
+}
+
+/* Etiquetas */
+.info-cuenta .form-label {
+  color: var(--cafe-lumina, #3B2C2C);
+  font-family: var(--fuente-texto, "Montserrat", sans-serif);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Campos del formulario */
+.info-cuenta .form-control {
+  border: 1px solid #D9C9BE;
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  background-color: #fff;
+  color: #403332;
+  font-size: 0.9rem;
+}
+
+.info-cuenta .form-control:focus {
+  border-color: #806D65;
+  box-shadow: 0 0 0 0.15rem rgba(128, 109, 101, 0.15);
+}
+
+/* Contenedor de contraseña */
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Espacio para el icono */
+.password-container input {
+  padding-right: 50px;
+}
+
+/* Botón del ojito */
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: #3B2C2C;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+/* Efecto al pasar el cursor */
+.password-toggle:hover {
+  color: #806D65;
+}
+
+/* Accesibilidad */
+.password-toggle:focus-visible {
+  outline: 2px solid #806D65;
+  border-radius: 5px;
+}
