@@ -1,3 +1,4 @@
+
 /* Lumina · componente Header
  * Sigue el prototipo de Figma. Tipografías y colores salen de css/main.css.
  * Los hover de los botones se hacen solo con CSS: un círculo de color sube
@@ -50,7 +51,7 @@
   letter-spacing: -0.01em;
 }
 
-/* La "u" del logo es una sonrisa: curva oscura con un borde amarillo por debajo */
+/* La "u" del logo es una sonrisa */
 .site-logo-u {
   width: 0.78em;
   height: 0.6em;
@@ -93,6 +94,7 @@
 
 .site-actions {
   display: flex;
+  align-items: center;
   gap: 0.25rem;
 }
 
@@ -142,12 +144,13 @@
 .site-nav-link:focus-visible,
 .site-icon:focus-visible,
 .site-toggle:focus-visible,
-.site-logo:focus-visible {
+.site-logo:focus-visible,
+.site-logout-button:focus-visible {
   outline: 2px solid var(--cafe-lumina, #3B2C2C);
   outline-offset: 2px;
 }
 
-/* Puntito de la página actual: aparece con un pequeño rebote */
+/* Puntito de la página actual */
 .site-nav-link::after {
   content: "";
   position: absolute;
@@ -198,7 +201,7 @@
   stroke-linejoin: round;
 }
 
-/* Globito con la cantidad del carrito (main.js: setCartCount) */
+/* Globito con la cantidad del carrito */
 .site-cart-count {
   position: absolute;
   top: 0;
@@ -214,6 +217,65 @@
   font-weight: 600;
   line-height: 1.15rem;
   text-align: center;
+}
+
+/* ---------- Nombre del usuario en el Header ---------- */
+
+.site-account-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: auto;
+  min-width: 2.6rem;
+  height: 2.6rem;
+  padding: 0 0.8rem;
+  border-radius: 8px;
+}
+
+.site-account-link::before {
+  border-radius: 8px;
+}
+
+.site-account-link svg {
+  flex-shrink: 0;
+}
+
+.site-account-link span {
+  color: var(--cafe-lumina, #3B2C2C);
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---------- Botón cerrar sesión ---------- */
+
+.site-logout-button {
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--cafe-lumina, #3B2C2C);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cafe-lumina, #3B2C2C);
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.site-logout-button:hover {
+  background-color: var(--cafe-lumina, #3B2C2C);
+  color: #fff;
+}
+
+.site-logout-button:active {
+  transform: scale(0.96);
+}
+
+.site-logout-button[hidden] {
+  display: none;
 }
 
 /* ---------- Botón del menú (celular) ---------- */
@@ -252,7 +314,7 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* ---------- Pantallas grandes: menú en una sola fila ---------- */
+/* ---------- Pantallas grandes ---------- */
 
 @media (min-width: 992px) {
   .site-toggle {
@@ -279,7 +341,7 @@
   }
 }
 
-/* ---------- Accesibilidad: menos movimiento ---------- */
+/* ---------- Accesibilidad ---------- */
 
 @media (prefers-reduced-motion: reduce) {
   .site-nav-link,
@@ -287,12 +349,14 @@
   .site-nav-link::before,
   .site-icon::before,
   .site-nav-link::after,
-  .site-toggle-line {
+  .site-toggle-line,
+  .site-logout-button {
     transition: none;
   }
 }
 
-/* Logo en archivo SVG (assets/img/logo-lumina.svg): cambia el alto para ajustar el tamaño */
+/* Logo SVG */
+
 .site-logo-img {
   display: block;
   height: 36px;
