@@ -1,77 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi cuenta · Lumina</title>
 
-  <!-- Remix Icon (iconos ri-*) -->
+  <!-- Remix Icon -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 
-  <!-- Bootstrap va primero: su Reboot no debe pisar tus estilos -->
+  <!-- Bootstrap -->
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
 
+  <!-- Estilos generales -->
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="../../css/components.css">
   <link rel="stylesheet" href="mi-cuenta.css">
+
+  <!-- Estilos de los módulos -->
   <link rel="stylesheet" href="info/info.css">
   <link rel="stylesheet" href="pedidos/pedidos.css">
   <link rel="stylesheet" href="../../componentes/favoritos/item-favoritos/item-favoritos.css">
   <link rel="stylesheet" href="../../tienda/favoritos/favoritos.css">
+
+  <!-- Font Awesome para el ojito de la contraseña -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 
 <body>
 
+  <!-- Header -->
   <header id="header"></header>
 
   <main>
     <div class="container my-5">
       <div class="row">
 
-        <!-- Columna Izquierda: Menú de Navegación Vertical -->
+        <!-- Menú lateral -->
         <div class="col-md-4">
-          <div class="nav flex-column nav-pills p-3 rounded-4" id="v-pills-tab" role="tablist"
+          <div class="nav flex-column nav-pills p-3 rounded-4"
+            id="v-pills-tab"
+            role="tablist"
             aria-orientation="vertical">
 
-            <button class="nav-link active text-start py-3 mb-2 d-flex align-items-center" id="v-pills-account-tab"
-              data-bs-toggle="pill" data-bs-target="#v-pills-account" type="button" role="tab"
-              aria-controls="v-pills-account" aria-selected="true">
-              <i class="ri-user-line me-2"></i> Información de la cuenta
+            <!-- Información de la cuenta -->
+            <button
+              class="nav-link active text-start py-3 mb-2 d-flex align-items-center"
+              id="v-pills-account-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#v-pills-account"
+              type="button"
+              role="tab"
+              aria-controls="v-pills-account"
+              aria-selected="true">
+
+              <i class="ri-user-line me-2"></i>
+              Información de la cuenta
             </button>
 
-            <button class="nav-link text-start py-3 mb-2 d-flex align-items-center" id="v-pills-orders-tab"
-              data-bs-toggle="pill" data-bs-target="#v-pills-orders" type="button" role="tab"
-              aria-controls="v-pills-orders" aria-selected="false">
-              <i class="ri-shopping-bag-3-line me-2"></i> Mis pedidos
+            <!-- Pedidos -->
+            <button
+              class="nav-link text-start py-3 mb-2 d-flex align-items-center"
+              id="v-pills-orders-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#v-pills-orders"
+              type="button"
+              role="tab"
+              aria-controls="v-pills-orders"
+              aria-selected="false">
+
+              <i class="ri-shopping-bag-3-line me-2"></i>
+              Mis pedidos
             </button>
 
-            <button class="nav-link text-start py-3 d-flex align-items-center" id="v-pills-favorites-tab"
-              data-bs-toggle="pill" data-bs-target="#v-pills-favorites" type="button" role="tab"
-              aria-controls="v-pills-favorites" aria-selected="false">
-              <i class="ri-heart-line me-2"></i> Favoritos
+            <!-- Favoritos -->
+            <button
+              class="nav-link text-start py-3 d-flex align-items-center"
+              id="v-pills-favorites-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#v-pills-favorites"
+              type="button"
+              role="tab"
+              aria-controls="v-pills-favorites"
+              aria-selected="false">
+
+              <i class="ri-heart-line me-2"></i>
+              Favoritos
             </button>
 
           </div>
         </div>
 
-        <!-- Columna Derecha: Contenido Dinámico (Tab Content) -->
+        <!-- Contenido de las secciones -->
         <div class="col-md-8">
           <div class="tab-content p-4 p-md-0" id="v-pills-tabContent">
 
-            <!-- Panel 1: Información de la cuenta (se inyecta desde mi-cuenta/info/index.html) -->
-            <div class="tab-pane fade show active" id="v-pills-account" role="tabpanel"
+            <!-- Información de la cuenta -->
+            <div
+              class="tab-pane fade show active"
+              id="v-pills-account"
+              role="tabpanel"
               aria-labelledby="v-pills-account-tab">
+
               <div id="info-content"></div>
             </div>
-            <!-- Panel 2: Mis pedidos (se inyecta desde mi-cuenta/pedidos/index.html) -->
-            <div class="tab-pane fade" id="v-pills-orders" role="tabpanel" aria-labelledby="v-pills-orders-tab">
+
+            <!-- Mis pedidos -->
+            <div
+              class="tab-pane fade"
+              id="v-pills-orders"
+              role="tabpanel"
+              aria-labelledby="v-pills-orders-tab">
+
               <div id="pedidos-content"></div>
             </div>
 
-            <!-- Panel 3: Favoritos (se inyecta desde mi-cuenta/favoritos/index.html) -->
-            <div class="tab-pane fade" id="v-pills-favorites" role="tabpanel" aria-labelledby="v-pills-favorites-tab">
+            <!-- Favoritos -->
+            <div
+              class="tab-pane fade"
+              id="v-pills-favorites"
+              role="tabpanel"
+              aria-labelledby="v-pills-favorites-tab">
+
               <div id="favoritos-content"></div>
             </div>
 
@@ -82,74 +133,143 @@
     </div>
   </main>
 
+  <!-- Footer -->
   <footer id="footer"></footer>
 
+  <!-- Scripts generales -->
   <script src="../../js/bootstrap.bundle.min.js"></script>
   <script src="../../js/ui.js"></script>
   <script src="../../js/main.js"></script>
 
-  <!-- Catálogo antes del carrito (cargarCarrito usa velas) -->
+  <!-- Catálogo antes del carrito -->
   <script src="../../js/velas.js"></script>
   <script src="../../js/carrito.js"></script>
 
-  <!-- Componente de favoritos (template strings) -->
+  <!-- Scripts de favoritos -->
   <script src="../../componentes/favoritos/item-favoritos/item-favoritos.js"></script>
   <script src="../../js/favoritos.js"></script>
   <script src="../../tienda/favoritos/favoritos.js"></script>
 
   <script>
-    // Inyecta el módulo de favoritos desde su propio archivo
-    fetch('favoritos/index.html')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('favoritos-content').innerHTML = html;
-        if (typeof renderFavoritos === 'function') {
-          renderFavoritos();
-        }
-      })
-      .catch(err => console.error('Error cargando módulo de favoritos:', err));
-  </script>
 
-  <script>
-    // Inyecta el módulo de información de cuenta
+    // Cargar módulo de información de la cuenta
     fetch('info/index.html')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('info-content').innerHTML = html;
+      .then(res => {
+        if (!res.ok) {
+          throw new Error("No se pudo cargar información de la cuenta");
+        }
+
+        return res.text();
       })
-      .catch(err => console.error('Error cargando módulo de info:', err));
+      .then(html => {
+
+        document.getElementById('info-content').innerHTML = html;
+
+        // Cargar JavaScript de información de la cuenta
+        const script = document.createElement('script');
+        script.src = 'info/info.js';
+
+        script.onload = () => {
+          if (typeof cargarInformacionCuenta === 'function') {
+            cargarInformacionCuenta();
+          }
+        };
+
+        script.onerror = () => {
+          console.error('Error cargando info.js');
+        };
+
+        document.body.appendChild(script);
+
+      })
+      .catch(err => {
+        console.error('Error cargando módulo de info:', err);
+      });
+
   </script>
 
   <script>
-    // Inyecta el módulo de pedidos
+
+    // Cargar módulo de pedidos
     fetch('pedidos/index.html')
-      .then(res => res.text())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error("No se pudo cargar pedidos");
+        }
+
+        return res.text();
+      })
       .then(html => {
         document.getElementById('pedidos-content').innerHTML = html;
       })
-      .catch(err => console.error('Error cargando módulo de pedidos:', err));
+      .catch(err => {
+        console.error('Error cargando módulo de pedidos:', err);
+      });
+
   </script>
 
   <script>
+
+    // Cargar módulo de favoritos
+    fetch('favoritos/index.html')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error("No se pudo cargar favoritos");
+        }
+
+        return res.text();
+      })
+      .then(html => {
+
+        document.getElementById('favoritos-content').innerHTML = html;
+
+        if (typeof renderFavoritos === 'function') {
+          renderFavoritos();
+        }
+
+      })
+      .catch(err => {
+        console.error('Error cargando módulo de favoritos:', err);
+      });
+
+  </script>
+
+  <script>
+
+    // Actualizar burbuja del carrito
     function actualizarBurbujaCarrito() {
+
       if (typeof refrescarBurbujaCarrito === "function") {
         refrescarBurbujaCarrito();
       }
+
     }
 
     if (document.getElementById("cart-count")) {
+
       actualizarBurbujaCarrito();
+
     } else {
+
       const observer = new MutationObserver(() => {
+
         const badge = document.getElementById("cart-count");
+
         if (badge) {
           observer.disconnect();
           actualizarBurbujaCarrito();
         }
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
-    }
-  </script>
-</body>
 
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+
+    }
+
+  </script>
+
+</body>
 </html>
