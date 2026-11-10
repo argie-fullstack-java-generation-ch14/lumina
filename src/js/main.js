@@ -37,7 +37,8 @@ document.addEventListener("DOMContentLoaded", async () => {
    HEADER
    - Marca el enlace de la página donde estás.
    - Muestra el nombre del usuario si inició sesión.
-   - Actualiza el destino del icono de cuenta.
+   - El icono de cuenta abre un dropdown: sin sesión muestra
+     "Iniciar sesión" y "Registrarse"; con sesión, "Mi cuenta".
    - Permite cerrar sesión.
 ========================================================== */
 
@@ -52,6 +53,9 @@ function initHeader() {
   // Elementos de la cuenta.
   const accountLink = document.getElementById("site-account-link");
   const accountName = document.getElementById("site-account-name");
+  const loginItem = document.getElementById("site-account-login");
+  const registerItem = document.getElementById("site-account-register");
+  const profileItem = document.getElementById("site-account-profile");
   const logoutButton = document.getElementById("site-logout-button");
 
   if (!accountLink || !accountName || !logoutButton) return;
@@ -80,18 +84,22 @@ function initHeader() {
     // Muestra el nombre en el Header.
     accountName.textContent = `${nombre} ${inicialApellido}`;
 
-    // Al hacer clic en el nombre, va a Mi cuenta.
-    accountLink.href = accountUrl;
-    accountLink.setAttribute("aria-label", `Mi cuenta de ${nombre}`);
+    // El dropdown solo ofrece "Mi cuenta".
+    loginItem.hidden = true;
+    registerItem.hidden = true;
+    profileItem.hidden = false;
+    profileItem.href = accountUrl;
 
     // Muestra el botón Cerrar sesión.
     logoutButton.hidden = false;
 
   } else {
-    // Si no hay sesión activa, muestra solo el acceso al login.
+    // Si no hay sesión activa, el dropdown ofrece iniciar sesión o registrarse.
     accountName.textContent = "";
-    accountLink.href = loginUrl;
-    accountLink.setAttribute("aria-label", "Iniciar sesión");
+    loginItem.hidden = false;
+    loginItem.href = loginUrl;
+    registerItem.hidden = false;
+    profileItem.hidden = true;
 
     logoutButton.hidden = true;
   }

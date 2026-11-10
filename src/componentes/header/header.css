@@ -249,6 +249,39 @@
   white-space: nowrap;
 }
 
+/* ---------- Dropdown de la cuenta ---------- */
+
+.site-account-menu {
+  --bs-dropdown-link-color: var(--cafe-lumina, #3B2C2C);
+  --bs-dropdown-link-hover-color: var(--cafe-lumina, #3B2C2C);
+  --bs-dropdown-link-active-color: var(--cafe-lumina, #3B2C2C);
+  --bs-dropdown-link-hover-bg: var(--naranja-acentuado, #DBCBBF);
+  --bs-dropdown-link-active-bg: var(--naranja-acentuado, #DBCBBF);
+  padding: 2px;
+  border-radius: 12px;
+  display: grid;
+  gap: 2px;
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
+  font-size: 0.8rem;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.site-account-menu:not(.show) {
+  display: none;
+}
+
+.site-account-menu .dropdown-item {
+  padding: 0.55rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+/* Bootstrap usa display:block en .dropdown-item y eso pisa el atributo hidden */
+.site-account-menu .dropdown-item[hidden] {
+  display: none;
+}
+
 /* ---------- Botón cerrar sesión ---------- */
 
 .site-logout-button {
