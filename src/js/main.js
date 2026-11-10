@@ -82,7 +82,10 @@ function initHeader() {
       : "";
 
     // Muestra el nombre en el Header.
+    accountName.hidden = false;
     accountName.textContent = `${nombre} ${inicialApellido}`;
+
+    accountLink.classList.remove("site-account-compact");
 
     // El dropdown solo ofrece "Mi cuenta".
     loginItem.hidden = true;
@@ -95,7 +98,11 @@ function initHeader() {
 
   } else {
     // Si no hay sesión activa, el dropdown ofrece iniciar sesión o registrarse.
+    accountName.hidden = true;
     accountName.textContent = "";
+
+    // Sin nombre, el botón queda cuadrado (círculo) como carrito y favoritos.
+    accountLink.classList.add("site-account-compact");
     loginItem.hidden = false;
     loginItem.href = loginUrl;
     registerItem.hidden = false;
