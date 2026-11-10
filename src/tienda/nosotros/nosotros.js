@@ -49,6 +49,8 @@ const integrantes = {
 const memberModal = document.getElementById("memberModal");
 const closeMemberModal = document.getElementById("closeMemberModal");
 
+const modalContent = document.querySelector(".member-modal-content");
+
 const modalPhoto = document.getElementById("modalPhoto");
 const modalName = document.getElementById("modalName");
 const modalRole = document.getElementById("modalRole");
@@ -60,6 +62,14 @@ const modalGithub = document.getElementById("modalGithub");
 let elementoAnterior = null;
 
 // ========================================
+// DETECTAR DISPOSITIVO
+// ========================================
+
+const esDispositivoTactil = window.matchMedia(
+  "(hover: none), (pointer: coarse)"
+).matches;
+
+// ========================================
 // ABRIR MODAL
 // ========================================
 
@@ -68,6 +78,14 @@ function abrirModal(integranteId) {
   const integrante = integrantes[integranteId];
 
   if (!integrante || !memberModal) {
+    return;
+  }
+
+  // Evitar recargar la misma información
+  if (
+    memberModal.classList.contains("active") &&
+    modalName.textContent === integrante.nombre
+  ) {
     return;
   }
 
@@ -82,10 +100,8 @@ function abrirModal(integranteId) {
   modalRole.textContent = integrante.rol;
   modalDescription.textContent = integrante.descripcion;
 
-  // Enlace de LinkedIn
+  // Enlaces profesionales
   modalLinkedin.href = integrante.linkedin;
-
-  // Enlace de GitHub
   modalGithub.href = integrante.github;
 
   // Mostrar ventana
@@ -103,7 +119,7 @@ function abrirModal(integranteId) {
 
 function cerrarModal() {
 
-  if (!memberModal) {
+  if (!memberModal || !memberModal.classList.contains("active")) {
     return;
   }
 
@@ -118,20 +134,40 @@ function cerrarModal() {
 }
 
 // ========================================
-// EVENTOS DE LAS FOTOGRAFIAS
+// EVENTOS DE LAS FOTOGRAFÍAS
 // ========================================
 
 document.querySelectorAll(".team-photo").forEach((boton) => {
 
+  const integranteId = boton.dataset.member;
+
+  // Computador: abrir al pasar el cursor
+  if (!esDispositivoTactil) {
+
+    boton.addEventListener("mouseenter", () => {
+      abrirModal(integranteId);
+    });
+
+  }
+
+  // Celular: abrir al tocar la fotografía
   boton.addEventListener("click", () => {
-
-    const integranteId = boton.dataset.member;
-
     abrirModal(integranteId);
-
   });
 
 });
+
+// ========================================
+// CERRAR AL SALIR DE LA TARJETA
+// ========================================
+
+if (modalContent && !esDispositivoTactil) {
+
+  modalContent.addEventListener("mouseleave", () => {
+    cerrarModal();
+  });
+
+}
 
 // ========================================
 // EVENTOS PARA CERRAR LA VENTANA
@@ -139,7 +175,12 @@ document.querySelectorAll(".team-photo").forEach((boton) => {
 
 // Botón X
 if (closeMemberModal) {
-  closeMemberModal.addEventListener("click", cerrarModal);
+
+  closeMemberModal.addEventListener("click", (evento) => {
+    evento.stopPropagation();
+    cerrarModal();
+  });
+
 }
 
 // Clic fuera de la tarjeta

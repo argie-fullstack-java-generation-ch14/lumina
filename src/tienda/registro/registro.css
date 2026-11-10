@@ -1,3 +1,4 @@
+
 /* Lumina · registro
  * Estilos SOLO de esta página.
  */
@@ -101,6 +102,43 @@
   outline-offset: 2px;
 }
 
+/* Contenedor de los campos de contraseña */
+.register-password-container {
+  position: relative;
+  width: 100%;
+}
+
+.register-password-container .register-input {
+  padding-right: 45px;
+}
+
+/* Botón para mostrar y ocultar contraseña */
+.register-password-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: var(--negro-relajacion);
+  cursor: pointer;
+  font-size: 18px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.register-password-toggle:hover {
+  color: var(--celeste-apagado);
+}
+
+.register-password-toggle:focus-visible {
+  outline: 2px solid var(--celeste-apagado);
+  border-radius: 5px;
+}
+
 .register-help {
   margin: 0;
   font-size: 0.8125rem;
@@ -126,26 +164,27 @@
   padding-left: 1.25rem;
 }
 
+/* Botón Registrarme */
 .register-button {
   width: 100%;
   min-height: 48px;
   padding: 0.75rem 1.75rem;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--naranja-claro);
-  background-color: var(--celeste-apagado);
-  border: 0;
-  border-radius: 8px;
+  color: #F7F1E9;
+  background-color: #354F56;
+  border: none;
+  border-radius: 100px;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
 .register-button:hover {
-  background-color: var(--negro-relajacion);
+  background-color: #263D44;
 }
 
 .register-button:focus-visible {
-  outline: 2px solid var(--celeste-apagado);
+  outline: 2px solid #354F56;
   outline-offset: 3px;
 }
 
@@ -229,11 +268,13 @@
     transform: translateY(0.4em) scale(1.2);
     color: #B8A6EE;
   }
+
   60% {
     opacity: 0.8;
     filter: blur(3px);
     color: #8F7BC9;
   }
+
   100% {
     opacity: 1;
     filter: blur(0);

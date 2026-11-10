@@ -282,3 +282,28 @@ function initRegisterForm() {
 }
 
 initRegisterForm();
+
+
+// Mostrar y ocultar contraseñas
+document.querySelectorAll(".register-password-toggle").forEach((button) => {
+
+  button.addEventListener("click", () => {
+
+    const input = document.getElementById(button.dataset.target);
+    const icon = button.querySelector("i");
+
+    const mostrar = input.type === "password";
+
+    input.type = mostrar ? "text" : "password";
+
+    icon.classList.toggle("fa-eye", !mostrar);
+    icon.classList.toggle("fa-eye-slash", mostrar);
+
+    button.setAttribute(
+      "aria-label",
+      mostrar ? "Ocultar contraseña" : "Mostrar contraseña"
+    );
+
+  });
+
+});

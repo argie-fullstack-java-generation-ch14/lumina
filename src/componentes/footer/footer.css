@@ -1,8 +1,9 @@
+
 /* Lumina · componente Footer */
 
 /* Contenedor principal */
 .site-footer {
-  margin-top: 3rem;
+  margin-top: 0;
   padding: 2rem 0 1.5rem;
   background-color: #403332;
   background-image: url(../../assets/img/vector-footer.svg);
