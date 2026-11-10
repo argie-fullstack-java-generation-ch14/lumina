@@ -1,51 +1,497 @@
-/* Lumina · nosotros
- * Estilos SOLO de esta página.
- *
- * Regla del equipo: cada persona edita únicamente el CSS de su página.
- * Lo compartido va en css/main.css o css/components.css, nunca aquí.
- * Clases en inglés y kebab-case: .product-card, no .productCard.
- */
 
-.card-size-img {
-  height: 18rem;
+/* ========================================
+   LUMINA - PAGINA SOBRE NOSOTROS
+======================================== */
+
+/* Contenedor principal */
+.about-page {
   width: 100%;
-  object-fit: cover;
-  object-position: center 8%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem 3rem;
+  background-color: #ffffff;
+  color: #403332;
 }
 
-.dev-card {
-  width: 18rem;
-  height: 530px;
+/* ========================================
+   TITULO PRINCIPAL
+======================================== */
+
+.about-title {
+  margin-bottom: 2rem;
+  text-align: left;
 }
 
-.dev-info {
+.about-title h1 {
+  margin: 0;
+  color: #403332;
+  font-family: "Recoleta", serif;
+  font-size: 1.9rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* ========================================
+   EQUIPO LUMINA
+======================================== */
+
+.team-section {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.team-container {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  justify-items: center;
+  gap: 1.2rem;
+  max-width: 850px;
+  margin: 0 auto;
+  background: transparent;
+}
+
+.team-member {
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+  background: transparent;
+}
+
+/* Fotografías */
+.team-photo {
+  width: 100%;
+  max-width: 210px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 0.7rem;
+  overflow: visible;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.team-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+}
+
+/* Nombres de los integrantes */
+.team-member h2 {
+  margin: 0;
+  color: #403332;
+  font-family: "Recoleta", serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* ========================================
+   VISION - LOGO - MISION
+======================================== */
+
+.about-purpose {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1100px;
+  margin: 4rem auto 0;
+}
+
+/* Contenedores de visión y misión */
+.about-text {
+  width: 100%;
+  text-align: left;
+}
+
+/* Títulos de Visión y Misión */
+.about-text h2 {
+  margin: 0 0 0.7rem;
+  color: #403332;
+  font-family: "Recoleta", serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+/* Contenido de Visión y Misión */
+.about-text p {
+  margin: 0;
+  color: #665653;
+  font-family: "Calibri", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  text-align: justify;
+}
+
+/* ========================================
+   LOGO Y ESLOGAN
+======================================== */
+
+.about-logo {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 0.5rem;
-}
-
-.dev-info-header {
-  display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 0;
 }
 
-.dev-info-header p {
-  margin-top: 1rem;
-}
-
-.dev-info-header h5,
-.dev-info-header h6 {
+.about-logo img {
+  display: block;
+  width: 100%;
+  max-width: 230px;
+  height: auto;
+  object-fit: contain;
   margin: 0;
 }
 
-.dev-info-description {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-  line-clamp: 4;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin: 0;
+/* Eslogan debajo del logo */
+.about-slogan {
+  position: relative;
+  margin: -2rem 0 0;
+  padding: 0;
+  color: #806d65;
+  font-family: "Calibri", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+  letter-spacing: 0.3px;
+  z-index: 1;
+}
+/* Texto en inglés */
+.about-tagline {
+  font-family: "Calibri", sans-serif;
+}
+
+/* ========================================
+   TABLETAS
+======================================== */
+
+@media (max-width: 768px) {
+
+  .about-page {
+    padding: 1.5rem 1.5rem 2.5rem;
+  }
+
+  .team-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 1.5rem;
+  }
+
+  .team-photo {
+    max-width: 190px;
+  }
+
+  .team-member h2 {
+    font-size: 1.3rem;
+  }
+
+  .about-purpose {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3.5rem;
+  }
+
+  .about-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .about-text p {
+    font-size: 0.95rem;
+  }
+
+  .about-logo {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .about-logo img {
+    max-width: 200px;
+  }
+
+  .about-slogan {
+    margin-top: -1.7rem;
+  }
+}
+
+/* ========================================
+   CELULARES
+======================================== */
+
+@media (max-width: 480px) {
+
+  .about-page {
+    padding: 1.2rem 1rem 2rem;
+  }
+
+  .about-title {
+    margin-bottom: 1.8rem;
+  }
+
+  .about-title h1 {
+    font-size: 1.5rem;
+  }
+
+  .team-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.8rem 1rem;
+  }
+
+  .team-photo {
+    max-width: 160px;
+  }
+
+  .team-member h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  .about-purpose {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+    margin-top: 3rem;
+  }
+
+  .about-text h2 {
+    font-size: 1.6rem;
+    font-weight: 400;
+  }
+
+  .about-text p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    text-align: justify;
+  }
+
+  .about-logo {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .about-logo img {
+    max-width: 190px;
+  }
+
+  .about-slogan {
+    margin-top: -1.5rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* ========================================
+   PANTALLAS MUY PEQUEÑAS
+======================================== */
+
+@media (max-width: 350px) {
+
+  .team-container {
+    grid-template-columns: 1fr;
+  }
+
+  .team-photo {
+    max-width: 190px;
+  }
+
+  .team-member h2 {
+    font-size: 1.25rem;
+  }
+}
+
+
+/* ========================================
+   MODAL - INFORMACION DEL EQUIPO LUMINA
+======================================== */
+
+.member-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  padding: 1.5rem;
+  background: rgba(64, 51, 50, 0.65);
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(3px);
+}
+
+.member-modal.active {
+  display: flex;
+}
+
+/* Tarjeta principal */
+.member-modal-content {
+  position: relative;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 680px;
+  padding: 2.5rem;
+  background: #fffaf6;
+  border: 1px solid #e9dcd2;
+  border-radius: 22px;
+  box-shadow: 0 15px 45px rgba(64, 51, 50, 0.2);
+  animation: modalEntrada 0.3s ease;
+}
+
+/* Animación de entrada */
+@keyframes modalEntrada {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Botón cerrar */
+.member-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #403332;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.member-modal-close:hover {
+  background: #eee3dc;
+}
+
+/* Fotografía */
+.member-modal-photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.member-modal-photo img {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Información */
+.member-modal-info {
+  min-width: 0;
+}
+
+.member-modal-info h2 {
+  margin: 0 0 0.5rem;
+  color: #403332;
+  font-family: "Recoleta", serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.member-modal-info h3 {
+  margin: 0 0 1rem;
+  color: #806d65;
+  font-family: "Calibri", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+}
+
+.member-modal-info p {
+  margin: 0 0 1.5rem;
+  color: #665653;
+  font-family: "Calibri", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Botones de redes */
+.member-modal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.member-modal-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid #806d65;
+  border-radius: 10px;
+  background: transparent;
+  color: #403332;
+  font-family: "Calibri", sans-serif;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.member-modal-links a:hover {
+  background: #403332;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* ========================================
+   MODAL - TABLETAS Y CELULARES
+======================================== */
+
+@media (max-width: 600px) {
+
+  .member-modal {
+    padding: 1rem;
+  }
+
+  .member-modal-content {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 1rem;
+    max-width: 380px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 2.2rem 1.5rem;
+  }
+
+  .member-modal-photo img {
+    max-width: 160px;
+    max-height: 180px;
+  }
+
+  .member-modal-info {
+    text-align: center;
+  }
+
+  .member-modal-info h2 {
+    font-size: 1.5rem;
+  }
+
+  .member-modal-info h3 {
+    font-size: 1rem;
+  }
+
+  .member-modal-info p {
+    font-size: 0.95rem;
+  }
+
+  .member-modal-links {
+    justify-content: center;
+  }
 }

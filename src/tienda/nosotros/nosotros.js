@@ -1,86 +1,168 @@
-// Lumina · about-us.js
 
-// !TODO - Cargar fotos e CLoudinary
-const imageBase = /\/(tienda|admin)\//.test(window.location.pathname) ? '../../' : './';
+// ========================================
+// LUMINA - NOSOTROS
+// Información de los integrantes
+// ========================================
 
-const team = [
-  {
-    name: "Pedro Saravia",
-    role: "Frontend Developer",
-    description: "Interesado en explorar cómo la tecnología puede ayudarnos a resolver problemas.",
-    photo: "https://res.cloudinary.com/cxhfqd0n/image/upload/v1793467475/cropped_photo.jpg",
-    linkedin: "https://www.linkedin.com/in/pedrosq/",
-    github: "https://github.com/psaraviaq"
+const integrantes = {
+  naya: {
+    nombre: "Nayant Gonzalez",
+    rol: "UI Designer / Full Stack Developer",
+    descripcion: "Apasionada por el UI y el diseño, aprendiendo Full Stack para crear soluciones web funcionales, intuitivas y atractivas.",
+    foto: "https://res.cloudinary.com/zj7mojiw/image/upload/v1794279449/Retrato_c%C3%A1lido_de_Naya_con_cabello_ondulado.png",
+    linkedin: "https://www.linkedin.com/in/nayagonzalezd/",
+    github: "https://github.com/nayagonzalezd"
   },
-  {
-    name: "Argie Rincón",
-    role: "Full Stack Developer",
-    description: "Apasionada de la arquitectura de software y la creación de experiencias digitales enfocadas en el usuario.",
-    photo: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1791561044/generation/IMG_1545_2_zw8gnn.jpg",
+
+  argie: {
+    nombre: "Argie Rincón",
+    rol: "Full Stack Developer",
+    descripcion: "Apasionada de la arquitectura de software y la creación de experiencias digitales enfocadas en el usuario.",
+    foto: "https://res.cloudinary.com/zj7mojiw/image/upload/v1794279449/Retrato_elegante_en_tonos_beige_argie.png",
     linkedin: "https://www.linkedin.com/in/argierincon/",
     github: "https://github.com/argierincon"
   },
-  {
-    name: "Nicole Betancourt",
-    role: "Full Stack Developer",
-    description: "Aprendiendo Full Stack con Java. Me apasionan la música y aprender algo nuevo cada día. Me gusta convertir ideas en código.",
-    photo: `${imageBase}image/nicole.jpg`,
+
+  pedro: {
+    nombre: "Pedro Saravia",
+    rol: "Frontend Developer",
+    descripcion: "Interesado en explorar cómo la tecnología puede ayudarnos a resolver problemas.",
+    foto: "https://res.cloudinary.com/zj7mojiw/image/upload/v1794279449/Retrato_c%C3%A1lido_con_fondo_org%C3%A1nico_pedro.png",
+    linkedin: "https://www.linkedin.com/in/pedrosq/",
+    github: "https://github.com/psaraviaq"
+  },
+
+  nicole: {
+    nombre: "Nicole Betancourt",
+    rol: "Full Stack Developer",
+    descripcion: "Aprendiendo Full Stack con Java. Me apasionan la música y aprender algo nuevo cada día. Me gusta convertir ideas en código.",
+    foto: "https://res.cloudinary.com/zj7mojiw/image/upload/v1794279452/Retrato_c%C3%A1lido_de_Nicole_con_gafas.png",
     linkedin: "https://www.linkedin.com/in/nicole-betancourt-alvarez-nba/",
     github: "https://github.com/NBA-Nicole"
-  },
-  {
-    name: "Nayant Gonzalez",
-    role: "UI Designer / Full Stack Developer",
-    description: "Apasionada por el UI y el diseño, aprendiendo Full Stack para crear soluciones web funcionales, intuitivas y atractivas. ",
-    photo: `${imageBase}image/naya.jpeg`,
-    linkedin: "https://www.linkedin.com/in/nayagonzalezd/",
-    github: "https://github.com/nayagonzalezd"
   }
-];
+};
 
-function createCardTemplate(person) {
-  return `
-    <div class="card dev-card">
+// ========================================
+// ELEMENTOS DEL MODAL
+// ========================================
 
-      <img src="${person.photo}" class="card-size-img card-img-top" alt="${person.name}'s profile picture">
+const memberModal = document.getElementById("memberModal");
+const closeMemberModal = document.getElementById("closeMemberModal");
 
-      <div class="card-body dev-info">
-        <div class="dev-info-header">
-          <h5 class="card-title">${person.name}</h5>
-          <h6 class="card-subtitle text-body-secondary">${person.role}</h6>
-          <p class="card-text dev-info-description">${person.description}</p>
-        </div>
-        <div class="d-flex justify-content-end gap-2">
-          <a href="${person.linkedin}" target="_blank" class="btn btn-outline-primary" aria-label="${person.name}'s LinkedIn profile">
-            <i class="bi bi-linkedin me-2"></i>LinkedIn
-          </a>
-          <a href="${person.github}" target="_blank" class="btn btn-outline-dark" aria-label="${person.name}'s GitHub profile">
-            <i class="bi bi-github me-2"></i>GitHub
-          </a>
-        </div>
-      </div>
+const modalPhoto = document.getElementById("modalPhoto");
+const modalName = document.getElementById("modalName");
+const modalRole = document.getElementById("modalRole");
+const modalDescription = document.getElementById("modalDescription");
 
-    </div>
-  `;
+const modalLinkedin = document.getElementById("modalLinkedin");
+const modalGithub = document.getElementById("modalGithub");
+
+let elementoAnterior = null;
+
+// ========================================
+// ABRIR MODAL
+// ========================================
+
+function abrirModal(integranteId) {
+
+  const integrante = integrantes[integranteId];
+
+  if (!integrante || !memberModal) {
+    return;
+  }
+
+  elementoAnterior = document.activeElement;
+
+  // Mostrar fotografía
+  modalPhoto.src = integrante.foto;
+  modalPhoto.alt = `Retrato de ${integrante.nombre}`;
+
+  // Mostrar información
+  modalName.textContent = integrante.nombre;
+  modalRole.textContent = integrante.rol;
+  modalDescription.textContent = integrante.descripcion;
+
+  // Enlace de LinkedIn
+  modalLinkedin.href = integrante.linkedin;
+
+  // Enlace de GitHub
+  modalGithub.href = integrante.github;
+
+  // Mostrar ventana
+  memberModal.classList.add("active");
+  memberModal.setAttribute("aria-hidden", "false");
+
+  document.body.style.overflow = "hidden";
+
+  closeMemberModal.focus();
 }
 
-function renderTeam() {
-  const aboutUsContainer = document.getElementById("about-us");
-  if (!aboutUsContainer) return;
+// ========================================
+// CERRAR MODAL
+// ========================================
 
-  const cardsMarkup = team.map(person => createCardTemplate(person)).join("");
+function cerrarModal() {
 
-  aboutUsContainer.innerHTML = `
-    <div id="cards-container" class="d-flex flex-wrap gap-3 justify-content-between">
-      ${cardsMarkup}
-    </div>
-  `;
+  if (!memberModal) {
+    return;
+  }
+
+  memberModal.classList.remove("active");
+  memberModal.setAttribute("aria-hidden", "true");
+
+  document.body.style.overflow = "";
+
+  if (elementoAnterior) {
+    elementoAnterior.focus();
+  }
 }
 
-// Al inyectarse en la home (después de DOMContentLoaded) el evento ya ocurrió,
-// así que ejecutamos de inmediato; en su propia página esperamos al evento.
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", renderTeam);
-} else {
-  renderTeam();
+// ========================================
+// EVENTOS DE LAS FOTOGRAFIAS
+// ========================================
+
+document.querySelectorAll(".team-photo").forEach((boton) => {
+
+  boton.addEventListener("click", () => {
+
+    const integranteId = boton.dataset.member;
+
+    abrirModal(integranteId);
+
+  });
+
+});
+
+// ========================================
+// EVENTOS PARA CERRAR LA VENTANA
+// ========================================
+
+// Botón X
+if (closeMemberModal) {
+  closeMemberModal.addEventListener("click", cerrarModal);
 }
+
+// Clic fuera de la tarjeta
+if (memberModal) {
+
+  memberModal.addEventListener("click", (evento) => {
+
+    if (evento.target === memberModal) {
+      cerrarModal();
+    }
+
+  });
+
+}
+
+// Tecla Escape
+document.addEventListener("keydown", (evento) => {
+
+  if (
+    evento.key === "Escape" &&
+    memberModal?.classList.contains("active")
+  ) {
+    cerrarModal();
+  }
+
+});
