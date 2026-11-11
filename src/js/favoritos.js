@@ -142,6 +142,18 @@ function pintarCorazonFavorito(id, esFavoritoAhora) {
       const icono = boton.querySelector("i");
       icono.classList.toggle("fa-regular", !esFavoritoAhora);
       icono.classList.toggle("fa-solid", esFavoritoAhora);
+
+      if (window.bootstrap && boton.hasAttribute("data-bs-toggle")) {
+        const tooltip = bootstrap.Tooltip.getInstance(boton);
+
+        if (tooltip) {
+          tooltip.setContent({
+            "bs.title": esFavoritoAhora
+              ? "Quitar de favoritos"
+              : "Agregar a favoritos"
+          });
+        }
+      }
     });
 }
 

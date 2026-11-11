@@ -96,6 +96,8 @@ function initHeader() {
     // Muestra el botón Cerrar sesión.
     logoutButton.hidden = false;
 
+    new bootstrap.Tooltip(logoutButton);
+
   } else {
     // Si no hay sesión activa, el dropdown ofrece iniciar sesión o registrarse.
     accountName.hidden = true;
