@@ -32,6 +32,7 @@
 
 .badge-item p {
   font-size: 14px;
+  font-weight: 300;
   color: var(--celeste-apagado);
   margin: 0;
 }
@@ -56,6 +57,7 @@
 
   .badge-item p {
     font-size: 16px;
+    font-weight: 300;
   }
 }
 
