@@ -69,8 +69,9 @@
 }
 
 .login-field label {
-  color: #403332;
+  font-size: 0.875rem;
   font-weight: 600;
+  color: var(--negro-relajacion);
 }
 
 .login-field input {
@@ -79,7 +80,7 @@
   border: 1px solid #d9c9be;
   border-radius: 9px;
   outline: none;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: light-dark(rgb(232, 240, 254), rgb(22, 31, 46));
 }
 
 .login-field input:focus {
@@ -98,7 +99,7 @@
   border-radius: 100px;
 
   background: #354F56;
-  color: #F7F1E9;
+  color: #F7F6F4;
 
   font-size: 1rem;
   font-weight: 600;
