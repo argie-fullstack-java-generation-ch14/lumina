@@ -1,4 +1,3 @@
-
 /* Lumina · registro
  * Estilos SOLO de esta página.
  */
@@ -7,6 +6,14 @@
   min-height: 70vh;
   padding-top: 3rem;
   padding-bottom: 3rem;
+  background-image:
+    linear-gradient(rgba(250, 247, 243, 0.18),
+      rgba(250, 247, 243, 0.18)),
+    url("https://res.cloudinary.com/dvvwfb2tr/image/upload/v1794398411/generation/lumina/miscelaneas/velas-registro_iwshq9.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .register-layout {
@@ -15,6 +22,8 @@
   gap: 2rem;
   align-items: start;
   transition: opacity 0.8s ease;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .register-layout.is-leaving {
@@ -23,8 +32,16 @@
 
 @media (min-width: 992px) {
   .register-layout {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: 4rem;
+    grid-template-columns: minmax(0, 420px) minmax(0, 580px);
+    gap: 2rem;
+  }
+
+  .register-intro {
+    background: rgba(255, 250, 246, 0);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border-radius: 12px;
+    padding: 10px;
   }
 }
 
@@ -51,10 +68,17 @@
 }
 
 .register-panel {
+  width: 100%;
   padding: 1.5rem;
-  background-color: var(--naranja-claro);
-  border: 1px solid var(--naranja-acentuado);
-  border-radius: 12px;
+
+  background: rgba(255, 250, 246, 0.60);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 20px;
+
+  box-shadow: 0 10px 35px rgba(64, 51, 50, 0.15);
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 @media (min-width: 576px) {
@@ -83,13 +107,14 @@
 
 .register-input {
   width: 100%;
-  padding: 0.75rem 0.875rem;
+  padding: 0.85rem 1rem;
   font-size: 1rem;
   line-height: 1.5;
   color: var(--negro-acentuado);
-  background-color: var(--naranja-claro);
-  border: 1px solid var(--celeste-apagado);
-  border-radius: 8px;
+  background-color: light-dark(rgb(232, 240, 254), rgb(22, 31, 46));
+  border: 1px solid #d9c9be;
+  border-radius: 9px;
+  outline: none;
 }
 
 .register-input::placeholder {
@@ -98,8 +123,8 @@
 }
 
 .register-input:focus-visible {
-  outline: 2px solid var(--celeste-apagado);
-  outline-offset: 2px;
+  border-color: #806d65;
+  box-shadow: 0 0 0 3px rgba(128, 109, 101, 0.12);
 }
 
 /* Contenedor de los campos de contraseña */
@@ -171,7 +196,7 @@
   padding: 0.75rem 1.75rem;
   font-size: 1rem;
   font-weight: 600;
-  color: #F7F1E9;
+  color: #F7F6F4;
   background-color: #354F56;
   border: none;
   border-radius: 100px;
