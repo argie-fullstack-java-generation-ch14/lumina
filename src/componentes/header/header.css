@@ -89,6 +89,7 @@
 .site-nav {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 0.15rem;
 }
 
@@ -166,6 +167,19 @@
 
 .site-nav-link[aria-current="page"]::after {
   transform: translateX(-50%) scale(1);
+}
+
+@media (max-width: 991.98px) {
+  .site-nav-link::after {
+    left: auto;
+    right: 0.55rem;
+    bottom: 50%;
+    transform: translateY(50%) scale(0);
+  }
+
+  .site-nav-link[aria-current="page"]::after {
+    transform: translateY(50%) scale(1);
+  }
 }
 
 /* ---------- Iconos (carrito, favoritos, cuenta) ---------- */
@@ -291,26 +305,12 @@
 /* ---------- Botón cerrar sesión ---------- */
 
 .site-logout-button {
-  padding: 0.65rem 0.9rem;
-  border: 1px solid var(--cafe-lumina, #3B2C2C);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--cafe-lumina, #3B2C2C);
-  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
-  font-size: 0.75rem;
-  font-weight: 600;
-  white-space: nowrap;
   cursor: pointer;
-  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-.site-logout-button:hover {
-  background-color: var(--cafe-lumina, #3B2C2C);
-  color: #fff;
-}
-
-.site-logout-button:active {
-  transform: scale(0.96);
+.site-logout-button i {
+  font-size: 1.25rem;
+  line-height: 1;
 }
 
 .site-logout-button[hidden] {
@@ -376,6 +376,7 @@
 
   .site-nav {
     flex-direction: row;
+    align-items: center;
     gap: 0.25rem;
   }
 }

@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "titulo": "La luz que transforma: velas para cada espacio",
+    "resumen": "De la sala al baño, la luz cálida de una vela cambia por completo la atmósfera de tu hogar. Descubre qué aromas y tamaños combinan mejor con cada rincón.",
+    "fecha": "2025-07-02",
+    "imagen": "https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=600",
+    "alt": "Artículo: Velas aromáticas decorando el hogar",
+    "categoria": "espacios"
+  },
+  {
+    "id": 2,
+    "titulo": "Meditar con velas: una guía para principiantes",
+    "resumen": "Aprende a usar la llama de una vela como punto de atención para practicar trataka, una técnica de meditación que calma la mente en pocos minutos.",
+    "fecha": "2025-06-25",
+    "imagen": "https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=600",
+    "alt": "Artículo: Meditación con velas y luz cálida",
+    "categoria": "bienestar"
+  },
+  {
+    "id": 3,
+    "titulo": "Hecho a mano: cómo nace una vela Lumina",
+    "resumen": "De la cera de soya al pabilo de algodón, te contamos el proceso artesanal detrás de cada vela Lumina y por qué importa lo que enciendes en tu casa.",
+    "fecha": "2025-06-10",
+    "imagen": "https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=600",
+    "alt": "Artículo: Proceso artesanal de fabricación de velas",
+    "categoria": "artesanal"
+  },
+  {
+    "id": 4,
+    "titulo": "Rituales de pausa: cómo encender tu calma",
+    "resumen": "Cinco minutos al lado de una vela aromática pueden cambiar el ritmo de tu día. Descubre cómo crear un ritual de pausa que se convierta en tu momento favorito.",
+    "fecha": "2025-05-28",
+    "imagen": "https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=600",
+    "alt": "Artículo: Ritual de pausa con vela aromática",
+    "categoria": "rituales"
+  },
+  {
+    "id": 5,
+    "titulo": "Guía de aromas: encuentra tu fragancia ideal",
+    "resumen": "Vainilla, lavanda, cítricos o maderas: cada aroma cuenta una historia distinta. Aprende a elegir la fragancia que mejor acompaña cada espacio y estado de ánimo.",
+    "fecha": "2025-05-12",
+    "imagen": "https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=600",
+    "alt": "Artículo: Guía para elegir aromas de velas",
+    "categoria": "aromas"
+  },
+  {
+    "id": 6,
+    "titulo": "Cuida tu vela: 7 consejos para que dure más",
+    "resumen": "Del primer encendido al último centímetro de cera, estos sencillos cuidados harán que tus velas Lumina ardan de forma pareja y duren mucho más.",
+    "fecha": "2025-04-30",
+    "imagen": "https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=600",
+    "alt": "Artículo: Cuidados y mantenimiento de velas",
+    "categoria": "cuidados"
+  }
+]

@@ -121,57 +121,48 @@
   color: var(--cafe-lumina);
 }
 
-/* Botón agregar al carrito (compacto, mismo estilo del botón principal) */
-.product-card-price .add-to-cart {
+.product-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.product-card-price .add-to-cart,
+.product-card-price .favorite-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 11px;
-  border: 1px solid #FFFFFF;
-  border-radius: 22px;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
   background-color: #3B2D2D;
   color: #FFFFFF;
   font-family: inherit;
   font-size: 0.9rem;
   line-height: 1;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
   position: relative;
 }
 
-.product-card-price .add-to-cart:hover {
+.product-card-price .favorite-button {
+  background-color: var(--naranja-apagado, #AD784E);
+}
+
+.product-card-price .add-to-cart:hover,
+.product-card-price .favorite-button:hover {
   background-color: #554342;
   color: #FFFFFF;
 }
 
-/* Tooltip "Agregar al carrito" al hacer hover.
-   Anclado al borde interior derecho para que quepa dentro de la card
-   (el overflow: hidden de la card lo recorta si se centra). */
-.product-card-price .add-to-cart::after {
-  content: "Agregar al carrito";
-  position: absolute;
-  bottom: calc(100% + 6px);
-  right: 0;
-  transform: translateY(4px);
-  padding: 6px 10px;
-  border-radius: 8px;
-  background-color: #3B2D2D;
+.product-card-price .favorite-button:hover {
+  background-color: var(--naranja-apagado, #AD784E);
+  filter: brightness(0.92);
   color: #FFFFFF;
-  font-family: var(--fuente-texto);
-  font-size: 0.75rem;
-  font-weight: 600;
-  white-space: nowrap;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-  z-index: 5;
 }
 
-.product-card-price .add-to-cart:hover::after,
-.product-card-price .add-to-cart:focus-visible::after {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+.product-card-price .favorite-button[aria-pressed="true"] i {
+  color: var(--cafe-lumina, #3B2C2C);
 }

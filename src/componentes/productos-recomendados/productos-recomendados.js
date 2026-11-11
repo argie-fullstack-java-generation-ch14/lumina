@@ -23,9 +23,25 @@ function crearCardRecomendada(vela) {
             <p class="product-card-desc mb-2 small">${vela.description}</p>
             <div class="product-card-price">
               <p class="mb-0">$ ${vela.price.toLocaleString("es-CO")}</p>
-              <button class="add-to-cart" type="button" data-product-id="${vela.id}" aria-label="Agregar ${vela.name} al carrito">
-                <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
-              </button>
+              <div class="product-card-actions">
+                <button
+                  class="favorite-button"
+                  type="button"
+                  data-product-id="${vela.id}"
+                  aria-pressed="${esFavorito(vela.id)}"
+                  aria-label="${esFavorito(vela.id) ? `Quitar ${vela.name} de favoritos` : `Agregar ${vela.name} a favoritos`}"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="bottom"
+                  data-bs-title="${esFavorito(vela.id) ? "Quitar de favoritos" : "Agregar a favoritos"}">
+                  <i class="fa-${esFavorito(vela.id) ? "solid" : "regular"} fa-heart" aria-hidden="true"></i>
+                </button>
+                <button class="add-to-cart" type="button" data-product-id="${vela.id}" aria-label="Agregar ${vela.name} al carrito"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="bottom"
+                  data-bs-title="Agregar al carrito">
+                  <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+                </button>
+              </div>
             </div>
           </div>
         </article>
@@ -65,7 +81,14 @@ function renderProductosRecomendados() {
   ];
 
   contenedores.forEach((contenedor) => {
-    if (contenedor) contenedor.innerHTML = seccion;
+    if (!contenedor) return;
+
+    contenedor.innerHTML = seccion;
+
+    // Tooltip de Bootstrap para los botones de agregar al carrito.
+    contenedor.querySelectorAll('[data-bs-toggle="tooltip"]').forEach((boton) => {
+      new bootstrap.Tooltip(boton);
+    });
   });
 }
 

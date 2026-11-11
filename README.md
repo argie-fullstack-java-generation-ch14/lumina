@@ -97,7 +97,7 @@ componente que se repite en todas las páginas. Da acceso directo a Inicio,
 Catálogo, Crea tu Vela, Nosotros, Contacto, Carrito y Usuario.
 
 La entrada de Usuario es condicional: **sin sesión muestra `Login`, con sesión
-muestra `Perfil`**.
+muestra el área de cuenta (`Mi cuenta`)**.
 
 | Sección | Archivo | Desde |
 |---|---|---|
@@ -108,11 +108,12 @@ muestra `Perfil`**.
 | Carrito | `src/tienda/carrito/index.html` | Menú |
 | Nosotros | `src/tienda/nosotros/index.html` | Menú |
 | Contacto | `src/tienda/contacto/index.html` | Menú |
-| Login | `src/tienda/login/index.html` | Menú (sin sesión), perfil |
+| Login | `src/tienda/login/index.html` | Menú (sin sesión) |
 | Registro | `src/tienda/registro/index.html` | Login |
+| Favoritos | `src/tienda/favoritos/index.html` | Menú / Login |
 | Recuperar contraseña | `src/tienda/recuperar-contrasena/index.html` | Login |
-| Perfil | `src/tienda/mi-cuenta/perfil/index.html` | Menú (con sesión) |
-| Pedidos | `src/tienda/mi-cuenta/pedidos/index.html` | Perfil |
+| Mi cuenta | `src/tienda/mi-cuenta/index.html` | Menú (con sesión) — área con pestañas: Información, Favoritos, Pedidos |
+| Pedidos | `src/tienda/mi-cuenta/pedidos/index.html` | Mi cuenta |
 
 ### Acciones dentro de una página (no son páginas)
 
@@ -175,6 +176,10 @@ comienzos.
 | Carrito | Productos con cantidad, subtotal y total; modificar cantidad y eliminar; **estado vacío ("carrito vacío")**; modal de confirmación de pedido |
 | Nosotros | Historia, misión, visión, valores, compromiso con el bienestar, materiales biodegradables, filosofía |
 | Contacto | Formulario: nombre, correo, asunto, mensaje + datos de contacto + redes |
+| Login | Formulario de autenticación + enlace al registro |
+| Registro | Formulario de creación de cuenta con animación de bienvenida al completar |
+| Favoritos | Lista de productos favoritos y botón para vaciar favoritos |
+| Mi cuenta | Área de cuenta con pestañas: Información de la cuenta, Favoritos y Pedidos |
 
 ## Catálogo
 
