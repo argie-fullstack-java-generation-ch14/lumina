@@ -33,13 +33,13 @@
 @media (min-width: 992px) {
   .register-layout {
     grid-template-columns: minmax(0, 420px) minmax(0, 580px);
-    gap: 2rem;
+    gap: 4rem;
   }
 
   .register-intro {
     background: rgba(255, 250, 246, 0);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2.4px);
+    -webkit-backdrop-filter: blur(2.4px);
     border-radius: 12px;
     padding: 10px;
   }
