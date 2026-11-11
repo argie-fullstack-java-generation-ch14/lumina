@@ -1,5 +1,9 @@
 import { crearBlogCard } from '../../componentes/blog-card/blog-card.js';
 
+const BLOG_DIR = new URL(".", import.meta.url).href;
+
+export const ARTICULO_URL = new URL("articulo/", BLOG_DIR).href;
+
 // Convierte una fecha ISO (2025-07-02) al formato legible (02-07-2025)
 export function formatearFecha(fechaISO) {
   const [anio, mes, dia] = fechaISO.split('-');

@@ -1,0 +1,123 @@
+.articulo-page {
+  min-height: 60vh;
+  background-color: #ffffff;
+  padding: 2rem 0 4rem;
+}
+
+/* Cabecera del artículo */
+.articulo-cabecera {
+  max-width: 760px;
+  margin: 0 auto 1.5rem;
+  text-align: left;
+}
+
+/* Volver al blog (mismos estilos del botón de vaciar carrito) */
+.articulo-volver {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: var(--naranja-apagado, #AD784E);
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.articulo-volver:hover {
+  color: var(--cafe-lumina, #3B2C2C);
+  opacity: 0.8;
+}
+
+.articulo-titulo {
+  font-family: var(--fuente-titulos, Georgia, serif);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--cafe-lumina, #3B2C2C);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-align: left;
+}
+
+/* Imagen destacada */
+.articulo-imagen {
+  max-width: 760px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.articulo-imagen img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 1rem;
+  max-height: 260px;
+}
+
+@media (min-width: 768px) {
+  .articulo-imagen img {
+    max-height: 400px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .articulo-imagen img {
+    max-height: 480px;
+  }
+}
+
+/* Metadatos (Fecha debajo de la imagen) */
+.articulo-info-meta {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.articulo-meta-item {
+  font-size: 0.875rem;
+  color: #666666;
+  font-weight: 500;
+}
+
+.blog-date {
+  font-size: 0.875rem;
+  color: #666666;
+  font-weight: 500;
+}
+
+/* Texto del artículo y contenido */
+.articulo-contenido {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.articulo-contenido .articulo-lead {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--negro-relajacion, #33302D);
+  margin-bottom: 1.25rem;
+  line-height: 1.6;
+}
+
+.articulo-texto {
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
+  font-size: 1rem;
+  color: #625B57;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+/* Responsive móvil */
+@media (max-width: 767.98px) {
+  .articulo-page {
+    padding: 1.5rem 1rem 3rem;
+  }
+}
