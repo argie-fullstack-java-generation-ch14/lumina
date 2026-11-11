@@ -1,20 +1,38 @@
+
+/* FONDO GENERAL */
+body:has(#v-pills-tab) {
+  background-image:
+    linear-gradient(rgba(250, 247, 243, 0.15), rgba(250, 247, 243, 0.15)),
+    url("https://res.cloudinary.com/zj7mojiw/image/upload/v1794354432/Velas_Lumina__habita_tu_pausa.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* MENÚ LATERAL */
 #v-pills-tab {
-  background-color: var(--verde-amarillento);
+  background-color: rgba(255, 250, 246, 0.55) !important;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 #v-pills-tab .nav-link {
   color: var(--celeste-apagado);
+  background-color: transparent;
 }
 
 #v-pills-tab .nav-link.active {
-  background-color: var(--celeste-apagado);
-  color: var(--gris-barra);
+  background-color: rgba(53, 79, 86, 0.90);
+  color: #F7F1E9;
 }
 
+/* CONTENIDO */
 #v-pills-tabContent {
   min-height: 60vh;
 }
 
+/* TÍTULOS */
 #v-pills-account h3,
 #v-pills-orders h3,
 #v-pills-favorites h3 {
