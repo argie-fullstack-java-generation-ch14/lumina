@@ -39,3 +39,11 @@ body:has(#v-pills-tab) {
   color: var(--cafe-lumina, #3B2C2C);
   font-family: var(--fuente-titulos, Georgia, serif);
 }
+
+#v-pills-favorites .btn-clear-favoritos {
+  color: var(--cafe-lumina);
+}
+
+#v-pills-favorites .btn-clear-favoritos:hover {
+  opacity: 0.8;
+}
