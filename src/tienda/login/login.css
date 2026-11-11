@@ -23,7 +23,6 @@
 
 /* TARJETA DEL LOGIN */
 
-
 .login-card {
   width: 100%;
   max-width: 460px;
@@ -39,7 +38,6 @@
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 }
-
 
 /* TÍTULO */
 
@@ -88,9 +86,58 @@
   box-shadow: 0 0 0 3px rgba(128, 109, 101, 0.12);
 }
 
+/* CONTENEDOR DEL CAMPO DE CONTRASEÑA */
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 45px;
+}
+
+/* OJITO PARA MOSTRAR U OCULTAR CONTRASEÑA */
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: auto;
+  min-height: auto;
+  padding: 4px;
+
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: #354F56;
+
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: none;
+}
+
+.toggle-password:hover,
+.toggle-password:focus,
+.toggle-password:active {
+  background: transparent;
+  color: #8A6D5C;
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
 /* BOTÓN INICIAR SESIÓN */
 
-#login-form button {
+#login-form > button[type="submit"] {
   width: 100%;
   min-height: 48px;
   padding: 0.75rem 1.75rem;
@@ -108,11 +155,11 @@
   transition: background 0.2s ease;
 }
 
-#login-form button:hover {
+#login-form > button[type="submit"]:hover {
   background: #263D44;
 }
 
-#login-form button:focus-visible {
+#login-form > button[type="submit"]:focus-visible {
   outline: 2px solid #354F56;
   outline-offset: 3px;
 }
@@ -136,7 +183,6 @@
   .login-page {
     min-height: 75vh;
     padding: 2rem 1rem;
-
     background-position: center;
   }
 

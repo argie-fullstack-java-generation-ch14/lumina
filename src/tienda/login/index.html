@@ -25,12 +25,48 @@
       <form id="login-form" novalidate>
         <div class="login-field">
           <label for="login-email">Correo electrónico</label>
-          <input id="login-email" type="email" placeholder="nombre@correo.com" required>
+          <input
+            id="login-email"
+            type="email"
+            placeholder="nombre@correo.com"
+            required
+          >
         </div>
 
         <div class="login-field">
           <label for="login-password">Contraseña</label>
-          <input id="login-password" type="password" placeholder="Tu contraseña" required>
+
+          <div class="password-container">
+            <input
+              id="login-password"
+              type="password"
+              placeholder="Tu contraseña"
+              required
+            >
+
+            <button
+              type="button"
+              id="toggle-password"
+              class="toggle-password"
+              aria-label="Mostrar contraseña"
+              aria-pressed="false"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
         </div>
 
         <button type="submit">Iniciar sesión</button>

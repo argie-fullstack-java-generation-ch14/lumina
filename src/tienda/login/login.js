@@ -4,7 +4,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const emailInput = document.querySelector("#login-email");
   const passwordInput = document.querySelector("#login-password");
   const alertBox = document.querySelector("#login-alert");
+  const togglePassword = document.querySelector("#toggle-password");
 
+  // Mostrar u ocultar contraseña
+  togglePassword.addEventListener("click", () => {
+    const isPassword = passwordInput.type === "password";
+
+    passwordInput.type = isPassword ? "text" : "password";
+
+    togglePassword.setAttribute(
+      "aria-label",
+      isPassword ? "Ocultar contraseña" : "Mostrar contraseña"
+    );
+
+    togglePassword.setAttribute("aria-pressed", String(isPassword));
+  });
+
+  // Iniciar sesión
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
