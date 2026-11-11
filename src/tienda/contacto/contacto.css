@@ -713,6 +713,26 @@
   font-family: Calibri, sans-serif;
   font-size: 1.1rem;
   line-height: 1.6;
+  text-align: justify;
+  color: var(--negro-relajacion);
+}
+
+.contact-location-text2 {
+  margin: 0;
+  font-family: Calibri, sans-serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  line-height: 1.6;
+  text-align: justify;
+  color: var(--negro-relajacion);
+}
+
+.contact-location-text3 {
+  margin: 0;
+  font-family: Calibri, sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: justify;
   color: var(--negro-relajacion);
 }
 
