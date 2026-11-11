@@ -7,6 +7,7 @@ function initRegisterForm() {
   const layout = document.querySelector('#register-layout');
   const done = document.querySelector('#register-done');
   const doneTitle = document.querySelector('#register-done-title');
+  const doneLoginLink = document.querySelector('.register-login-link');
   const submitButton = document.querySelector('#register-submit');
   const starsCanvas = document.querySelector('#register-stars');
 
@@ -198,6 +199,8 @@ function initRegisterForm() {
     doneTitle.setAttribute('aria-label', successText);
 
     let index = 0;
+    let lastLetter = null;
+
     successText.split(' ').forEach((word) => {
       const wordSpan = document.createElement('span');
       wordSpan.className = 'register-word';
@@ -209,6 +212,7 @@ function initRegisterForm() {
         letterSpan.style.setProperty('--i', index);
         letterSpan.textContent = letter;
         wordSpan.appendChild(letterSpan);
+        lastLetter = letterSpan;
         index++;
       }
 
@@ -219,6 +223,19 @@ function initRegisterForm() {
 
     done.hidden = false;
     doneTitle.focus();
+
+    if (reducedMotion) {
+      doneLoginLink.classList.add('is-visible');
+      return;
+    }
+
+    if (lastLetter) {
+      lastLetter.addEventListener('animationend', () => {
+        doneLoginLink.classList.add('is-visible');
+      }, { once: true });
+    } else {
+      doneLoginLink.classList.add('is-visible');
+    }
   }
 
   async function playEnding() {
