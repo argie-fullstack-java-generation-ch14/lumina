@@ -89,6 +89,7 @@
 .site-nav {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 0.15rem;
 }
 
@@ -166,6 +167,19 @@
 
 .site-nav-link[aria-current="page"]::after {
   transform: translateX(-50%) scale(1);
+}
+
+@media (max-width: 991.98px) {
+  .site-nav-link::after {
+    left: auto;
+    right: 0.55rem;
+    bottom: 50%;
+    transform: translateY(50%) scale(0);
+  }
+
+  .site-nav-link[aria-current="page"]::after {
+    transform: translateY(50%) scale(1);
+  }
 }
 
 /* ---------- Iconos (carrito, favoritos, cuenta) ---------- */
@@ -362,6 +376,7 @@
 
   .site-nav {
     flex-direction: row;
+    align-items: center;
     gap: 0.25rem;
   }
 }
