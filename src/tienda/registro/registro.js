@@ -256,7 +256,7 @@ function initRegisterForm() {
     window.scrollTo(0, 0);
 
     stars.start();
-    await wait(3000);
+    await wait(1500);
     await stars.fadeOut();
 
     showSuccessText();
