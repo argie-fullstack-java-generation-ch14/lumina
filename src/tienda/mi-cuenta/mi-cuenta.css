@@ -29,7 +29,7 @@ body:has(#v-pills-tab) {
 
 /* CONTENIDO */
 #v-pills-tabContent {
-  min-height: 60vh;
+  min-height: 70vh;
 }
 
 /* TÍTULOS */
