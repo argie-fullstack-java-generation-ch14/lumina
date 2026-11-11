@@ -15,7 +15,7 @@ const integrantes = {
   },
 
   argie: {
-    nombre: "Argie Rincón",
+    nombre: "Argie Rincon",
     rol: "Full Stack Developer",
     descripcion: "Apasionada de la arquitectura de software y la creación de experiencias digitales enfocadas en el usuario.",
     foto: "https://res.cloudinary.com/zj7mojiw/image/upload/v1794279449/Retrato_elegante_en_tonos_beige_argie.png",

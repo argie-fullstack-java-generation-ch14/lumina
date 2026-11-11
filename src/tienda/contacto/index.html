@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -8,7 +9,6 @@
   <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 
-  <!-- Bootstrap va primero: el Reboot no debe pisar los estilos -->
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -21,53 +21,182 @@
 
   <header id="header"></header>
 
-  <!-- Contenido de Contacto -->
   <main class="contact-page">
     <div class="container contact-layout">
 
+      <!-- INFORMACIÓN DE CONTACTO -->
       <div class="contact-intro">
-        <h1 class="contact-title">Hablemos de tu vela</h1>
+        <h1 class="contact-title">Lumina te escucha</h1>
+
         <p class="contact-lead">
-          Cuéntanos si tienes una duda sobre un pedido o si quieres una vela hecha a tu medida.
+           Cada pausa tiene una historia y nos gustaría conocer la tuya. Escríbenos, comparte tus ideas y encontremos juntos esa vela que conecte contigo.
         </p>
+
+        <div class="contact-details">
+
+          <!-- WHATSAPP -->
+          <a
+            class="contact-detail"
+            href="https://wa.me/573244441234"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="contact-detail-icon">
+              <i class="fa-brands fa-whatsapp"></i>
+            </span>
+
+            <span class="contact-detail-content">
+              <span class="contact-detail-title">WhatsApp</span>
+              <span class="contact-detail-text">324 444 1234</span>
+            </span>
+          </a>
+
+          <!-- UBICACIÓN -->
+          <div class="contact-detail">
+            <span class="contact-detail-icon">
+              <i class="fa-solid fa-location-dot"></i>
+            </span>
+
+            <span class="contact-detail-content">
+              <span class="contact-detail-title">Nuestra ubicacion</span>
+              <span class="contact-detail-text">Bogotá, Colombia</span>
+            </span>
+          </div>
+
+        </div>
+
+        <!-- REDES SOCIALES -->
+        <div class="contact-socials">
+
+          <p class="contact-socials-title">Siguenos en todas nuestras redes sociales </p>
+
+          <div class="contact-social-links">
+
+            <!-- INSTAGRAM -->
+            <a
+              href="https://www.instagram.com/luminacol/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram Lumina"
+            >
+              <i class="fa-brands fa-instagram"></i>
+              <span>Instagram</span>
+            </a>
+
+            <!-- FACEBOOK -->
+            <a
+              href="https://www.facebook.com/luminacol/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook Lumina"
+            >
+              <i class="fa-brands fa-facebook-f"></i>
+              <span>Facebook</span>
+            </a>
+
+            <!-- TIKTOK -->
+            <a
+              href="https://www.tiktok.com/@luminacol"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TikTok Lumina"
+            >
+              <i class="fa-brands fa-tiktok"></i>
+              <span>TikTok</span>
+            </a>
+
+          </div>
+
+        </div>
+
       </div>
 
+      <!-- FORMULARIO -->
       <div class="contact-panel">
 
-        <!-- Aquí va el link de Formspree, en el action del formulario -->
-        <form class="contact-form" id="contact-form" action="https://formspree.io/f/xwlvaoyv" method="POST" novalidate>
+        <form
+          class="contact-form"
+          id="contact-form"
+          action="https://formspree.io/f/xwlvaoyv"
+          method="POST"
+          novalidate
+        >
+
           <input type="hidden" name="_subject" value="Nuevo mensaje desde Lumina">
 
           <div class="contact-field">
             <label class="contact-label" for="contact-name">Nombre</label>
-            <input class="contact-input" id="contact-name" name="name" type="text" autocomplete="name" maxlength="60" placeholder="Ej: Laura Gómez" aria-describedby="contact-name-error" required>
+            <input
+              class="contact-input"
+              id="contact-name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              maxlength="60"
+              placeholder="Ej: Laura Gómez"
+              aria-describedby="contact-name-error"
+              required
+            >
             <p class="contact-error" id="contact-name-error"></p>
           </div>
 
           <div class="contact-field">
             <label class="contact-label" for="contact-email">Correo electrónico</label>
-            <input class="contact-input" id="contact-email" name="email" type="email" autocomplete="email" maxlength="100" placeholder="nombre@correo.com" aria-describedby="contact-email-error" required>
+            <input
+              class="contact-input"
+              id="contact-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              maxlength="100"
+              placeholder="nombre@correo.com"
+              aria-describedby="contact-email-error"
+              required
+            >
             <p class="contact-error" id="contact-email-error"></p>
           </div>
 
           <div class="contact-field">
             <label class="contact-label" for="contact-phone">Teléfono</label>
-            <input class="contact-input" id="contact-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="Ej: 300 123 4567" aria-describedby="contact-phone-error" required>
+            <input
+              class="contact-input"
+              id="contact-phone"
+              name="phone"
+              type="tel"
+              inputmode="tel"
+              autocomplete="tel"
+              maxlength="20"
+              placeholder="Ej: 300 123 4567"
+              aria-describedby="contact-phone-error"
+              required
+            >
             <p class="contact-error" id="contact-phone-error"></p>
           </div>
 
           <div class="contact-field">
             <label class="contact-label" for="contact-message">Mensaje</label>
-            <textarea class="contact-input contact-textarea" id="contact-message" name="message" rows="5" maxlength="500" placeholder="Cuéntanos en qué podemos ayudarte" aria-describedby="contact-message-error" required></textarea>
+            <textarea
+              class="contact-input contact-textarea"
+              id="contact-message"
+              name="message"
+              rows="5"
+              maxlength="500"
+              placeholder="Cuéntanos en qué podemos ayudarte"
+              aria-describedby="contact-message-error"
+              required
+            ></textarea>
             <p class="contact-error" id="contact-message-error"></p>
           </div>
 
           <p class="contact-form-error" id="contact-form-error" role="alert"></p>
 
-          <button class="contact-button" type="submit">Enviar mensaje</button>
+          <button class="contact-button" type="submit">
+            Enviar mensaje
+          </button>
+
         </form>
 
-        <!-- Esto sale mientras se envía el mensaje (el hámster) -->
+        <!-- ESTADO DE ENVÍO: HÁMSTER -->
         <div class="contact-state" id="contact-sending" hidden>
           <div class="hamster-wheel-box" role="img" aria-label="Hámster corriendo en una rueda">
             <div class="hamster-wheel"></div>
@@ -87,23 +216,55 @@
             </div>
             <div class="hamster-spoke"></div>
           </div>
-          <h2 class="contact-state-title" id="contact-sending-title" tabindex="-1">Enviando tu mensaje…</h2>
+
+          <h2 class="contact-state-title" id="contact-sending-title" tabindex="-1">
+            Enviando tu mensaje…
+          </h2>
         </div>
 
-        <!-- Esto sale cuando Formspree confirma que el mensaje se envió -->
+        <!-- MENSAJE DE ÉXITO -->
         <div class="contact-state" id="contact-success" hidden>
-          <h2 class="contact-state-title" id="contact-success-title" tabindex="-1">¡Mensaje enviado!</h2>
+          <h2 class="contact-state-title" id="contact-success-title" tabindex="-1">
+            ¡Mensaje enviado!
+          </h2>
+
           <p class="contact-state-text" id="contact-success-text"></p>
-          <button class="contact-button" type="button" id="contact-again">Enviar otro mensaje</button>
+
+          <button class="contact-button" type="button" id="contact-again">
+            Enviar otro mensaje
+          </button>
         </div>
 
       </div>
+
+      <!-- UBICACIÓN Y MAPA -->
+      <section class="contact-location">
+
+        <div class="contact-location-info">
+          <h2 class="contact-location-title">Estamos en Bogota</h2>
+
+          <p class="contact-location-text">
+            Desde Bogotá creamos momentos especiales a través de nuestras velas.
+            Escríbenos para conocer nuestros productos y opciones de entrega.
+          </p>
+        </div>
+
+        <iframe
+          class="contact-map"
+          src="https://maps.google.com/maps?q=Bogota%2C%20Colombia&z=11&output=embed"
+          title="Mapa general de Bogotá, Colombia"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+
+      </section>
+
     </div>
   </main>
 
   <footer id="footer"></footer>
 
-  <!-- Bootstrap va primero: el modal usa su API -->
   <script src="../../js/bootstrap.bundle.min.js"></script>
   <script src="../../js/ui.js"></script>
   <script src="../../js/main.js"></script>
