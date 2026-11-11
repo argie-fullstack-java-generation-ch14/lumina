@@ -7,6 +7,7 @@ function initRegisterForm() {
   const layout = document.querySelector('#register-layout');
   const done = document.querySelector('#register-done');
   const doneTitle = document.querySelector('#register-done-title');
+  const doneLoginLink = document.querySelector('.register-login-link');
   const submitButton = document.querySelector('#register-submit');
   const starsCanvas = document.querySelector('#register-stars');
 
@@ -131,24 +132,25 @@ function initRegisterForm() {
   function markFields(errors) {
     fields.forEach((field) => {
       const hasError = errors.some((error) => error.input === field.input);
-      field.input.closest('.register-field').classList.toggle('has-error', hasError);
+      const fieldEl = field.input.closest('.register-field');
+      fieldEl.classList.toggle('has-error', hasError);
       field.input.setAttribute('aria-invalid', hasError ? 'true' : 'false');
+
+      const existing = fieldEl.querySelector('.register-error');
+      if (existing) existing.remove();
+
+      if (hasError) {
+        const message = errors.find((error) => error.input === field.input).message;
+        const errorEl = document.createElement('p');
+        errorEl.className = 'register-error';
+        errorEl.textContent = message;
+        fieldEl.appendChild(errorEl);
+      }
     });
   }
 
   function showAlert(errors) {
-    if (errors.length === 0) {
-      alertBox.innerHTML = '';
-      return;
-    }
-
-    const items = errors.map((error) => '<li>' + error.message + '</li>').join('');
-    alertBox.innerHTML =
-      '<div class="alert alert-danger alert-dismissible" role="alert">' +
-      '<strong>Revisa estos datos:</strong>' +
-      '<ul class="mb-0 mt-2">' + items + '</ul>' +
-      '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>' +
-      '</div>';
+    alertBox.innerHTML = '';
   }
 
   function createUser() {
@@ -197,6 +199,8 @@ function initRegisterForm() {
     doneTitle.setAttribute('aria-label', successText);
 
     let index = 0;
+    let lastLetter = null;
+
     successText.split(' ').forEach((word) => {
       const wordSpan = document.createElement('span');
       wordSpan.className = 'register-word';
@@ -208,6 +212,7 @@ function initRegisterForm() {
         letterSpan.style.setProperty('--i', index);
         letterSpan.textContent = letter;
         wordSpan.appendChild(letterSpan);
+        lastLetter = letterSpan;
         index++;
       }
 
@@ -218,6 +223,19 @@ function initRegisterForm() {
 
     done.hidden = false;
     doneTitle.focus();
+
+    if (reducedMotion) {
+      doneLoginLink.classList.add('is-visible');
+      return;
+    }
+
+    if (lastLetter) {
+      lastLetter.addEventListener('animationend', () => {
+        doneLoginLink.classList.add('is-visible');
+      }, { once: true });
+    } else {
+      doneLoginLink.classList.add('is-visible');
+    }
   }
 
   async function playEnding() {
@@ -238,7 +256,7 @@ function initRegisterForm() {
     window.scrollTo(0, 0);
 
     stars.start();
-    await wait(3000);
+    await wait(1500);
     await stars.fadeOut();
 
     showSuccessText();
@@ -276,6 +294,29 @@ function initRegisterForm() {
       markFields(errors);
       if (alertBox.children.length > 0) {
         showAlert(errors);
+      }
+    });
+
+    field.input.addEventListener('blur', () => {
+      const fieldEl = field.input.closest('.register-field');
+      const message = field.validate(field.input.value);
+      const existing = fieldEl.querySelector('.register-error');
+
+      if (message === '') {
+        fieldEl.classList.remove('has-error');
+        field.input.setAttribute('aria-invalid', 'false');
+        if (existing) existing.remove();
+      } else {
+        fieldEl.classList.add('has-error');
+        field.input.setAttribute('aria-invalid', 'true');
+        if (!existing) {
+          const errorEl = document.createElement('p');
+          errorEl.className = 'register-error';
+          errorEl.textContent = message;
+          fieldEl.appendChild(errorEl);
+        } else {
+          existing.textContent = message;
+        }
       }
     });
   });

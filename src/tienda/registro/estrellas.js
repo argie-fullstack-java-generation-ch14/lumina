@@ -4,7 +4,7 @@
 function createStars(canvas) {
   const ctx = canvas.getContext('2d');
   const colors = ['#8F78D9', '#AD784E', '#7C9474'];
-  const fadeTime = 1500;
+  const fadeTime = 1000;
 
   let stars = [];
   let width = 0;
