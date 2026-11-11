@@ -38,8 +38,8 @@
 
   .register-intro {
     background: rgba(255, 250, 246, 0);
-    backdrop-filter: blur(2.4px);
-    -webkit-backdrop-filter: blur(2.4px);
+    backdrop-filter: blur(2.8px);
+    -webkit-backdrop-filter: blur(2.8px);
     border-radius: 12px;
     padding: 10px;
   }
