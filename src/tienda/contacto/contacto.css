@@ -1,3 +1,4 @@
+
 /* Lumina · contacto
  * Estilos SOLO de esta página.
  *
@@ -9,6 +10,7 @@
 /* --- Estructura de la página --- */
 .contact-page {
   padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .contact-layout {
@@ -27,7 +29,6 @@
 }
 
 /* --- Título y texto de arriba --- */
-/* El equipo todavía no ha eligió una fuente, por eso uso estas*/
 .contact-title {
   margin: 0 0 1rem;
   font-family: Georgia, "Times New Roman", serif;
@@ -109,7 +110,7 @@
   resize: vertical;
 }
 
-/* Campo con error: borde naranja (de 2px, lo hago con una sombra para que el campo no se mueva) y el mensaje debajo */
+/* Campo con error */
 .has-error .contact-input {
   border-color: var(--naranja-apagado);
   box-shadow: inset 0 0 0 1px var(--naranja-apagado);
@@ -149,26 +150,27 @@
   display: none;
 }
 
+/* Botón Enviar mensaje */
 .contact-button {
   width: 100%;
   min-height: 48px;
   padding: 0.75rem 1.75rem;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--naranja-claro);
-  background-color: var(--celeste-apagado);
-  border: 0;
-  border-radius: 8px;
+  color: #F7F1E9;
+  background-color: #354F56;
+  border: none;
+  border-radius: 100px;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
 .contact-button:hover {
-  background-color: var(--negro-relajacion);
+  background-color: #263D44;
 }
 
 .contact-button:focus-visible {
-  outline: 2px solid var(--celeste-apagado);
+  outline: 2px solid #354F56;
   outline-offset: 3px;
 }
 
@@ -179,7 +181,7 @@
   }
 }
 
-/* --- Vista de "enviando"--- */
+/* --- Vista de "enviando" --- */
 .contact-state {
   display: flex;
   flex-direction: column;

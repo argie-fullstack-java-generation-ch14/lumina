@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -54,16 +55,41 @@
 
             <div class="register-field">
               <label class="register-label" for="register-password">Contraseña</label>
-              <input class="register-input" id="register-password" name="contrasena" type="password" autocomplete="new-password" maxlength="40" placeholder="Mínimo 8 caracteres">
+
+              <div class="register-password-container">
+                <input class="register-input" id="register-password" name="contrasena"
+                  type="password" autocomplete="new-password" maxlength="40"
+                  placeholder="Mínimo 8 caracteres">
+
+                <button type="button" class="register-password-toggle"
+                  data-target="register-password" aria-label="Mostrar contraseña">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+
               <p class="register-help">Usa letras y números.</p>
             </div>
 
             <div class="register-field">
               <label class="register-label" for="register-confirm">Confirmar contraseña</label>
-              <input class="register-input" id="register-confirm" name="confirmarContrasena" type="password" autocomplete="new-password" maxlength="40" placeholder="Repite tu contraseña">
+
+              <div class="register-password-container">
+                <input class="register-input" id="register-confirm"
+                  name="confirmarContrasena" type="password"
+                  autocomplete="new-password" maxlength="40"
+                  placeholder="Repite tu contraseña">
+
+                <button type="button" class="register-password-toggle"
+                  data-target="register-confirm" aria-label="Mostrar contraseña">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
             </div>
 
-            <button class="register-button" id="register-submit" type="submit">Registrarme</button>
+            <button class="register-button" id="register-submit" type="submit">
+              Registrarme
+            </button>
+
           </form>
 
         </div>

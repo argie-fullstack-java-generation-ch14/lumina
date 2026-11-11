@@ -1,22 +1,47 @@
 
+/* LUMINA - INICIAR SESIÓN */
+
 .login-page {
   min-height: 75vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 3rem 1rem;
-  background: #faf7f3;
+
+  /* Fondo de velas Lumina */
+  background-image:
+    linear-gradient(
+      rgba(250, 247, 243, 0.18),
+      rgba(250, 247, 243, 0.18)
+    ),
+    url("https://res.cloudinary.com/zj7mojiw/image/upload/v1794354432/Velas_Lumina__habita_tu_pausa.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
+
+/* TARJETA DEL LOGIN */
+
 
 .login-card {
   width: 100%;
   max-width: 460px;
   padding: 2.5rem;
-  background: #fff;
-  border: 1px solid #e9dcd2;
+
+  /* Caja semitransparente */
+  background: rgba(255, 250, 246, 0.60);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(64, 51, 50, 0.10);
+
+  box-shadow: 0 10px 35px rgba(64, 51, 50, 0.15);
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
+
+
+/* TÍTULO */
 
 .login-card h1 {
   color: #403332;
@@ -26,11 +51,15 @@
   margin-bottom: 0.8rem;
 }
 
+/* TEXTO DESCRIPTIVO */
+
 .login-card > p {
   color: #806d65;
   text-align: center;
   line-height: 1.5;
 }
+
+/* CAMPOS DEL FORMULARIO */
 
 .login-field {
   display: flex;
@@ -50,6 +79,7 @@
   border: 1px solid #d9c9be;
   border-radius: 9px;
   outline: none;
+  background-color: rgba(255, 255, 255, 0.85);
 }
 
 .login-field input:focus {
@@ -57,21 +87,36 @@
   box-shadow: 0 0 0 3px rgba(128, 109, 101, 0.12);
 }
 
+/* BOTÓN INICIAR SESIÓN */
+
 #login-form button {
   width: 100%;
-  padding: 0.9rem;
+  min-height: 48px;
+  padding: 0.75rem 1.75rem;
+
   border: none;
-  border-radius: 9px;
-  background: #403332;
-  color: white;
+  border-radius: 100px;
+
+  background: #354F56;
+  color: #F7F1E9;
+
+  font-size: 1rem;
   font-weight: 600;
+
   cursor: pointer;
   transition: background 0.2s ease;
 }
 
 #login-form button:hover {
-  background: #806d65;
+  background: #263D44;
 }
+
+#login-form button:focus-visible {
+  outline: 2px solid #354F56;
+  outline-offset: 3px;
+}
+
+/* REGISTRO */
 
 .login-register {
   margin-top: 1.5rem;
@@ -83,7 +128,17 @@
   font-weight: 700;
 }
 
+/* TABLETAS Y CELULARES */
+
 @media (max-width: 480px) {
+
+  .login-page {
+    min-height: 75vh;
+    padding: 2rem 1rem;
+
+    background-position: center;
+  }
+
   .login-card {
     padding: 1.7rem;
   }
@@ -91,4 +146,5 @@
   .login-card h1 {
     font-size: 1.65rem;
   }
+
 }
