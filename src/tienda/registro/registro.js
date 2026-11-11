@@ -131,24 +131,25 @@ function initRegisterForm() {
   function markFields(errors) {
     fields.forEach((field) => {
       const hasError = errors.some((error) => error.input === field.input);
-      field.input.closest('.register-field').classList.toggle('has-error', hasError);
+      const fieldEl = field.input.closest('.register-field');
+      fieldEl.classList.toggle('has-error', hasError);
       field.input.setAttribute('aria-invalid', hasError ? 'true' : 'false');
+
+      const existing = fieldEl.querySelector('.register-error');
+      if (existing) existing.remove();
+
+      if (hasError) {
+        const message = errors.find((error) => error.input === field.input).message;
+        const errorEl = document.createElement('p');
+        errorEl.className = 'register-error';
+        errorEl.textContent = message;
+        fieldEl.appendChild(errorEl);
+      }
     });
   }
 
   function showAlert(errors) {
-    if (errors.length === 0) {
-      alertBox.innerHTML = '';
-      return;
-    }
-
-    const items = errors.map((error) => '<li>' + error.message + '</li>').join('');
-    alertBox.innerHTML =
-      '<div class="alert alert-danger alert-dismissible" role="alert">' +
-      '<strong>Revisa estos datos:</strong>' +
-      '<ul class="mb-0 mt-2">' + items + '</ul>' +
-      '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>' +
-      '</div>';
+    alertBox.innerHTML = '';
   }
 
   function createUser() {
@@ -276,6 +277,29 @@ function initRegisterForm() {
       markFields(errors);
       if (alertBox.children.length > 0) {
         showAlert(errors);
+      }
+    });
+
+    field.input.addEventListener('blur', () => {
+      const fieldEl = field.input.closest('.register-field');
+      const message = field.validate(field.input.value);
+      const existing = fieldEl.querySelector('.register-error');
+
+      if (message === '') {
+        fieldEl.classList.remove('has-error');
+        field.input.setAttribute('aria-invalid', 'false');
+        if (existing) existing.remove();
+      } else {
+        fieldEl.classList.add('has-error');
+        field.input.setAttribute('aria-invalid', 'true');
+        if (!existing) {
+          const errorEl = document.createElement('p');
+          errorEl.className = 'register-error';
+          errorEl.textContent = message;
+          fieldEl.appendChild(errorEl);
+        } else {
+          existing.textContent = message;
+        }
       }
     });
   });
