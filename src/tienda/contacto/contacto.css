@@ -14,10 +14,8 @@
 
   /* Fondo con fotografía de Lumina */
   background-image:
-    linear-gradient(
-      rgba(250, 247, 243, 0.35),
-      rgba(250, 247, 243, 0.35)
-    ),
+    linear-gradient(rgba(250, 247, 243, 0.35),
+      rgba(250, 247, 243, 0.35)),
     url("https://res.cloudinary.com/zj7mojiw/image/upload/v1794429972/1e281687-fffc-4e23-b6be-ecd0c95ef3f4.png");
 
   background-size: cover;
@@ -36,8 +34,29 @@
 @media (min-width: 992px) {
   .contact-layout {
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: 4rem;
+    column-gap: 4rem;
+    row-gap: 6rem;
   }
+}
+
+@media (min-width: 992px) {
+  .contact-location {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  }
+
+  .contact-map {
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 0px !important;
+
+  }
+
+  .contact-page {
+    padding-top: 5rem;
+  }
+}
+
+.contact-location-info {
+  padding: 1.2rem;
 }
 
 /* --- Título y texto de arriba --- */
@@ -53,7 +72,8 @@
   margin: 0;
   max-width: 28rem;
   font-family: Calibri, sans-serif;
-  font-size: 1.25rem;
+  font-size: 18px;
+  font-weight: 300;
   line-height: 1.5;
   color: var(--negro-relajacion);
 }
@@ -64,12 +84,23 @@
   }
 }
 
+.contact-intro {
+  background: rgba(255, 250, 246, 0);
+  backdrop-filter: blur(2.8px);
+  -webkit-backdrop-filter: blur(2.8px);
+  border-radius: 12px;
+  padding: 10px;
+}
+
 /* --- Caja donde van el formulario, el hámster y el mensaje de gracias --- */
 .contact-panel {
   padding: 1.5rem;
-  background-color: rgba(255, 250, 246, 0.48);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 12px;
+  background: rgba(255, 250, 246, 0.60);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 20px;
+  box-shadow: 0 10px 35px rgba(64, 51, 50, 0.15);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 @media (min-width: 576px) {
@@ -92,51 +123,76 @@
 }
 
 .contact-label {
-  font-family: Calibri, sans-serif;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--negro-relajacion);
 }
 
 .contact-input {
   width: 100%;
-  padding: 0.75rem 0.875rem;
+  padding: 0.85rem 1rem;
   font-family: Calibri, sans-serif;
-  font-size: 1.125rem;
+  font-size: 0.9rem;
   line-height: 1.5;
   color: var(--negro-acentuado);
-  background-color: rgba(255, 250, 246, 0.45);
-  border: 1px solid var(--celeste-apagado);
-  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.65);
+  border: 1px solid #d9c9be;
+  border-radius: 9px;
+  outline: none;
 }
 
-.contact-input::placeholder {
-  color: var(--celeste-apagado);
-  opacity: 0.8;
+.contact-input:-webkit-autofill,
+.contact-input:-webkit-autofill:focus,
+.contact-input:-webkit-autofill:hover,
+.contact-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.65) inset !important;
+  -webkit-text-fill-color: var(--negro-acentuado) !important;
 }
 
 .contact-input:focus-visible {
-  outline: 2px solid var(--celeste-apagado);
-  outline-offset: 2px;
+  border-color: #806d65;
+  box-shadow: 0 0 0 3px rgba(128, 109, 101, 0.12);
+}
+
+.contact-input:focus-visible {
+  border-color: #806d65;
+  box-shadow: 0 0 0 3px rgba(128, 109, 101, 0.12);
 }
 
 .contact-textarea {
   min-height: 8rem;
   resize: vertical;
+  background-color: rgba(255, 255, 255, 0.65);
+  border: 1px solid #d9c9be;
+  border-radius: 9px;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.contact-textarea:-webkit-autofill,
+.contact-textarea:-webkit-autofill:focus,
+.contact-textarea:-webkit-autofill:hover,
+.contact-textarea:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.65) inset !important;
+  -webkit-text-fill-color: var(--negro-acentuado) !important;
+}
+
+.contact-textarea:focus-visible {
+  border-color: #806d65;
+  box-shadow: 0 0 0 3px rgba(128, 109, 101, 0.12);
 }
 
 /* Campo con error */
 .has-error .contact-input {
   border-color: var(--naranja-apagado);
-  box-shadow: inset 0 0 0 1px var(--naranja-apagado);
 }
 
 .contact-error {
   margin: 0;
   font-family: Calibri, sans-serif;
-  font-size: 1rem;
+  font-size: 0.8125rem;
   line-height: 1.4;
-  color: var(--negro-relajacion);
+  color: var(--naranja-apagado);
 }
 
 .contact-error:empty {
@@ -172,9 +228,9 @@
   width: 100%;
   min-height: 48px;
   padding: 0.75rem 1.75rem;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: #F7F1E9;
+  color: #F7F6F4;
   background-color: #354F56;
   border: none;
   border-radius: 100px;
@@ -395,6 +451,7 @@
 }
 
 @keyframes hamster-run {
+
   from,
   to {
     transform: rotate(4deg) translate(-0.8em, 1.85em);
@@ -406,6 +463,7 @@
 }
 
 @keyframes hamster-head {
+
   from,
   25%,
   50%,
@@ -423,6 +481,7 @@
 }
 
 @keyframes hamster-eye {
+
   from,
   90%,
   to {
@@ -435,6 +494,7 @@
 }
 
 @keyframes hamster-ear {
+
   from,
   25%,
   50%,
@@ -452,6 +512,7 @@
 }
 
 @keyframes hamster-body {
+
   from,
   25%,
   50%,
@@ -469,6 +530,7 @@
 }
 
 @keyframes hamster-limb-fr {
+
   from,
   25%,
   50%,
@@ -486,6 +548,7 @@
 }
 
 @keyframes hamster-limb-fl {
+
   from,
   25%,
   50%,
@@ -503,6 +566,7 @@
 }
 
 @keyframes hamster-limb-br {
+
   from,
   25%,
   50%,
@@ -520,6 +584,7 @@
 }
 
 @keyframes hamster-limb-bl {
+
   from,
   25%,
   50%,
@@ -537,6 +602,7 @@
 }
 
 @keyframes hamster-tail {
+
   from,
   25%,
   50%,
@@ -565,6 +631,7 @@
 
 /* Si la persona pidió menos animaciones en su sistema, el hámster se queda quieto */
 @media (prefers-reduced-motion: reduce) {
+
   .hamster,
   .hamster-part,
   .hamster-spoke {
@@ -664,7 +731,7 @@
   font-family: Calibri, sans-serif;
   color: #354F56;
   background: rgba(255, 250, 246, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--naranja-acentuado);
   border-radius: 30px;
   font-size: 1rem;
   text-decoration: none;
@@ -672,7 +739,7 @@
 }
 
 .contact-social-links a:hover {
-  color: #F7F1E9;
+  color: #F7F6F4;
   background-color: #354F56;
   border-color: #354F56;
 }
@@ -688,16 +755,25 @@
 .contact-location {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
   align-items: center;
   gap: 2rem;
   margin-top: 1rem;
-  padding: 1.5rem;
-  background: rgba(255, 250, 246, 0.48);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 12px;
+  background: rgba(255, 250, 246, 0.60);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 20px;
+  box-shadow: 0 10px 35px rgba(64, 51, 50, 0.15);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
+}
+
+.contact-location-info {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  order: 2;
+}
+
+.contact-map {
+  order: 1;
 }
 
 .contact-location-title {
@@ -711,7 +787,8 @@
 .contact-location-text {
   margin: 0;
   font-family: Calibri, sans-serif;
-  font-size: 1.1rem;
+  font-size: 18px;
+  font-weight: 300;
   line-height: 1.6;
   text-align: justify;
   color: var(--negro-relajacion);
@@ -725,23 +802,32 @@
   line-height: 1.6;
   text-align: justify;
   color: var(--negro-relajacion);
+  text-align: center;
 }
 
 .contact-location-text3 {
   margin: 0;
   font-family: Calibri, sans-serif;
-  font-size: 1.1rem;
+  font-size: 18px;
+  font-weight: 300;
   line-height: 1.6;
   text-align: justify;
   color: var(--negro-relajacion);
+  text-align: center;
+}
+
+.lumina-en-peru {
+  margin-top: 1rem;
 }
 
 .contact-map {
   display: block;
   width: 100%;
+  height: 100%;
   min-height: 250px;
   border: none;
-  border-radius: 10px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 /* =========================================
@@ -767,11 +853,23 @@
     padding: 0.5rem 0.7rem;
   }
 
-  .contact-location {
-    padding: 1.2rem;
-  }
-
   .contact-map {
     min-height: 220px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .contact-lead {
+    font-size: 16px;
+  }
+
+  .lumina-en-peru {
+    margin-top: 1.2rem;
+  }
+}
+
+@media screen and (min-width:768px) {
+  .contact-location {
+    min-height: 480px;
   }
 }
