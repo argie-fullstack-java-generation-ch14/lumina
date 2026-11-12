@@ -88,6 +88,63 @@ Luego abrir <http://localhost:3000/> y entrar a `src/`, o directamente
 > copia del repo anterior a este archivo, se debe escribir la URL con la
 > barra final: `http://localhost:3000/src/`.
 
+## Componentes reutilizables sin framework
+
+El proyecto no usa ningún framework de front-end (React, Vue, Astro...). Para no repetir código entre páginas, imita dos patrones de componentes reutilizables:
+
+### 1. Inyección por `fetch()` de HTML externo
+
+El header y el footer se escriben una sola vez, en `src/componentes/header/header.html` y `src/componentes/footer/footer.html`, y se inyectan en cada página con `fetch()` (ver `src/js/ui.js`):
+
+```js
+await renderPartial("#header", "header/header.html");
+await renderPartial("#footer", "footer/footer.html");
+```
+
+La función `renderPartial` (definida en `src/js/ui.js:109`) imita el patrón de **plantillas parciales** (*partials*) que existe en casi todos los entornos web desde hace décadas. Un partial es un fragmento de HTML que se repite en varias páginas —típicamente el header y el footer— y que se mantiene en **un solo archivo**: se escribe una vez y se "incluye" donde hace falta. Si mañana cambia el menú, se edita un archivo y se actualiza todo el sitio; si el markup se copiara y pegara en cada página, habría que editarlo página por página y cada copia sería una oportunidad de que quede desactualizada (el principio **DRY**: *Don't Repeat Yourself*).
+
+El patrón no es invención de ningún framework moderno: es tan viejo como el `include` de PHP, y casi todas las tecnologías lo traen con otro nombre o sintaxis:
+
+| Entorno | Cómo incluye un partial |
+|---|---|
+| PHP puro | `<?php include 'partials/header.php'; ?>` |
+| Laravel (PHP) | Blade: `@include('partials.header')` |
+| WordPress (PHP) | `get_header()`, `get_footer()`, `get_template_part('partials/card')` |
+| Symfony (PHP) | Twig: `{{ include('partials/header.html.twig') }}` |
+| Ruby on Rails | `render partial: "header"` — de aquí viene el nombre "partial" |
+| Handlebars | `{{> header }}` |
+| EJS | `<%- include('partials/header') %>` |
+
+Lo que cambia entre unos y otros es **quién hace el include**. En PHP, Rails, Blade o Twig lo hace el servidor, antes de enviar la página al navegador: el HTML llega ya armado. Lumina no tiene servidor, así que el include lo hace el navegador: `renderPartial` pide el fragmento con `fetch()`, lo inyecta en el contenedor indicado por el selector (`#header`, `#footer`), resuelve sus rutas relativas para que funcionen desde cualquier página y carga su CSS si aún no está en el `<head>`. Para quien visita el sitio el resultado es el mismo; la diferencia es que el armado ocurre en el navegador y, por eso, exige servir el sitio por HTTP (ver "Cómo verlo").
+
+La misma estrategia se usa en la home (`src/index.html`) para inyectar el contenido de cada módulo dentro de su sección vacía (`#inicio`, `#beneficios`, `#catalogo`, etc.), mediante `renderSection(selector, path)` en `src/js/ui.js`. `renderSection` es la variante para la home: parsea el HTML completo del módulo con `DOMParser`, extrae solo el `<main>`, y además inyecta scripts y reinicializa los componentes de Bootstrap.
+
+Lo que resuelve `ui.js` al inyectar:
+- Resuelve rutas relativas de enlaces `<a>` e imágenes respecto a `src/` (`resolveLinks` / `resolveModulePaths`).
+- Carga el CSS del componente si aún no está en el `<head>` (deduplicado por URL).
+- Carga y ejecuta los `<script>` del componente, evitando cargarlos dos veces.
+- Reinicializa los componentes de Bootstrap (carroseles, etc.) después de inyectar.
+
+⚠️ Como usa `fetch()`, el sitio **debe servirse por HTTP**; abrir el HTML con `file://` deja las páginas sin header ni footer.
+
+### 2. Template strings (componentes con datos dinámicos)
+
+Cuando un componente necesita mostrar datos que vienen de un JSON (y no solo markup estático), se usa un módulo ES que expone una función que devuelve HTML como *template string*, y la página lo pinta con `innerHTML`.
+
+Ejemplos:
+- `src/componentes/blog-card/blog-card.js` → `crearBlogCard(articulo)` devuelve el HTML de una tarjeta de artículo.
+- `src/componentes/productos-recomendados/productos-recomendados.js` → `crearSeccionRecomendados(velas)` devuelve el HTML completo (título + carrusel de cards) usando `.map().join("")`.
+- `src/componentes/carrusel/carrusel.js` → template strings para montar el carrusel.
+
+Ejemplo en `src/tienda/blog/blog.js`: primero trae `articulos.json`, luego llama a `crearBlogCard(articulo)` y asigna el resultado al `innerHTML` del contenedor.
+
+### Cuándo usar cada estrategia
+
+| Estrategia | Cuándo usarla | Dónde vive |
+|---|---|---|
+| `fetch()` + HTML externo | Markup compartido entre páginas (header, footer, secciones de la home) | `src/componentes/` con `.html`, inyectado desde `src/js/ui.js` |
+| Template strings | Componentes que reciben datos dinámicos (JSON) | `src/componentes/` con `.js`, importado por la página |
+
 ## Mapa de navegación
 
 ### Sitio público
