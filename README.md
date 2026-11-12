@@ -5,7 +5,9 @@ Tienda de velas personalizadas. Sitio público + panel de administrador.
 Fase 1: HTML/CSS/JS sin servidor. Fase 2: API Java/Spring Boot + MySQL.
 
 Este documento es el **modelo de negocio**: qué es Lumina, qué páginas tiene y
-qué hace cada una. Para la parte técnica —estructura de carpetas, CSS, Bootstrap
+qué hace cada una. También documenta las estrategias técnicas que usa el sitio
+(ver [Estrategias técnicas del proyecto](#estrategias-técnicas-del-proyecto)).
+Para el resto de la parte técnica —estructura de carpetas, CSS, Bootstrap
 y reglas del equipo con Git— ver [docs/DESARROLLO.md](docs/DESARROLLO.md).
 
 ## Cómo verlo (con Live Server)
@@ -88,11 +90,15 @@ Luego abrir <http://localhost:3000/> y entrar a `src/`, o directamente
 > copia del repo anterior a este archivo, se debe escribir la URL con la
 > barra final: `http://localhost:3000/src/`.
 
-## Componentes reutilizables sin framework
+## Estrategias técnicas del proyecto
+
+Sin framework ni backend, el proyecto tuvo que resolver a mano varios problemas que en otros proyectos resuelven las librerías. Estas son las estrategias adoptadas, qué problema resuelve cada una y dónde están en el código.
+
+### 1. Componentes reutilizables sin framework
 
 El proyecto no usa ningún framework de front-end (React, Vue, Astro...). Para no repetir código entre páginas, imita dos patrones de componentes reutilizables:
 
-### 1. Inyección por `fetch()` de HTML externo
+#### Inyección por `fetch()` de HTML externo
 
 El header y el footer se escriben una sola vez, en `src/componentes/header/header.html` y `src/componentes/footer/footer.html`, y se inyectan en cada página con `fetch()` (ver `src/js/ui.js`):
 
@@ -123,27 +129,160 @@ Lo que resuelve `ui.js` al inyectar:
 - Resuelve rutas relativas de enlaces `<a>` e imágenes respecto a `src/` (`resolveLinks` / `resolveModulePaths`).
 - Carga el CSS del componente si aún no está en el `<head>` (deduplicado por URL).
 - Carga y ejecuta los `<script>` del componente, evitando cargarlos dos veces.
-- Reinicializa los componentes de Bootstrap (carroseles, etc.) después de inyectar.
+- Reinicializa los componentes de Bootstrap (carruseles, etc.) después de inyectar.
 
 ⚠️ Como usa `fetch()`, el sitio **debe servirse por HTTP**; abrir el HTML con `file://` deja las páginas sin header ni footer.
 
-### 2. Template strings (componentes con datos dinámicos)
+#### Template strings (componentes con datos dinámicos)
 
 Cuando un componente necesita mostrar datos que vienen de un JSON (y no solo markup estático), se usa un módulo ES que expone una función que devuelve HTML como *template string*, y la página lo pinta con `innerHTML`.
 
 Ejemplos:
 - `src/componentes/blog-card/blog-card.js` → `crearBlogCard(articulo)` devuelve el HTML de una tarjeta de artículo.
-- `src/componentes/productos-recomendados/productos-recomendados.js` → `crearSeccionRecomendados(velas)` devuelve el HTML completo (título + carrusel de cards) usando `.map().join("")`.
+- `src/componentes/productos-recomendados/productos-recomendados.js` → `crearSeccionRecomendados(velas)` devuelve el HTML completo (título + cards en scroll horizontal) usando `.map().join("")`.
 - `src/componentes/carrusel/carrusel.js` → template strings para montar el carrusel.
+- `src/componentes/carrito/item-carrito/item-carrito.js` y `src/componentes/favoritos/item-favoritos/item-favoritos.js` → el HTML de una fila del carrito o de la lista de favoritos a partir del producto.
 
 Ejemplo en `src/tienda/blog/blog.js`: primero trae `articulos.json`, luego llama a `crearBlogCard(articulo)` y asigna el resultado al `innerHTML` del contenedor.
 
-### Cuándo usar cada estrategia
+#### Cuándo usar cada técnica
 
 | Estrategia | Cuándo usarla | Dónde vive |
 |---|---|---|
 | `fetch()` + HTML externo | Markup compartido entre páginas (header, footer, secciones de la home) | `src/componentes/` con `.html`, inyectado desde `src/js/ui.js` |
-| Template strings | Componentes que reciben datos dinámicos (JSON) | `src/componentes/` con `.js`, importado por la página |
+| Template strings | Componentes que reciben datos dinámicos (JSON) | `src/componentes/` con `.js`, importado por la página o auto-montado (ej. `productos-recomendados.js`) |
+
+Estas dos técnicas resuelven el **reuso de markup**. Las estrategias siguientes cubren lo que el proyecto también resolvió a mano: la carga y sincronización del catálogo, las rutas entre páginas anidadas, el enrutado de vistas de detalle, el rendimiento de la home y la confiabilidad de los datos persistentes.
+
+### 2. Evento `velas-listadas` — sincronizar scripts sin depender de su orden
+
+El catálogo (`src/js/velas.js`) es un módulo ES con top-level `await`: el navegador lo ejecuta de forma diferida, cuando termina de descargar `velas.json`. En cambio, sus consumidores (`carrito.js`, `favoritos.js`, `productos-recomendados.js`...) son scripts clásicos que corren de inmediato y no pueden saber si el catálogo ya está disponible cuando arrancan.
+
+La solución: `velas.js` publica el catálogo en `window.velas` y anuncia que está listo con un `CustomEvent`:
+
+```js
+// src/js/velas.js:19-23
+window.velas = velas;
+window.dispatchEvent(new CustomEvent("velas-listadas"));
+```
+
+Cada consumidor se registra con el mismo patrón:
+
+```js
+// ej. src/js/carrito.js:78-82
+if (window.velas) {
+  initCarrito();
+} else {
+  window.addEventListener("velas-listadas", initCarrito, { once: true });
+}
+```
+
+Es un mini event-bus hecho a mano: **un emisor** (`velas.js`) y **suscriptores** que se auto-registran con `{ once: true }`. Consecuencia práctica: cada página puede incluir los `<script>` en el orden que sea sin romper nada, y ningún consumidor necesita saber dónde está el `<script>` de `velas.js` respecto al suyo.
+
+- Emisor: `src/js/velas.js:19-23`.
+- Suscriptores: `src/js/carrito.js:78-82`, `src/js/favoritos.js:61-64`, `src/componentes/productos-recomendados/productos-recomendados.js:111-116`, `src/tienda/catalogo/favoritos-de-temporada/favoritos-de-temporada.js:13-16`.
+
+### 3. Un solo módulo de datos con top-level `await`
+
+El catálogo no se pide desde cada página ni desde cada componente: existe **una única capa de datos**, `src/js/velas.js`. Al ser un módulo ES puede usar `await` en el nivel superior: el navegador no ejecuta lo que depende de él hasta que el JSON llegó.
+
+```js
+// src/js/velas.js:1-2
+const response = await fetch(new URL("../data/velas.json", import.meta.url));
+export const velas = await response.json();
+```
+
+Ese mismo módulo hace las tres cosas: carga el JSON **una sola vez** por visita (un solo `fetch` a `velas.json`, sin importar cuántas páginas o componentes consuman el catálogo), lo exporta como única fuente de verdad (`import { velas } from "../../js/velas.js"`, como hace `catalogo.js:9`) y lo publica en `window.velas` para los scripts clásicos que no pueden hacer `import` (que es lo que hace posible el event bus de la estrategia 2).
+
+Consecuencia práctica: la ruta del JSON (`data/velas.json`) vive en **un solo archivo**. Ningún consumidor sabe dónde está el JSON ni cómo se carga; solo saben que pueden leer `velas`.
+
+### 4. Rutas ancladas al script, no a la página
+
+Los mismos scripts corren en páginas anidadas a distinta profundidad: `src/index.html`, `src/tienda/carrito/index.html`, `src/tienda/catalogo/producto/index.html`. Si un script resolviera sus rutas contra la página actual (`location.href`), cada página daría un resultado distinto.
+
+La solución: cada script calcula su base a partir de **su propia URL** —`document.currentScript.src` en los scripts clásicos, `import.meta.url` en los módulos ES— y de ahí deriva URLs absolutas que son las mismas desde cualquier página:
+
+```js
+// src/js/carrito.js:20-23 (script clásico)
+const CARRITO_URL = new URL(
+  "../tienda/carrito/index.html",
+  new URL(".", document.currentScript.src).href
+).href;
+
+// src/tienda/blog/blog.js:3-5 (módulo ES)
+const BLOG_DIR = new URL(".", import.meta.url).href;
+export const ARTICULO_URL = new URL("articulo/", BLOG_DIR).href;
+```
+
+Otros ejemplos: `src/js/ui.js:6-12` (`APP_BASE` → `COMPONENTS_BASE`), `src/tienda/catalogo/catalogo.js:6-7` (`CATALOGO_DIR` → `PRODUCTO_URL`).
+
+El complemento está en la inyección: cuando `ui.js` inyecta HTML traído con `fetch()`, reescribe los enlaces e imágenes relativos del fragmento (`resolveLinks` / `resolveModulePaths`, `ui.js:22-47`) para que también apunten al lugar correcto. Resultado: los enlaces se escriben una vez, relativos a la carpeta del script, y funcionan desde cualquier página del sitio.
+
+### 5. Detalle por query param: una plantilla HTML + un JSON
+
+Para tener N artículos de blog no hace falta N archivos HTML ni un enrutador: una sola **página plantilla** (`src/tienda/blog/articulo/index.html`) sirve a todos. Su módulo (`articulo.js`) lee el identificador de la URL, resuelve el contenido contra el JSON y renderiza:
+
+- `articulo.js:10-12` — lee `?slug=` con `URLSearchParams`.
+- `articulo.js:14-17` — trae `data/articulos.json` (ruta construida con la base del módulo, estrategia 4).
+- `init()` en `articulo.js:70-93` — tres estados: sin slug → "no encontrado"; slug inexistente → "no encontrado"; slug válido → renderiza el artículo y actualiza `document.title`.
+
+Los enlaces que apuntan al detalle se construyen con `encodeURIComponent` para que el slug viaje seguro en la URL: `catalogo.js:36` (cards del catálogo → `producto/?slug=...`) y `carrusel.js:152-155` (cards del carrusel).
+
+> Nota sobre el detalle de **producto** (`src/tienda/catalogo/producto/`): la **navegación** ya funciona con el mismo patrón — los enlaces del catálogo y del carrusel ya apuntan a `producto/?slug=...` — pero la página todavía no consume el slug: `producto.js` está vacío y el HTML tiene bloques wireframe con TODO. Pendiente: que `producto.js` lea el `?slug=`, resuelva la vela contra el catálogo y renderice imagen, info y precio, igual que hace `articulo.js` con los artículos.
+
+### 6. Preload del CSS de la home (truco *loadCSS*)
+
+La home inyecta el contenido de 6 secciones con `renderSection`, y cada sección (y el header, el footer y el carrusel) trae su propio CSS. Si ese CSS solo se cargara al inyectar — cuando `ui.js` añade el `<link>` después del `fetch()` — la home mostraría un instante de contenido sin estilos (*FOUC*).
+
+La solución está declarada en el `<head>` de `src/index.html:19-27`, con el truco clásico *loadCSS*:
+
+```html
+<link rel="preload" href="tienda/inicio/inicio.css" as="style"
+      onload="this.rel='stylesheet'">
+```
+
+Dos fases en una línea:
+- `rel="preload" as="style"`: el navegador descarga el CSS con prioridad alta **sin bloquear el render** ni aplicarlo.
+- `onload="this.rel='stylesheet'"`: al terminar la descarga, el propio `<link>` cambia su `rel` y el CSS se aplica.
+
+Es decir, el CSS de cada sección ya está (o casi) en el navegador cuando `renderSection` inyecta su HTML, que viaja por `fetch()` por separado. El resultado: la home con 6 secciones inyectadas no se queda en blanco ni parpadea. Por si el CSS llegara dos veces, `ui.js` deduplica por URL absoluta antes de añadir `<link>` (`injectStyles`, `ui.js:49-66`).
+
+### 7. localStorage como entrada no confiable
+
+El carrito y los favoritos viven en `localStorage`, que es texto editable por cualquiera (el usuario, otra pestaña, una extensión). Tratarlo como fuente confiable rompería la página con un JSON corrupto o inyectaría productos fantasma que ya no existen en el catálogo.
+
+Por eso, al cargar (`src/js/carrito.js:32-61`), el contenido nunca se usa tal cual: se valida y normaliza de arriba abajo.
+
+```js
+// src/js/carrito.js:40-55 (resumen)
+const datos = JSON.parse(carritoGuardado);        // dentro de try/catch
+if (!Array.isArray(datos)) return [];              // debe ser un array
+
+return datos
+  .filter(item =>
+    velas.some(vela => vela.id === Number(item.id)) &&   // el producto existe en el catálogo
+    Number.isInteger(Number(item.quantity)) &&
+    Number(item.quantity) > 0                            // cantidad entera y positiva
+  )
+  .map(item => ({
+    id: Number(item.id),
+    quantity: Math.min(99, Number(item.quantity))        // tope de cantidad
+  }));
+```
+
+Si algo falla —JSON roto, formato inesperado— se devuelve un carrito vacío y la página renderiza normal. `favoritos.js` aplica la misma normalización sobre su clave.
+
+Claves del ecosistema: `lumina-carrito`, `lumina-favoritos`, `usuarios`, `usuarioActivo`. Todas temporales: en Fase 2 pasan a la API (ver "Dos fases de arquitectura").
+
+### 8. Carrusel infinito sin librería
+
+`src/componentes/carrusel/carrusel.js` implementa a mano lo que un carrusel de librería da gratis:
+
+- **Loop infinito** duplicando la pista (`base + base`, `:223-229`), midiendo el ciclo con `offsetLeft` y repitiendo hasta llenar el ancho visible (tope 8 repeticiones, `:231-235`).
+- **Wrap del scroll**: al pasar el ciclo, `scrollLeft` retrocede un ciclo completo (`:106-110`) — visualmente infinito, con scroll nativo.
+- **Drag vs click**: las cards navegan al detalle, pero solo con un toque real. Con un `WeakMap` se guarda dónde empezó el `pointerdown` y en el `click` se compara: si el dedo se movió más de 6px o cambió el `scrollLeft`, fue un arrastre y no navega (`:112-156`).
+- **Autoplay respetuoso**: `setInterval` que se pausa al hacer hover y que no corre si el usuario tiene `prefers-reduced-motion` activado (`:164+`).
+- **Idempotente**: un flag (`pista.dataset.carruselListo`, `:100-104`) evita duplicar listeners si el carrusel se re-monta.
 
 ## Mapa de navegación
 
@@ -160,7 +299,7 @@ muestra el área de cuenta (`Mi cuenta`)**.
 |---|---|---|
 | Inicio | `src/tienda/inicio/index.html` | Menú |
 | Catálogo | `src/tienda/catalogo/index.html` | Menú |
-| Detalle de producto | `src/tienda/catalogo/producto/index.html?id=1` | Inicio, Catálogo |
+| Detalle de producto | `src/tienda/catalogo/producto/index.html?slug=<slug-de-la-vela>` | Inicio, Catálogo |
 | Crea tu vela | `src/tienda/crea-tu-vela/index.html` | Menú |
 | Carrito | `src/tienda/carrito/index.html` | Menú |
 | Nosotros | `src/tienda/nosotros/index.html` | Menú |
