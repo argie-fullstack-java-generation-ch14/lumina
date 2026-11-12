@@ -23,6 +23,13 @@
   justify-content: space-between;
 }
 
+/* Título de la card: Recoleta (identidad, frases importantes).
+   Fallback para la vista standalone del componente, donde main.css
+   (que define --fuente-titulos) no está cargado */
+.benefits-card h3 {
+  font-family: var(--fuente-titulos, "Recoleta", Georgia, serif);
+}
+
 /* Franja celeste full-bleed: desde el borde izquierdo de la pantalla
    hasta la card (el container la mantiene centrada; el pseudo la cruza) */
 .benefits-card::before {
