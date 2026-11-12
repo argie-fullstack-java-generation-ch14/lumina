@@ -113,6 +113,8 @@ function quitarFavorito(id) {
   if (typeof renderFavoritos === "function") {
     renderFavoritos();
   }
+
+  sincronizarCorazonesFavoritos();
 }
 
 // Agregar o quitar una vela de favoritos (toggle del corazón).
@@ -154,17 +156,31 @@ function pintarCorazonFavorito(id, esFavoritoAhora) {
       icono.classList.toggle("fa-regular", !esFavoritoAhora);
       icono.classList.toggle("fa-solid", esFavoritoAhora);
 
+      const textoTooltip = esFavoritoAhora
+        ? "Quitar de favoritos"
+        : "Agregar a favoritos";
+
+      // data-bs-title queda actualizado para tooltips que se (re)creen después
+      boton.setAttribute("data-bs-title", textoTooltip);
+
       if (window.bootstrap && boton.hasAttribute("data-bs-toggle")) {
         const tooltip = bootstrap.Tooltip.getInstance(boton);
 
         if (tooltip) {
-          tooltip.setContent({
-            "bs.title": esFavoritoAhora
-              ? "Quitar de favoritos"
-              : "Agregar a favoritos"
-          });
+          tooltip.setContent({ ".tooltip-inner": textoTooltip });
         }
       }
+    });
+}
+
+function sincronizarCorazonesFavoritos() {
+  document
+    .querySelectorAll(".favorite-button[data-product-id]")
+    .forEach((boton) => {
+      pintarCorazonFavorito(
+        boton.dataset.productId,
+        esFavorito(boton.dataset.productId)
+      );
     });
 }
 

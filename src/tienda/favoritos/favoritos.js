@@ -25,12 +25,27 @@ function estadoFavoritosVacio() {
   `;
 }
 
-// Cambios en los favoritos
 function vaciarFavoritos() {
-  favoritos = [];
+  const cards = document.querySelectorAll(
+    "#favoritos-items-container .cart-item-card"
+  );
 
-  guardarFavoritos();
-  renderFavoritos();
+  if (!cards.length) {
+    return;
+  }
+
+  cards.forEach((card) => card.classList.add("fade-out"));
+
+  setTimeout(() => {
+    favoritos = [];
+
+    guardarFavoritos();
+    renderFavoritos();
+
+    if (typeof sincronizarCorazonesFavoritos === "function") {
+      sincronizarCorazonesFavoritos();
+    }
+  }, 300);
 }
 
 // Agregar al carrito desde la tarjeta de favoritos
@@ -70,7 +85,9 @@ document.addEventListener("click", (evento) => {
   }
 });
 
-// Vaciar favoritos y render al cargar la página
+// Vaciar favoritos y render al cargar la página.
+// El render espera al catálogo: velas.js es un módulo con top-level await
+// y DOMContentLoaded ocurre antes de que el JSON haya llegado
 document.addEventListener("DOMContentLoaded", () => {
   const botonVaciar = document.querySelector(".btn-clear-favoritos");
   if (botonVaciar) {
@@ -78,5 +95,9 @@ document.addEventListener("DOMContentLoaded", () => {
     botonVaciar.type = "button";
   }
 
-  renderFavoritos();
+  if (window.velas) {
+    renderFavoritos();
+  } else {
+    window.addEventListener("velas-listadas", renderFavoritos, { once: true });
+  }
 });

@@ -225,7 +225,11 @@
         document.getElementById('favoritos-content').innerHTML = html;
 
         if (typeof renderFavoritos === 'function') {
-          renderFavoritos();
+          if (window.velas) {
+            renderFavoritos();
+          } else {
+            window.addEventListener('velas-listadas', renderFavoritos, { once: true });
+          }
         }
 
       })
