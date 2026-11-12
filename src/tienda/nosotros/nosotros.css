@@ -497,7 +497,7 @@
   font-size: 28px;
   font-weight: 700;
   line-height: 1.2;
-  text-align: center;
+  text-align: left;
 }
 
 
@@ -517,7 +517,7 @@
   font-family: "Recoleta", serif;
   font-size: 1.25rem;
   font-weight: 700;
-  text-align: center;
+  text-align: left;
 }
 
 /* TABLETAS */
@@ -553,4 +553,14 @@
     line-height: 1.65;
   }
 
+}
+
+.about-history img.img-rounded-custom-1 {
+  border-radius: 40px 10px 40px 10px;
+  object-fit: cover;
+}
+
+.about-history img.img-rounded-custom-2 {
+  border-radius: 10px 40px 10px 40px;
+  object-fit: cover;
 }

@@ -67,7 +67,19 @@ function guardarCarrito() {
   );
 }
 
-let carrito = cargarCarrito();
+let carrito = [];
+
+// Inicializa el carrito solo cuando el catálogo de velas está disponible.
+function initCarrito() {
+  carrito = cargarCarrito();
+  renderCarrito();
+}
+
+if (window.velas) {
+  initCarrito();
+} else {
+  window.addEventListener("velas-listadas", initCarrito, { once: true });
+}
 
 // Asocia cada item del carrito con los datos del catálogo (js/velas.js)
 function obtenerProductosCarrito() {
@@ -200,10 +212,10 @@ function agregarAlCarrito(id) {
   renderCarrito();
 
   const velaAgregada = velas.find(
-  vela => vela.id === idProducto
-);
+    vela => vela.id === idProducto
+  );
 
-mostrarNotificacionCarrito(velaAgregada);
+  mostrarNotificacionCarrito(velaAgregada);
 }
 
 // Cambios en el carrito
@@ -300,6 +312,7 @@ function estadoCarritoVacio() {
 // antes de que el header (inyectado por fetch) exista en el DOM.
 function refrescarBurbujaCarrito() {
   if (typeof setCartCount !== "function") return;
+  if (!window.velas) return;
 
   const totales = calcularTotales(obtenerProductosCarrito());
 
@@ -354,5 +367,5 @@ document.addEventListener("DOMContentLoaded", () => {
     botonVaciar.type = "button";
   }
 
-  renderCarrito();
+  // El render inicial ahora se dispara desde initCarrito tras cargar velas.
 });

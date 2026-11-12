@@ -107,4 +107,15 @@ document.addEventListener("click", function (evento) {
   }
 });
 
-document.addEventListener("DOMContentLoaded", renderProductosRecomendados);
+function init() {
+  if (window.velas) {
+    renderProductosRecomendados();
+    return;
+  }
+
+  window.addEventListener("velas-listadas", renderProductosRecomendados, {
+    once: true,
+  });
+}
+
+document.addEventListener("DOMContentLoaded", init);

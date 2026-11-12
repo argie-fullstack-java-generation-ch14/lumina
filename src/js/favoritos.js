@@ -51,7 +51,18 @@ function guardarFavoritos() {
   );
 }
 
-let favoritos = cargarFavoritos();
+let favoritos = [];
+
+// Inicializa favoritos solo cuando el catálogo de velas está disponible.
+function initFavoritos() {
+  favoritos = cargarFavoritos();
+}
+
+if (window.velas) {
+  initFavoritos();
+} else {
+  window.addEventListener("velas-listadas", initFavoritos, { once: true });
+}
 
 // Asocia cada item de favoritos con los datos del catálogo (js/velas.js)
 function obtenerProductosFavoritos() {

@@ -41,6 +41,9 @@ function renderizarArticulo(articulo) {
       <time class="articulo-meta-item d-inline-flex align-items-center gap-2" datetime="${articulo.fecha}">
         <i class="fa-solid fa-calendar-days"></i> ${formatearFecha(articulo.fecha)}
       </time>
+      <span class="articulo-chip">
+        ${articulo.categoria.charAt(0).toUpperCase() + articulo.categoria.slice(1)}
+      </span>
     </div>
 
     <div class="articulo-contenido">
