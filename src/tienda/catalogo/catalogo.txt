@@ -15,3 +15,28 @@ https://res.cloudinary.com/zj7mojiw/image/upload/v1793039460/10.png rosa de med
 https://res.cloudinary.com/zj7mojiw/image/upload/v1793039460/8.png ultimo suspiro 
 https://res.cloudinary.com/zj7mojiw/image/upload/v1793039460/11.png hechizo de luna
 https://res.cloudinary.com/zj7mojiw/image/upload/v1793070538/Frascos_sostenibles_entre_eucaliptos_y_flores_blancas.png imagen sustentabilidad
+
+// Imagenes para descricion de las velas 
+
+renacer https://res.cloudinary.com/zj7mojiw/image/upload/v1794503211/Vela_Lumina_Renacer_entre_flores_y_sombras_%D1%83%D1%87%D0%B0%D1%81%D1%82.png
+relajacion https://res.cloudinary.com/zj7mojiw/image/upload/v1794503211/Vela_Lumina_en_Serum_Beige.png
+Luna nueva https://res.cloudinary.com/zj7mojiw/image/upload/v1794503210/Imagen_de_ChatGPT_12_nov_2026_10_51_00_a.m.png
+Equilibrio https://res.cloudinary.com/zj7mojiw/image/upload/v1794503210/Vela_Lumina_Equilibrio_en_Lavanda.png
+Conexion https://res.cloudinary.com/zj7mojiw/image/upload/v1794503210/Vela_Lumina_Conexi%C3%B3n_entre_Flores.png
+Pausa https://res.cloudinary.com/zj7mojiw/image/upload/v1794503209/Vela_Pausa_entre_flores_y_luz.png
+Atardecer https://res.cloudinary.com/zj7mojiw/image/upload/v1794503209/Vela_Lumina_al_Atardecer.png
+Aura https://res.cloudinary.com/zj7mojiw/image/upload/v1794503208/Vela_AURA_con_cristales_y_flores_blancas.png
+Claridad https://res.cloudinary.com/zj7mojiw/image/upload/v1794503208/Vela_Lumina_Claridad_entre_eucaliptos.png
+Armonia https://res.cloudinary.com/zj7mojiw/image/upload/v1794503207/Vela_Lumina_Armon%C3%ADa_entre_Rosas.png
+Noche de paz https://res.cloudinary.com/zj7mojiw/image/upload/v1794503207/Vela_navide%C3%B1a_Noche_de_Paz.png
+Pinos del bosque https://res.cloudinary.com/zj7mojiw/image/upload/v1794503206/Vela_Pinos_del_Bosque_en_Navidad.png
+Magia https://res.cloudinary.com/zj7mojiw/image/upload/v1794503206/Vela_Magia_en_Navidad.png
+Canela dorada https://res.cloudinary.com/zj7mojiw/image/upload/v1794503205/Canela_dorada__tradici%C3%B3n_navide%C3%B1a.png
+Brillo https://res.cloudinary.com/zj7mojiw/image/upload/v1794503203/Vela_Lumina_Brillo_entre_dorados_festivos.png
+Bosque encantado https://res.cloudinary.com/zj7mojiw/image/upload/v1794503202/Vela_Bosque_Encantado_en_el_Bosque.png
+Noche de brujas https://res.cloudinary.com/zj7mojiw/image/upload/v1794503203/Vela_Lumina__Noche_de_Brujas.png
+Ultimo suspiro https://res.cloudinary.com/zj7mojiw/image/upload/v1794503203/Velo_de_%C3%9Altimo_Suspiro.png
+Celebracion https://res.cloudinary.com/zj7mojiw/image/upload/v1794503202/Vela_navide%C3%B1a_Lumina_Celebraci%C3%B3n.png
+Hechizo de luna https://res.cloudinary.com/zj7mojiw/image/upload/v1794503202/Vela_Hechizo_de_Luna_y_Lavanda.png
+Calabaza dorada https://res.cloudinary.com/zj7mojiw/image/upload/v1794503201/Vela_Calabaza_Dorada_de_Halloween.png
+Rossa de medianoche https://res.cloudinary.com/zj7mojiw/image/upload/v1794503201/Vela_Rosa_de_Medianoche.png
