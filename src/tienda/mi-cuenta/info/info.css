@@ -29,6 +29,15 @@
   font-size: 0.9rem;
 }
 
+/* Evita que el autofill del navegador sobreescriba el fondo */
+.info-cuenta .form-control:-webkit-autofill,
+.info-cuenta .form-control:-webkit-autofill:focus,
+.info-cuenta .form-control:-webkit-autofill:hover,
+.info-cuenta .form-control:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.65) inset !important;
+  -webkit-text-fill-color: #403332 !important;
+}
+
 /* Efecto al seleccionar un campo */
 .info-cuenta .form-control:focus {
   border-color: #806D65;
