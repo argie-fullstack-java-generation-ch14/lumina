@@ -73,7 +73,6 @@
   max-width: 28rem;
   font-family: Calibri, sans-serif;
   font-size: 18px;
-  font-weight: 300;
   line-height: 1.5;
   color: var(--negro-relajacion);
 }
@@ -86,8 +85,8 @@
 
 .contact-intro {
   background: rgba(255, 250, 246, 0);
-  backdrop-filter: blur(2.8px);
-  -webkit-backdrop-filter: blur(2.8px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   border-radius: 12px;
   padding: 10px;
 }
@@ -871,5 +870,12 @@
 @media screen and (min-width:768px) {
   .contact-location {
     min-height: 480px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .contact-intro {
+    backdrop-filter: blur(2.8px);
+    -webkit-backdrop-filter: blur(2.8px);
   }
 }

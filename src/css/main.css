@@ -13,7 +13,11 @@
 
 @font-face {
   font-family: "Recoleta";
-  src: url("../assets/fonts/Recoleta-RegularDEMO.otf") format("opentype");
+  src: local("Recoleta"),
+    local("Recoleta Regular"),
+    url("../assets/fonts/recoleta-regular.woff2") format("woff2"),
+    url("../assets/fonts/recoleta-regular.otf") format("opentype"),
+    url("../assets/fonts/recoleta-regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -38,8 +42,10 @@
   --negro-acentuado: #13120F;
 
   /* Del prototipo de Figma */
-  --cafe-lumina: #3B2C2C;       /* texto, logo y botones */
-  --gris-barra: #F7F6F4;        /* fondo de la barra del header */
+  --cafe-lumina: #3B2C2C;
+  /* texto, logo y botones */
+  --gris-barra: #F7F6F4;
+  /* fondo de la barra del header */
 
   /* Tipografías */
   --fuente-titulos: "Recoleta", "Fraunces", Georgia, serif;

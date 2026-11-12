@@ -130,6 +130,10 @@
   margin-bottom: 1.25rem;
 }
 
+.btn-dark {
+  border-radius: 9999px;
+}
+
 /* Responsive móvil */
 @media (max-width: 767.98px) {
   .articulo-page {
