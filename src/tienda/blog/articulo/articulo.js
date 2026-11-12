@@ -12,7 +12,7 @@ function leerSlugDeLaUrl() {
 }
 
 async function cargarArticulos() {
-  const response = await fetch(new URL("../articulos.json", ARTICULO_DIR));
+  const response = await fetch(new URL("../../../data/articulos.json", ARTICULO_DIR));
   return response.json();
 }
 
@@ -35,12 +35,12 @@ function renderizarArticulo(articulo) {
     </figure>
 
     <div class="articulo-info-meta mb-4">
-      <span class="articulo-meta-item d-inline-flex align-items-center gap-2">
-        <i class="fa-solid fa-feather-pointed"></i> ${articulo.autor}
-      </span>
       <time class="articulo-meta-item d-inline-flex align-items-center gap-2" datetime="${articulo.fecha}">
         <i class="fa-solid fa-calendar-days"></i> ${formatearFecha(articulo.fecha)}
       </time>
+        <span class="articulo-meta-item d-inline-flex align-items-center gap-2">
+        <i class="fa-solid fa-feather-pointed"></i> ${articulo.autor}
+      </span>
       <span class="articulo-chip">
         ${articulo.categoria.charAt(0).toUpperCase() + articulo.categoria.slice(1)}
       </span>
@@ -62,7 +62,7 @@ function renderizarNoEncontrado() {
       <p class="articulo-lead mb-4">
         Parece que esta vela se apagó: el artículo que buscas no existe o cambió de dirección.
       </p>
-      <a class="btn btn-primary" href="../index.html">Ver todos los artículos</a>
+      <a class="btn btn-dark" href="../index.html">Ver todos los artículos</a>
     </div>
   `;
 }
