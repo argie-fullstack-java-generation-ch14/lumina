@@ -6,7 +6,7 @@
 
 const integrantes = {
   naya: {
-    nombre: "Nayant Gonzalez",
+    nombre: "Nayant González",
     rol: "UI Designer / Full Stack Developer",
     descripcion: "Apasionada por el UI y el diseño, aprendiendo Full Stack para crear soluciones web funcionales, intuitivas y atractivas.",
     foto: "https://res.cloudinary.com/zj7mojiw/image/upload/v1794279449/Retrato_c%C3%A1lido_de_Naya_con_cabello_ondulado.png",
@@ -15,7 +15,7 @@ const integrantes = {
   },
 
   argie: {
-    nombre: "Argie Rincon",
+    nombre: "Argie Rincón",
     rol: "Full Stack Developer",
     descripcion: "Apasionada de la arquitectura de software y la creación de experiencias digitales enfocadas en el usuario.",
     foto: "https://res.cloudinary.com/zj7mojiw/image/upload/v1794279449/Retrato_elegante_en_tonos_beige_argie.png",
@@ -36,7 +36,7 @@ const integrantes = {
     nombre: "Nicole Betancourt",
     rol: "Full Stack Developer",
     descripcion: "Aprendiendo Full Stack con Java. Me apasionan la música y aprender algo nuevo cada día. Me gusta convertir ideas en código.",
-    foto: "https://res.cloudinary.com/zj7mojiw/image/upload/v1794279452/Retrato_c%C3%A1lido_de_Nicole_con_gafas.png",
+    foto: "https://res.cloudinary.com/zj7mojiw/image/upload/v1794280795/Retrato_c%C3%A1lido_de_Nicole_con_gafas.png",
     linkedin: "https://www.linkedin.com/in/nicole-betancourt-alvarez-nba/",
     github: "https://github.com/NBA-Nicole"
   }
