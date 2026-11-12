@@ -183,7 +183,18 @@
 .register-error {
   margin: 0;
   font-size: 0.8125rem;
+  line-height: 1.4;
   color: var(--naranja-apagado);
+}
+
+.register-error::before {
+  content: "";
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--naranja-apagado);
 }
 
 .has-error .register-input {
