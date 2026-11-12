@@ -148,7 +148,7 @@
 
 @media (max-width: 600px) {
     .season-favorites {
-        padding: 28px 16px 36px;
+        padding: 28px 16px 0px;
     }
 
     .favorites-grid {
