@@ -289,8 +289,8 @@ Claves del ecosistema: `lumina-carrito`, `lumina-favoritos`, `usuarios`, `usuari
 ### Sitio público
 
 **`Menú`** en la columna "Desde" no es una página: es el Header / Navbar, el
-componente que se repite en todas las páginas. Da acceso directo a Inicio,
-Catálogo, Crea tu Vela, Nosotros, Contacto, Carrito y Usuario.
+componente que se repite en todas las páginas. Da acceso directo a Inicio
+(el logo), Catálogo, Nosotros, Blog, Contáctanos, Carrito, Favoritos y Usuario.
 
 La entrada de Usuario es condicional: **sin sesión muestra `Login`, con sesión
 muestra el área de cuenta (`Mi cuenta`)**.
@@ -300,22 +300,29 @@ muestra el área de cuenta (`Mi cuenta`)**.
 | Inicio | `src/tienda/inicio/index.html` | Menú |
 | Catálogo | `src/tienda/catalogo/index.html` | Menú |
 | Detalle de producto | `src/tienda/catalogo/producto/index.html?slug=<slug-de-la-vela>` | Inicio, Catálogo |
-| Crea tu vela | `src/tienda/crea-tu-vela/index.html` | Menú |
+| Crea tu vela | `src/tienda/crear/index.html` | Aún sin enlace: se abre por URL (el creador paso a paso está en construcción) |
 | Carrito | `src/tienda/carrito/index.html` | Menú |
 | Nosotros | `src/tienda/nosotros/index.html` | Menú |
-| Contacto | `src/tienda/contacto/index.html` | Menú |
+| Blog | `src/tienda/blog/index.html` | Menú |
+| Artículo del blog | `src/tienda/blog/articulo/index.html?slug=<slug-del-articulo>` | Blog |
+| Contáctanos | `src/tienda/contacto/index.html` | Menú |
 | Login | `src/tienda/login/index.html` | Menú (sin sesión) |
 | Registro | `src/tienda/registro/index.html` | Login |
-| Favoritos | `src/tienda/favoritos/index.html` | Menú / Login |
-| Recuperar contraseña | `src/tienda/recuperar-contrasena/index.html` | Login |
+| Favoritos | `src/tienda/favoritos/index.html` | Menú |
+| Recuperar contraseña | *(sin implementar aún)* | Login |
 | Mi cuenta | `src/tienda/mi-cuenta/index.html` | Menú (con sesión) — área con pestañas: Información, Favoritos, Pedidos |
-| Pedidos | `src/tienda/mi-cuenta/pedidos/index.html` | Mi cuenta |
+| Información (pestaña) | `src/tienda/mi-cuenta/info/index.html` | Mi cuenta |
+| Favoritos (pestaña) | `src/tienda/mi-cuenta/favoritos/index.html` | Mi cuenta |
+| Pedidos (pestaña) | `src/tienda/mi-cuenta/pedidos/index.html` | Mi cuenta |
+
+Las tres pestañas de Mi cuenta no se navegan como páginas: `mi-cuenta/index.html`
+las trae con `fetch()` y las inyecta dentro del área de pestañas.
 
 ### Acciones dentro de una página (no son páginas)
 
 | Acción | Ocurre en |
 |---|---|
-| Agregar al carrito | `src/tienda/catalogo/producto/index.html`, `src/tienda/crea-tu-vela/index.html` |
+| Agregar al carrito | Cards del catálogo, cards del carrusel, productos recomendados y lista de favoritos (`src/js/carrito.js` y sus componentes) |
 | Editar cantidad / eliminar | `src/tienda/carrito/index.html` |
 | Confirmar pedido (modal) | `src/tienda/carrito/index.html` |
 
@@ -323,10 +330,11 @@ muestra el área de cuenta (`Mi cuenta`)**.
 
 | Sección | Archivo |
 |---|---|
-| Panel | `src/admin/panel/index.html` |
-| Productos | `src/admin/productos/index.html` |
-| Crear / actualizar | `src/admin/producto-formulario/index.html` |
-| Pedidos | `src/admin/pedidos/index.html` |
+| Gestión de productos | `src/admin/productos/index.html` |
+| Crear / actualizar producto (modal) | `src/admin/producto-formulario/modal.html` |
+
+El panel de administración y los pedidos del admin son secciones pendientes de
+construir: hoy la administración es solo la gestión de productos.
 
 ## Dos fases de arquitectura
 
