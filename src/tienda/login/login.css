@@ -78,7 +78,16 @@
   border: 1px solid #d9c9be;
   border-radius: 9px;
   outline: none;
-  background-color: light-dark(rgb(232, 240, 254), rgb(22, 31, 46));
+  background-color: rgba(255, 255, 255, 0.65) !important;
+}
+
+/* Evita que el autofill del navegador sobreescriba el fondo */
+.login-field input:-webkit-autofill,
+.login-field input:-webkit-autofill:focus,
+.login-field input:-webkit-autofill:hover,
+.login-field input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.65) inset !important;
+  -webkit-text-fill-color: var(--negro-acentuado) !important;
 }
 
 .login-field input:focus {
