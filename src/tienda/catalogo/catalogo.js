@@ -3,8 +3,10 @@
 
 // Carpeta de este script: resuelve rutas correctamente
 // en su propia pagina y cuando se inyecta en la home.
-const CATALOGO_DIR = new URL(".", document.currentScript.src).href;
+const CATALOGO_DIR = new URL(".", import.meta.url).href;
 const PRODUCTO_URL = new URL("producto/", CATALOGO_DIR).href;
+
+import { velas, obtenerClaseCategoria } from "../../js/velas.js";
 
 // El enlace "Explora todo el catálogo" solo tiene sentido cuando el catálogo
 // se muestra desde el inicio; en esta misma página se oculta.
@@ -16,8 +18,8 @@ if (location.pathname.includes("catalogo")) {
     document.getElementById("catalogo-completo")?.classList.add("catalogo-margin");
 }
 
-// Datos de los productos del catalogo: viven en js/velas.js, que se carga
-// antes de este script (misma estructura de datos para el carrusel de la
+// Datos de los productos del catalogo: viven en js/velas.json, cargados
+// por js/velas.js (misma estructura de datos para el carrusel de la
 // home y el modulo de favoritas de temporada).
 const catalogo = { catalogo: velas };
 

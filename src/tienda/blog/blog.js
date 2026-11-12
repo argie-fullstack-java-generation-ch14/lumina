@@ -37,7 +37,7 @@ function centrarTerceraImagen() {
 
 async function renderArticulos() {
   try {
-    const response = await fetch('./articulos.json');
+    const response = await fetch('../../data/articulos.json');
     const articulos = await response.json();
     const container = document.getElementById('articulos-container');
 
