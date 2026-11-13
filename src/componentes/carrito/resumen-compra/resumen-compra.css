@@ -3,7 +3,7 @@
   background-color: var(--naranja-claro);
   border: 1px solid var(--naranja-acentuado);
   border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(59, 44, 44, 0.05);
+  box-shadow: none;
 }
 
 .summary-title {
