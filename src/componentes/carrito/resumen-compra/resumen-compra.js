@@ -3,6 +3,8 @@
 // Espera: objeto totales con { cantidad, subtotal, descuento, iva, total }
 // (ver calcularTotales en js/carrito.js) y el cupón activo.
 
+const CATALOGO_URL = new URL("../catalogo/index.html", location.href).href;
+
 function crearResumenCompra(totales, opciones = {}) {
 	const { cantidad, subtotal, descuento, iva, total } = totales;
 	const { mostrarCupon = true, mostrarBoton = true } = opciones;
@@ -38,9 +40,13 @@ function crearResumenCompra(totales, opciones = {}) {
                 </div>
           </div>
 
-          <button type="button" class="btn-checkout w-100">
+          <button type="button" class="btn-checkout w-100 mb-2">
               Finalizar compra
           </button>
+
+          <a href="${CATALOGO_URL}" class="btn-seguir-comprando w-100" type="button">
+              Seguir comprando
+          </a>
       `
 		: "";
 
