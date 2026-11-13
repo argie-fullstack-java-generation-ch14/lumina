@@ -41,6 +41,20 @@
 		return element;
 	}
 
+	function renderEmptyState() {
+		if (!productList) return;
+
+		productList.innerHTML = `
+			<div class="col-10 mx-auto placeholder-wrap">
+				<article class="card cart-empty p-5 text-center">
+					<i class="fa-solid fa-face-frown mb-3" aria-hidden="true"></i>
+					<h2 class="product-title mb-2">Sin velas creadas</h2>
+					<p class="product-info mb-4">Agrega tu primera vela para comenzar.</p>
+				</article>
+			</div>
+		`;
+	}
+
 	function renderProduct(product) {
 		if (!productList) return;
 
@@ -64,7 +78,11 @@
 		heading.className = "candle-heading";
 		heading.append(
 			createTextElement("h3", "", product.name),
-			createTextElement("span", `candle-category ${categoryClasses[product.category] || "category-default"}`, product.category)
+			createTextElement(
+				"span",
+				`candle-category ${categoryClasses[product.category] || "category-default"}`,
+				product.category
+			)
 		);
 
 		const details = document.createElement("div");
@@ -86,7 +104,12 @@
 	}
 
 	const products = loadProducts();
-	products.forEach(renderProduct);
+
+	if (products.length === 0) {
+		renderEmptyState();
+	} else {
+		products.forEach(renderProduct);
+	}
 
 	window.addEventListener("product-created", (event) => {
 		const product = {
@@ -96,6 +119,11 @@
 
 		products.push(product);
 		saveProducts();
+
+		if (products.length === 1) {
+			productList.innerHTML = "";
+		}
+
 		renderProduct(product);
 	});
 
