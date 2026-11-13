@@ -62,14 +62,6 @@ const modalGithub = document.getElementById("modalGithub");
 let elementoAnterior = null;
 
 // ========================================
-// DETECTAR DISPOSITIVO
-// ========================================
-
-const esDispositivoTactil = window.matchMedia(
-  "(hover: none), (pointer: coarse)"
-).matches;
-
-// ========================================
 // ABRIR MODAL
 // ========================================
 
@@ -141,33 +133,28 @@ document.querySelectorAll(".team-photo").forEach((boton) => {
 
   const integranteId = boton.dataset.member;
 
-  // Computador: abrir al pasar el cursor
-  if (!esDispositivoTactil) {
-
-    boton.addEventListener("mouseenter", () => {
-      abrirModal(integranteId);
-    });
-
-  }
-
-  // Celular: abrir al tocar la fotografía
+  // Abrir al hacer clic (computador y móvil)
   boton.addEventListener("click", () => {
+
+    // Si ya está abierto este mismo integrante, cerrar en lugar de recargar
+    if (
+      memberModal &&
+      memberModal.classList.contains("active") &&
+      modalName.textContent === integrantes[integranteId].nombre
+    ) {
+      cerrarModal();
+      return;
+    }
+
     abrirModal(integranteId);
   });
 
 });
 
 // ========================================
-// CERRAR AL SALIR DE LA TARJETA
+// CERRAR AL HACER CLIC FUERA DEL CONTENIDO
 // ========================================
 
-if (modalContent && !esDispositivoTactil) {
-
-  modalContent.addEventListener("mouseleave", () => {
-    cerrarModal();
-  });
-
-}
 
 // ========================================
 // EVENTOS PARA CERRAR LA VENTANA
