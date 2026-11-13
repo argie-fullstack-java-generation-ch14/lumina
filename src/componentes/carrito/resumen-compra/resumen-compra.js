@@ -3,17 +3,44 @@
 // Espera: objeto totales con { cantidad, subtotal, descuento, iva, total }
 // (ver calcularTotales en js/carrito.js) y el cupón activo.
 
-function crearResumenCompra(totales) {
+function crearResumenCompra(totales, opciones = {}) {
 	const { cantidad, subtotal, descuento, iva, total } = totales;
+	const { mostrarCupon = true, mostrarBoton = true } = opciones;
 	const fmt = (valor) => valor.toLocaleString("es-CO");
 
 	// Solo se muestra la fila de descuento si hay cupón aplicado
-	const filaDescuento = descuento
+	const filaDescuento = descuento && mostrarCupon
 		? `
       <div class="d-flex justify-content-between align-items-center mb-3">
           <span class="summary-descuento">Cupón ${cuponAplicado} (-10 %)</span>
           <span class="summary-value">- $ ${fmt(descuento)}</span>
       </div>
+      `
+		: "";
+
+	const bloqueCupon = mostrarCupon
+		? `
+          <div class="mb-4">
+              <label for="couponInput" class="form-label coupon-label d-flex align-items-center gap-2 mb-2">
+                  <i class="fa-solid fa-ticket" aria-hidden="true"></i>
+                  <span>Ingresar cupón de descuento</span>
+              </label>
+
+                <div class="row g-2">
+                    <div class="col-12 col-sm-8 col-lg-12 col-xl-8">
+                        <input type="text" id="couponInput" class="form-control coupon-input"
+                            value="${cuponAplicado ?? ""}"
+                            placeholder="Ingresar código del cupón">
+                    </div>
+                    <div class="col-12 col-sm-4 col-lg-12 col-xl-4">
+                        <button type="button" class="btn-apply w-100">Aplicar</button>
+                    </div>
+                </div>
+          </div>
+
+          <button type="button" class="btn-checkout w-100">
+              Finalizar compra
+          </button>
       `
 		: "";
 
@@ -43,27 +70,7 @@ function crearResumenCompra(totales) {
 
           <hr class="summary-divider mt-0 mb-4">
 
-          <div class="mb-4">
-              <label for="couponInput" class="form-label coupon-label d-flex align-items-center gap-2 mb-2">
-                  <i class="fa-solid fa-ticket" aria-hidden="true"></i>
-                  <span>Ingresar cupón de descuento</span>
-              </label>
-
-                <div class="row g-2">
-                    <div class="col-12 col-sm-8 col-lg-12 col-xl-8">
-                        <input type="text" id="couponInput" class="form-control coupon-input"
-                            value="${cuponAplicado ?? ""}"
-                            placeholder="Ingresar código del cupón">
-                    </div>
-                    <div class="col-12 col-sm-4 col-lg-12 col-xl-4">
-                        <button type="button" class="btn-apply w-100">Aplicar</button>
-                    </div>
-                </div>
-          </div>
-
-          <button type="button" class="btn-checkout w-100">
-              Finalizar compra
-          </button>
+          ${bloqueCupon}
       </div>
   `;
 }

@@ -21,6 +21,7 @@
   <!-- Estilos de los módulos -->
   <link rel="stylesheet" href="info/info.css">
   <link rel="stylesheet" href="pedidos/pedidos.css">
+  <link rel="stylesheet" href="../../componentes/carrito/resumen-compra/resumen-compra.css">
   <link rel="stylesheet" href="../../componentes/favoritos/item-favoritos/item-favoritos.css">
   <link rel="stylesheet" href="../../tienda/favoritos/favoritos.css">
 
@@ -40,51 +41,31 @@
 
         <!-- Menú lateral -->
         <div class="col-md-4">
-          <div class="nav flex-column nav-pills p-3 rounded-4"
-            id="v-pills-tab"
-            role="tablist"
+          <div class="nav flex-column nav-pills p-3 rounded-4" id="v-pills-tab" role="tablist"
             aria-orientation="vertical">
 
             <!-- Información de la cuenta -->
-            <button
-              class="nav-link active text-start py-3 mb-2 d-flex align-items-center"
-              id="v-pills-account-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#v-pills-account"
-              type="button"
-              role="tab"
-              aria-controls="v-pills-account"
-              aria-selected="true">
+            <button class="nav-link active text-start py-3 mb-2 d-flex align-items-center" id="v-pills-account-tab"
+              data-bs-toggle="pill" data-bs-target="#v-pills-account" type="button" role="tab"
+              aria-controls="v-pills-account" aria-selected="true">
 
               <i class="ri-user-line me-2"></i>
-              Información de la cuenta
+              Mi Información
             </button>
 
             <!-- Pedidos -->
-            <button
-              class="nav-link text-start py-3 mb-2 d-flex align-items-center"
-              id="v-pills-orders-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#v-pills-orders"
-              type="button"
-              role="tab"
-              aria-controls="v-pills-orders"
-              aria-selected="false">
+            <button class="nav-link text-start py-3 mb-2 d-flex align-items-center" id="v-pills-orders-tab"
+              data-bs-toggle="pill" data-bs-target="#v-pills-orders" type="button" role="tab"
+              aria-controls="v-pills-orders" aria-selected="false">
 
               <i class="ri-shopping-bag-3-line me-2"></i>
               Mis pedidos
             </button>
 
             <!-- Favoritos -->
-            <button
-              class="nav-link text-start py-3 d-flex align-items-center"
-              id="v-pills-favorites-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#v-pills-favorites"
-              type="button"
-              role="tab"
-              aria-controls="v-pills-favorites"
-              aria-selected="false">
+            <button class="nav-link text-start py-3 d-flex align-items-center" id="v-pills-favorites-tab"
+              data-bs-toggle="pill" data-bs-target="#v-pills-favorites" type="button" role="tab"
+              aria-controls="v-pills-favorites" aria-selected="false">
 
               <i class="ri-heart-line me-2"></i>
               Favoritos
@@ -95,34 +76,23 @@
 
         <!-- Contenido de las secciones -->
         <div class="col-md-8">
-          <div class="tab-content p-4 p-md-0" id="v-pills-tabContent">
+          <div class="tab-content" id="v-pills-tabContent">
 
             <!-- Información de la cuenta -->
-            <div
-              class="tab-pane fade show active"
-              id="v-pills-account"
-              role="tabpanel"
+            <div class="tab-pane fade show active" id="v-pills-account" role="tabpanel"
               aria-labelledby="v-pills-account-tab">
 
               <div id="info-content"></div>
             </div>
 
             <!-- Mis pedidos -->
-            <div
-              class="tab-pane fade"
-              id="v-pills-orders"
-              role="tabpanel"
-              aria-labelledby="v-pills-orders-tab">
+            <div class="tab-pane fade" id="v-pills-orders" role="tabpanel" aria-labelledby="v-pills-orders-tab">
 
               <div id="pedidos-content"></div>
             </div>
 
             <!-- Favoritos -->
-            <div
-              class="tab-pane fade"
-              id="v-pills-favorites"
-              role="tabpanel"
-              aria-labelledby="v-pills-favorites-tab">
+            <div class="tab-pane fade" id="v-pills-favorites" role="tabpanel" aria-labelledby="v-pills-favorites-tab">
 
               <div id="favoritos-content"></div>
             </div>
@@ -151,130 +121,12 @@
   <script src="../../js/favoritos.js"></script>
   <script src="../../tienda/favoritos/favoritos.js"></script>
 
-  <script>
-
-    // Cargar módulo de información de la cuenta
-    fetch('info/index.html')
-      .then(res => {
-        if (!res.ok) {
-          throw new Error("No se pudo cargar información de la cuenta");
-        }
-
-        return res.text();
-      })
-      .then(html => {
-
-        document.getElementById('info-content').innerHTML = html;
-
-        // Cargar JavaScript de información de la cuenta
-        const script = document.createElement('script');
-        script.src = 'info/info.js';
-
-        script.onload = () => {
-          if (typeof cargarInformacionCuenta === 'function') {
-            cargarInformacionCuenta();
-          }
-        };
-
-        script.onerror = () => {
-          console.error('Error cargando info.js');
-        };
-
-        document.body.appendChild(script);
-
-      })
-      .catch(err => {
-        console.error('Error cargando módulo de info:', err);
-      });
-
-  </script>
-
-  <script>
-
-    // Cargar módulo de pedidos
-    fetch('pedidos/index.html')
-      .then(res => {
-        if (!res.ok) {
-          throw new Error("No se pudo cargar pedidos");
-        }
-
-        return res.text();
-      })
-      .then(html => {
-        document.getElementById('pedidos-content').innerHTML = html;
-      })
-      .catch(err => {
-        console.error('Error cargando módulo de pedidos:', err);
-      });
-
-  </script>
-
-  <script>
-
-    // Cargar módulo de favoritos
-    fetch('favoritos/index.html')
-      .then(res => {
-        if (!res.ok) {
-          throw new Error("No se pudo cargar favoritos");
-        }
-
-        return res.text();
-      })
-      .then(html => {
-
-        document.getElementById('favoritos-content').innerHTML = html;
-
-        if (typeof renderFavoritos === 'function') {
-          if (window.velas) {
-            renderFavoritos();
-          } else {
-            window.addEventListener('velas-listadas', renderFavoritos, { once: true });
-          }
-        }
-
-      })
-      .catch(err => {
-        console.error('Error cargando módulo de favoritos:', err);
-      });
-
-  </script>
-
-  <script>
-
-    // Actualizar burbuja del carrito
-    function actualizarBurbujaCarrito() {
-
-      if (typeof refrescarBurbujaCarrito === "function") {
-        refrescarBurbujaCarrito();
-      }
-
-    }
-
-    if (document.getElementById("cart-count")) {
-
-      actualizarBurbujaCarrito();
-
-    } else {
-
-      const observer = new MutationObserver(() => {
-
-        const badge = document.getElementById("cart-count");
-
-        if (badge) {
-          observer.disconnect();
-          actualizarBurbujaCarrito();
-        }
-
-      });
-
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true
-      });
-
-    }
-
-  </script>
+  <!-- Scripts del módulo Mi cuenta -->
+  <script src="../../componentes/carrito/resumen-compra/resumen-compra.js"></script>
+  <script src="../../componentes/item-mis-pedidos/item-mis-pedidos.js"></script>
+  <script src="pedidos/pedidos.js"></script>
+  <script src="mi-cuenta.js"></script>
 
 </body>
+
 </html>

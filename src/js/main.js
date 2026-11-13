@@ -37,8 +37,9 @@ document.addEventListener("DOMContentLoaded", async () => {
    HEADER
    - Marca el enlace de la página donde estás.
    - Muestra el nombre del usuario si inició sesión.
-   - El icono de cuenta abre un dropdown: sin sesión muestra
-     "Iniciar sesión" y "Registrarse"; con sesión, "Mi cuenta".
+   - El icono de cuenta abre un dropdown solo sin sesión:
+     muestra "Iniciar sesión" y "Registrarse".
+   - Con sesión activa, el clic lleva directo a Mi cuenta.
    - Permite cerrar sesión.
 ========================================================== */
 
@@ -52,10 +53,10 @@ function initHeader() {
 
   // Elementos de la cuenta.
   const accountLink = document.getElementById("site-account-link");
+  const accountMenu = document.getElementById("site-account-menu");
   const accountName = document.getElementById("site-account-name");
   const loginItem = document.getElementById("site-account-login");
   const registerItem = document.getElementById("site-account-register");
-  const profileItem = document.getElementById("site-account-profile");
   const logoutButton = document.getElementById("site-logout-button");
 
   if (!accountLink || !accountName || !logoutButton) return;
@@ -87,11 +88,19 @@ function initHeader() {
 
     accountLink.classList.remove("site-account-compact");
 
-    // El dropdown solo ofrece "Mi cuenta".
-    loginItem.hidden = true;
-    registerItem.hidden = true;
-    profileItem.hidden = false;
-    profileItem.href = accountUrl;
+    // Con sesión activa no hay dropdown: el clic lleva directo a Mi cuenta.
+    accountLink.removeAttribute("data-bs-toggle");
+    accountLink.removeAttribute("data-bs-auto-close");
+    accountLink.removeAttribute("aria-expanded");
+    accountLink.setAttribute("aria-label", "Mi cuenta");
+
+    if (accountMenu) {
+      accountMenu.hidden = true;
+    }
+
+    accountLink.onclick = () => {
+      window.location.href = accountUrl;
+    };
 
     // Muestra el botón Cerrar sesión.
     logoutButton.hidden = false;
@@ -108,7 +117,6 @@ function initHeader() {
     loginItem.hidden = false;
     loginItem.href = loginUrl;
     registerItem.hidden = false;
-    profileItem.hidden = true;
 
     logoutButton.hidden = true;
   }

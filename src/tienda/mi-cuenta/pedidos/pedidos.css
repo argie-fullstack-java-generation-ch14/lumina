@@ -1,0 +1,217 @@
+/* Botón Ir al catálogo: mismos estilos del botón Vaciar favoritos */
+#v-pills-orders .btn-clear-favoritos {
+  color: var(--cafe-lumina);
+}
+
+#v-pills-orders .btn-clear-favoritos:hover {
+  opacity: 0.8;
+}
+
+/* Contenedor transparente para que cada pedido parezca una tarjeta independiente */
+.pedidos-accordion .pedido-card {
+  background-color: transparent;
+  border: none;
+}
+
+.pedidos-accordion .accordion-collapse {
+  width: 98%;
+  margin: 0 auto;
+  border-radius: 20px;
+  margin-top: 10px;
+  padding: 0px 10px 10px;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+@media screen and (min-width: 1024px) {
+  .pedidos-accordion .accordion-collapse {
+    padding: 0px 20px 20px;
+  }
+}
+
+/* Cabecera del acordeón: en mobile los bloques se apilan */
+.pedidos-accordion .pedido-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.pedidos-accordion .pedido-estado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+@media screen and (min-width: 1024px) {
+  .pedidos-accordion .pedido-header-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+
+  .pedidos-accordion .pedido-estado {
+    width: auto;
+    flex-shrink: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* Cabecera del acordeón (mismos estilos del item de favoritos de Mi cuenta) */
+.pedidos-accordion .pedido-header-btn {
+  background-color: rgba(255, 250, 246, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 16px !important;
+  padding: 1.25rem 1.5rem;
+  color: var(--cafe-lumina);
+  font-family: var(--fuente-texto);
+  box-shadow: none !important;
+}
+
+.pedidos-accordion .pedido-header-btn:hover {
+  background-color: rgba(255, 250, 246, 0.65);
+}
+
+/* Evita que Bootstrap pinte de azul la cabecera cuando está abierta */
+.pedidos-accordion .pedido-header-btn:not(.collapsed) {
+  background-color: rgba(255, 250, 246, 0.65);
+  color: var(--cafe-lumina);
+}
+
+/* Ocultar la flecha por defecto de Bootstrap para usar nuestro Remix Icon */
+.pedidos-accordion .pedido-header-btn::after {
+  display: none;
+}
+
+/* Rotación de la flecha según el estado del acordeón */
+.pedidos-accordion .pedido-chevron {
+  color: var(--naranja-apagado);
+  transition: transform 0.25s ease;
+}
+
+.pedidos-accordion .pedido-header-btn.collapsed .pedido-chevron {
+  transform: rotate(180deg);
+}
+
+/* Textos de la cabecera */
+.pedido-fecha {
+  font-family: var(--fuente-titulos);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--cafe-lumina);
+}
+
+.pedido-meta p:not(.pedido-fecha) {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--negro-relajacion);
+  margin-bottom: 0.25rem;
+}
+
+.pedido-meta p:not(.pedido-fecha) strong {
+  color: var(--negro-acentuado);
+}
+
+.pedido-meta p:not(.pedido-fecha) span {
+  color: var(--negro-relajacion);
+}
+
+/* Badge de estado (COMPLETADA) */
+.pedido-badge-estado {
+  background-color: #354F56;
+  color: #F7F1E9;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 0.4rem 0.9rem;
+}
+
+/* Chip naranja apagado para pedidos pendientes */
+.pedido-badge-estado.is-pendiente {
+  background-color: var(--naranja-apagado, #AD784E);
+}
+
+/* Títulos internos: "Productos" y "Resumen de la compra" */
+.pedido-seccion-titulo {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--cafe-lumina, #382B26);
+}
+
+/* Items de productos dentro del desplegable */
+.pedido-producto-item:not(:last-child) {
+  border-bottom: 1px solid rgba(56, 43, 38, 0.15);
+}
+
+/* Antes de 1024px el detalle va debajo de la imagen */
+.pedido-producto-item {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media screen and (min-width: 1024px) {
+  .pedido-producto-item {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.pedido-producto-img {
+  width: 92px;
+  height: 92px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 1023px) {
+  .pedido-producto-img {
+    width: 100%;
+    height: 200px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .pedido-producto-img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.pedido-producto-detalle h5 {
+  font-size: 0.98rem;
+  color: var(--cafe-lumina, #382B26);
+}
+
+.pedido-producto-detalle p {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--cafe-lumina, #382B26);
+}
+
+.pedido-producto-precio {
+  font-size: 0.95rem !important;
+  margin-top: 2px;
+}
+
+@media screen and (min-width: 1024px) {
+  .pedido-producto-detalle h5 {
+    font-size: 1.1rem;
+  }
+
+  .pedido-producto-detalle p {
+    font-size: 0.95rem;
+  }
+
+  .pedido-producto-precio {
+    font-size: 1.05rem !important;
+  }
+}
+
+/* En pedidos el resumen no lleva el último separador */
+#pedido-resumen-1 .summary-divider:last-of-type {
+  display: none;
+}

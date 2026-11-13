@@ -1,0 +1,81 @@
+[
+  {
+    "fecha": "13 de Noviembre 2026",
+    "numeroOrden": "L-1236",
+    "estado": "PENDIENTE",
+    "abierto": true,
+    "productos": [
+      {
+        "id": 11,
+        "name": "Noche de Paz",
+        "slug": "noche-de-paz",
+        "img": "https://res.cloudinary.com/zj7mojiw/image/upload/v1794503207/Vela_navide%C3%B1a_Noche_de_Paz.png",
+        "scent": "Vainilla",
+        "category": "Navidad",
+        "weight": 200,
+        "color": "Marfil calido",
+        "price": 12000
+      },
+      {
+        "id": 12,
+        "name": "Pinos del Bosque",
+        "slug": "pinos-del-bosque",
+        "img": "https://res.cloudinary.com/zj7mojiw/image/upload/v1794503206/Vela_Pinos_del_Bosque_en_Navidad.png",
+        "scent": "Pino y cedro",
+        "category": "Navidad",
+        "weight": 200,
+        "color": "Verde pino",
+        "price": 12000
+      }
+    ]
+  },
+  {
+    "fecha": "2 de Noviembre 2026",
+    "numeroOrden": "L-1235",
+    "estado": "COMPLETADA",
+    "abierto": false,
+    "productos": [
+      {
+        "id": 9,
+        "name": "Armonia",
+        "slug": "armonia",
+        "img": "https://res.cloudinary.com/zj7mojiw/image/upload/v1794503207/Vela_Lumina_Armon%C3%ADa_entre_Rosas.png",
+        "scent": "Floral",
+        "category": "Intencion",
+        "weight": 200,
+        "color": "Rosa pastel",
+        "price": 12000
+      }
+    ]
+  },
+  {
+    "fecha": "31 de Octubre 2026",
+    "numeroOrden": "L-1234",
+    "estado": "COMPLETADA",
+    "abierto": false,
+    "productos": [
+      {
+        "id": 18,
+        "name": "Calabaza Dorada",
+        "slug": "calabaza-dorada",
+        "img": "https://res.cloudinary.com/zj7mojiw/image/upload/v1794503201/Vela_Calabaza_Dorada_de_Halloween.png",
+        "scent": "Calabaza especiada, canela y naranja",
+        "category": "Halloween",
+        "weight": 200,
+        "color": "Naranja terracota",
+        "price": 12000
+      },
+      {
+        "id": 19,
+        "name": "Hechizo de Luna",
+        "slug": "hechizo-de-luna",
+        "img": "https://res.cloudinary.com/zj7mojiw/image/upload/v1794503202/Vela_Hechizo_de_Luna_y_Lavanda.png",
+        "scent": "Lavanda, cedro y hierbas aromáticas",
+        "category": "Halloween",
+        "weight": 200,
+        "color": "Violeta mistico",
+        "price": 12000
+      }
+    ]
+  }
+]

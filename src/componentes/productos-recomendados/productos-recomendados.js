@@ -1,10 +1,15 @@
 const CATEGORIAS_TEMPORADA = ["Navidad", "Halloween"];
 
+const SCRIPT_RECOMENDADOS = document.currentScript?.src;
+const PRODUCTO_URL_RECOMENDADOS = SCRIPT_RECOMENDADOS
+  ? new URL("../../tienda/catalogo/producto/", SCRIPT_RECOMENDADOS).href
+  : null;
+
 function crearCardRecomendada(vela) {
   const claseCategoria = obtenerClaseCategoria(vela.category);
 
   return `
-        <article class="card lumina-product-card border-0 shadow-sm flex-shrink-0 product-card-fixed">
+        <article class="card lumina-product-card border-0 shadow-sm flex-shrink-0 product-card-fixed" data-slug="${vela.slug}">
           <div class="card-img-wrapper">
             <img src="${vela.img}" alt="Vela ${vela.name}" class="card-img-top product-card-img" loading="lazy">
           </div>
@@ -105,6 +110,50 @@ document.addEventListener("click", function (evento) {
   if (typeof agregarAlCarrito === "function") {
     agregarAlCarrito(idProducto);
   }
+});
+
+// Navegar al detalle de la vela al hacer clic en la card (sin arrastres ni botones)
+const presionadosRecomendados = new WeakMap();
+
+document.addEventListener("pointerdown", function (evento) {
+  if (evento.pointerType === "mouse" && evento.button !== 0) {
+    return;
+  }
+
+  const card = evento.target.closest(".product-card-fixed");
+
+  if (card) {
+    presionadosRecomendados.set(card, {
+      x: evento.clientX,
+      y: evento.clientY,
+    });
+  }
+});
+
+document.addEventListener("click", function (evento) {
+  if (evento.target.closest("button, a")) {
+    return;
+  }
+
+  const card = evento.target.closest(".product-card-fixed");
+  const inicio = card && presionadosRecomendados.get(card);
+  presionadosRecomendados.delete(card);
+
+  if (!card || !inicio || !PRODUCTO_URL_RECOMENDADOS || !card.dataset.slug) {
+    return;
+  }
+
+  const deslizo = Math.abs(inicio.x - evento.clientX) > 6 ||
+    Math.abs(inicio.y - evento.clientY) > 6;
+
+  if (deslizo) {
+    return;
+  }
+
+  window.location.href = new URL(
+    `?slug=${encodeURIComponent(card.dataset.slug)}`,
+    PRODUCTO_URL_RECOMENDADOS
+  ).href;
 });
 
 function init() {
