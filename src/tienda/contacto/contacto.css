@@ -654,11 +654,14 @@
 }
 
 .contact-detail {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.85rem;
   color: var(--negro-relajacion);
   text-decoration: none;
+  align-self: flex-start;
+  width: fit-content;
+  cursor: pointer;
 }
 
 .contact-detail-icon {
