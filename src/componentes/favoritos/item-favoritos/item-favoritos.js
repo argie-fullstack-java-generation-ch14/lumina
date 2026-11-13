@@ -4,12 +4,12 @@
 // weight, color, price). Los favoritos no manejan cantidad.
 
 function crearItemFavorito(item) {
-  return `
+    return `
     <article class="card cart-item-card p-3" data-favorito-id="${item.id}">
 
       <div class="row align-items-center g-3">
 
-          <div class="col-12 col-md-3 col-xl-2 text-center">
+          <div class="col-12 col-md-4 col-xl-3 text-center">
               <img
                   src="${item.img}"
                   alt="Vela ${item.name}"
@@ -18,7 +18,7 @@ function crearItemFavorito(item) {
               >
           </div>
 
-          <div class="col-12 col-md-9 col-xl-4">
+          <div class="col-12 col-md-8 col-xl-5">
               <h2 class="product-title mb-2">${item.name}</h2>
               <p class="product-info mb-1">
                   <strong>Aroma:</strong> ${item.scent}
@@ -34,7 +34,7 @@ function crearItemFavorito(item) {
               </p>
           </div>
 
-          <div class="col-12 col-xl-6 pe-0 d-flex justify-content-end align-items-center gap-4">
+          <div class="col-12 col-xl-4 pe-0 d-flex justify-content-end align-items-center gap-4">
               <button
                   class="add-to-cart"
                   type="button"

@@ -40,10 +40,16 @@
 
 .product-img {
   width: 100%;
-  max-width: 130px;
-  aspect-ratio: 1 / 1;
+  height: 200px;
   object-fit: cover;
   border-radius: 12px;
+}
+
+@media screen and (min-width: 1024px) {
+  .product-img {
+    width: 150px;
+    height: 150px;
+  }
 }
 
 .product-title {
