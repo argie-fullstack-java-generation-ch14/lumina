@@ -44,6 +44,14 @@
     const confirmation = el.querySelector(".payment-confirmation");
     const orderNumber = el.querySelector(".order-number");
 
+    function resetCheckout() {
+      if (form) form.hidden = false;
+      if (confirmation) confirmation.hidden = true;
+    }
+
+    // Al cerrar la modal, reinicia al estado de formulario de pago.
+    el.addEventListener("hidden.bs.modal", resetCheckout);
+
     if (form) {
       form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -59,6 +67,15 @@
         if (confirmation) {
           confirmation.hidden = false;
         }
+
+        const cards = document.querySelectorAll("#cart-items-container .cart-item-card");
+        cards.forEach((card) => card.classList.add("fade-out"));
+
+        setTimeout(() => {
+          if (typeof vaciarCarrito === "function") {
+            vaciarCarrito();
+          }
+        }, 300);
       });
     }
   }
