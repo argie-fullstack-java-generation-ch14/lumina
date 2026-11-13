@@ -1,8 +1,22 @@
 (function () {
   const MODAL_ID = "checkoutModal";
   const COMPONENT_DIR = new URL("./", document.currentScript.src).href;
+  const PEDIDOS_GUARDADOS_KEY = "lumina-pedidos";
 
   let modalInstance = null;
+
+  function fechaFormateada() {
+    const ahora = new Date();
+    const partes = ahora.toLocaleDateString("es-CO", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    }).split(" ");
+    // partes: ["13", "de", "noviembre", "2026"]
+    const mes = partes[2];
+    const mesCapitalizado = mes.charAt(0).toUpperCase() + mes.slice(1);
+    return `${partes[0]} de ${mesCapitalizado} ${partes[3]}`;
+  }
 
   async function insertMarkup() {
     if (document.getElementById(MODAL_ID)) {
@@ -59,6 +73,44 @@
         const numero = `L-${Math.floor(1000 + Math.random() * 9000)}`;
         if (orderNumber) {
           orderNumber.textContent = numero;
+        }
+
+        // Guarda el pedido en localStorage para que aparezca en "Mis pedidos".
+        if (
+          typeof obtenerProductosCarrito === "function" &&
+          typeof calcularTotales === "function"
+        ) {
+          const productosCarrito = obtenerProductosCarrito();
+          const totales = calcularTotales(productosCarrito);
+
+          const pedido = {
+            fecha: fechaFormateada(),
+            numeroOrden: numero,
+            estado: "PENDIENTE",
+            abierto: true,
+            productos: productosCarrito.map((p) => ({
+              id: p.id,
+              name: p.name,
+              img: p.img,
+              scent: p.scent,
+              weight: p.weight,
+              color: p.color,
+              price: p.price
+            })),
+            totales
+          };
+
+          let guardados = [];
+          try {
+            guardados = JSON.parse(localStorage.getItem(PEDIDOS_GUARDADOS_KEY) || "[]");
+            if (!Array.isArray(guardados)) guardados = [];
+          } catch (error) {
+            console.error("Error al leer pedidos guardados:", error);
+            guardados = [];
+          }
+
+          guardados.unshift(pedido);
+          localStorage.setItem(PEDIDOS_GUARDADOS_KEY, JSON.stringify(guardados));
         }
 
         if (form) {
