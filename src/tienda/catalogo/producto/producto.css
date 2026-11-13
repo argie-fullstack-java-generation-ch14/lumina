@@ -1,15 +1,242 @@
-/* Lumina · producto
- * Estilos SOLO de esta página.
- *
- * Regla del equipo: cada persona edita únicamente el CSS de su página.
- * Lo compartido va en css/main.css o css/components.css, nunca aquí.
- * Clases en inglés y kebab-case: .product-card, no .productCard.
- */
+.producto-imagen-wrapper {
+  position: relative;
+  width: 100%;
+  height: 430px;
+}
 
-/* Espacio mínimo para la zona de cards (promo / recicla) a partir de 1024px */
-@media (min-width: 1024px) {
-  .col-lg-4 > #card-promo,
-  .col-lg-4 > #card-recicla {
-    min-width: 300px;
+.producto-imagen-wrapper-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 20px;
+}
+
+.producto-tag {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  color: var(--naranja-claro);
+  font-size: 16px;
+  font-family: var(--fuente-texto);
+  z-index: 2;
+  /* box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05); */
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.producto-tag:hover {
+  transform: translateY(-3px);
+}
+
+.producto-tag i {
+  margin-bottom: 4px;
+  background: rgba(203, 179, 161, 0.3);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  color: var(--naranja-claro);
+  font-size: 48px;
+  line-height: 1;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.producto-tag span {
+  background: rgba(203, 179, 161, 0.3);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  line-height: 1.4;
+  /* min-height: 2.8em; */
+  font-family: var(--fuente-texto);
+  font-weight: 300;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.tag-top-left {
+  top: 10%;
+  left: 0%;
+}
+
+.tag-bottom-left {
+  bottom: 4%;
+  left: -4%;
+}
+
+.tag-top-right {
+  top: 10%;
+  right: 0%;
+}
+
+.tag-bottom-right {
+  bottom: 4%;
+  right: -4%;
+}
+
+.tag-arrow {
+  position: absolute;
+  z-index: 2;
+  width: 50px;
+}
+
+.tag-anchor {
+  position: absolute;
+  width: 150px;
+  height: 135px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 22%;
+  z-index: 2;
+}
+
+.tag-arrow {
+  position: absolute;
+  width: 45px;
+}
+
+.tl-arrow {
+  top: -55px;
+  left: -40px;
+}
+
+.bl-arrow {
+  bottom: 25px;
+  left: -36px;
+}
+
+.tr-arrow {
+  top: -55px;
+  right: -50px;
+}
+
+.br-arrow {
+  bottom: 25px;
+  right: -48px;
+}
+
+@media (max-width: 426px) {
+  .producto-tag {
+    display: flex;
+    width: 130px;
+    height: 130px;
+  }
+
+  .producto-tag i {
+    font-size: 28px;
+  }
+
+  .producto-tag span {
+    font-size: 12px;
+    min-height: auto;
+  }
+
+  .tag-top-left,
+  .tag-top-right {
+    top: 6%;
+  }
+
+  .tag-bottom-left,
+  .tag-bottom-right {
+    bottom: 0%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .producto-imagen-wrapper {
+    min-height: 630px;
+  }
+
+  .tag-top-left {
+    top: 14%;
+    left: 6%;
+  }
+
+  .tag-bottom-left {
+    bottom: 4%;
+    left: 6%;
+  }
+
+  .tag-top-right {
+    top: 14%;
+    right: 6%;
+  }
+
+  .tag-bottom-right {
+    bottom: 4%;
+    right: 6%;
+  }
+
+  .tag-anchor {
+    width: 220px;
+    height: 195px;
+    bottom: 23%;
+  }
+
+  .tl-arrow {
+    top: -44px;
+    left: -100px;
+  }
+
+  .bl-arrow {
+    bottom: -110px;
+    left: -54px;
+  }
+
+  .tr-arrow {
+    top: -44px;
+    right: -50px;
+  }
+
+  .br-arrow {
+    bottom: -100px;
+    right: 6px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .tag-bottom-left {
+    left: 0%;
+  }
+
+  .tag-bottom-right {
+    right: 0;
+  }
+
+  .bl-arrow {
+    left: -14px;
+  }
+
+  .br-arrow {
+    right: 36px;
+  }
+
+  .producto-info {
+    height: 100%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .tag-bottom-left {
+    left: 6%;
+  }
+
+  .tag-bottom-right {
+    right: 6;
+  }
+}
+
+
+@media screen and (min-width: 1400px) {
+  .bl-arrow {
+    bottom: -110px;
+    left: -73px;
+  }
+
+  .br-arrow {
+    right: -10px;
   }
 }

@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="../../../css/main.css">
   <link rel="stylesheet" href="../../../css/components.css">
   <link rel="stylesheet" href="producto.css">
-  <link rel="stylesheet" href="../../../componentes/carrito/card-promo/card-promo.css">
 </head>
 
 <body>
@@ -25,14 +24,65 @@
   <main class="container my-5">
 
     <div class="container my-5">
-      <div class="row align-items-start g-4">
+      <div class="row align-items-stretch g-4">
 
-        <!-- BLOQUE 1: Imagen Principal (Columna Izquierda) -->
-        <!-- En móvil ocupa todo el ancho, en lg (desktop) ocupa 3 columnas -->
-        <!-- eliminar bordes al completar la vista -->
-        <div class="col-12 col-lg-3">
-          <div class="border rounded text-center" style="min-height: 400px;">
-            <span class="text-muted">Aca va la imagen del producto al que se le hizo clic, esa imagen se debe traer del catálogo o de Favoritos de temporada mediante el id del producto y renderizarla dinámicamente en este contenedor.</span>
+        <div class="col-12 col-lg-7">
+          <div class="producto-imagen-wrapper position-relative overflow-hidden">
+            <!-- Imagen principal de la vela -->
+            <img
+              src="https://res.cloudinary.com/zj7mojiw/image/upload/v1794503211/Vela_Lumina_Renacer_entre_flores_y_sombras_%D1%83%D1%87%D0%B0%D1%81%D1%82.png"
+              alt="Vela Aromática Lumina" class="img-fluid w-100 object-fit-cover producto-imagen-wrapper-img">
+
+            <div class="tag-anchor">
+              <div class="tag-arrow tl-arrow">
+                <picture>
+                  <source media="(min-width: 768px)" srcset="../../../assets/icons/tl-desktop.svg">
+                  <img src="../../../assets/icons/tl-mobile.svg" alt="" aria-hidden="true">
+                </picture>
+              </div>
+              <div class="tag-arrow bl-arrow">
+                <picture>
+                  <source media="(min-width: 768px)" srcset="../../../assets/icons/bl-desktop.svg">
+                  <img src="../../../assets/icons/bl-mobile.svg" alt="" aria-hidden="true">
+                </picture>
+              </div>
+              <div class="tag-arrow tr-arrow">
+                <picture>
+                  <source media="(min-width: 768px)" srcset="../../../assets/icons/tr-desktop.svg">
+                  <img src="../../../assets/icons/tr-mobile.svg" alt="" aria-hidden="true">
+                </picture>
+              </div>
+              <div class="tag-arrow br-arrow">
+                <picture>
+                  <source media="(min-width: 768px)" srcset="../../../assets/icons/br-desktop.svg">
+                  <img src="../../../assets/icons/br-mobile.svg" alt="" aria-hidden="true">
+                </picture>
+              </div>
+            </div>
+
+            <div class="producto-tag tag-top-left text-center p-3">
+              <i class="fa-solid fa-jar fa-lg"></i>
+              <span class="d-block">Frascos Reutilizables</span>
+            </div>
+
+            <!-- Insignia flotante 2: Esencias Naturales -->
+            <div class="producto-tag tag-bottom-left text-center p-3">
+              <i class="fa-solid fa-bottle-droplet fa-lg"></i>
+              <span class="d-block">Esencias<br>Naturales</span>
+            </div>
+
+            <!-- Insignia flotante 3: Cera de Soya -->
+            <div class="producto-tag tag-top-right text-center p-3">
+              <i class="fa-solid fa-wheat-awn fa-lg"></i>
+              <span class="d-block">100% Cera de Soya Natural</span>
+            </div>
+
+            <!-- Insignia flotante 4: Vegano -->
+            <div class="producto-tag tag-bottom-right text-center p-3">
+              <i class="fa-solid fa-leaf fa-lg"></i>
+              <span class="d-block">Producto<br>Vegano</span>
+            </div>
+
           </div>
         </div>
 
@@ -40,18 +90,12 @@
         <!-- En móvil ocupa todo el ancho, en lg (desktop) ocupa 5 columnas -->
         <!-- eliminar bordes al completar la vista -->
         <div class="col-12 col-lg-5">
-          <div class="border rounded" style="min-height: 400px;">
-            <span class="text-muted">Trae la info del producto mediante su id: nombre en el h2, categoría con su chip de categoría, y en especificaciones: aroma, peso y color. Descripción en párrafo y precio con su formato de moneda.</span>
+            <div class="border rounded producto-info">
+            <span class="text-muted">Trae la info del producto mediante su id: nombre en el h2, categoría con su chip de
+              categoría, y en especificaciones: aroma, peso y color. Descripción en párrafo y precio con su formato de
+              moneda.</span>
           </div>
         </div>
-
-        <!-- BLOQUE 3: Cards Promo y Recicla (Columna Derecha) -->
-        <!-- En móvil ocupa todo el ancho, en lg (desktop) ocupa 4 columnas -->
-        <div class="col-12 col-lg-4">
-          <div id="card-promo"></div>
-          <div id="card-recicla"></div>
-        </div>
-
       </div>
     </div>
   </main>
@@ -62,8 +106,6 @@
   <script src="../../../js/bootstrap.bundle.min.js"></script>
   <script src="../../../js/ui.js"></script>
   <script src="../../../js/main.js"></script>
-  <script src="../../../componentes/carrito/card-promo/card-promo.js"></script>
-  <script src="../../../componentes/carrito/card-promo/card-recicla.js"></script>
   <script src="../../../js/carrito.js"></script>
   <script type="module" src="../../../js/velas.js"></script>
   <script src="producto.js"></script>
