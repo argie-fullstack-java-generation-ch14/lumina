@@ -123,7 +123,7 @@
   text-decoration: none;
   text-align: center;
   border-radius: 40px;
-  border: 2px solid var(--cafe-lumina);
+  border: 1px solid var(--cafe-lumina);
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
