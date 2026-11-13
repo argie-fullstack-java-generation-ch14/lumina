@@ -1,6 +1,7 @@
 /* Contenedor principal */
 .about-page {
   margin-top: 3rem;
+  margin-bottom: 28px;
   width: 100%;
   max-width: 1200px;
   padding: 1.5rem 2rem 3rem;
@@ -11,7 +12,7 @@
 /* TITULO PRINCIPAL */
 
 .about-title {
-  margin-bottom: 2rem;
+  margin-bottom: 22px;
   text-align: left;
 }
 
@@ -560,4 +561,10 @@
 .about-history img.img-rounded-custom-2 {
   border-radius: 10px 40px 10px 40px;
   object-fit: cover;
+}
+
+@media screen and (min-width: 768px) {
+  .about-title {
+    margin-bottom: 3rem;
+  }
 }
