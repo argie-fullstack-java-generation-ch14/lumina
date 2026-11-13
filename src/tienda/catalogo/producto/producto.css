@@ -78,22 +78,22 @@
 }
 
 .tag-top-left {
-  top: 10%;
+  top: 6%;
   left: 0%;
 }
 
 .tag-bottom-left {
-  bottom: 4%;
+  bottom: 0%;
   left: -4%;
 }
 
 .tag-top-right {
-  top: 10%;
+  top: 6%;
   right: 0%;
 }
 
 .tag-bottom-right {
-  bottom: 4%;
+  bottom: 0%;
   right: -4%;
 }
 
@@ -218,19 +218,6 @@
 
 .producto-btn-carrito:active {
   transform: translateY(0);
-}
-
-@media (max-width: 426px) {
-
-  .tag-top-left,
-  .tag-top-right {
-    top: 6%;
-  }
-
-  .tag-bottom-left,
-  .tag-bottom-right {
-    bottom: 0%;
-  }
 }
 
 @media screen and (min-width: 768px) {
