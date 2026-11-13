@@ -1,0 +1,89 @@
+.faq-title {
+  font-family: var(--fuente-titulos);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--cafe-lumina);
+  margin-bottom: 0.5rem;
+}
+
+.faq-lead {
+  font-size: 1.05rem;
+  color: var(--negro-relajacion);
+}
+
+.faq-link {
+  color: var(--naranja-apagado);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.faq-link:hover {
+  color: var(--cafe-lumina);
+  text-decoration: underline;
+}
+
+.faq-item {
+  border: 1px solid var(--verde-apagado);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.faq-item .accordion-button {
+  font-family: var(--fuente-titulos);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--cafe-lumina);
+  background-color: #FFFFFF;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  border-bottom: none;
+}
+
+.faq-item .accordion-button.collapsed {
+  border-radius: 12px;
+}
+
+/* Abierto: solo esquinas superiores en el botón */
+.faq-item .accordion-button:not(.collapsed) {
+  color: var(--naranja-apagado);
+  background-color: #faf7f4;
+  box-shadow: none;
+  border-radius: 12px 12px 0 0;
+  border-bottom: 1px solid var(--verde-apagado);
+}
+
+.faq-item .accordion-button.collapsed:hover {
+  background-color: #faf7f4;
+}
+
+.faq-item .accordion-button::after {
+  filter: none;
+}
+
+/* Abierto: solo esquinas inferiores en el cuerpo */
+.faq-item .accordion-collapse > .accordion-body {
+  font-size: 0.95rem;
+  color: var(--negro-relajacion);
+  line-height: 1.6;
+  padding: 1rem 1.25rem;
+  background-color: #FFFFFF;
+  border-radius: 0 0 12px 12px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.faq-item .accordion-button:not(.collapsed) + .accordion-collapse > .accordion-body {
+  border-top: 1px solid var(--verde-apagado);
+}
+
+@media (max-width: 576px) {
+  .faq-title {
+    font-size: 1.5rem;
+  }
+
+  .faq-layout {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

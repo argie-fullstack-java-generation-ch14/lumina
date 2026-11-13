@@ -16,8 +16,6 @@
 
 .product-img {
   width: 100%;
-  max-width: 130px;
-  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 12px;
 }
@@ -68,6 +66,20 @@
   font-weight: 700;
   font-size: 1.4rem;
   color: var(--cafe-lumina);
+}
+
+@media screen and (max-widt: 767.98) {
+  .product-img {
+    height: 200px;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .product-img {
+    max-width: 130px;
+    aspect-ratio: 1 / 1;
+  }
 }
 
 @media screen and (min-width: 1024px) {
