@@ -90,14 +90,42 @@
           </div>
         </div>
 
-        <!-- BLOQUE 2: Información del Producto, Precio y Botón (Columna Central) -->
-        <!-- En móvil ocupa todo el ancho, en lg (desktop) ocupa 5 columnas -->
-        <!-- eliminar bordes al completar la vista -->
+        <!-- BLOQUE 2: Información del Producto, Precio y Botón -->
         <div class="col-12 col-lg-5">
-            <div class="border rounded producto-info">
-            <span class="text-muted">Trae la info del producto mediante su id: nombre en el h2, categoría con su chip de
-              categoría, y en especificaciones: aroma, peso y color. Descripción en párrafo y precio con su formato de
-              moneda.</span>
+          <div class="producto-info d-flex flex-column justify-content-between ps-lg-4 py-2">
+
+            <div>
+              <h2 id="producto-nombre" class="producto-titulo mb-4">Equilibrio</h2>
+
+              <div class="mb-4">
+                <h3 class="producto-subtitulo mb-2">Categoría</h3>
+                <span id="producto-categoria" class="candle-category category-mindfulness">Mindfulness</span>
+              </div>
+
+              <div class="mb-4">
+                <h3 class="producto-subtitulo mb-2">Especificaciones</h3>
+                <ul class="list-unstyled producto-specs mb-0">
+                  <li><strong>Aroma:</strong> <span id="producto-aroma">Lavanda - Manzanilla</span></li>
+                  <li><strong>Peso:</strong> <span id="producto-peso">200g</span></li>
+                  <li><strong>Color:</strong> <span id="producto-color">Blanca con destellos rojos</span></li>
+                </ul>
+              </div>
+
+              <div class="producto-desc-block">
+                <h3 class="producto-subtitulo mb-2">Descripción</h3>
+                <p id="producto-descripcion" class="producto-desc mb-0">
+                  Ideal para desconectarte del ruido del día y crear un ambiente relajante.
+                </p>
+              </div>
+            </div>
+
+            <div class="producto-purchase pt-3 mt-auto">
+              <span id="producto-precio" class="producto-precio">$ 12.000</span>
+              <button id="btn-agregar-carrito" type="button" class="producto-btn-carrito">
+                Agregar al carrito
+              </button>
+            </div>
+
           </div>
         </div>
       </div>
