@@ -42,6 +42,10 @@ fetch('pedidos/index.html')
   })
   .then(html => {
     document.getElementById('pedidos-content').innerHTML = html;
+
+    if (typeof renderPedidos === 'function') {
+      renderPedidos();
+    }
   })
   .catch(err => {
     console.error('Error cargando módulo de pedidos:', err);
