@@ -95,7 +95,19 @@
           <div class="producto-info d-flex flex-column justify-content-between ps-lg-4 py-2">
 
             <div>
-              <h2 id="producto-nombre" class="producto-titulo mb-4">Equilibrio</h2>
+                <div class="producto-titulo-wrapper d-flex align-items-center gap-3 mb-4">
+                <h2 id="producto-nombre" class="producto-titulo mb-0">Equilibrio</h2>
+                <button
+                  class="favorite-button producto-favorite-button"
+                  type="button"
+                  aria-label="Agregar a favoritos"
+                  aria-pressed="false"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="bottom"
+                  data-bs-title="Agregar a favoritos">
+                  <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                </button>
+              </div>
 
               <div class="mb-4">
                 <h3 class="producto-subtitulo mb-2">Categoría</h3>
@@ -139,6 +151,7 @@
   <script src="../../../js/ui.js"></script>
   <script src="../../../js/main.js"></script>
   <script src="../../../js/carrito.js"></script>
+  <script src="../../../js/favoritos.js"></script>
   <script type="module" src="../../../js/velas.js"></script>
   <script src="producto.js"></script>
 </body>
