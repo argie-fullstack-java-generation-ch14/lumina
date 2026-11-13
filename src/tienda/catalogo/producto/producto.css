@@ -57,8 +57,8 @@
 .producto-tag i {
   margin-bottom: 4px;
   /* background: rgba(203, 179, 161, 0.3); */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
   color: var(--naranja-claro);
   font-size: 28px;
   line-height: 1;
