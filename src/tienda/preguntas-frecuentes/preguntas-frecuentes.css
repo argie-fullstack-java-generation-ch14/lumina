@@ -1,3 +1,4 @@
+/* --- PÁGINA PREGUNTAS FRECUENTES --- */
 .faq-title {
   font-family: var(--fuente-titulos);
   font-size: 2rem;
@@ -22,10 +23,13 @@
   text-decoration: underline;
 }
 
-.faq-item {
+.faq-item,
+.faq-item:first-of-type,
+.faq-item:not(:first-of-type) {
   border: 1px solid var(--verde-apagado);
   border-radius: 12px;
   margin-bottom: 1rem;
+  overflow: hidden;
 }
 
 .faq-item .accordion-button {
@@ -35,12 +39,12 @@
   color: var(--cafe-lumina);
   background-color: #FFFFFF;
   padding: 1rem 1.25rem;
-  border-radius: 12px;
+  border-radius: 0;
   border-bottom: none;
 }
 
 .faq-item .accordion-button.collapsed {
-  border-radius: 12px;
+  border-radius: 0;
 }
 
 /* Abierto: solo esquinas superiores en el botón */
@@ -60,20 +64,22 @@
   filter: none;
 }
 
-/* Abierto: solo esquinas inferiores en el cuerpo */
-.faq-item .accordion-collapse > .accordion-body {
+/* Cerrado: body sin bordes que conflicten con el contenedor */
+.faq-item .accordion-body {
   font-size: 0.95rem;
   color: var(--negro-relajacion);
   line-height: 1.6;
   padding: 1rem 1.25rem;
   background-color: #FFFFFF;
-  border-radius: 0 0 12px 12px;
+  border-radius: 0;
   border-top: none;
   border-left: none;
   border-right: none;
 }
 
-.faq-item .accordion-button:not(.collapsed) + .accordion-collapse > .accordion-body {
+/* Abierto: solo esquinas inferiores en el cuerpo */
+.faq-item .accordion-button:not(.collapsed)+.accordion-collapse>.accordion-body {
+  border-radius: 0 0 12px 12px;
   border-top: 1px solid var(--verde-apagado);
 }
 
