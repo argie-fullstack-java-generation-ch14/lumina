@@ -1,11 +1,8 @@
-
-/* LUMINA - PAGINA SOBRE NOSOTROS*/
-
 /* Contenedor principal */
 .about-page {
+  margin-top: 3rem;
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
   padding: 1.5rem 2rem 3rem;
   background-color: #ffffff;
   color: #403332;
