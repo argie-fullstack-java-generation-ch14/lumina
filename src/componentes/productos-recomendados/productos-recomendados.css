@@ -12,6 +12,7 @@
 .product-card-fixed {
   width: 220px;
   min-width: 220px;
+  cursor: pointer;
 }
 
 .related-scroll::-webkit-scrollbar {
