@@ -270,6 +270,15 @@ function renderCarrito() {
     contenedorItems.innerHTML = productos.length
       ? productos.map(crearItemCarrito).join("")
       : estadoCarritoVacio();
+
+    // Animación sutil de entrada para los items que aparecen
+    if (productos.length) {
+      const items = contenedorItems.querySelectorAll(".cart-item-card");
+      items.forEach((item) => {
+        item.classList.add("fade-in");
+        setTimeout(() => item.classList.remove("fade-in"), 500);
+      });
+    }
   }
 
   // Resumen de la compra

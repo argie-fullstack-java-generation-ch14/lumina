@@ -99,6 +99,13 @@ function agregarFavorito(id) {
   });
 
   guardarFavoritos();
+
+  // La vista de favoritos se re-renderiza si estamos en ella
+  if (typeof renderFavoritos === "function") {
+    renderFavoritos();
+  }
+
+  sincronizarCorazonesFavoritos();
 }
 
 function quitarFavorito(id) {

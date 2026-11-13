@@ -8,6 +8,15 @@ function renderFavoritos() {
     contenedorItems.innerHTML = productos.length
       ? productos.map(crearItemFavorito).join("")
       : estadoFavoritosVacio();
+
+    // Animación sutil de entrada para los items que aparecen
+    if (productos.length) {
+      const items = contenedorItems.querySelectorAll(".cart-item-card");
+      items.forEach((item) => {
+        item.classList.add("fade-in");
+        setTimeout(() => item.classList.remove("fade-in"), 500);
+      });
+    }
   }
 }
 
