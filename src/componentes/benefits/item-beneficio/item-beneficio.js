@@ -27,7 +27,7 @@ const BENEFICIOS = [
   },
   {
     imagen: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1794021979/generation/lumina/benefits/intencion_igh2rx.png",
-    titulo: "Itención",
+    titulo: "Intención",
     texto: "Velas y rituales para tu equilibrio",
   },
 ];
