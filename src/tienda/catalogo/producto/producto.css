@@ -35,9 +35,9 @@
 
 .producto-tag i {
   margin-bottom: 4px;
-  background: rgba(203, 179, 161, 0.3);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
+  /* background: rgba(203, 179, 161, 0.3); */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--naranja-claro);
   font-size: 48px;
   line-height: 1;
@@ -46,9 +46,9 @@
 }
 
 .producto-tag span {
-  background: rgba(203, 179, 161, 0.3);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
+  /* background: rgba(203, 179, 161, 0.3); */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   line-height: 1.4;
   /* min-height: 2.8em; */
   font-family: var(--fuente-texto);
