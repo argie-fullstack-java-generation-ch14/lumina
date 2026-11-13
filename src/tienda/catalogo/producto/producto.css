@@ -153,6 +153,32 @@
   line-height: 1.2;
 }
 
+/* Botón favorito al lado del nombre del producto */
+.producto-favorite-button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: #F8F4F1;
+  color: #554A47;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.producto-favorite-button:hover {
+  transform: scale(1.05);
+}
+
+.producto-favorite-button[aria-pressed="true"] {
+  color: #D77C8D;
+}
+
 .producto-subtitulo {
   font-size: 1.05rem;
   font-weight: 700;

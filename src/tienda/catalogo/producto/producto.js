@@ -6,6 +6,28 @@ function initProducto() {
 
   document.getElementById("producto-nombre").textContent = vela.name;
 
+    const btnFavorito = document.querySelector(".producto-favorite-button");
+    if (btnFavorito && typeof esFavorito === "function") {
+      btnFavorito.dataset.productId = vela.id;
+      const estaEnFavoritos = esFavorito(vela.id);
+      btnFavorito.setAttribute("aria-pressed", String(estaEnFavoritos));
+      btnFavorito.setAttribute(
+        "aria-label",
+        estaEnFavoritos
+          ? `Quitar ${vela.name} de favoritos`
+          : `Agregar ${vela.name} a favoritos`
+      );
+      btnFavorito.setAttribute(
+        "data-bs-title",
+        estaEnFavoritos ? "Quitar de favoritos" : "Agregar a favoritos"
+      );
+      const icono = btnFavorito.querySelector("i");
+      icono.className = estaEnFavoritos ? "fa-solid fa-heart" : "fa-regular fa-heart";
+      icono.setAttribute("aria-hidden", "true");
+
+      new bootstrap.Tooltip(btnFavorito);
+    }
+
   const categoria = document.getElementById("producto-categoria");
   categoria.textContent = vela.category;
   categoria.className = `candle-category ${window.obtenerClaseCategoria(
