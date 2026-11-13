@@ -1,7 +1,6 @@
 /* Contenedor principal */
 .about-page {
-  margin-top: 3rem;
-  margin-bottom: 28px;
+  margin: 3rem auto 28px;
   width: 100%;
   max-width: 1200px;
   padding: 1.5rem 2rem 3rem;
@@ -13,7 +12,6 @@
 
 .about-title {
   margin-bottom: 22px;
-  text-align: left;
 }
 
 .about-title h1 {
