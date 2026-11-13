@@ -1,15 +1,376 @@
-/* Lumina · producto
- * Estilos SOLO de esta página.
- *
- * Regla del equipo: cada persona edita únicamente el CSS de su página.
- * Lo compartido va en css/main.css o css/components.css, nunca aquí.
- * Clases en inglés y kebab-case: .product-card, no .productCard.
- */
+.producto-imagen-wrapper {
+  position: relative;
+  width: 100%;
+  height: 430px;
+}
 
-/* Espacio mínimo para la zona de cards (promo / recicla) a partir de 1024px */
-@media (min-width: 1024px) {
-  .col-lg-4 > #card-promo,
-  .col-lg-4 > #card-recicla {
-    min-width: 300px;
+.articulo-volver {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: var(--naranja-apagado, #AD784E);
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.articulo-volver:hover {
+  color: var(--cafe-lumina, #3B2C2C);
+  opacity: 0.8;
+}
+
+.producto-imagen-wrapper-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 20px;
+}
+
+.producto-tag {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  color: var(--naranja-claro);
+  font-size: 12px;
+  font-family: var(--fuente-texto);
+  z-index: 2;
+  /* box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05); */
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.producto-tag:hover {
+  transform: translateY(-3px);
+}
+
+.producto-tag i {
+  margin-bottom: 4px;
+  /* background: rgba(203, 179, 161, 0.3); */
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  color: var(--naranja-claro);
+  font-size: 28px;
+  line-height: 1;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.producto-tag span {
+  /* background: rgba(203, 179, 161, 0.3); */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  line-height: 1.4;
+  font-family: var(--fuente-texto);
+  font-weight: 300;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.tag-top-left {
+  top: 10%;
+  left: 0%;
+}
+
+.tag-bottom-left {
+  bottom: 4%;
+  left: -4%;
+}
+
+.tag-top-right {
+  top: 10%;
+  right: 0%;
+}
+
+.tag-bottom-right {
+  bottom: 4%;
+  right: -4%;
+}
+
+.tag-arrow {
+  position: absolute;
+  z-index: 2;
+  width: 50px;
+}
+
+.tag-anchor {
+  position: absolute;
+  width: 150px;
+  height: 135px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 22%;
+  z-index: 2;
+}
+
+.tag-arrow {
+  position: absolute;
+  width: 45px;
+}
+
+.tl-arrow {
+  top: -55px;
+  left: -40px;
+}
+
+.bl-arrow {
+  bottom: 25px;
+  left: -36px;
+}
+
+.tr-arrow {
+  top: -55px;
+  right: -50px;
+}
+
+.br-arrow {
+  bottom: 25px;
+  right: -48px;
+}
+
+
+/* Contenedor principal de información */
+.producto-info {
+  color: var(--cafe-lumina);
+  font-family: var(--fuente-texto);
+}
+
+.producto-titulo {
+  font-family: var(--fuente-titulos);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--cafe-lumina);
+  line-height: 1.2;
+}
+
+.producto-subtitulo {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--cafe-lumina);
+}
+
+.producto-info .candle-category {
+  padding: 6px 14px;
+  font-size: 12px;
+}
+
+.producto-specs li {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--cafe-lumina);
+}
+
+.producto-specs strong {
+  font-weight: 700;
+}
+
+.producto-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--cafe-lumina);
+  max-width: 92%;
+}
+
+.producto-precio {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--cafe-lumina);
+  letter-spacing: -0.5px;
+}
+
+.producto-btn-carrito {
+  background-color: var(--cafe-lumina);
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.7rem 1.5rem;
+  border-radius: 50px;
+  border: none;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.producto-purchase {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.producto-purchase .producto-btn-carrito {
+  align-self: flex-end;
+}
+
+.producto-btn-carrito:hover,
+.producto-btn-carrito:focus {
+  background-color: #554342;
+  color: #FFFFFF;
+}
+
+.producto-btn-carrito:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 426px) {
+
+  .tag-top-left,
+  .tag-top-right {
+    top: 6%;
+  }
+
+  .tag-bottom-left,
+  .tag-bottom-right {
+    bottom: 0%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .producto-imagen-wrapper {
+    min-height: 630px;
+  }
+
+  .producto-tag {
+    width: 160px;
+    height: 160px;
+    font-size: 16px;
+  }
+
+  .producto-tag i {
+    font-size: 48px;
+  }
+
+  .tag-top-left {
+    top: 14%;
+    left: 6%;
+  }
+
+  .tag-bottom-left {
+    bottom: 4%;
+    left: 6%;
+  }
+
+  .tag-top-right {
+    top: 14%;
+    right: 6%;
+  }
+
+  .tag-bottom-right {
+    bottom: 4%;
+    right: 6%;
+  }
+
+  .tag-anchor {
+    width: 220px;
+    height: 195px;
+    bottom: 23%;
+  }
+
+  .tl-arrow {
+    top: -44px;
+    left: -100px;
+  }
+
+  .bl-arrow {
+    bottom: -110px;
+    left: -54px;
+  }
+
+  .tr-arrow {
+    top: -44px;
+    right: -50px;
+  }
+
+  .br-arrow {
+    bottom: -100px;
+    right: 6px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .tag-bottom-left {
+    left: 0%;
+  }
+
+  .tag-bottom-right {
+    right: 0;
+  }
+
+  .bl-arrow {
+    left: -14px;
+  }
+
+  .br-arrow {
+    right: 36px;
+  }
+
+  .producto-info {
+    height: 100%;
+  }
+
+  .producto-titulo {
+    font-size: 2rem;
+  }
+
+  .producto-subtitulo {
+    font-size: 1.15rem;
+  }
+
+  .producto-specs li {
+    font-size: 1rem;
+  }
+
+  .producto-desc {
+    font-size: 1rem;
+  }
+
+  .producto-precio {
+    font-size: 1.8rem;
+  }
+
+  .producto-btn-carrito {
+    font-size: 0.9rem;
+    padding: 0.75rem 1.75rem;
+  }
+
+  .producto-purchase {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .producto-purchase .producto-btn-carrito {
+    align-self: auto;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .tag-bottom-left {
+    left: 6%;
+  }
+
+  .tag-bottom-right {
+    right: 6%;
+  }
+}
+
+
+@media screen and (min-width: 1400px) {
+  .bl-arrow {
+    bottom: -110px;
+    left: -73px;
+  }
+
+  .br-arrow {
+    right: -10px;
   }
 }

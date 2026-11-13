@@ -166,56 +166,6 @@
 }
 
 
-/* Categorías */
-
-.candle-category {
-    display: inline-block;
-    padding: 4px 9px;
-    border-radius: 20px;
-    color: #FFFFFF;
-    font-size: 10px;
-    font-weight: 500;
-    line-height: 1.2;
-    white-space: nowrap;
-}
-
-.category-amor-propio {
-    background-color: #DDA5AF;
-}
-
-.category-mindfulness {
-    background-color: #B9A9D0;
-}
-
-.category-intencion {
-    background-color: #C9A166;
-}
-
-.category-descanso {
-    background-color: #C9B9A7;
-}
-
-.category-bienestar {
-    background-color: #A9B7A0;
-}
-
-.category-halloween {
-    background-color: #F36D43;
-}
-
-.category-navidad {
-    background-color: #38535E;
-}
-
-.category-rituales {
-    background-color: #C9A166;
-}
-
-.category-default {
-    background-color: #B9A9D0;
-}
-
-
 /* Aroma y peso */
 
 .candle-details {
