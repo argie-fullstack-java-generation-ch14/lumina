@@ -1,8 +1,10 @@
 // Lumina · mi cuenta · pedidos
-// Carga los pedidos desde src/data/pedidos.json y los renderiza con el
+// Carga los pedidos desde src/data/pedidos.json y los que el usuario ha
+// realizado (guardados en localStorage al pagar) y los renderiza con el
 // componente item-mis-pedidos, que reutiliza el resumen de compra del carrito.
 
 const PEDIDOS_URL = new URL("../../../data/pedidos.json", document.currentScript.src).href;
+const PEDIDOS_GUARDADOS_KEY = "lumina-pedidos";
 const IVA_TASA_PEDIDOS = 0.19;
 
 // Mismos criterios de calcularTotales en js/carrito.js (sin cupón).
@@ -20,6 +22,16 @@ function calcularTotalesPedido(productos) {
   };
 }
 
+function obtenerPedidosGuardados() {
+  try {
+    const datos = JSON.parse(localStorage.getItem(PEDIDOS_GUARDADOS_KEY) || "[]");
+    return Array.isArray(datos) ? datos : [];
+  } catch (error) {
+    console.error("Error al leer pedidos guardados:", error);
+    return [];
+  }
+}
+
 async function renderPedidos() {
   if (typeof crearItemPedido !== "function") {
     return;
@@ -32,18 +44,24 @@ async function renderPedidos() {
   }
 
   try {
-    const response = await fetch(PEDIDOS_URL);
+    const [response, pedidosGuardados] = await Promise.all([
+      fetch(PEDIDOS_URL),
+      Promise.resolve(obtenerPedidosGuardados())
+    ]);
 
     if (!response.ok) {
       throw new Error(`Error ${response.status} al cargar pedidos.json`);
     }
 
-    const pedidos = await response.json();
+    const pedidosJson = await response.json();
 
-    lista.innerHTML = pedidos
+    // Los pedidos realizados por el usuario van primero (los más recientes arriba).
+    const todos = [...pedidosGuardados, ...pedidosJson];
+
+    lista.innerHTML = todos
       .map((pedido, indice) => crearItemPedido({
         ...pedido,
-        totales: calcularTotalesPedido(pedido.productos)
+        totales: pedido.totales || calcularTotalesPedido(pedido.productos)
       }, indice + 1))
       .join("\n");
 

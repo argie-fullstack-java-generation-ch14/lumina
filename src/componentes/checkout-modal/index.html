@@ -1,0 +1,85 @@
+<!-- Componente Checkout Modal — se inyecta en <body> por checkout-modal.js -->
+<div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="checkoutModalLabel">Pago</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <section class="payment-wrapper">
+
+          <h2 class="payment-title mb-3">Método de pago</h2>
+
+          <form class="payment-form">
+            <p class="payment-label mb-3">Selecciona el método de pago</p>
+
+            <div class="payment-options d-flex gap-3">
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="visa" checked>
+                <span class="card-brand-badge badge-visa">VISA</span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="mastercard">
+                <span class="card-brand-badge badge-mc">
+                  <span class="mc-circle mc-red"></span>
+                  <span class="mc-circle mc-yellow"></span>
+                </span>
+              </label>
+            </div>
+
+            <div class="mb-3">
+              <label for="cardNumber" class="form-label payment-label">Número de tarjeta</label>
+              <div class="input-group payment-input-group">
+                <span class="input-group-text payment-input-icon">
+                  <i class="ri-bank-card-line"></i>
+                </span>
+                <input type="text" class="form-control payment-input ps-0" id="cardNumber"
+                  placeholder="0000 0000 0000 0000" maxlength="19">
+              </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-12 col-sm-6">
+                <label for="expiryDate" class="form-label payment-label">Fecha de vencimiento</label>
+                <input type="text" class="form-control payment-input" id="expiryDate" placeholder="MM / AA"
+                  maxlength="9">
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <label for="cvvCvc" class="form-label payment-label">CVV/CVC</label>
+                <div class="input-group payment-input-group">
+                  <input type="password" class="form-control payment-input pe-0" id="cvvCvc" placeholder="***"
+                    maxlength="4">
+                  <span class="input-group-text payment-input-icon" title="Código de seguridad de 3 o 4 dígitos">
+                    <i class="ri-question-line"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label for="cardholderName" class="form-label payment-label">Nombre del titular</label>
+              <input type="text" class="form-control payment-input" id="cardholderName"
+                placeholder="Nombre del titular">
+            </div>
+            <button type="submit" class="btn payment-submit-btn">
+              Pagar
+            </button>
+          </form>
+
+          <div class="payment-confirmation" hidden>
+            <div class="confirmation-icon">
+              <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+            </div>
+            <h2 class="confirmation-title">Orden confirmada</h2>
+            <p class="confirmation-order">
+              Número de orden <span class="order-number">L-0000</span>
+            </p>
+            <p class="confirmation-thanks">Gracias por comprar en Lumina</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

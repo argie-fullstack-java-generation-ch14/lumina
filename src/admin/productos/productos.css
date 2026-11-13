@@ -1,7 +1,78 @@
-/* Lumina · admin/productos
- * Estilos SOLO de esta página.
- *
- * Regla del equipo: cada persona edita únicamente el CSS de su página.
- * Lo compartido va en css/main.css o css/components.css, nunca aquí.
- * Clases en inglés y kebab-case: .product-card, no .productCard.
- */
+.btn-agregar-vela {
+	background-color: var(--cafe-lumina);
+	color: #FFFFFF;
+	font-size: 0.85rem;
+	font-weight: 600;
+	padding: 0.7rem 1.5rem;
+	border-radius: 50px;
+	border: none;
+	cursor: pointer;
+	font-family: inherit;
+	transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.btn-agregar-vela:hover,
+.btn-agregar-vela:focus {
+	background-color: #554342;
+	color: #FFFFFF;
+}
+
+.btn-agregar-vela:active {
+	transform: translateY(0);
+}
+
+/* Estado vacío — mismo estilo que el carrito */
+.placeholder-wrap {
+	grid-column: 1 / -1;
+}
+
+.cart-empty {
+	border: 1.5px dashed var(--verde-apagado);
+	border-radius: 16px;
+	background-color: #FFFFFF;
+	box-shadow: none;
+}
+
+.cart-empty i {
+	font-size: 2.5rem;
+	color: var(--verde-apagado);
+}
+
+.product-title {
+	font-family: var(--fuente-titulos);
+	font-size: 1.35rem;
+	font-weight: 700;
+	color: var(--cafe-lumina);
+}
+
+.product-info {
+	font-size: 0.9rem;
+	color: var(--negro-relajacion);
+}
+
+.btn-checkout {
+	display: inline-block;
+	padding-block: 10px;
+	background-color: var(--cafe-lumina);
+	color: #FFFFFF;
+	font-family: var(--fuente-texto);
+	font-weight: 600;
+	font-size: 15px;
+	text-decoration: none;
+}
+
+.btn-catalogo {
+	display: block;
+	min-width: 200px;
+	max-width: 200px;
+	padding: 10px;
+	margin-inline: auto;
+	background-color: var(--celeste-apagado);
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+h1 {
+	font-family: var(--fuente-titulos);
+	color: var(--cafe-lumina);
+}
