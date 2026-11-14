@@ -1,0 +1,10 @@
+# Lo que genera Maven
+target/
+
+# Editores
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
