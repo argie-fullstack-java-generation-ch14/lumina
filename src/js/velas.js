@@ -26,6 +26,7 @@ export function obtenerClaseCategoria(categoria) {
     "Amor propio": "category-amor-propio",
     "Mindfulness": "category-mindfulness",
     "Intencion": "category-intencion",
+    "Intención": "category-intencion",
     "Descanso": "category-descanso",
     "Bienestar": "category-bienestar",
     "Halloween": "category-halloween",
