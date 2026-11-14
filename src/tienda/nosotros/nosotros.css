@@ -394,7 +394,7 @@
 .member-modal-info h3 {
   margin: 0 0 1rem;
   color: #806d65;
-  font-family: "Calibri", sans-serif;
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
   font-size: 1.15rem;
   font-weight: 400;
 }
