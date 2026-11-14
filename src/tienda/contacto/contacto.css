@@ -10,7 +10,7 @@
 .contact-page {
   padding-top: 3rem;
   padding-bottom: 3rem;
-  font-family: Calibri, sans-serif;
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
 
   /* Fondo con fotografía de Lumina */
   background-image:
@@ -71,7 +71,7 @@
 .contact-lead {
   margin: 0;
   max-width: 28rem;
-  font-family: Calibri, sans-serif;
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
   font-size: 18px;
   line-height: 1.5;
   color: var(--negro-relajacion);
@@ -130,7 +130,7 @@
 .contact-input {
   width: 100%;
   padding: 0.85rem 1rem;
-  font-family: Calibri, sans-serif;
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
   font-size: 0.9rem;
   line-height: 1.5;
   color: var(--negro-acentuado);
@@ -188,7 +188,7 @@
 
 .contact-error {
   margin: 0;
-  font-family: Calibri, sans-serif;
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
   font-size: 0.8125rem;
   line-height: 1.4;
   color: var(--naranja-apagado);
@@ -211,7 +211,7 @@
 .contact-form-error {
   margin: 0;
   padding: 0.75rem 1rem;
-  font-family: Calibri, sans-serif;
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
   font-size: 1.05rem;
   color: var(--negro-relajacion);
   background-color: rgba(255, 250, 246, 0.55);
@@ -281,7 +281,7 @@
 .contact-state-text {
   margin: 0;
   max-width: 24rem;
-  font-family: Calibri, sans-serif;
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
   font-size: 1.1rem;
   color: var(--negro-relajacion);
 }
@@ -693,7 +693,7 @@
 
 .contact-detail-text {
   margin: 0;
-  font-family: Calibri, sans-serif;
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
   font-size: 1.05rem;
   color: var(--negro-relajacion);
 }
@@ -730,7 +730,7 @@
   align-items: center;
   gap: 0.45rem;
   padding: 0.55rem 0.85rem;
-  font-family: Calibri, sans-serif;
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
   color: #354F56;
   background: rgba(255, 250, 246, 0.45);
   border: 1px solid var(--naranja-acentuado);
@@ -788,7 +788,7 @@
 
 .contact-location-text {
   margin: 0;
-  font-family: Calibri, sans-serif;
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
   font-size: 18px;
   font-weight: 300;
   line-height: 1.6;
@@ -798,7 +798,7 @@
 
 .contact-location-text2 {
   margin: 0;
-  font-family: Calibri, sans-serif;
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
   font-size: 1.1rem;
   font-weight: bold;
   line-height: 1.6;
@@ -809,7 +809,7 @@
 
 .contact-location-text3 {
   margin: 0;
-  font-family: Calibri, sans-serif;
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
   font-size: 18px;
   font-weight: 300;
   line-height: 1.6;

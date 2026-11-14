@@ -22,7 +22,7 @@ function crearResumenCompra(totales, opciones = {}) {
 
 	const bloqueCupon = mostrarCupon
 		? `
-          <div class="mb-4">
+          <div class="mb-4 coupon-field">
               <label for="couponInput" class="form-label coupon-label d-flex align-items-center gap-2 mb-2">
                   <i class="fa-solid fa-ticket" aria-hidden="true"></i>
                   <span>Ingresar cupón de descuento</span>
@@ -32,15 +32,18 @@ function crearResumenCompra(totales, opciones = {}) {
                     <div class="col-12 col-sm-8 col-lg-12 col-xl-8">
                         <input type="text" id="couponInput" class="form-control coupon-input"
                             value="${cuponAplicado ?? ""}"
+                            aria-describedby="couponError"
                             placeholder="Ingresar código del cupón">
                     </div>
                     <div class="col-12 col-sm-4 col-lg-12 col-xl-4">
                         <button type="button" class="btn-apply w-100">Aplicar</button>
                     </div>
                 </div>
+
+                <p class="coupon-error" id="couponError" aria-live="polite"></p>
           </div>
 
-          <button type="button" class="btn-checkout w-100 mb-2">
+          <button type="button" class="btn-checkout w-100 mb-2"${cantidad > 0 ? "" : " disabled"}>
               Finalizar compra
           </button>
 

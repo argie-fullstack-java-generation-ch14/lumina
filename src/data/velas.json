@@ -8,7 +8,7 @@
     "category": "Bienestar",
     "weight": 200,
     "color": "Blanco con destellos rosa",
-    "description": "Un momento para renovar tu energia.",
+    "description": "Un momento para renovar tu energía.",
     "price": 12000
   },
   {
@@ -41,7 +41,7 @@
     "slug": "luna-nueva",
     "img": "https://res.cloudinary.com/zj7mojiw/image/upload/v1794503210/Imagen_de_ChatGPT_12_nov_2026_10_51_00_a.m.png",
     "scent": "Amaderado",
-    "category": "Intencion",
+    "category": "Intención",
     "weight": 200,
     "color": "Plata envejecida",
     "description": "Un nuevo comienzo para ti.",
@@ -56,12 +56,12 @@
     "category": "Amor propio",
     "weight": 200,
     "color": "Verde salvia",
-    "description": "Ideal para desconectarte del ruido del dia y crear un ambiente relajante.",
+    "description": "Ideal para desconectarte del ruido del día y crear un ambiente relajante.",
     "price": 12000
   },
   {
     "id": 6,
-    "name": "Conexion",
+    "name": "Conexión",
     "slug": "conexion",
     "img": "https://res.cloudinary.com/zj7mojiw/image/upload/v1794503210/Vela_Lumina_Conexi%C3%B3n_entre_Flores.png",
     "scent": "Dulce",
@@ -76,10 +76,10 @@
     "name": "Atardecer",
     "slug": "atardecer",
     "img": "https://res.cloudinary.com/zj7mojiw/image/upload/v1794503209/Vela_Lumina_al_Atardecer.png",
-    "scent": "Citrico",
+    "scent": "Cítrico",
     "category": "Bienestar",
     "weight": 200,
-    "color": "Melocoton suave",
+    "color": "Melocotón suave",
     "description": "Disfruta la tranquilidad del momento.",
     "price": 12000
   },
@@ -97,14 +97,14 @@
   },
   {
     "id": 9,
-    "name": "Armonia",
+    "name": "Armonía",
     "slug": "armonia",
     "img": "https://res.cloudinary.com/zj7mojiw/image/upload/v1794503207/Vela_Lumina_Armon%C3%ADa_entre_Rosas.png",
     "scent": "Floral",
-    "category": "Intencion",
+    "category": "Intención",
     "weight": 200,
     "color": "Rosa pastel",
-    "description": "Encuentra armonia en tu espacio.",
+    "description": "Encuentra armonía en tu espacio.",
     "price": 12000
   },
   {
@@ -116,7 +116,7 @@
     "category": "Mindfulness",
     "weight": 200,
     "color": "Lavanda suave",
-    "description": "Desconecta del ruido y regalate calma.",
+    "description": "Desconecta del ruido y regálate calma.",
     "price": 12000
   },
   {
@@ -127,7 +127,7 @@
     "scent": "Vainilla",
     "category": "Navidad",
     "weight": 200,
-    "color": "Marfil calido",
+    "color": "Marfil cálido",
     "description": "Calma que ilumina tu hogar.",
     "price": 12000
   },
@@ -152,7 +152,7 @@
     "category": "Navidad",
     "weight": 200,
     "color": "Rosa frambuesa",
-    "description": "Pequenos momentos que se sienten grandes.",
+    "description": "Pequeños momentos que se sienten grandes.",
     "price": 12000
   },
   {
@@ -172,23 +172,23 @@
     "name": "Brillo",
     "slug": "brillo",
     "img": "https://res.cloudinary.com/zj7mojiw/image/upload/v1794503203/Vela_Lumina_Brillo_entre_dorados_festivos.png",
-    "scent": "Jazmin y ambar",
+    "scent": "Jazmín y ámbar",
     "category": "Navidad",
     "weight": 200,
-    "color": "Ambar calido",
+    "color": "Ámbar cálido",
     "description": "Luz para nuevos comienzos.",
     "price": 12000
   },
   {
     "id": 16,
-    "name": "Celebracion",
+    "name": "Celebración",
     "slug": "celebracion",
     "img": "https://res.cloudinary.com/zj7mojiw/image/upload/v1794503202/Vela_navide%C3%B1a_Lumina_Celebraci%C3%B3n.png",
     "scent": "Naranja y canela",
     "category": "Navidad",
     "weight": 200,
     "color": "Coral suave",
-    "description": "Aromas que reunen lo mas importante.",
+    "description": "Aromas que reúnen lo más importante.",
     "price": 12000
   },
   {
@@ -223,8 +223,8 @@
     "scent": "Lavanda, cedro y hierbas aromáticas",
     "category": "Halloween",
     "weight": 200,
-    "color": "Violeta mistico",
-    "description": "Una pausa magica para reconectar contigo misma.",
+    "color": "Violeta místico",
+    "description": "Una pausa mágica para reconectar contigo misma.",
     "price": 12000
   },
   {
@@ -235,7 +235,7 @@
     "scent": "Rosa, frutos rojos y pachuli",
     "category": "Halloween",
     "weight": 200,
-    "color": "Borgona profundo",
+    "color": "Borgoña profundo",
     "description": "Un aroma misterioso para celebrar tu esencia.",
     "price": 12000
   },
@@ -244,7 +244,7 @@
     "name": "Bosque Encantado",
     "slug": "bosque-encantado",
     "img": "https://res.cloudinary.com/zj7mojiw/image/upload/v1794503202/Vela_Bosque_Encantado_en_el_Bosque.png",
-    "scent": "Pino, cedro y tierra humeda",
+    "scent": "Pino, cedro y tierra húmeda",
     "category": "Halloween",
     "weight": 200,
     "color": "Esmeralda intenso",
@@ -253,7 +253,7 @@
   },
   {
     "id": 22,
-    "name": "Ultimo Suspiro",
+    "name": "Último Suspiro",
     "slug": "ultimo-suspiro",
     "img": "https://res.cloudinary.com/zj7mojiw/image/upload/v1794503203/Velo_de_%C3%9Altimo_Suspiro.png",
     "scent": "Incienso, vainilla y madera ahumada",

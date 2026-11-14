@@ -133,6 +133,15 @@ const esPaginaPrincipal =
     document.body.dataset.page === "home";
 
 
+// Comparaciones sin tildes: "Intención" y "intencion" deben coincidir.
+function normalizar(texto) {
+    return texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+}
+
+
 // Aplicar filtros y ordenamiento.
 function actualizarCatalogo() {
     // Reintenta encontrar el contenedor: en la home este script puede
@@ -150,17 +159,17 @@ function actualizarCatalogo() {
         document.querySelectorAll(
             'input[name="category"]:checked'
         )
-    ).map(input => input.value.toLowerCase());
+    ).map(input => normalizar(input.value));
 
     const aromasSeleccionados = Array.from(
         document.querySelectorAll(
             'input[name="scent"]:checked'
         )
-    ).map(input => input.value.toLowerCase());
+    ).map(input => normalizar(input.value));
 
     let productosFiltrados = catalogo.catalogo.filter(vela => {
-        const categoria = vela.category.toLowerCase();
-        const aroma = vela.scent.toLowerCase();
+        const categoria = normalizar(vela.category);
+        const aroma = normalizar(vela.scent);
 
         const coincideCategoria =
             categoriasSeleccionadas.length === 0 ||
@@ -204,6 +213,16 @@ function actualizarCatalogo() {
     const productosVisibles = esPaginaPrincipal
         ? productosFiltrados.slice(0, 8)
         : productosFiltrados;
+
+    console.log(
+        "Velas mostradas:",
+        productosVisibles.map(vela => ({
+            id: vela.id,
+            nombre: vela.name,
+            categoria: vela.category,
+            precio: vela.price
+        }))
+    );
 
     // Mostrar los productos en pantalla.
     contenedor.innerHTML = productosVisibles

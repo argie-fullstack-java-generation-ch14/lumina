@@ -3,6 +3,25 @@
   background-color: #ffffff;
 }
 
+/* ---------- Listado de artículos ---------- */
+#articulos-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem; /* mismo espaciado que g-4 */
+}
+
+@media (min-width: 768px) {
+  #articulos-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  #articulos-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .blog-hero {
   padding-top: 2rem;
   padding-bottom: 0;

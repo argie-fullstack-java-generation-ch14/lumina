@@ -353,19 +353,48 @@ document.addEventListener("click", (evento) => {
   }
 });
 
-// Aplicar el cupón de descuento del resumen
+// Aplicar el cupón de descuento del resumen.
+function marcarErrorCupon(input, mensaje) {
+  const campo = input.closest(".coupon-field");
+  const error = campo?.querySelector(".coupon-error");
+
+  campo?.classList.toggle("has-error", Boolean(mensaje));
+  input.setAttribute("aria-invalid", mensaje ? "true" : "false");
+  if (error) {
+    error.textContent = mensaje;
+  }
+
+  if (mensaje) {
+    input.focus();
+  }
+}
+
 document.addEventListener("click", (evento) => {
   if (!evento.target.closest(".btn-apply")) return;
 
   const input = document.getElementById("couponInput");
   if (!input) return;
 
-  if (!aplicarCupon(input.value)) {
-    alert("El cupón ingresado no es válido.");
+  const codigo = input.value.trim();
+  let mensaje = "";
+
+  if (codigo === "") {
+    mensaje = "Escribe el código del cupón.";
+  } else if (!aplicarCupon(codigo)) {
+    mensaje = "El cupón ingresado no es válido.";
+  }
+
+  if (mensaje) {
+    marcarErrorCupon(input, mensaje);
     return;
   }
 
   renderCarrito();
+});
+
+document.addEventListener("input", (evento) => {
+  if (evento.target?.id !== "couponInput") return;
+  marcarErrorCupon(evento.target, "");
 });
 
 // Vaciar carrito y render al cargar la página
