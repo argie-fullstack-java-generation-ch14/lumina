@@ -41,12 +41,7 @@ async function renderArticulos() {
     const articulos = await response.json();
     const container = document.getElementById('articulos-container');
 
-    articulos.forEach((articulo) => {
-      const col = document.createElement('div');
-      col.className = 'col-12 col-md-6 col-lg-4';
-      col.innerHTML = crearBlogCard(articulo);
-      container.appendChild(col);
-    });
+    container.innerHTML = articulos.map(crearBlogCard).join("");
   } catch (error) {
     console.error('Error cargando artículos:', error);
   }
