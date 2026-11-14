@@ -43,7 +43,7 @@ function crearResumenCompra(totales, opciones = {}) {
                 <p class="coupon-error" id="couponError" aria-live="polite"></p>
           </div>
 
-          <button type="button" class="btn-checkout w-100 mb-2">
+          <button type="button" class="btn-checkout w-100 mb-2"${cantidad > 0 ? "" : " disabled"}>
               Finalizar compra
           </button>
 
