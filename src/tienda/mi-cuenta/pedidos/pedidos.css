@@ -182,11 +182,13 @@
 }
 
 .pedido-producto-detalle h5 {
+  font-family: var(--fuente-titulos, "Recoleta", Georgia, serif);
   font-size: 0.98rem;
   color: var(--cafe-lumina, #382B26);
 }
 
 .pedido-producto-detalle p {
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
   font-size: 0.85rem;
   line-height: 1.45;
   color: var(--cafe-lumina, #382B26);

@@ -74,6 +74,7 @@
 }
 
 .product-info {
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
   font-size: 0.9rem;
   color: var(--negro-relajacion);
 }
