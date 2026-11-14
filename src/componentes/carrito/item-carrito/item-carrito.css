@@ -41,6 +41,14 @@
   color: var(--cafe-lumina);
 }
 
+/* Imagen y título enlazan al detalle del producto */
+.product-link {
+  display: inline-block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .product-info {
   font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
   font-size: 0.9rem;
