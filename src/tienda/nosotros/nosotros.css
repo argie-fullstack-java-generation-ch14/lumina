@@ -396,7 +396,7 @@
   color: #806d65;
   font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
   font-size: 1.15rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .member-modal-info p {
