@@ -83,6 +83,33 @@
   box-shadow: 0 0 0 0.2rem rgba(55, 79, 89, 0.15);
 }
 
+/* Feedback de campo vacío / cupón inválido (mismo estilo del form de registro) */
+.coupon-error {
+  margin: 0.25rem 0 0;
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--naranja-apagado);
+}
+
+.coupon-error::before {
+  content: "";
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--naranja-apagado);
+}
+
+.coupon-error:empty {
+  display: none;
+}
+
+.coupon-field.has-error .coupon-input {
+  border-color: var(--naranja-apagado);
+}
+
 .btn-apply {
   background-color: var(--celeste-apagado);
   color: #FFFFFF;
