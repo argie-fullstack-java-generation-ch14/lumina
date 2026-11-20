@@ -3,7 +3,7 @@
 // realizado (guardados en localStorage al pagar) y los renderiza con el
 // componente item-mis-pedidos, que reutiliza el resumen de compra del carrito.
 
-const PEDIDOS_URL = new URL("../../../data/pedidos.json", document.currentScript.src).href;
+const PEDIDOS_URL = "/src/data/pedidos.json";
 const PEDIDOS_GUARDADOS_KEY = "lumina-pedidos";
 const IVA_TASA_PEDIDOS = 0.19;
 
