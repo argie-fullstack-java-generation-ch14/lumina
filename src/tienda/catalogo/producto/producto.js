@@ -1,21 +1,28 @@
+import { productos, obtenerClaseCategoria, obtenerLabelCategoria } from "../../../js/productos.js";
+
 function initProducto() {
   const params = new URLSearchParams(window.location.search);
   const slug = params.get("slug");
-  const vela =
-    window.velas.find((v) => v.slug === slug) ?? window.velas[0];
+  const producto =
+    productos.find((p) => p.slug === slug) ?? productos[0];
 
-  document.getElementById("producto-nombre").textContent = vela.name;
+  if (!producto) {
+    document.getElementById("producto-nombre").textContent = "Producto no encontrado";
+    return;
+  }
+
+  document.getElementById("producto-nombre").textContent = producto.name;
 
     const btnFavorito = document.querySelector(".producto-favorite-button");
     if (btnFavorito && typeof esFavorito === "function") {
-      btnFavorito.dataset.productId = vela.id;
-      const estaEnFavoritos = esFavorito(vela.id);
+      btnFavorito.dataset.productId = producto.id;
+      const estaEnFavoritos = esFavorito(producto.id);
       btnFavorito.setAttribute("aria-pressed", String(estaEnFavoritos));
       btnFavorito.setAttribute(
         "aria-label",
         estaEnFavoritos
-          ? `Quitar ${vela.name} de favoritos`
-          : `Agregar ${vela.name} a favoritos`
+          ? `Quitar ${producto.name} de favoritos`
+          : `Agregar ${producto.name} a favoritos`
       );
       btnFavorito.setAttribute(
         "data-bs-title",
@@ -29,37 +36,33 @@ function initProducto() {
     }
 
   const categoria = document.getElementById("producto-categoria");
-  categoria.textContent = vela.category;
-  categoria.className = `candle-category ${window.obtenerClaseCategoria(
-    vela.category
+  categoria.textContent = producto.category;
+  categoria.className = `candle-category ${obtenerClaseCategoria(
+    producto.category
   )}`;
 
-  document.getElementById("producto-aroma").textContent = vela.scent;
-  document.getElementById("producto-peso").textContent = `${vela.weight}g`;
-  document.getElementById("producto-color").textContent = vela.color;
+  document.getElementById("producto-aroma").textContent = producto.scent;
+  document.getElementById("producto-peso").textContent = `${producto.weightGrams}g`;
+  document.getElementById("producto-color").textContent = producto.color;
   document.getElementById("producto-descripcion").textContent =
-    vela.description;
-  document.getElementById("producto-precio").textContent = `$ ${vela.price.toLocaleString(
+    producto.description;
+  document.getElementById("producto-precio").textContent = `$ ${producto.price.toLocaleString(
     "es-CO"
   )}`;
 
   const imagen = document.querySelector(".producto-imagen-wrapper-img");
-  imagen.src = vela.img;
-  imagen.alt = `Vela Lumina ${vela.name}`;
+  imagen.src = producto.imageUrl;
+  imagen.alt = `Vela Lumina ${producto.name}`;
 
-  document.title = `${vela.name} · Lumina`;
+  document.title = `${producto.name} · Lumina`;
 
   const botonCarrito = document.getElementById("btn-agregar-carrito");
-  botonCarrito.dataset.productId = vela.id;
+  botonCarrito.dataset.productId = producto.id;
   botonCarrito.addEventListener("click", () => {
     if (typeof agregarAlCarrito === "function") {
-      agregarAlCarrito(vela.id);
+      agregarAlCarrito(producto.id);
     }
   });
 }
 
-if (window.velas) {
-  initProducto();
-} else {
-  window.addEventListener("velas-listadas", initProducto, { once: true });
-}
+initProducto();

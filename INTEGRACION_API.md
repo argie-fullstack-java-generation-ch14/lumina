@@ -237,4 +237,53 @@ Comportamientos mínimos:
 
 ---
 
+## 10. Checklist de implementación por fases (front)
+
+### Fase 0 — Capa API
+- [ ] Crear `src/api/client.js` con `API_BASE_URL`, funciones genéricas `apiGet/Post/Put/Delete`, headers JSON y parseo centralizado de errores `ApiError`.
+- [ ] Rellenar `src/api/endpoints.js` con las rutas reales del backend (`/api/productos`, `/api/pedidos`, `/api/registro`, `/api/login`, etc.).
+- [ ] Implementar `src/api/services/velas.service.js` (`productosService`): `obtenerTodas`, `obtenerPorSlug`, `obtenerPorCategoria`, `crearProducto`, `actualizarProducto`, `eliminarProducto`.
+- [ ] Crear `src/api/services/usuarios.service.js`: registro, login, obtener usuario, actualizar usuario.
+- [ ] Crear `src/api/services/pedidos.service.js`: crear pedido, listar pedidos, actualizar estado de pedido.
+- [ ] Crear `src/api/adapters.js`: funciones de mapeo backend → front y front → backend.
+
+### Fase 1 — Catálogo y detalle
+- [ ] `src/js/productos.js`: reemplazar el `fetch` a `src/data/productos.json` por `GET /api/productos`.
+- [ ] `src/tienda/catalogo/catalogo.js`: cargar productos desde la API y seguir filtrando/ordenando en el front.
+- [ ] `src/tienda/catalogo/producto/producto.js`: buscar por slug en el módulo de productos; mostrar "no encontrado" si no existe.
+- [ ] Deprecian `productos.json` / `velas.json` (quitar de uso en runtime).
+
+### Fase 2 — Autenticación
+- [ ] `src/tienda/registro/registro.js`: `POST /api/registro` con `{ fullName, phone, email, password }`; guardar `UserResponse` en `usuarioActivo` sin contraseña.
+- [ ] `src/tienda/login/login.js`: `POST /api/login` con `{ email, password }`; validar contra el backend, no contra `localStorage`.
+- [ ] `src/js/main.js`: leer `usuarioActivo` ya mapeado (`fullName`, `phone`, `email`).
+- [ ] `src/tienda/mi-cuenta/info/info.js`: eliminar el bloque de contraseña; mostrar nombre, correo y teléfono.
+
+### Fase 3 — Pedidos (checkout y mis pedidos)
+- [ ] `src/componentes/checkout-modal/checkout-modal.js`: validar sesión; llamar `POST /api/pedidos` con `{ userId, items: [{ productId, quantity }], couponCode }`; mostrar totales del `OrderResponse` del backend.
+- [ ] `src/tienda/mi-cuenta/pedidos/pedidos.js`: `GET /api/pedidos?usuarioId=`; renderizar con mapa de estados y resumen del backend.
+- [ ] Dejar de calcular IVA y descuentos localmente; usar los valores de `OrderResponse` del backend.
+- [ ] Enviar `couponCode` dentro del cuerpo de `POST /api/pedidos`.
+
+### Fase 4 — Administración (CRUD productos)
+- [ ] `src/admin/productos/productos.js`: cargar `GET /api/productos` al entrar y renderizar todos los productos.
+- [ ] `src/admin/producto-formulario/producto-formulario.js`: `POST /api/productos` con payload adaptado, incluidos `stock` y `available`.
+- [ ] Agregar botón editar por producto: abrir modal precargado y llamar `PUT /api/productos/{id}`.
+- [ ] Agregar botón eliminar: `DELETE /api/productos/{id}` con confirmación y manejo de `409`.
+- [ ] Mapear `ApiError.details` a los campos del formulario.
+- [ ] Eliminar la lógica de `lumina-productos` en `localStorage`.
+
+### Fase 5 — Limpieza y smoke test
+- [ ] Eliminar `localStorage`/`JSON` obsoletos (`lumina-productos`, `lumina-pedidos`, `usuarios`, `usuarioActivo`).
+- [ ] Ejecutar smoke test front–backend.
+
+---
+
+### Bloqueadores (backend, no front)
+
+- [ ] **Rol D:** corregir la importación de `ApiError` en `GlobalExceptionHandler` (`com.lumina.common.ApiError` vs `com.lumina.dto.response.ApiError`) para que el backend compile.
+- [ ] **Rol E (JWT):** pendiente del profesor; la sesión sigue en `localStorage` (`usuarioActivo`).
+
+---
+
 > Este plan es una guía de implementación para el front. Si el backend cambia algún contrato (rutas, nombres de campos o respuestas), este documento debe actualizarse junto con el cambio de backend.

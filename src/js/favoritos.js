@@ -1,6 +1,7 @@
 // Lumina · favoritos
-// La lista de favoritos vive en localStorage: cada entrada referencia a velas
-// del catálogo (js/velas.js) y `quantity` son las unidades deseadas.
+// La lista de favoritos vive en localStorage: cada entrada referencia a
+// productos del catálogo (js/productos.js) y `quantity` son las unidades
+// deseadas.
 // La vista en tienda/favoritos usa estas funciones junto con carrito.js para
 // las cards promocionales.
 
@@ -29,7 +30,7 @@ function cargarFavoritos() {
 
     return datos
       .filter(item =>
-        velas.some(vela => vela.id === Number(item.id)) &&
+        productos.some(producto => producto.id === Number(item.id)) &&
         Number.isInteger(Number(item.quantity)) &&
         Number(item.quantity) > 0
       )
@@ -53,48 +54,48 @@ function guardarFavoritos() {
 
 let favoritos = [];
 
-// Inicializa favoritos solo cuando el catálogo de velas está disponible.
+// Inicializa favoritos solo cuando el catálogo de productos está disponible.
 function initFavoritos() {
   favoritos = cargarFavoritos();
 }
 
-if (window.velas) {
+if (window.productos) {
   initFavoritos();
 } else {
-  window.addEventListener("velas-listadas", initFavoritos, { once: true });
+  window.addEventListener("productos-listadas", initFavoritos, { once: true });
 }
 
-// Asocia cada item de favoritos con los datos del catálogo (js/velas.js)
+// Asocia cada item de favoritos con los datos del catálogo (js/productos.js)
 function obtenerProductosFavoritos() {
   return favoritos
     .map((item) => {
-      const vela = velas.find((v) => v.id === item.id);
-      return vela ? { ...vela, quantity: item.quantity } : null;
+      const producto = productos.find((p) => p.id === item.id);
+      return producto ? { ...producto, quantity: item.quantity } : null;
     })
     .filter(Boolean);
 }
 
-// ¿Está una vela en favoritos?
+// ¿Está un producto en favoritos?
 function esFavorito(id) {
   const idBuscado = Number(id);
   return favoritos.some(item => item.id === idBuscado);
 }
 
-// Agregar una vela a favoritos (sin duplicados)
+// Agregar un producto a favoritos (sin duplicados)
 function agregarFavorito(id) {
-  const idVela = Number(id);
+  const idProducto = Number(id);
 
-  if (!velas.some(vela => vela.id === idVela)) {
-    console.error("La vela no existe en el catálogo.");
+  if (!productos.some(producto => producto.id === idProducto)) {
+    console.error("El producto no existe en el catálogo.");
     return;
   }
 
-  if (esFavorito(idVela)) {
+  if (esFavorito(idProducto)) {
     return;
   }
 
   favoritos.push({
-    id: idVela,
+    id: idProducto,
     quantity: 1
   });
 
@@ -124,29 +125,29 @@ function quitarFavorito(id) {
   sincronizarCorazonesFavoritos();
 }
 
-// Agregar o quitar una vela de favoritos (toggle del corazón).
+// Agregar o quitar un producto de favoritos (toggle del corazón).
 // Devuelve `true` si quedó como favorito.
 function alternarFavorito(id) {
-  const idVela = Number(id);
+  const idProducto = Number(id);
 
-  if (!velas.some(vela => vela.id === idVela)) {
-    console.error("La vela no existe en el catálogo.");
+  if (!productos.some(producto => producto.id === idProducto)) {
+    console.error("El producto no existe en el catálogo.");
     return false;
   }
 
-  if (esFavorito(idVela)) {
-    quitarFavorito(idVela);
+  if (esFavorito(idProducto)) {
+    quitarFavorito(idProducto);
     return false;
   }
 
-  agregarFavorito(idVela);
+  agregarFavorito(idProducto);
   return true;
 }
 
-// Sincroniza el corazón de las cards de una vela (catálogo, carrusel y
-// duplicated en el carrusel) con el estado de favoritos
+// Sincroniza el corazón de las cards de un producto (catálogo, carrusel y
+// duplicado en el carrusel) con el estado de favoritos
 function pintarCorazonFavorito(id, esFavoritoAhora) {
-  const vela = velas.find((v) => v.id === Number(id));
+  const producto = productos.find((p) => p.id === Number(id));
 
   document
     .querySelectorAll(`.favorite-button[data-product-id="${Number(id)}"]`)
@@ -155,8 +156,8 @@ function pintarCorazonFavorito(id, esFavoritoAhora) {
       boton.setAttribute(
         "aria-label",
         esFavoritoAhora
-          ? `Quitar ${vela.name} de favoritos`
-          : `Agregar ${vela.name} a favoritos`
+          ? `Quitar ${producto.name} de favoritos`
+          : `Agregar ${producto.name} a favoritos`
       );
 
       const icono = boton.querySelector("i");
@@ -191,9 +192,9 @@ function sincronizarCorazonesFavoritos() {
     });
 }
 
-// Notificación cuando se guarda una vela en favoritos
+// Notificación cuando se guarda un producto en favoritos
 // (reutiliza los estilos de .cart-toast en css/main.css)
-function mostrarNotificacionFavorito(vela) {
+function mostrarNotificacionFavorito(producto) {
   let notificacion = document.getElementById("favoritos-toast");
 
   if (!notificacion) {
@@ -213,10 +214,10 @@ function mostrarNotificacionFavorito(vela) {
     </div>
 
     <div class="cart-toast-content">
-      <img src="${vela.img}" alt="${vela.name}">
+      <img src="${producto.imageUrl}" alt="${producto.name}">
       <div>
-        <strong>${vela.name}</strong>
-        <p>Aquí la encontrarás cuando quieras.</p>
+        <strong>${producto.name}</strong>
+        <p>Aquí lo encontrarás cuando quieras.</p>
       </div>
     </div>
 
@@ -239,7 +240,7 @@ function mostrarNotificacionFavorito(vela) {
   });
 }
 
-// Corazón de las cards: guarda o quita la vela de favoritos al pulsarlo
+// Corazón de las cards: guarda o quita el producto de favoritos al pulsarlo
 document.addEventListener("click", function (evento) {
   const boton = evento.target.closest(".favorite-button");
 
@@ -255,9 +256,9 @@ document.addEventListener("click", function (evento) {
     return;
   }
 
-  const velaAgregada = velas.find(
-    (v) => v.id === Number(boton.dataset.productId)
+  const productoAgregado = productos.find(
+    (p) => p.id === Number(boton.dataset.productId)
   );
 
-  mostrarNotificacionFavorito(velaAgregada);
+  mostrarNotificacionFavorito(productoAgregado);
 });

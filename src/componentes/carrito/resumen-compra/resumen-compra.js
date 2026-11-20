@@ -1,21 +1,21 @@
 // Lumina · resumen-compra
 // Componente: resumen de la compra (subtotal, IVA, total y cupón).
-// Espera: objeto totales con { cantidad, subtotal, descuento, iva, total }
+// Espera: objeto totales con { cantidad, subtotal, discountTotal, taxTotal, total }
 // (ver calcularTotales en js/carrito.js) y el cupón activo.
 
 const CATALOGO_URL = new URL("../catalogo/index.html", location.href).href;
 
 function crearResumenCompra(totales, opciones = {}) {
-	const { cantidad, subtotal, descuento, iva, total } = totales;
+	const { cantidad, subtotal, discountTotal, taxTotal, total } = totales;
 	const { mostrarCupon = true, mostrarBoton = true } = opciones;
 	const fmt = (valor) => valor.toLocaleString("es-CO");
 
 	// Solo se muestra la fila de descuento si hay cupón aplicado
-	const filaDescuento = descuento && mostrarCupon
+	const filaDescuento = discountTotal && mostrarCupon
 		? `
       <div class="d-flex justify-content-between align-items-center mb-3">
           <span class="summary-descuento">Cupón ${cuponAplicado} (-10 %)</span>
-          <span class="summary-value">- $ ${fmt(descuento)}</span>
+          <span class="summary-value">- $ ${fmt(discountTotal)}</span>
       </div>
       `
 		: "";
@@ -31,7 +31,6 @@ function crearResumenCompra(totales, opciones = {}) {
                 <div class="row g-2">
                     <div class="col-12 col-sm-8 col-lg-12 col-xl-8">
                         <input type="text" id="couponInput" class="form-control coupon-input"
-                            value="${cuponAplicado ?? ""}"
                             aria-describedby="couponError"
                             placeholder="Ingresar código del cupón">
                     </div>
@@ -66,8 +65,8 @@ function crearResumenCompra(totales, opciones = {}) {
           ${filaDescuento}
 
           <div class="d-flex justify-content-between align-items-center mb-3">
-              <span class="summary-text-muted">IVA</span>
-              <span class="summary-value">$ ${fmt(iva)}</span>
+          <span class="summary-text-muted">IVA</span>
+          <span class="summary-value">$ ${fmt(taxTotal)}</span>
           </div>
 
           <hr class="summary-divider my-3">

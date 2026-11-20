@@ -108,16 +108,16 @@ window.initProductForm = () => {
 		const product = {
 			name,
 			slug: name.toLowerCase().replace(/\s+/g, "-"),
-			img: fields[6].input.value.trim(),
+			imageUrl: fields[6].input.value.trim(),
 			color: fields[7].input.value.trim(),
 			scent: fields[1].input.value.trim(),
-			category: fields[2].input.selectedOptions[0].textContent.trim(),
-			weight: Number(fields[3].input.value),
+			category: fields[2].input.value.trim(),
+			weightGrams: Number(fields[3].input.value),
 			price: Number(fields[4].input.value),
 			description: fields[5].input.value.trim()
 		};
 
-		console.log("Vela creada:", product);
+		console.log("Producto creado:", product);
 		window.dispatchEvent(new CustomEvent("product-created", { detail: product }));
 		bootstrap.Modal.getOrCreateInstance(modal).hide();
 	});

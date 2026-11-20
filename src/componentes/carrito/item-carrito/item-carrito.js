@@ -1,7 +1,7 @@
 // Lumina · item-carrito
 // Componente: tarjeta de un artículo del carrito.
-// Espera: item con la misma estructura de velas.js (id, name, img, scent,
-// weight, color, price) + quantity.
+// Espera: item con la misma estructura de productos.js (id, name, imageUrl,
+// scent, weightGrams, color, price) + quantity.
 
 // Ruta a la página de detalle del producto, resuelta desde la carpeta
 // de este script (componentes/carrito/item-carrito/ → src/): sube 3 niveles.
@@ -21,12 +21,12 @@ function crearItemCarrito(item) {
           <div class="col-12 col-md-3 col-lg-2 text-center">
               <a class="product-link" href="${urlDetalle}"
                  aria-label="Ver detalles de ${item.name}">
-                  <img
-                      src="${item.img}"
-                      alt="Vela ${item.name}"
-                      class="img-fluid product-img"
-                      loading="lazy"
-                  >
+                   <img
+                       src="${item.imageUrl}"
+                       alt="Vela ${item.name}"
+                       class="img-fluid product-img"
+                       loading="lazy"
+                   >
               </a>
           </div>
 
@@ -38,7 +38,7 @@ function crearItemCarrito(item) {
                   <strong>Aroma:</strong> ${item.scent}
               </p>
               <p class="product-info mb-1">
-                  <strong>Peso:</strong> ${item.weight}g
+                  <strong>Peso:</strong> ${item.weightGrams}g
               </p>
               <p class="product-info mb-1">
                   <strong>Color:</strong> ${item.color}
