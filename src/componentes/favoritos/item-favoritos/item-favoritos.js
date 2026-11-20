@@ -1,7 +1,7 @@
 // Lumina · item-favoritos
 // Componente: tarjeta de un artículo de favoritos.
-// Espera: item con la estructura de velas.js (id, name, img, scent,
-// weight, color, price). Los favoritos no manejan cantidad.
+// Espera: item con la estructura de productos.js (id, name, imageUrl, scent,
+// weightGrams, color, price). Los favoritos no manejan cantidad.
 
 // Ruta a la página de detalle del producto, resuelta desde la carpeta
 // de este script (componentes/favoritos/item-favoritos/ → src/): sube 3 niveles.
@@ -21,12 +21,12 @@ function crearItemFavorito(item) {
           <div class="col-12 col-md-4 col-xl-3 text-center">
               <a class="product-link" href="${urlDetalle}"
                  aria-label="Ver detalles de ${item.name}">
-                  <img
-                      src="${item.img}"
-                      alt="Vela ${item.name}"
-                      class="img-fluid product-img"
-                      loading="lazy"
-                  >
+                   <img
+                       src="${item.imageUrl}"
+                       alt="Vela ${item.name}"
+                       class="img-fluid product-img"
+                       loading="lazy"
+                   >
               </a>
           </div>
 
@@ -38,7 +38,7 @@ function crearItemFavorito(item) {
                   <strong>Aroma:</strong> ${item.scent}
               </p>
               <p class="product-info mb-1">
-                  <strong>Peso:</strong> ${item.weight}g
+                  <strong>Peso:</strong> ${item.weightGrams}g
               </p>
               <p class="product-info mb-1">
                   <strong>Color:</strong> ${item.color}

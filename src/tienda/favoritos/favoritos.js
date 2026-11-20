@@ -95,7 +95,7 @@ document.addEventListener("click", (evento) => {
 });
 
 // Vaciar favoritos y render al cargar la página.
-// El render espera al catálogo: velas.js es un módulo con top-level await
+// El render espera al catálogo: productos.js es un módulo con top-level await
 // y DOMContentLoaded ocurre antes de que el JSON haya llegado
 document.addEventListener("DOMContentLoaded", () => {
   const botonVaciar = document.querySelector(".btn-clear-favoritos");
@@ -104,9 +104,9 @@ document.addEventListener("DOMContentLoaded", () => {
     botonVaciar.type = "button";
   }
 
-  if (window.velas) {
+  if (window.productos) {
     renderFavoritos();
   } else {
-    window.addEventListener("velas-listadas", renderFavoritos, { once: true });
+    window.addEventListener("productos-listadas", renderFavoritos, { once: true });
   }
 });
