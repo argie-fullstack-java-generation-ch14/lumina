@@ -1,21 +1,27 @@
-const response = await fetch(new URL("../data/velas.json", import.meta.url));
-export const velas = await response.json();
+export let productos = [];
+
+try {
+  const response = await fetch(new URL("../data/productos.json", import.meta.url));
+  productos = await response.json();
+} catch (error) {
+  console.warn("No se pudieron cargar los productos desde productos.json:", error);
+  productos = [];
+}
 
 // Fusionar productos creados desde el panel de admin (guardados en localStorage)
 try {
   const productosCreados = JSON.parse(localStorage.getItem("lumina-productos") || "[]");
 
   if (Array.isArray(productosCreados) && productosCreados.length > 0) {
-    const maxId = velas.reduce((max, vela) => Math.max(max, Number(vela.id) || 0), 0);
+    const maxId = productos.reduce((max, producto) => Math.max(max, Number(producto.id) || 0), 0);
 
     productosCreados.forEach((producto, index) => {
-      // Evitar colisiones de ID con el JSON y entre productos creados
-      if (!producto.id || velas.some((v) => v.id === producto.id)) {
+      if (!producto.id || productos.some((p) => p.id === producto.id)) {
         producto.id = maxId + index + 1;
       }
     });
 
-    velas.push(...productosCreados);
+    productos.push(...productosCreados);
   }
 } catch (error) {
   console.warn("No se pudieron cargar los productos creados desde el admin:", error);
@@ -37,8 +43,8 @@ export function obtenerClaseCategoria(categoria) {
   return categorias[categoria] || "category-default";
 }
 
-window.velas = velas;
+window.productos = productos;
 window.obtenerClaseCategoria = obtenerClaseCategoria;
 
-// Notifica a los demás módulos que el catálogo de velas ya está disponible.
-window.dispatchEvent(new CustomEvent("velas-listadas"));
+// Notifica a los demás módulos que el catálogo de productos ya está disponible.
+window.dispatchEvent(new CustomEvent("productos-listadas"));
