@@ -389,11 +389,16 @@ document.addEventListener("click", (evento) => {
     return;
   }
 
+  marcarErrorCupon(input, "");
   renderCarrito();
+
+  const inputDespues = document.getElementById("couponInput");
+  if (inputDespues) inputDespues.value = "";
 });
 
 document.addEventListener("input", (evento) => {
   if (evento.target?.id !== "couponInput") return;
+  evento.target.value = evento.target.value.toUpperCase();
   marcarErrorCupon(evento.target, "");
 });
 

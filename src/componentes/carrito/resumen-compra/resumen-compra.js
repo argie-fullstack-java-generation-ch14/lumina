@@ -31,7 +31,6 @@ function crearResumenCompra(totales, opciones = {}) {
                 <div class="row g-2">
                     <div class="col-12 col-sm-8 col-lg-12 col-xl-8">
                         <input type="text" id="couponInput" class="form-control coupon-input"
-                            value="${cuponAplicado ?? ""}"
                             aria-describedby="couponError"
                             placeholder="Ingresar código del cupón">
                     </div>
