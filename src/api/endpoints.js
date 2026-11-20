@@ -5,9 +5,9 @@
 //
 // Ejemplo de estructura esperada:
 // export const endpoints = {
-//   velas: {
-//     all: "/api/velas",
-//     bySlug: (slug) => `/api/velas/${slug}`,
+//   productos: {
+//     all: "/api/productos",
+//     bySlug: (slug) => `/api/productos/${slug}`,
 //   },
 //   articulos: {
 //     all: "/api/articulos",
