@@ -24,9 +24,8 @@ function calcularTotalesPedido(items) {
 }
 
 function obtenerTotalesPedido(pedido) {
-  if (pedido.totales) {
-    return pedido.totales;
-  }
+  // OrderResponse del backend trae los totales planos:
+  // subtotal, discountTotal, taxTotal, total.
   if (pedido.subtotal !== undefined) {
     return {
       cantidad: pedido.items?.length ?? 0,
@@ -34,6 +33,16 @@ function obtenerTotalesPedido(pedido) {
       discountTotal: pedido.discountTotal ?? 0,
       taxTotal: pedido.taxTotal ?? 0,
       total: pedido.total
+    };
+  }
+  // Fallback legacy: objeto anidado pedido.totales
+  if (pedido.totales) {
+    return {
+      cantidad: pedido.totales.cantidad ?? pedido.items?.length ?? 0,
+      subtotal: pedido.totales.subtotal ?? 0,
+      discountTotal: pedido.totales.discountTotal ?? 0,
+      taxTotal: pedido.totales.taxTotal ?? 0,
+      total: pedido.totales.total ?? 0
     };
   }
   return calcularTotalesPedido(pedido.items ?? []);

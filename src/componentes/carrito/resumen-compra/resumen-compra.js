@@ -1,6 +1,6 @@
 // Lumina · resumen-compra
 // Componente: resumen de la compra (subtotal, IVA, total y cupón).
-// Espera: objeto totales con { cantidad, subtotal, descuento, iva, total }
+// Espera: objeto totales con { cantidad, subtotal, discountTotal, taxTotal, total }
 // (ver calcularTotales en js/carrito.js) y el cupón activo.
 
 const CATALOGO_URL = new URL("../catalogo/index.html", location.href).href;
