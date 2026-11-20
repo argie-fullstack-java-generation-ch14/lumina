@@ -1,12 +1,12 @@
 
-/* Lumina - Catalogo de velas */
+/* Lumina - Catálogo de productos */
 
 // Carpeta de este script: resuelve rutas correctamente
-// en su propia pagina y cuando se inyecta en la home.
+// en su propia página y cuando se inyecta en la home.
 const CATALOGO_DIR = new URL(".", import.meta.url).href;
 const PRODUCTO_URL = new URL("producto/", CATALOGO_DIR).href;
 
-import { velas, obtenerClaseCategoria } from "../../js/velas.js";
+import { productos, obtenerClaseCategoria } from "../../js/productos.js";
 
 // El enlace "Explora todo el catálogo" solo tiene sentido cuando el catálogo
 // se muestra desde el inicio; en esta misma página se oculta.
@@ -18,28 +18,28 @@ if (location.pathname.includes("catalogo")) {
     document.getElementById("catalogo-completo")?.classList.add("catalogo-margin");
 }
 
-// Datos de los productos del catalogo: viven en js/velas.json, cargados
-// por js/velas.js (misma estructura de datos para el carrusel de la
-// home y el modulo de favoritas de temporada).
-const catalogo = { catalogo: velas };
+// Datos de los productos del catálogo: viven en js/productos.json, cargados
+// por js/productos.js (misma estructura de datos para el carrusel de la
+// home y el módulo de favoritas de temporada).
+const catalogo = { catalogo: productos };
 
 
-// Crear la tarjeta de una vela.
-function crearVela(vela) {
-    const claseCategoria = obtenerClaseCategoria(vela.category);
+// Crear la tarjeta de un producto.
+function crearVela(producto) {
+    const claseCategoria = obtenerClaseCategoria(producto.category);
 
     return `
         <article class="candle-card">
 
             <a
                 class="candle-link"
-                href="${PRODUCTO_URL}?slug=${encodeURIComponent(vela.slug)}"
-                aria-label="Ver detalles de ${vela.name}">
+                href="${PRODUCTO_URL}?slug=${encodeURIComponent(producto.slug)}"
+                aria-label="Ver detalles de ${producto.name}">
 
                 <img
                     class="candle-image"
-                    src="${vela.img}"
-                    alt="Vela Lumina ${vela.name}"
+                    src="${producto.imageUrl}"
+                    alt="Vela Lumina ${producto.name}"
                     loading="lazy"
                 >
 
@@ -48,11 +48,11 @@ function crearVela(vela) {
             <button
                 class="favorite-button"
                 type="button"
-                data-product-id="${vela.id}"
-                aria-label="${esFavorito(vela.id) ? `Quitar ${vela.name} de favoritos` : `Agregar ${vela.name} a favoritos`}"
-                aria-pressed="${esFavorito(vela.id)}">
+                data-product-id="${producto.id}"
+                aria-label="${esFavorito(producto.id) ? `Quitar ${producto.name} de favoritos` : `Agregar ${producto.name} a favoritos`}"
+                aria-pressed="${esFavorito(producto.id)}">
 
-                <i class="fa-${esFavorito(vela.id) ? "solid" : "regular"} fa-heart"
+                <i class="fa-${esFavorito(producto.id) ? "solid" : "regular"} fa-heart"
                    aria-hidden="true"></i>
 
             </button>
@@ -60,10 +60,10 @@ function crearVela(vela) {
             <div class="candle-content">
 
                 <div class="candle-heading">
-                    <h3>${vela.name}</h3>
+                    <h3>${producto.name}</h3>
 
                     <span class="candle-category ${claseCategoria}">
-                        ${vela.category}
+                        ${producto.category}
                     </span>
                 </div>
 
@@ -72,29 +72,29 @@ function crearVela(vela) {
                     <span class="candle-scent">
                         <i class="fa-solid fa-bottle-droplet"
                            aria-hidden="true"></i>
-                        ${vela.scent}
+                        ${producto.scent}
                     </span>
 
                     <span class="candle-weight">
-                        ${vela.weight}g
+                        ${producto.weightGrams}g
                     </span>
 
                 </div>
 
                 <p class="candle-description">
-                    ${vela.description}
+                    ${producto.description}
                 </p>
 
                 <div class="candle-purchase">
                     <p class="candle-price">
-                        $ ${vela.price.toLocaleString("es-CO")}
+                        $ ${producto.price.toLocaleString("es-CO")}
                     </p>
 
                     <button
                         class="add-to-cart"
                         type="button"
-                        data-product-id="${vela.id}"
-                        aria-label="Agregar ${vela.name} al carrito">
+                        data-product-id="${producto.id}"
+                        aria-label="Agregar ${producto.name} al carrito">
                         Agregar al carrito
                     </button>
                 </div>
@@ -106,7 +106,7 @@ function crearVela(vela) {
 }
 
 
-// Referencias a los elementos del catalogo.
+// Referencias a los elementos del catálogo.
 const contenedorCatalogo = document.getElementById(
     "catalog-container"
 );
@@ -167,9 +167,9 @@ function actualizarCatalogo() {
         )
     ).map(input => normalizar(input.value));
 
-    let productosFiltrados = catalogo.catalogo.filter(vela => {
-        const categoria = normalizar(vela.category);
-        const aroma = normalizar(vela.scent);
+    let productosFiltrados = catalogo.catalogo.filter(producto => {
+        const categoria = normalizar(producto.category);
+        const aroma = normalizar(producto.scent);
 
         const coincideCategoria =
             categoriasSeleccionadas.length === 0 ||
@@ -215,12 +215,12 @@ function actualizarCatalogo() {
         : productosFiltrados;
 
     console.log(
-        "Velas mostradas:",
-        productosVisibles.map(vela => ({
-            id: vela.id,
-            nombre: vela.name,
-            categoria: vela.category,
-            precio: vela.price
+        "Productos mostrados:",
+        productosVisibles.map(producto => ({
+            id: producto.id,
+            nombre: producto.name,
+            categoria: producto.category,
+            precio: producto.price
         }))
     );
 
@@ -232,7 +232,7 @@ function actualizarCatalogo() {
     // Actualizar el contador de productos visibles.
     if (contadorProductos) {
         contadorProductos.textContent =
-            `${productosVisibles.length} velas encontradas`;
+            `${productosVisibles.length} productos encontrados`;
     }
 
     // Mostrar mensaje si no hay productos.
@@ -282,7 +282,7 @@ if (botonLimpiar) {
 
 
 // El corazón de favoritos se maneja globalmente en js/favoritos.js
-// (guarda la vela en "lumina-favoritos" y pinta el corazón).
+// (guarda el producto en "lumina-favoritos" y pinta el corazón).
 
 // Agregar productos al carrito desde el catálogo.
 document.addEventListener("click", function (evento) {

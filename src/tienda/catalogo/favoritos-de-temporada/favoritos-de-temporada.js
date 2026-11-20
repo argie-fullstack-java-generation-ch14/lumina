@@ -1,19 +1,19 @@
-// Se ejecuta solo cuando el catálogo de velas está disponible.
+// Se ejecuta solo cuando el catálogo de productos está disponible.
 function initFavoritosDeTemporada() {
-  const velasDeTemporada = [
-    ...window.velas.filter(vela => vela.category === "Halloween"),
-    ...window.velas.filter(vela => vela.category === "Navidad")
+  const productosDeTemporada = [
+    ...window.productos.filter(producto => producto.categoryValue === "halloween"),
+    ...window.productos.filter(producto => producto.categoryValue === "navidad")
   ];
 
   crearCarrusel("#favoritas-carrusel", {
-    velas: velasDeTemporada
+    velas: productosDeTemporada
   });
 }
 
-if (window.velas) {
+if (window.productos) {
   initFavoritosDeTemporada();
 } else {
-  window.addEventListener("velas-listadas", initFavoritosDeTemporada, {
+  window.addEventListener("productos-listadas", initFavoritosDeTemporada, {
     once: true,
   });
 }
