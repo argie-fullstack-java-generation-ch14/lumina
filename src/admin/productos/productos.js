@@ -48,8 +48,8 @@
 			<div class="col-10 mx-auto placeholder-wrap">
 				<article class="card cart-empty p-5 text-center">
 					<i class="fa-solid fa-face-frown mb-3" aria-hidden="true"></i>
-					<h2 class="product-title mb-2">Sin velas creadas</h2>
-					<p class="product-info mb-4">Agrega tu primera vela para comenzar.</p>
+					<h2 class="product-title mb-2">Sin productos creados</h2>
+					<p class="product-info mb-4">Agrega tu primer producto para comenzar.</p>
 				</article>
 			</div>
 		`;
@@ -66,7 +66,7 @@
 
 		const image = document.createElement("img");
 		image.className = "candle-image";
-		image.src = product.img;
+		image.src = product.imageUrl;
 		image.alt = `Vela Lumina ${product.name}`;
 		image.loading = "lazy";
 		imageContainer.append(image);
@@ -89,7 +89,7 @@
 		details.className = "candle-details";
 		details.append(
 			createTextElement("span", "candle-scent", product.scent),
-			createTextElement("span", "candle-weight", `${product.weight} g`)
+			createTextElement("span", "candle-weight", `${product.weightGrams} g`)
 		);
 
 		const description = createTextElement("p", "candle-description", product.description);
