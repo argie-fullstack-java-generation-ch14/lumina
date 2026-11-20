@@ -13,22 +13,22 @@ const BENEFICIOS = [
   {
     imagen: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1794021978/generation/lumina/benefits/descanso_cyaice.png",
     titulo: "Descanso",
-    texto: "Velas y rituales para tu equilibrio",
+    texto: "Aromas que calman tu mente y cuerpo",
   },
   {
     imagen: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1794021979/generation/lumina/benefits/mindfulness_rr3xc4.png",
     titulo: "Mindfulness",
-    texto: "Velas y rituales para tu equilibrio",
+    texto: "Momento de presencia y atención plena",
   },
   {
     imagen: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1794021978/generation/lumina/benefits/amor-propio_oet0su.png",
     titulo: "Amor Propio",
-    texto: "Velas y rituales para tu equilibrio",
+    texto: "Nutriendo tu ser con compasión y cuidado",
   },
   {
     imagen: "https://res.cloudinary.com/dvvwfb2tr/image/upload/v1794021979/generation/lumina/benefits/intencion_igh2rx.png",
     titulo: "Intención",
-    texto: "Velas y rituales para tu equilibrio",
+    texto: "Guiando tu camino hacia tu propósito",
   },
 ];
 
