@@ -84,20 +84,21 @@
           const totales = calcularTotales(productosCarrito);
 
           const pedido = {
-            fecha: fechaFormateada(),
-            numeroOrden: numero,
-            estado: "PENDIENTE",
-            abierto: true,
-            productos: productosCarrito.map((p) => ({
-              id: p.id,
-              name: p.name,
-              img: p.img,
-              scent: p.scent,
-              weight: p.weight,
-              color: p.color,
-              price: p.price
-            })),
-            totales
+            orderNumber: numero,
+            createdAt: new Date().toISOString(),
+            status: "PENDING",
+            open: true,
+            subtotal: totales.subtotal,
+            discountTotal: totales.discountTotal,
+            taxTotal: totales.taxTotal,
+            total: totales.total,
+            items: productosCarrito.map((p) => ({
+              productId: p.id,
+              productName: p.name,
+              unitPrice: p.price,
+              quantity: p.quantity,
+              lineTotal: p.price * p.quantity
+            }))
           };
 
           let guardados = [];

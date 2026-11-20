@@ -25,7 +25,7 @@ const CARRITO_URL = new URL(
 // Decide aleatoriamente si se mostrará la card de promo o la de recicla para esta visita
 const tipoCardAleatoria = Math.random() < 0.5 ? "promo" : "recicla";
 
-// Items del carrito: `id` referencia a velas del catálogo (js/velas.js)
+// Items del carrito: `productId` referencia a productos del catálogo (js/productos.js)
 // y `quantity` son las unidades agregadas
 const CLAVE_CARRITO = "lumina-carrito";
 
@@ -45,12 +45,12 @@ function cargarCarrito() {
 
     return datos
       .filter(item =>
-        velas.some(vela => vela.id === Number(item.id)) &&
+        productos.some(producto => producto.id === Number(item.productId)) &&
         Number.isInteger(Number(item.quantity)) &&
         Number(item.quantity) > 0
       )
       .map(item => ({
-        id: Number(item.id),
+        productId: Number(item.productId),
         quantity: Math.min(99, Number(item.quantity))
       }));
 
@@ -69,24 +69,24 @@ function guardarCarrito() {
 
 let carrito = [];
 
-// Inicializa el carrito solo cuando el catálogo de velas está disponible.
+// Inicializa el carrito solo cuando el catálogo de productos está disponible.
 function initCarrito() {
   carrito = cargarCarrito();
   renderCarrito();
 }
 
-if (window.velas) {
+if (window.productos) {
   initCarrito();
 } else {
-  window.addEventListener("velas-listadas", initCarrito, { once: true });
+  window.addEventListener("productos-listadas", initCarrito, { once: true });
 }
 
-// Asocia cada item del carrito con los datos del catálogo (js/velas.js)
+// Asocia cada item del carrito con los datos del catálogo (js/productos.js)
 function obtenerProductosCarrito() {
   return carrito
     .map((item) => {
-      const vela = velas.find((v) => v.id === item.id);
-      return vela ? { ...vela, quantity: item.quantity } : null;
+      const producto = productos.find((p) => p.id === item.productId);
+      return producto ? { ...producto, quantity: item.quantity } : null;
     })
     .filter(Boolean);
 }
@@ -110,9 +110,9 @@ function calcularTotales(productos) {
   return {
     cantidad,
     subtotal,
-    descuento,
-    iva,
-    total: subtotal - descuento + iva,
+    discountTotal: descuento,
+    taxTotal: iva,
+    total: subtotal - descuento + iva
   };
 }
 
@@ -135,8 +135,8 @@ function aplicarCupon(codigo) {
   return true;
 }
 
-// Notificación cuando se agrega una vela al carrito
-function mostrarNotificacionCarrito(vela) {
+// Notificación cuando se agrega un producto al carrito
+function mostrarNotificacionCarrito(producto) {
   let notificacion = document.getElementById("cart-toast");
 
   if (!notificacion) {
@@ -156,9 +156,9 @@ function mostrarNotificacionCarrito(vela) {
     </div>
 
     <div class="cart-toast-content">
-      <img src="${vela.img}" alt="${vela.name}">
+      <img src="${producto.imageUrl}" alt="${producto.name}">
       <div>
-        <strong>${vela.name}</strong>
+        <strong>${producto.name}</strong>
         <p>Tu momento especial comienza aquí.</p>
       </div>
     </div>
@@ -186,24 +186,24 @@ function mostrarNotificacionCarrito(vela) {
 function agregarAlCarrito(id) {
   const idProducto = Number(id);
 
-  const velaExiste = velas.some(
-    vela => vela.id === idProducto
+  const productoExiste = productos.some(
+    producto => producto.id === idProducto
   );
 
-  if (!velaExiste) {
+  if (!productoExiste) {
     console.error("El producto no existe en el catálogo.");
     return;
   }
 
   const item = carrito.find(
-    producto => producto.id === idProducto
+    producto => producto.productId === idProducto
   );
 
   if (item) {
     item.quantity = Math.min(99, item.quantity + 1);
   } else {
     carrito.push({
-      id: idProducto,
+      productId: idProducto,
       quantity: 1
     });
   }
@@ -211,16 +211,16 @@ function agregarAlCarrito(id) {
   guardarCarrito();
   renderCarrito();
 
-  const velaAgregada = velas.find(
-    vela => vela.id === idProducto
+  const productoAgregado = productos.find(
+    producto => producto.id === idProducto
   );
 
-  mostrarNotificacionCarrito(velaAgregada);
+  mostrarNotificacionCarrito(productoAgregado);
 }
 
 // Cambios en el carrito
 function cambiarCantidad(id, delta) {
-  const item = carrito.find((item) => item.id === Number(id));
+  const item = carrito.find((item) => item.productId === Number(id));
   if (!item) return;
 
   const nuevaCantidad = item.quantity + delta;
@@ -238,7 +238,7 @@ function cambiarCantidad(id, delta) {
 }
 
 function eliminarItem(id) {
-  const index = carrito.findIndex((item) => item.id === Number(id));
+  const index = carrito.findIndex((item) => item.productId === Number(id));
   if (index === -1) return;
 
   carrito.splice(index, 1);
@@ -262,17 +262,17 @@ function renderCarrito() {
   const contenedorPromo = document.getElementById("card-promo");
   const contenedorRecicla = document.getElementById("card-recicla");
 
-  const productos = obtenerProductosCarrito();
-  const totales = calcularTotales(productos);
+  const productosCarrito = obtenerProductosCarrito();
+  const totales = calcularTotales(productosCarrito);
 
   // Lista de artículos del carrito (o estado vacío)
   if (contenedorItems) {
-    contenedorItems.innerHTML = productos.length
-      ? productos.map(crearItemCarrito).join("")
+    contenedorItems.innerHTML = productosCarrito.length
+      ? productosCarrito.map(crearItemCarrito).join("")
       : estadoCarritoVacio();
 
     // Animación sutil de entrada para los items que aparecen
-    if (productos.length) {
+    if (productosCarrito.length) {
       const items = contenedorItems.querySelectorAll(".cart-item-card");
       items.forEach((item) => {
         item.classList.add("fade-in");
@@ -310,18 +310,18 @@ function estadoCarritoVacio() {
     <article class="card cart-empty p-5 text-center">
       <i class="fa-solid fa-cart-shopping mb-3" aria-hidden="true"></i>
       <h2 class="product-title mb-2">Carrito vacío</h2>
-      <p class="product-info mb-4">Encuentra tu vela ideal en el catálogo.</p>
+      <p class="product-info mb-4">Encuentra tu producto ideal en el catálogo.</p>
       <a href="${catalogoUrl}" class="btn-checkout btn-catalogo">Ir al catálogo</a>
     </article>
   `;
 }
 
-// Re-pinta la burbujita del header con lo guardado en localStorage.
+// Re-pinta la burbujita del carrito con lo guardado en localStorage.
 // Se necesita porque al recargar, renderCarrito del DOMContentLoaded corre
 // antes de que el header (inyectado por fetch) exista en el DOM.
 function refrescarBurbujaCarrito() {
   if (typeof setCartCount !== "function") return;
-  if (!window.velas) return;
+  if (!window.productos) return;
 
   const totales = calcularTotales(obtenerProductosCarrito());
 
@@ -405,5 +405,5 @@ document.addEventListener("DOMContentLoaded", () => {
     botonVaciar.type = "button";
   }
 
-  // El render inicial ahora se dispara desde initCarrito tras cargar velas.
+  // El render inicial ahora se dispara desde initCarrito tras cargar productos.
 });
