@@ -5,14 +5,15 @@
 	const mount = document.querySelector("#productFormModalMount");
 	const productList = document.querySelector("#product-list");
 
-	const categoryClasses = {
-		"Amor propio": "category-amor-propio",
-		Bienestar: "category-bienestar",
-		Descanso: "category-descanso",
-		Halloween: "category-halloween",
-		"Intención": "category-intencion",
-		Mindfulness: "category-mindfulness",
-		Navidad: "category-navidad"
+	const categoryInfo = {
+		bienestar: { label: "Bienestar", clase: "category-bienestar" },
+		descanso: { label: "Descanso", clase: "category-descanso" },
+		mindfulness: { label: "Mindfulness", clase: "category-mindfulness" },
+		intencion: { label: "Intención", clase: "category-intencion" },
+		"amor-propio": { label: "Amor propio", clase: "category-amor-propio" },
+		halloween: { label: "Halloween", clase: "category-halloween" },
+		navidad: { label: "Navidad", clase: "category-navidad" },
+		rituales: { label: "Rituales", clase: "category-rituales" }
 	};
 
 	function loadProducts() {

@@ -30,7 +30,7 @@ function crearCardCarrusel(producto) {
           <h3>${producto.name}</h3>
 
           <span class="candle-category ${claseCategoria}">
-            ${producto.category}
+            ${obtenerLabelCategoria(producto.category)}
           </span>
         </div>
 

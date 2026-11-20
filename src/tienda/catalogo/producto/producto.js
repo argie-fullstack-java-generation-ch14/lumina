@@ -1,4 +1,4 @@
-import { productos, obtenerClaseCategoria } from "../../../js/productos.js";
+import { productos, obtenerClaseCategoria, obtenerLabelCategoria } from "../../../js/productos.js";
 
 function initProducto() {
   const params = new URLSearchParams(window.location.search);

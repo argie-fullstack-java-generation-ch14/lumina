@@ -1,4 +1,4 @@
-const CATEGORIAS_TEMPORADA = ["Navidad", "Halloween"];
+const CATEGORIAS_TEMPORADA = ["navidad", "halloween"];
 
 const SCRIPT_RECOMENDADOS = document.currentScript?.src;
 const PRODUCTO_URL_RECOMENDADOS = SCRIPT_RECOMENDADOS

@@ -6,7 +6,7 @@
 const CATALOGO_DIR = new URL(".", import.meta.url).href;
 const PRODUCTO_URL = new URL("producto/", CATALOGO_DIR).href;
 
-import { productos, obtenerClaseCategoria } from "../../js/productos.js";
+import { productos, obtenerClaseCategoria, obtenerLabelCategoria } from "../../js/productos.js";
 
 // El enlace "Explora todo el catálogo" solo tiene sentido cuando el catálogo
 // se muestra desde el inicio; en esta misma página se oculta.

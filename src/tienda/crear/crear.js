@@ -108,7 +108,7 @@ function initCandleForm() {
       imageUrl: "https://gstatic.com/images",
       scent: scentField.input.value.trim(),
       color: colorField.input.value.trim(),
-      category: categoryField.input.selectedOptions[0].textContent.trim(),
+      category: categoryField.input.value.trim(),
       weightGrams: Number(weightField.input.value),
       description: descriptionField.input.value.trim(),
       price: Number(priceField.input.value)

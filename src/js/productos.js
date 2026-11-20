@@ -27,24 +27,30 @@ try {
   console.warn("No se pudieron cargar los productos creados desde el admin:", error);
 }
 
-export function obtenerClaseCategoria(categoria) {
-  const categorias = {
-    "Amor propio": "category-amor-propio",
-    "Mindfulness": "category-mindfulness",
-    "Intencion": "category-intencion",
-    "Intención": "category-intencion",
-    "Descanso": "category-descanso",
-    "Bienestar": "category-bienestar",
-    "Halloween": "category-halloween",
-    "Navidad": "category-navidad",
-    "Rituales": "category-rituales"
-  };
+export const CATEGORIAS = [
+  { value: "bienestar", label: "Bienestar", clase: "category-bienestar" },
+  { value: "descanso", label: "Descanso", clase: "category-descanso" },
+  { value: "mindfulness", label: "Mindfulness", clase: "category-mindfulness" },
+  { value: "intencion", label: "Intención", clase: "category-intencion" },
+  { value: "amor-propio", label: "Amor propio", clase: "category-amor-propio" },
+  { value: "halloween", label: "Halloween", clase: "category-halloween" },
+  { value: "navidad", label: "Navidad", clase: "category-navidad" },
+  { value: "rituales", label: "Rituales", clase: "category-rituales" },
+];
 
-  return categorias[categoria] || "category-default";
+export function obtenerLabelCategoria(value) {
+  const encontrada = CATEGORIAS.find((categoria) => categoria.value === value);
+  return encontrada ? encontrada.label : value;
+}
+
+export function obtenerClaseCategoria(value) {
+  const encontrada = CATEGORIAS.find((categoria) => categoria.value === value);
+  return encontrada ? encontrada.clase : "category-default";
 }
 
 window.productos = productos;
 window.obtenerClaseCategoria = obtenerClaseCategoria;
+window.obtenerLabelCategoria = obtenerLabelCategoria;
 
 // Notifica a los demás módulos que el catálogo de productos ya está disponible.
 window.dispatchEvent(new CustomEvent("productos-listadas"));

@@ -111,7 +111,7 @@ window.initProductForm = () => {
 			imageUrl: fields[6].input.value.trim(),
 			color: fields[7].input.value.trim(),
 			scent: fields[1].input.value.trim(),
-			category: fields[2].input.selectedOptions[0].textContent.trim(),
+			category: fields[2].input.value.trim(),
 			weightGrams: Number(fields[3].input.value),
 			price: Number(fields[4].input.value),
 			description: fields[5].input.value.trim()

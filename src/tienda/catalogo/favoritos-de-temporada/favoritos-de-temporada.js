@@ -1,8 +1,8 @@
 // Se ejecuta solo cuando el catálogo de productos está disponible.
 function initFavoritosDeTemporada() {
   const productosDeTemporada = [
-    ...window.productos.filter(producto => producto.categoryValue === "halloween"),
-    ...window.productos.filter(producto => producto.categoryValue === "navidad")
+    ...window.productos.filter(producto => producto.category === "halloween"),
+    ...window.productos.filter(producto => producto.category === "navidad")
   ];
 
   crearCarrusel("#favoritas-carrusel", {
