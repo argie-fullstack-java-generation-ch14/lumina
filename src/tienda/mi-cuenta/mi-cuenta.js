@@ -65,10 +65,10 @@ fetch('favoritos/index.html')
     document.getElementById('favoritos-content').innerHTML = html;
 
     if (typeof renderFavoritos === 'function') {
-      if (window.velas) {
+      if (window.productos) {
         renderFavoritos();
       } else {
-        window.addEventListener('velas-listadas', renderFavoritos, { once: true });
+        window.addEventListener('productos-listadas', renderFavoritos, { once: true });
       }
     }
 

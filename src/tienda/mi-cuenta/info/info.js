@@ -39,10 +39,9 @@ function cargarInformacionCuenta() {
   }
 
   // Mostrar información del usuario
-  nombre.value = usuario.nombreCompleto || "";
+  nombre.value = usuario.fullName || "";
   email.value = usuario.email || "";
-  telefono.value = usuario.telefono || "";
-  password.value = usuario.contrasena || "";
+  telefono.value = usuario.phone || "";
 
   // Mostrar u ocultar contraseña
   if (togglePassword && passwordEye) {

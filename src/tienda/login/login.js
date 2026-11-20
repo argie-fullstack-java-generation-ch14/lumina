@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const users = JSON.parse(localStorage.getItem("usuarios")) || [];
 
     const user = users.find((item) =>
-      item.email === email && item.contrasena === password
+      item.email === email && item.password === password
     );
 
     if (!user) {
@@ -42,7 +42,12 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    localStorage.setItem("usuarioActivo", JSON.stringify(user));
+    // Guarda solo los datos públicos del usuario (sin contraseña)
+    localStorage.setItem("usuarioActivo", JSON.stringify({
+      fullName: user.fullName,
+      phone: user.phone,
+      email: user.email
+    }));
 
     window.location.href = "../mi-cuenta/index.html";
   });

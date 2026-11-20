@@ -74,8 +74,8 @@ function initHeader() {
     console.error("Error al recuperar el usuario:", error);
   }
 
-  if (user && user.nombreCompleto) {
-    const partesNombre = user.nombreCompleto.trim().split(/\s+/);
+  if (user && user.fullName) {
+    const partesNombre = user.fullName.trim().split(/\s+/);
     const nombre = partesNombre[0];
 
     const inicialApellido = partesNombre.length > 1
