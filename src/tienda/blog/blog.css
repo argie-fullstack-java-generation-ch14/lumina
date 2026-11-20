@@ -152,6 +152,11 @@
   .hero-bg-wrapper {
     background-image: radial-gradient(circle 480px at 50% 10%, rgba(219, 203, 191, 0.8) 0%, rgba(219, 203, 191, 0.45) 50%, rgba(255, 255, 255, 0) 80%);
   }
+
+  .blog-img-container {
+    overflow-x: hidden;
+    justify-content: center !important;
+  }
 }
 
 @media screen and (min-width:1024px) {
