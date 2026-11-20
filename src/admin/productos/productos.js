@@ -77,12 +77,17 @@
 
 		const heading = document.createElement("div");
 		heading.className = "candle-heading";
+		const infoCategoria = categoryInfo[product.category] || {
+			label: product.category,
+			clase: "category-default"
+		};
+
 		heading.append(
 			createTextElement("h3", "", product.name),
 			createTextElement(
 				"span",
-				`candle-category ${categoryClasses[product.category] || "category-default"}`,
-				product.category
+				`candle-category ${infoCategoria.clase}`,
+				infoCategoria.label
 			)
 		);
 
