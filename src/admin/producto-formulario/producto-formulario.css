@@ -14,6 +14,15 @@
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
+
+	background: rgba(255, 250, 246, 0.60);
+	border: 1px solid rgba(255, 255, 255, 0.65);
+	border-radius: 20px;
+	padding: 1.5rem;
+
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	box-shadow: 0 10px 35px rgba(64, 51, 50, 0.15);
 }
 
 .product-form-field {
@@ -73,6 +82,10 @@
 	font-size: 0.8125rem;
 	line-height: 1.4;
 	color: var(--naranja-apagado);
+}
+
+.product-form-error:empty {
+	display: none;
 }
 
 .product-form-error::before {
