@@ -181,7 +181,7 @@
 /* REGISTRO */
 
 .login-register {
-  margin: 0;
+  margin-top: 1.5rem;
   font-size: 0.875rem;
   font-family: var(--fuente-texto);
   color: var(--negro-relajacion);
@@ -189,7 +189,7 @@
 }
 
 .login-register a {
-  color: var(--cafe-lumina);
+  color: var(--negro-relajacion);
   font-weight: 600;
   font-family: var(--fuente-texto);
   text-decoration: none;
