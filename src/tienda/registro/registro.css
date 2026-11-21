@@ -58,6 +58,7 @@
   max-width: 28rem;
   font-size: 1.125rem;
   line-height: 1.5;
+  font-family: var(--fuente-texto);
   color: var(--negro-relajacion);
 }
 
