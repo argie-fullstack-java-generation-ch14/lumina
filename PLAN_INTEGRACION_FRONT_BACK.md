@@ -60,29 +60,47 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 ## Notas para los Roles B, C y D — Base dejada por el Rol A
 
-**1. Reutilizar, no duplicar**
+**0. Levantar el backend (requisito previo para integrar)**
+- El front apunta por defecto a `http://localhost:8080/api/...` (definido en `src/api/client.js`).
+- Arrancar el backend de Spring Boot en el puerto 8080 antes de probar cualquier integración.
+- Si el backend corre en otra URL o puerto, definir `window.LUMINA_API_URL` antes de cargar los scripts del front, o sobreescribir `API_BASE_URL`.
+- Verificar CORS: el backend debe permitir peticiones desde el origen del front (ej. `http://localhost:3000` o `http://localhost:5500`).
+
+**1. Backend (revisar antes de trabajar)**
+- Bajar lo último de `main` del repositorio del backend antes de empezar.
+- Revisar el `README.md` del backend para instrucciones de arranque, variables de entorno y cualquier cambio reciente en los endpoints.
+- Confirmar que los endpoints que van a usar existen y devuelven el formato esperado (ej. `POST /api/registro` devuelve `{ id, fullName, phone, email, role }`).
+- Endpoints que el front consume (todos bajo `/api/`):
+  - `POST /api/registro` — registro de usuario
+  - `POST /api/login` — inicio de sesión (devuelve `token` y `user`)
+  - `GET /api/productos`, `GET /api/productos/{id}`, `GET /api/productos/slug/{slug}`
+  - `GET /api/productos?categoria=...`, `GET /api/productos?disponibles=true`
+  - `GET /api/usuarios/{id}`, `PUT /api/usuarios/{id}`
+  - `POST /api/pedidos`, `GET /api/pedidos?usuarioId=`, `PUT /api/pedidos/{id}/estado`
+
+**2. Reutilizar, no duplicar**
 - `src/api/services/usuarios.service.js` ya tiene `registrar()`, `login()`, `obtenerUsuario()`, `actualizarUsuario()`. No creen lógica de login/registro duplicada en sus vistas.
 - `src/api/authGuard.js` ya tiene `requireAuth(rolesPermitidos)`. Úsenlo para proteger vistas (Rol C en mi-cuenta, Rol D en admin).
 - `src/api/client.js` y `src/api/endpoints.js` ya están listos. No los modifiquen salvo que sea estrictamente necesario.
 
-**2. Módulos ES**
+**3. Módulos ES**
 - Cualquier archivo que use `import`/`export` debe cargarse en el HTML con `<script type="module">`. Si no, el navegador lanza `SyntaxError` y nada del script se ejecuta.
 
-**3. Estructura de registro**
+**4. Estructura de registro**
 - El registro se dividió en `src/tienda/registro/registro-ui.js` (interfaz, validaciones, animación, toggle de ojito) y `src/tienda/registro/registro-back.js` (llamada a `registrar()` del servicio). `index.html` importa `registro-ui.js`.
 
-**4. `APP_BASE`**
+**5. `APP_BASE`**
 - Ya está definido en `src/js/ui.js` y redefinido explícitamente en `src/js/main.js`. No lo redeclaren en otros archivos para evitar `Identifier 'APP_BASE' has already been declared`.
 
-**5. Logout**
+**6. Logout**
 - El botón de cerrar sesión en `src/js/main.js` borra tanto `token` como `usuarioActivo` de `localStorage`. Si agregan otro botón de logout, hagan lo mismo.
 
-**6. Estado de protección actual**
+**7. Estado de protección actual**
 - ✅ `src/tienda/mi-cuenta/index.html` protegido con `requireAuth()`.
 - ❌ Subpáginas de mi-cuenta (`info/`, `pedidos/`, `favoritos/`) **no** están protegidas si se acceden directo por URL (pendiente para Rol C).
 - ❌ Vistas de admin (`src/admin/productos/index.html`, `src/admin/producto-detalle/index.html`) **no** están protegidas (pendiente para Rol D, tarea 8).
 
-**7. Rama de trabajo**
+**8. Rama de trabajo**
 - Partan de `integracion/bases-login-argie`. Cada uno crea su rama hija desde ahí y abre su PR hacia `integracion/front-back`.
 
 ---
