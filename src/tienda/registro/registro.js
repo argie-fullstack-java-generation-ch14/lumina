@@ -388,25 +388,14 @@ initRegisterForm();
 // Mostrar y ocultar contraseñas
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".register-password-toggle").forEach((button) => {
-    button.addEventListener("click", () => {
-      const targetId = button.getAttribute("data-target");
-      const input = document.getElementById(targetId);
-      const icon = button.querySelector("i");
+  button.addEventListener("click", () => {
+    const targetId = button.getAttribute("data-target");
+    const input = document.getElementById(targetId);
 
-      if (!input) return;
+    if (!input) return;
 
-      const mostrar = input.type === "password";
-      input.type = mostrar ? "text" : "password";
-
-      if (icon) {
-        icon.classList.toggle("fa-eye", !mostrar);
-        icon.classList.toggle("fa-eye-slash", mostrar);
-      }
-
-      button.setAttribute(
-        "aria-label",
-        mostrar ? "Ocultar contraseña" : "Mostrar contraseña"
-      );
-    });
+    const mostrar = input.type === "password";
+    input.type = mostrar ? "text" : "password";
+  });
   });
 });
