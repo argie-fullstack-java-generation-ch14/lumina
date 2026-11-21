@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       // Redireccionar al panel de administración
-      window.location.href = "../productos/index.html";
+      window.location.href = "../productos/";
     } catch (error) {
       alertBox.innerHTML = `
         <div class="alert alert-danger" role="alert">
