@@ -3,8 +3,6 @@
 // Global: header y footer compartidos y, en la home, inyección del contenido
 // de cada página dentro de su sección.
 
-const APP_BASE = window.APP_BASE || window.location.origin;
-
 document.addEventListener("DOMContentLoaded", async () => {
   await renderPartial("#header", "header/header.html");
   initHeader();
