@@ -122,15 +122,15 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - ✅ `src/tienda/registro/registro.js`: ejemplo de cómo llamar a `POST /api/registro`
    - El Rol C debe reutilizar estos archivos sin modificarlos, solo consumirlos
 
-10. **Cerrar sesión (Logout)**
-   - Agregar botón de "Cerrar sesión" en el header (`src/js/main.js`) o en la vista de mi-cuenta
-   - Al hacer clic: borrar `token` y `usuarioActivo` de `localStorage`, redirigir a `src/tienda/login/index.html`
-   - Validar que el botón solo se muestre cuando hay sesión activa
+10. ✅ **Cerrar sesión (Logout)**
+   - ✅ Agregar botón de "Cerrar sesión" en el header (`src/js/main.js`) o en la vista de mi-cuenta
+   - ✅ Al hacer clic: borrar `token` y `usuarioActivo` de `localStorage`, redirigir a `src/tienda/login/index.html`
+   - ✅ Validar que el botón solo se muestre cuando hay sesión activa
 
-11. **Header que refleje el estado de autenticación**
-    - Editar VISTA `src/js/main.js` para leer `usuarioActivo` y mostrar el nombre del usuario logueado
-    - Mostrar/ocultar enlaces según el estado de autenticación (ej. "Mi cuenta" vs "Iniciar sesión")
-    - Mostrar/ocultar enlaces de administración según el rol (`ADMIN`/`STAFF` vs `CUSTOMER`)
+11. ✅ **Header que refleje el estado de autenticación**
+    - ✅ Editar VISTA `src/js/main.js` para leer `usuarioActivo` y mostrar el nombre del usuario logueado
+    - ✅ Mostrar/ocultar enlaces según el estado de autenticación (ej. "Mi cuenta" vs "Iniciar sesión")
+    - ✅ Mostrar/ocultar enlaces de administración según el rol (`ADMIN`/`STAFF` vs `CUSTOMER`)
 
 **Entrega del Rol A (Parte 1):** Pull request parcial o rama lista con `src/api/` funcional, login y registro integrados, y vista de login del admin creada.
 
