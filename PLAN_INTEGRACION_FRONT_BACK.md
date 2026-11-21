@@ -101,11 +101,11 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - ✅ Mostrar error genérico 401 sin revelar si el correo existe
    - ✅ Reutilizar `src/api/client.js` y `src/api/endpoints.js` creados en el Rol A
 
-7. **Proteger vistas del administración contra acceso no autorizado**
-   - Crear `src/api/authGuard.js` con función `requireAuth(rolesPermitidos)`
-   - Verificar que exista `token` en `localStorage` y que el rol del `usuarioActivo` esté en `rolesPermitidos` (ej. `['ADMIN', 'STAFF']`)
-   - Si no hay sesión o el rol no autoriza, redirigir a `src/tienda/login/index.html`
-   - Llamar a `requireAuth(['ADMIN', 'STAFF'])` al inicio de cada vista del panel de administración
+7. ✅ **Proteger vistas del administración contra acceso no autorizado**
+   - ✅ Crear `src/api/authGuard.js` con función `requireAuth(rolesPermitidos)`
+   - ✅ Verificar que exista `token` en `localStorage` y que el rol del `usuarioActivo` esté en `rolesPermitidos` (ej. `['ADMIN', 'STAFF']`)
+   - ✅ Si no hay sesión o el rol no autoriza, redirigir a `src/tienda/login/index.html`
+   - ✅ Llamar a `requireAuth(['ADMIN', 'STAFF'])` al inicio de cada vista del panel de administración
 
 8. **Conectar la página de registro al backend**
    - Editar `src/tienda/registro/registro.js`
