@@ -305,12 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
       );
 
-      // Redireccionar según rol
-      if (response.role === "ADMIN" || response.role === "STAFF") {
-        window.location.href = "../../admin/productos/";
-      } else {
-        window.location.href = "../mi-cuenta/index.html";
-      }
+      await playEnding();
     } catch (error) {
       submitButton.disabled = false;
 
