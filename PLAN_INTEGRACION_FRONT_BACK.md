@@ -26,17 +26,17 @@ El refactor nace de la rama base `refactor/capa-integration`, creada desde `main
    ```bash
    git switch refactor/capa-integration
    git pull
-   git switch -c refactor/integracion-front-a   # ejemplo para el Rol A
+   git switch -c refactor/integracion-front-argie   # ejemplo para el Rol A
    ```
 
 3. Nombres sugeridos de rama:
 
    | Rol | Rama |
    |-----|------|
-   | A | `refactor/integracion-front-a` |
-   | B | `refactor/integracion-front-b` |
-   | C | `refactor/integracion-front-c` |
-   | D | `refactor/integracion-front-d` |
+   | A | `refactor/integracion-front-argie` |
+   | B | `front-naya` |
+   | C | `front-nicole` |
+   | D | `pedro` |
 
 4. Cada integrante trabaja solo en los archivos de su rol y abre un PR hacia `refactor/capa-integration`. Si el PR no tiene conflictos, se hace merge directamente; si tiene conflictos, se resuelven y luego se hace el merge. No es necesaria la aprobación formal del PR por temas de tiempo.
 
@@ -86,7 +86,7 @@ El refactor nace de la rama base `refactor/capa-integration`, creada desde `main
 
 ---
 
-## Rol B — Integración de Catálogo y Detalle de Productos (Dificultad: 3/5)
+## Rol B (Naya) — Integración de Catálogo y Detalle de Productos (Dificultad: 3/5)
 
 **Objetivo:** Que la tienda muestre productos reales del backend en lugar de JSON estático.
 
@@ -118,7 +118,7 @@ El refactor nace de la rama base `refactor/capa-integration`, creada desde `main
 
 ---
 
-## Rol C — Integración de Autenticación y Pedidos (Checkout + Mis Pedidos) (Dificultad: 4/5)
+## Rol C (Nicole) — Integración de Autenticación y Pedidos (Checkout + Mis Pedidos) (Dificultad: 4/5)
 
 **Objetivo:** Que registro, login, checkout y "mis pedidos" usen el backend real.
 
@@ -159,7 +159,7 @@ El refactor nace de la rama base `refactor/capa-integration`, creada desde `main
 
 ---
 
-## Rol D — Integración del Panel de Administración (CRUD Productos) (Dificultad: 4/5)
+## Rol D (Pedro) — Integración del Panel de Administración (CRUD Productos) (Dificultad: 4/5)
 
 **Objetivo:** Que el admin gestione productos reales a través del backend.
 
@@ -230,11 +230,11 @@ El refactor nace de la rama base `refactor/capa-integration`, creada desde `main
 
 | Rol | Fase | Archivos clave | Dificultad |
 |-----|------|----------------|------------|
-| **A (Parte 1)** | Base + Login | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/tienda/login/login.js` | 2/5 |
-| **B** | Catálogo | `src/api/services/productos.service.js`, `src/js/productos.js`, `src/tienda/catalogo/` | 3/5 |
-| **C** | Auth + Pedidos | `src/api/services/usuarios.service.js`, `src/api/services/pedidos.service.js`, `src/tienda/registro/`, `src/componentes/checkout-modal/`, `src/tienda/mi-cuenta/pedidos/` | 4/5 |
-| **D** | Admin | `src/admin/productos/`, `src/admin/producto-formulario/` | 4/5 |
-| **A (Parte 2)** | Unificación | Rama `feature/integracion-completa`, PR a `main`, smoke test final | 5/5 |
+| **A (Argie, Parte 1)** | Base + Login | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/tienda/login/login.js` | 2/5 |
+| **B (Naya)** | Catálogo | `src/api/services/productos.service.js`, `src/js/productos.js`, `src/tienda/catalogo/` | 3/5 |
+| **C (Nicole)** | Auth + Pedidos | `src/api/services/usuarios.service.js`, `src/api/services/pedidos.service.js`, `src/tienda/registro/`, `src/componentes/checkout-modal/`, `src/tienda/mi-cuenta/pedidos/` | 4/5 |
+| **D (Pedro)** | Admin | `src/admin/productos/`, `src/admin/producto-formulario/` | 4/5 |
+| **A (Argie, Parte 2)** | Unificación | Rama `feature/integracion-completa`, PR a `main`, smoke test final | 5/5 |
 
 ---
 
