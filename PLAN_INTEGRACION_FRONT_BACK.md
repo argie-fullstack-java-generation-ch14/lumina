@@ -50,9 +50,9 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 | Rol | Fase | Archivos clave | Dificultad |
 |-----|------|----------------|------------|
-| [**A (Argie, Parte 1)**](#rol-a-argie-parte-1-bases-de-integracion) | Base + Login | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/api/authGuard.js`, `src/tienda/login/login.js`, `src/tienda/registro/registro.js`, `src/admin/login/login.html`, `src/admin/login/login.js` | 3/5 |
+| [**A (Argie, Parte 1)**](#rol-a-argie-parte-1-bases-de-integracion) | Base + Login + Auth header + Logout | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/api/authGuard.js`, `src/tienda/login/login.js`, `src/tienda/registro/registro.js`, `src/admin/login/login.html`, `src/admin/login/login.js`, `src/js/main.js` | 4/5 |
 | [**B (Naya)**](#rol-b-naya-integracion-de-catalogo-y-detalle-de-productos) | Catálogo + Carrito | `src/api/services/productos.service.js`, `src/js/productos.js`, `src/js/carrito.js`, `src/tienda/catalogo/` | 3/5 |
-| [**C (Nicole)**](#rol-c-nicole-integracion-de-autenticacion-y-pedidos) | Auth + Pedidos | `src/api/services/usuarios.service.js`, `src/api/services/pedidos.service.js`, `src/componentes/checkout-modal/`, `src/tienda/mi-cuenta/pedidos/` | 4/5 |
+| [**C (Nicole)**](#rol-c-nicole-integracion-de-autenticacion-y-pedidos) | Auth + Pedidos | `src/api/services/usuarios.service.js`, `src/api/services/pedidos.service.js`, `src/componentes/checkout-modal/`, `src/tienda/mi-cuenta/pedidos/` | 3/5 |
 | [**D (Pedro)**](#rol-d-pedro-integracion-del-panel-de-administracion) | Admin | `src/admin/productos/`, `src/admin/producto-formulario/`, `src/admin/producto-detalle/` | 4/5 |
 | [**A (Argie, Parte 2)**](#rol-a-argie-parte-2-unificacion-y-merge) | Unificación | Rama `feature/integracion-completa`, PR a `main`, smoke test final | 5/5 |
 
@@ -121,6 +121,16 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - ✅ `src/tienda/login/login.js`: ejemplo de cómo llamar a `POST /api/login` y guardar `token` + `usuarioActivo` en `localStorage`
    - ✅ `src/tienda/registro/registro.js`: ejemplo de cómo llamar a `POST /api/registro`
    - El Rol C debe reutilizar estos archivos sin modificarlos, solo consumirlos
+
+10. **Cerrar sesión (Logout)**
+   - Agregar botón de "Cerrar sesión" en el header (`src/js/main.js`) o en la vista de mi-cuenta
+   - Al hacer clic: borrar `token` y `usuarioActivo` de `localStorage`, redirigir a `src/tienda/login/index.html`
+   - Validar que el botón solo se muestre cuando hay sesión activa
+
+11. **Header que refleje el estado de autenticación**
+    - Editar VISTA `src/js/main.js` para leer `usuarioActivo` y mostrar el nombre del usuario logueado
+    - Mostrar/ocultar enlaces según el estado de autenticación (ej. "Mi cuenta" vs "Iniciar sesión")
+    - Mostrar/ocultar enlaces de administración según el rol (`ADMIN`/`STAFF` vs `CUSTOMER`)
 
 **Entrega del Rol A (Parte 1):** Pull request parcial o rama lista con `src/api/` funcional, login y registro integrados, y vista de login del admin creada.
 
@@ -207,17 +217,7 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - Al hacer checkout (`POST /api/pedidos`), se envía el `userId` del usuario autenticado. Si no hay sesión, el frontend debe solicitar login o registro antes de finalizar la compra.
    - El carrito se pierde si el usuario limpia el `localStorage`, cambia de navegador o de dispositivo.
 
-8. **Cerrar sesión (Logout)**
-   - Agregar botón de "Cerrar sesión" en el header (`src/js/main.js`) o en la vista de mi-cuenta
-   - Al hacer clic: borrar `token` y `usuarioActivo` de `localStorage`, redirigir a `src/tienda/login/index.html`
-   - Validar que el botón solo se muestre cuando hay sesión activa
-
-9. **Header que refleje el estado de autenticación**
-    - Editar VISTA `src/js/main.js` para leer `usuarioActivo` y mostrar el nombre del usuario logueado
-   - Mostrar/ocultar enlaces según el estado de autenticación (ej. "Mi cuenta" vs "Iniciar sesión")
-   - Mostrar/ocultar enlaces de administración según el rol (`ADMIN`/`STAFF` vs `CUSTOMER`)
-
-**Entrega del Rol C:** PR con autenticación, checkout, mis pedidos, logout y header con estado de autenticación funcionando contra el backend.
+**Entrega del Rol C:** PR con autenticación, checkout y mis pedidos funcionando contra el backend.
 
 ---
 
