@@ -48,9 +48,9 @@ function crearBotonPedido(pedido, indice) {
   const expanded = isOpen ? "true" : "false";
   const collapseTarget = `#collapse-pedido-${indice}`;
   const headingId = `heading-pedido-${indice}`;
-  const fecha = formatearFecha(pedido.createdAt);
-  const total = fmt(pedido.total);
-  const totalProductos = pedido.items.length;
+  const fecha = pedido.createdAt ? formatearFecha(pedido.createdAt) : pedido.fecha || "";
+  const total = fmt(pedido.total ?? 0);
+  const totalProductos = Array.isArray(pedido.items) ? pedido.items.length : 0;
   const estadoClase = pedido.status === "PENDING" ? " is-pendiente" : "";
 
   return `
@@ -76,15 +76,17 @@ function crearBotonPedido(pedido, indice) {
 }
 
 function crearItemPedido(pedido, indice) {
-  const productos = pedido.items
+  const items = Array.isArray(pedido.items) ? pedido.items : [];
+
+  const productos = items
     .map((item, i) => crearPedidoProducto(item, {
-      ultimo: i === pedido.items.length - 1
+      ultimo: i === items.length - 1
     }))
     .join("\n");
 
   const resumen = typeof crearResumenCompra === "function"
     ? crearResumenCompra({
-        cantidad: pedido.items.length,
+        cantidad: items.length,
         subtotal: pedido.subtotal,
         discountTotal: pedido.discountTotal,
         taxTotal: pedido.taxTotal,

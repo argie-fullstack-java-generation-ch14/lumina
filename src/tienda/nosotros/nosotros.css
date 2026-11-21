@@ -102,7 +102,7 @@
 .about-text h2 {
   margin: 0 0 0.7rem;
   color: var(--cafe-lumina);
-  font-family: Georgia, serif;
+  font-family: var(--fuente-titulos);
   font-size: 28px;
   font-weight: 700;
   line-height: 1.2;
@@ -493,7 +493,7 @@
 .about-history h2 {
   margin: 0 0 1.3rem;
   color: var(--cafe-lumina);
-  font-family: Georgia, serif;
+  font-family: var(--fuente-titulos);
   font-size: 28px;
   font-weight: 700;
   line-height: 1.2;
