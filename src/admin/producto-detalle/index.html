@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle de producto · Lumina</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link rel="stylesheet" href="producto-detalle.css">
+</head>
+<body>
+  <header id="header"></header>
+  <main class="container my-5">
+    <div class="container my-5">
+      <a class="articulo-volver" href="../productos/index.html">
+        <i class="ri-arrow-left-line"></i> Volver al listado
+      </a>
+      <div class="row align-items-stretch g-4">
+        <div class="col-12 col-lg-7">
+          <div class="producto-imagen-wrapper position-relative overflow-hidden">
+            <img
+              src=""
+              alt="Vela Lumina"
+              class="img-fluid w-100 object-fit-cover producto-imagen-wrapper-img">
+          </div>
+        </div>
+        <div class="col-12 col-lg-5">
+          <div class="producto-info d-flex flex-column justify-content-between ps-lg-4 py-2">
+            <div>
+              <div class="producto-titulo-wrapper d-flex align-items-center gap-3 mb-4">
+                <h2 id="producto-nombre" class="producto-titulo mb-0">Producto</h2>
+              </div>
+              <div class="mb-4">
+                <h3 class="producto-subtitulo mb-2">Categoría</h3>
+                <span id="producto-categoria" class="candle-category category-default">Categoría</span>
+              </div>
+              <div class="mb-4">
+                <h3 class="producto-subtitulo mb-2">Especificaciones</h3>
+                <ul class="list-unstyled producto-specs mb-0">
+                  <li><strong>Aroma:</strong> <span id="producto-aroma"></span></li>
+                  <li><strong>Peso:</strong> <span id="producto-peso"></span></li>
+                  <li><strong>Color:</strong> <span id="producto-color"></span></li>
+                </ul>
+              </div>
+              <div class="producto-desc-block">
+                <h3 class="producto-subtitulo mb-2">Descripción</h3>
+                <p id="producto-descripcion" class="producto-desc mb-0"></p>
+              </div>
+            </div>
+            <div class="producto-purchase pt-3 mt-auto">
+              <span id="producto-precio" class="producto-precio">$ 0</span>
+              <div class="d-flex gap-2">
+                <button id="btn-editar-producto" type="button" class="btn-editar-producto">Editar producto</button>
+                <button id="btn-eliminar-producto" type="button" class="btn-eliminar-producto">Eliminar producto</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer id="footer"></footer>
+  <script src="../../js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/ui.js"></script>
+  <script src="../../js/main.js"></script>
+  <script type="module" src="producto-detalle.js"></script>
+</body>
+</html>
