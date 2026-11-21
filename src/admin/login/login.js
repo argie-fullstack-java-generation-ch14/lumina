@@ -1,3 +1,10 @@
+// Lumina · Admin · Login
+// ------------------------------------------------------------
+// Vista de inicio de sesión del panel de administración.
+// Reutiliza src/api/services/usuarios.service.js (llamada a POST /api/login).
+
+import { login } from "../../api/services/usuarios.service.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("#login-form");
   const emailInput = document.querySelector("#login-email");
@@ -11,28 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
       emailInput: !!emailInput,
       passwordInput: !!passwordInput,
       alertBox: !!alertBox,
-      togglePassword: !!togglePassword,
+      toggleButton: !!togglePassword,
     });
     return;
-  }
-
-  const API_BASE_URL = window.LUMINA_API_URL || "http://localhost:8080";
-
-  async function apiPost(path, body) {
-    const response = await fetch(`${API_BASE_URL}${path}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    const data = await response.json();
-    if (!response.ok) {
-      const error = new Error(data.message || "Error en la petición");
-      error.status = response.status;
-      error.error = data.error;
-      error.details = data.details;
-      throw error;
-    }
-    return data;
   }
 
   // Mostrar u ocultar contraseña
@@ -63,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const data = await apiPost("/api/login", { email, password });
+      const data = await login({ email, password });
 
       // Verificar que el usuario tenga rol de administrador o staff
       if (data.user.role !== "ADMIN" && data.user.role !== "STAFF") {
@@ -84,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
           fullName: data.user.fullName,
           phone: data.user.phone,
           email: data.user.email,
-          role: data.user.role
+          role: data.user.role,
         })
       );
 

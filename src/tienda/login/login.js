@@ -1,5 +1,4 @@
-import { apiPost } from "../../api/client.js";
-import { endpoints } from "../../api/endpoints.js";
+import { login } from "../../api/services/usuarios.service.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("#login-form");
@@ -30,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = passwordInput.value;
 
     try {
-      const data = await apiPost(endpoints.auth.login, { email, password });
+      const data = await login({ email, password });
 
       // Guardar token y datos públicos del usuario (sin contraseña)
       localStorage.setItem("token", data.token);

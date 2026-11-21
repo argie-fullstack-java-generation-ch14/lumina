@@ -1,17 +1,12 @@
 // Lumina · Registro · Backend
 // ------------------------------------------------------------
 // Comunicación con la API para crear cuenta de usuario.
+// Reutiliza src/api/services/usuarios.service.js (Rol C / usuarios.service).
 
-import { apiPost } from "../../api/client.js";
-import { endpoints } from "../../api/endpoints.js";
+import { registrar } from "../../api/services/usuarios.service.js";
 
 export async function registerUser(userData) {
-  const response = await apiPost(endpoints.auth.register, {
-    fullName: userData.fullName,
-    phone: userData.phone,
-    email: userData.email,
-    password: userData.password,
-  });
+  const response = await registrar(userData);
 
   // Guardar usuario autenticado (sin contraseña)
   localStorage.setItem(
