@@ -26,8 +26,6 @@ Este documento describe los ajustes que debe hacer el **frontend** para consumir
 | Blog / artículos | El backend no tiene endpoints de artículos (`articulos.json` solo en front) |
 | Velas personalizadas | El backend tiene `/api/velas-personalizadas` pero el front no tiene módulo que lo consuma |
 | Pasarela de pagos real | Checkout solo genera solicitud de confirmación, no cobra |
-| Autenticación JWT | Pendiente del Rol E; la sesión sigue en `localStorage` (`usuarioActivo`) |
-| Protección de rutas de administración | El admin queda abierto mientras no haya JWT |
 
 ---
 
@@ -139,10 +137,18 @@ El backend devuelve el texto de la categoría tal cual (ej. `bienestar`, `navida
 - `velas.json`: dejar de usarse en runtime; mantener solo como referencia hasta que se verifique la integración, luego eliminar.
 
 ### 5.2 Autenticación
-- `src/tienda/registro/registro.js`: `POST /api/registro` con payload `{ fullName, phone, email, password }`. Al éxito, guardar `UserResponse` mapeado en `usuarioActivo`. Eliminar escritura en `usuarios` y no almacenar contraseña.
+
+El backend ya implementa autenticación con JWT (Rol E completado):
+- `POST /api/login` devuelve `{ token, user }`. El `token` debe guardarse y enviarse en las peticiones protegidas como cabecera `Authorization: Bearer <token>`.
+- `POST /api/registro` con payload `{ fullName, phone, email, password }`. Al éxito, guardar `UserResponse` mapeado en `usuarioActivo`. Eliminar escritura en `usuarios` y no almacenar contraseña.
 - `src/tienda/login/login.js`: `POST /api/login` con `{ email, password }`. No validar contraseña localmente; usar el resultado del backend. Eliminar lectura del array `usuarios`.
 - `src/js/main.js` (header): leer `usuarioActivo` ya mapeado (`nombreCompleto`).
 - `src/tienda/mi-cuenta/info/index.html` + `info.js`: eliminar el bloque de contraseña (el backend no la devuelve). Mostrar nombre, correo y teléfono. Si se requiere edición futura, usar `PUT /api/usuarios/{id}` con `{ fullName, phone }`.
+
+**Rutas protegidas que requieren `Authorization: Bearer <token>`:**
+- Todas las rutas de `/api/**` excepto `POST /api/registro`, `POST /api/login` y `GET /api/productos/**` (públicas).
+- Escrituras de productos (`POST/PUT/DELETE /api/productos`) requieren rol `ADMIN`.
+- Cambio de estado de pedidos (`PUT /api/pedidos/{id}/estado`) requiere rol `ADMIN` o `STAFF`.
 
 ### 5.3 Carrito, checkout y mis pedidos
 - **Checkout** (`src/componentes/checkout-modal/checkout-modal.js`): validar que exista sesión (`usuarioActivo.id`); si no hay sesión, redirigir al login o mostrar mensaje. En lugar de generar `L-####` y guardar en `localStorage`, llamar `POST /api/pedidos` con `{ userId, items: [{ productId, quantity }] }`.
@@ -282,7 +288,8 @@ Comportamientos mínimos:
 ### Bloqueadores (backend, no front)
 
 - [ ] **Rol D:** corregir la importación de `ApiError` en `GlobalExceptionHandler` (`com.lumina.common.ApiError` vs `com.lumina.dto.response.ApiError`) para que el backend compile.
-- [ ] **Rol E (JWT):** pendiente del profesor; la sesión sigue en `localStorage` (`usuarioActivo`).
+
+> **Rol E (JWT):** ya implementado en el backend. El front debe enviar el `token` recibido en `POST /api/login` como cabecera `Authorization: Bearer <token>` en las peticiones protegidas.
 
 ---
 
