@@ -389,3 +389,42 @@
     animation: none;
   }
 }
+
+.register-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.register-has-account {
+  margin: 0;
+  font-size: 0.875rem;
+  font-family: var(--fuente-texto);
+  color: var(--negro-relajacion);
+  text-align: center;
+}
+
+.register-has-account a {
+  color: var(--cafe-lumina);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.register-has-account a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .register-actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .register-has-account {
+    text-align: left;
+    margin: 0;
+  }
+}
