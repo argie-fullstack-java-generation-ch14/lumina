@@ -173,6 +173,11 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - Leer `usuarioActivo` con `fullName`, `phone`, `email`
    - Eliminar bloque de contraseña en "Mi cuenta"
 
+7. **Proteger vistas de mi-cuenta contra acceso no autenticado**
+   - Llamar a `requireAuth(['CUSTOMER', 'ADMIN', 'STAFF'])` al inicio de `src/tienda/mi-cuenta/info/`, `src/tienda/mi-cuenta/pedidos/` y `src/tienda/mi-cuenta/favoritos/`
+   - Si no hay sesión activa, redirigir a `src/tienda/login/index.html`
+   - Reutilizar `src/api/authGuard.js` creado en el Rol A
+
 **Entrega del Rol C:** PR con autenticación, checkout y mis pedidos funcionando contra el backend.
 
 ---
