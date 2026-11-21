@@ -43,7 +43,7 @@
 
 .login-card h1 {
   color: #403332;
-  font-family: "Recoleta", Georgia, serif;
+  font-family: var(--fuente-titulos);
   text-align: center;
   font-size: 2rem;
   margin-bottom: 0.8rem;
@@ -52,7 +52,8 @@
 /* TEXTO DESCRIPTIVO */
 
 .login-card > p {
-  color: #806d65;
+  color: var(--negro-relajacion);
+  font-family: var(--fuente-texto);
   text-align: center;
   line-height: 1.5;
 }
@@ -69,6 +70,7 @@
 .login-field label {
   font-size: 0.875rem;
   font-weight: 600;
+  font-family: var(--fuente-texto);
   color: var(--negro-relajacion);
 }
 
@@ -79,6 +81,7 @@
   border-radius: 9px;
   outline: none;
   background-color: rgba(255, 255, 255, 0.65) !important;
+  font-family: var(--fuente-texto);
 }
 
 /* Evita que el autofill del navegador sobreescriba el fondo */
@@ -88,6 +91,7 @@
 .login-field input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.65) inset !important;
   -webkit-text-fill-color: var(--negro-acentuado) !important;
+  font-family: var(--fuente-texto) !important;
 }
 
 .login-field input:focus {
@@ -157,7 +161,8 @@
   background: #354F56;
   color: #F7F6F4;
 
-  font-size: 1rem;
+  font-family: var(--fuente-texto);
+  font-size: 0.875rem;
   font-weight: 600;
 
   cursor: pointer;
@@ -177,12 +182,21 @@
 
 .login-register {
   margin-top: 1.5rem;
-  font-size: 0.95rem;
+  font-size: 0.875rem;
+  font-family: var(--fuente-texto);
+  color: var(--negro-relajacion);
+  text-align: center;
 }
 
 .login-register a {
-  color: #806d65;
-  font-weight: 700;
+  color: var(--negro-relajacion);
+  font-weight: 600;
+  font-family: var(--fuente-texto);
+  text-decoration: none;
+}
+
+.login-register a:hover {
+  text-decoration: underline;
 }
 
 /* TABLETAS Y CELULARES */
