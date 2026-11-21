@@ -43,7 +43,7 @@
 
 .login-card h1 {
   color: #403332;
-  font-family: "Recoleta", Georgia, serif;
+  font-family: var(--fuente-titulos);
   text-align: center;
   font-size: 2rem;
   margin-bottom: 0.8rem;
@@ -53,6 +53,7 @@
 
 .login-card > p {
   color: #806d65;
+  font-family: var(--fuente-texto);
   text-align: center;
   line-height: 1.5;
 }
@@ -69,6 +70,7 @@
 .login-field label {
   font-size: 0.875rem;
   font-weight: 600;
+  font-family: var(--fuente-texto);
   color: var(--negro-relajacion);
 }
 
@@ -79,6 +81,7 @@
   border-radius: 9px;
   outline: none;
   background-color: rgba(255, 255, 255, 0.65) !important;
+  font-family: var(--fuente-texto);
 }
 
 /* Evita que el autofill del navegador sobreescriba el fondo */
@@ -157,6 +160,7 @@
   background: #354F56;
   color: #F7F6F4;
 
+  font-family: var(--fuente-texto);
   font-size: 1rem;
   font-weight: 600;
 
@@ -178,11 +182,13 @@
 .login-register {
   margin-top: 1.5rem;
   font-size: 0.95rem;
+  font-family: var(--fuente-texto);
 }
 
 .login-register a {
   color: #806d65;
   font-weight: 700;
+  font-family: var(--fuente-texto);
 }
 
 /* TABLETAS Y CELULARES */
