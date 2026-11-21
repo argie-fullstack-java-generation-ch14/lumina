@@ -6,6 +6,46 @@
 
 ---
 
+## Rama de trabajo
+
+El refactor nace de la rama base `refactor/capa-integration`, creada desde `main`. Cada integrante crea su rama hija a partir de `refactor/capa-integration`, trabaja solo en sus archivos y abre un Pull Request hacia esa misma rama base. Si no hay conflictos, se hace merge directamente a `refactor/capa-integration`; si hay conflictos, se resuelven y luego se hace el merge. Solo al final, con todos los roles integrados y el build verde, `refactor/capa-integration` se fusiona a `main`.
+
+## Estrategia de ramas y Git
+
+1. El responsable de integración crea la rama base desde `main`:
+
+   ```bash
+   git switch main
+   git pull
+   git switch -c refactor/capa-integration
+   git push -u origin refactor/capa-integration
+   ```
+
+2. Cada integrante crea su rama desde `refactor/capa-integration`:
+
+   ```bash
+   git switch refactor/capa-integration
+   git pull
+   git switch -c refactor/integracion-front-a   # ejemplo para el Rol A
+   ```
+
+3. Nombres sugeridos de rama:
+
+   | Rol | Rama |
+   |-----|------|
+   | A | `refactor/integracion-front-a` |
+   | B | `refactor/integracion-front-b` |
+   | C | `refactor/integracion-front-c` |
+   | D | `refactor/integracion-front-d` |
+
+4. Cada integrante trabaja solo en los archivos de su rol y abre un PR hacia `refactor/capa-integration`. Si el PR no tiene conflictos, se hace merge directamente; si tiene conflictos, se resuelven y luego se hace el merge. No es necesaria la aprobación formal del PR por temas de tiempo.
+
+5. El build y el smoke test se ejecutan al final, con todos los roles integrados.
+
+6. Si todo pasa, `refactor/capa-integration` se fusiona a `main`.
+
+---
+
 ## Rol A (Argie) — Parte 1: Bases de integración (Dificultad: 2/5)
 
 **Objetivo:** Dejar lista la infraestructura mínima para que los demás roles solo conecten vistas con APIs, sin preocuparse por configuración de red, base URL o manejo de errores.
