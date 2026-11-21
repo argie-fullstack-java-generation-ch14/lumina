@@ -65,6 +65,27 @@
 	box-shadow: 0 0 0 3px rgba(128, 109, 101, 0.12);
 }
 
+.product-form-field select.form-select.product-form-input {
+	background-color: rgba(255, 255, 255, 0.65);
+	border: 1px solid #d9c9be;
+	border-radius: 9px;
+	font-size: 1rem;
+	line-height: 1.5;
+	color: var(--negro-acentuado);
+	padding: 0.85rem 2.5rem 0.85rem 1rem;
+	outline: none;
+	cursor: pointer;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23806d65' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+	background-repeat: no-repeat;
+	background-position: right 1rem center;
+	background-size: 16px 12px;
+}
+
+.product-form-field select.form-select.product-form-input:focus-visible {
+	border-color: #806d65;
+	box-shadow: 0 0 0 3px rgba(128, 109, 101, 0.12);
+}
+
 .product-form-textarea {
 	min-height: 8.5rem;
 	resize: vertical;
