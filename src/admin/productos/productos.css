@@ -31,9 +31,13 @@
 .candle-category,
 .candle-scent,
 .candle-weight,
-.candle-description,
-.candle-price {
+.candle-description {
 	font-family: var(--fuente-texto);
+}
+
+.candle-card h3,
+.candle-price {
+	font-family: var(--fuente-titulos);
 }
 
 .texto-admin {
