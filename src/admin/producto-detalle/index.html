@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detalle de producto · Lumina</title>
   <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="../../css/components.css">
@@ -16,9 +16,15 @@
   <header id="header"></header>
   <main class="container my-5">
     <div class="container my-5">
-      <a class="articulo-volver" href="../productos/index.html">
-        <i class="fa-solid fa-arrow-left"></i> Volver al listado
-      </a>
+      <div class="producto-toolbar">
+        <a class="articulo-volver" href="../productos/index.html">
+          <i class="ri-arrow-left-line"></i> Volver al listado
+        </a>
+        <div class="producto-acciones">
+          <button id="btn-editar-producto" type="button" class="btn-editar-producto">Editar</button>
+          <button id="btn-eliminar-producto" type="button" class="btn-eliminar-producto">Eliminar</button>
+        </div>
+      </div>
       <div class="row align-items-stretch g-4">
         <div class="col-12 col-lg-7">
           <div class="producto-imagen-wrapper position-relative overflow-hidden">
@@ -53,10 +59,6 @@
             </div>
             <div class="producto-purchase pt-3 mt-auto">
               <span id="producto-precio" class="producto-precio">$ 0</span>
-              <div class="d-flex gap-2">
-                <button id="btn-editar-producto" type="button" class="btn-editar-producto">Editar producto</button>
-                <button id="btn-eliminar-producto" type="button" class="btn-eliminar-producto">Eliminar producto</button>
-              </div>
             </div>
           </div>
         </div>
