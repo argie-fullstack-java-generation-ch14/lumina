@@ -50,7 +50,7 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 | Rol | Fase | Archivos clave | Dificultad |
 |-----|------|----------------|------------|
-| [**A (Argie, Parte 1)**](#rol-a-argie-parte-1-bases-de-integracion) | Base + Login | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/tienda/login/login.js` | 2/5 |
+| [**A (Argie, Parte 1)**](#rol-a-argie-parte-1-bases-de-integracion) | Base + Login | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/api/authGuard.js`, `src/tienda/login/login.js` | 2/5 |
 | [**B (Naya)**](#rol-b-naya-integracion-de-catalogo-y-detalle-de-productos) | Catálogo | `src/api/services/productos.service.js`, `src/js/productos.js`, `src/tienda/catalogo/` | 3/5 |
 | [**C (Nicole)**](#rol-c-nicole-integracion-de-autenticacion-y-pedidos) | Auth + Pedidos | `src/api/services/usuarios.service.js`, `src/api/services/pedidos.service.js`, `src/tienda/registro/`, `src/componentes/checkout-modal/`, `src/tienda/mi-cuenta/pedidos/` | 4/5 |
 | [**D (Pedro)**](#rol-d-pedro-integracion-del-panel-de-administracion) | Admin | `src/admin/productos/`, `src/admin/producto-formulario/` | 4/5 |
@@ -94,10 +94,11 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - Correr Live Server en `http://localhost:5500` **o** `npx serve` en el puerto deseado (ej. `npx serve -l 3000`)
    - Confirmar que CORS funciona con el backend
 
-6. **Replicar login para el módulo de administración**
-   - Copiar la estructura de `src/tienda/login/` hacia `src/admin/login/` (o crear una vista de login específica para el admin)
-   - Adaptar el redireccionamiento post-login para que apunte al panel de administración (`src/admin/productos/index.html`)
-   - Mantener la misma lógica de autenticación con `POST /api/login` y guardado de `token` + `usuarioActivo`
+6. **Proteger vistas del administración contra acceso no autorizado**
+   - Crear `src/api/authGuard.js` con función `requireAuth(rolesPermitidos)`
+   - Verificar que exista `token` en `localStorage` y que el rol del `usuarioActivo` esté en `rolesPermitidos` (ej. `['ADMIN', 'STAFF']`)
+   - Si no hay sesión o el rol no autoriza, redirigir a `src/tienda/login/index.html`
+   - Llamar a `requireAuth(['ADMIN', 'STAFF'])` al inicio de cada vista del panel de administración
 
 **Entrega del Rol A (Parte 1):** Pull request parcial o rama lista con `src/api/` funcional y login integrado.
 
