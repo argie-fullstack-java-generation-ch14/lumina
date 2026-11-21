@@ -181,15 +181,22 @@
 /* REGISTRO */
 
 .login-register {
-  margin-top: 1.5rem;
-  font-size: 0.95rem;
+  margin: 0;
+  font-size: 0.875rem;
   font-family: var(--fuente-texto);
+  color: var(--negro-relajacion);
+  text-align: center;
 }
 
 .login-register a {
-  color: #806d65;
-  font-weight: 700;
+  color: var(--cafe-lumina);
+  font-weight: 600;
   font-family: var(--fuente-texto);
+  text-decoration: none;
+}
+
+.login-register a:hover {
+  text-decoration: underline;
 }
 
 /* TABLETAS Y CELULARES */
