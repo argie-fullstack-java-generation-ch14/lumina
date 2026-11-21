@@ -1,3 +1,5 @@
+import { apiPost } from "../../api/client.js";
+import { endpoints } from "../../api/endpoints.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("#login-form");
@@ -21,34 +23,41 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Iniciar sesión
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const email = emailInput.value.trim().toLowerCase();
     const password = passwordInput.value;
 
-    const users = JSON.parse(localStorage.getItem("usuarios")) || [];
+    try {
+      const data = await apiPost(endpoints.auth.login, { email, password });
 
-    const user = users.find((item) =>
-      item.email === email && item.password === password
-    );
+      // Guardar token y datos públicos del usuario (sin contraseña)
+      localStorage.setItem("token", data.token);
+      localStorage.setItem(
+        "usuarioActivo",
+        JSON.stringify({
+          id: data.user.id,
+          fullName: data.user.fullName,
+          phone: data.user.phone,
+          email: data.user.email,
+          role: data.user.role
+        })
+      );
 
-    if (!user) {
+      // Redireccionar según rol
+      if (data.user.role === "ADMIN" || data.user.role === "STAFF") {
+        window.location.href = "../admin/productos/index.html";
+      } else {
+        window.location.href = "../mi-cuenta/index.html";
+      }
+    } catch (error) {
       alertBox.innerHTML = `
         <div class="alert alert-danger" role="alert">
           Correo o contraseña incorrectos.
         </div>
       `;
-      return;
+      console.error("Error de login:", error);
     }
-
-    // Guarda solo los datos públicos del usuario (sin contraseña)
-    localStorage.setItem("usuarioActivo", JSON.stringify({
-      fullName: user.fullName,
-      phone: user.phone,
-      email: user.email
-    }));
-
-    window.location.href = "../mi-cuenta/index.html";
   });
 });
