@@ -83,7 +83,7 @@
 		};
 
 		heading.append(
-			createTextElement("h3", "", product.name),
+			createTextElement("h3", "candle-title", product.name),
 			createTextElement(
 				"span",
 				`candle-category ${infoCategoria.clase}`,

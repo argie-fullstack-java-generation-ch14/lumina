@@ -35,7 +35,7 @@
 	font-family: var(--fuente-texto);
 }
 
-.candle-card h3,
+.candle-title,
 .candle-price {
 	font-family: var(--fuente-titulos);
 }
