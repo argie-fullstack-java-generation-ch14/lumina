@@ -48,13 +48,13 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 ## Resumen de entregables por Rol
 
-| Rol | Fase | Archivos clave | Dificultad | Enlace |
-|-----|------|----------------|------------|--------|
-| **A (Argie, Parte 1)** | Base + Login | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/tienda/login/login.js` | 2/5 | [Ver sección](#rol-a-argie-parte-1-bases-de-integracion) |
-| **B (Naya)** | Catálogo | `src/api/services/productos.service.js`, `src/js/productos.js`, `src/tienda/catalogo/` | 3/5 | [Ver sección](#rol-b-naya-integracion-de-catalogo-y-detalle-de-productos) |
-| **C (Nicole)** | Auth + Pedidos | `src/api/services/usuarios.service.js`, `src/api/services/pedidos.service.js`, `src/tienda/registro/`, `src/componentes/checkout-modal/`, `src/tienda/mi-cuenta/pedidos/` | 4/5 | [Ver sección](#rol-c-nicole-integracion-de-autenticacion-y-pedidos) |
-| **D (Pedro)** | Admin | `src/admin/productos/`, `src/admin/producto-formulario/` | 4/5 | [Ver sección](#rol-d-pedro-integracion-del-panel-de-administracion) |
-| **A (Argie, Parte 2)** | Unificación | Rama `feature/integracion-completa`, PR a `main`, smoke test final | 5/5 | [Ver sección](#rol-a-argie-parte-2-unificacion-y-merge) |
+| Rol | Fase | Archivos clave | Dificultad |
+|-----|------|----------------|------------|
+| [**A (Argie, Parte 1)**](#rol-a-argie-parte-1-bases-de-integracion) | Base + Login | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/tienda/login/login.js` | 2/5 |
+| [**B (Naya)**](#rol-b-naya-integracion-de-catalogo-y-detalle-de-productos) | Catálogo | `src/api/services/productos.service.js`, `src/js/productos.js`, `src/tienda/catalogo/` | 3/5 |
+| [**C (Nicole)**](#rol-c-nicole-integracion-de-autenticacion-y-pedidos) | Auth + Pedidos | `src/api/services/usuarios.service.js`, `src/api/services/pedidos.service.js`, `src/tienda/registro/`, `src/componentes/checkout-modal/`, `src/tienda/mi-cuenta/pedidos/` | 4/5 |
+| [**D (Pedro)**](#rol-d-pedro-integracion-del-panel-de-administracion) | Admin | `src/admin/productos/`, `src/admin/producto-formulario/` | 4/5 |
+| [**A (Argie, Parte 2)**](#rol-a-argie-parte-2-unificacion-y-merge) | Unificación | Rama `feature/integracion-completa`, PR a `main`, smoke test final | 5/5 |
 
 ---
 
