@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión · Lumina Admin</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+  <header id="header"></header>
+
+  <main class="login-page">
+    <section class="login-card">
+      <h1>Lumina Admin</h1>
+      <p>Inicia sesión para acceder al panel de administración.</p>
+
+      <div id="login-alert"></div>
+
+      <form id="login-form" novalidate>
+        <div class="login-field">
+          <label for="login-email">Correo electrónico</label>
+          <input
+            id="login-email"
+            type="email"
+            placeholder="nombre@correo.com"
+            required
+          >
+        </div>
+
+        <div class="login-field">
+          <label for="login-password">Contraseña</label>
+
+          <div class="password-container">
+            <input
+              id="login-password"
+              type="password"
+              placeholder="Tu contraseña"
+              required
+            >
+
+            <button
+              type="button"
+              id="toggle-password"
+              class="toggle-password"
+              aria-label="Mostrar contraseña"
+              aria-pressed="false"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit">Iniciar sesión</button>
+      </form>
+
+    </section>
+  </main>
+
+  <footer id="footer"></footer>
+
+  <script src="../../js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/ui.js"></script>
+  <script src="../../js/main.js"></script>
+  <script type="module" src="login.js"></script>
+</body>
+</html>

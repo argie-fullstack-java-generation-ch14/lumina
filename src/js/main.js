@@ -124,6 +124,7 @@ function initHeader() {
   // Acción para cerrar sesión.
   logoutButton.onclick = () => {
     localStorage.removeItem("usuarioActivo");
+    localStorage.removeItem("token");
     window.location.href = loginUrl;
   };
 }
