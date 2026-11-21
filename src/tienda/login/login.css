@@ -52,7 +52,7 @@
 /* TEXTO DESCRIPTIVO */
 
 .login-card > p {
-  color: #806d65;
+  color: var(--negro-relajacion);
   font-family: var(--fuente-texto);
   text-align: center;
   line-height: 1.5;
