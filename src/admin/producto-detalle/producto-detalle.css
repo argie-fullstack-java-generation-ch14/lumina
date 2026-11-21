@@ -149,6 +149,23 @@
   border: 1px solid var(--naranja-apagado);
 }
 
+.btn-eliminar-confirmar {
+  background-color: var(--naranja-apagado);
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--fuente-texto);
+  padding: 0.6rem 1.4rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-eliminar-confirmar:hover {
+  background-color: #c07a4a;
+}
+
 @media screen and (min-width: 768px) {
   .producto-imagen-wrapper {
     min-height: 630px;

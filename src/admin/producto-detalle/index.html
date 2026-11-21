@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="../../css/components.css">
+  <link rel="stylesheet" href="../producto-formulario/producto-formulario.css">
   <link rel="stylesheet" href="producto-detalle.css">
 </head>
 <body>
@@ -65,10 +66,32 @@
       </div>
     </div>
   </main>
+  <div id="productFormModalMount"></div>
+
+  <!-- Modal de confirmación de eliminación -->
+  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmDeleteLabel">¿Eliminar producto?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de que quieres eliminar <strong id="confirmDeleteName"></strong>?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-seguir-comprando" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn-eliminar-confirmar" id="btn-confirm-delete">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <footer id="footer"></footer>
   <script src="../../js/bootstrap.bundle.min.js"></script>
   <script src="../../js/ui.js"></script>
   <script src="../../js/main.js"></script>
+  <script src="../producto-formulario/producto-formulario.js"></script>
   <script type="module" src="producto-detalle.js"></script>
 </body>
 </html>

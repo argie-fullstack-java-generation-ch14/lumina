@@ -119,6 +119,7 @@
 
 .product-form-title {
 	font-family: var(--fuente-titulos);
+	color: var(--cafe-lumina);
 }
 
 @media (min-width: 768px) {
@@ -148,4 +149,27 @@
 	background-color: rgba(173, 120, 78, 0.08);
 	color: var(--naranja-apagado);
 	border-color: var(--naranja-apagado);
+}
+
+.btn-agregar-vela {
+	background-color: var(--cafe-lumina);
+	color: #FFFFFF;
+	font-size: 0.85rem;
+	font-weight: 600;
+	font-family: var(--fuente-texto);
+	padding: 0.7rem 1.5rem;
+	border-radius: 50px;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.btn-agregar-vela:hover,
+.btn-agregar-vela:focus {
+	background-color: #554342;
+	color: #FFFFFF;
+}
+
+.btn-agregar-vela:active {
+	transform: translateY(0);
 }
