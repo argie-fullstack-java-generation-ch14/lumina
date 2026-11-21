@@ -50,10 +50,10 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 | Rol | Fase | Archivos clave | Dificultad |
 |-----|------|----------------|------------|
-| [**A (Argie, Parte 1)**](#rol-a-argie-parte-1-bases-de-integracion) | Base + Login | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/api/authGuard.js`, `src/tienda/login/login.js`, `src/tienda/registro/registro.js` | 2/5 |
-| [**B (Naya)**](#rol-b-naya-integracion-de-catalogo-y-detalle-de-productos) | Catálogo | `src/api/services/productos.service.js`, `src/js/productos.js`, `src/tienda/catalogo/` | 3/5 |
-| [**C (Nicole)**](#rol-c-nicole-integracion-de-autenticacion-y-pedidos) | Auth + Pedidos | `src/api/services/usuarios.service.js`, `src/api/services/pedidos.service.js`, `src/tienda/registro/`, `src/componentes/checkout-modal/`, `src/tienda/mi-cuenta/pedidos/` | 4/5 |
-| [**D (Pedro)**](#rol-d-pedro-integracion-del-panel-de-administracion) | Admin | `src/admin/productos/`, `src/admin/producto-formulario/` | 4/5 |
+| [**A (Argie, Parte 1)**](#rol-a-argie-parte-1-bases-de-integracion) | Base + Login | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/api/authGuard.js`, `src/tienda/login/login.js`, `src/tienda/registro/registro.js`, `src/admin/login/login.html`, `src/admin/login/login.js` | 3/5 |
+| [**B (Naya)**](#rol-b-naya-integracion-de-catalogo-y-detalle-de-productos) | Catálogo + Carrito | `src/api/services/productos.service.js`, `src/js/productos.js`, `src/js/carrito.js`, `src/tienda/catalogo/` | 3/5 |
+| [**C (Nicole)**](#rol-c-nicole-integracion-de-autenticacion-y-pedidos) | Auth + Pedidos | `src/api/services/usuarios.service.js`, `src/api/services/pedidos.service.js`, `src/componentes/checkout-modal/`, `src/tienda/mi-cuenta/pedidos/` | 4/5 |
+| [**D (Pedro)**](#rol-d-pedro-integracion-del-panel-de-administracion) | Admin | `src/admin/productos/`, `src/admin/producto-formulario/`, `src/admin/producto-detalle/` | 4/5 |
 | [**A (Argie, Parte 2)**](#rol-a-argie-parte-2-unificacion-y-merge) | Unificación | Rama `feature/integracion-completa`, PR a `main`, smoke test final | 5/5 |
 
 ---
@@ -106,13 +106,29 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - Al éxito: guardar `UserResponse` en `usuarioActivo` (sin contraseña), redirigir según rol
    - Mostrar errores de validación (`400`, `409`) en el formulario correspondiente
 
-**Entrega del Rol A (Parte 1):** Pull request parcial o rama lista con `src/api/` funcional y login integrado.
+8. **Crear vista de login para el módulo de administración**
+   - Crear `src/admin/login/login.html` con formulario de inicio de sesión
+   - Crear `src/admin/login/login.js` con llamada a `POST /api/login`
+   - Al éxito: guardar `token` y `usuarioActivo` en `localStorage`, redirigir a `src/admin/productos/index.html`
+   - Mostrar error genérico 401 sin revelar si el correo existe
+   - Reutilizar `src/api/client.js` y `src/api/endpoints.js` creados en el Rol A
+
+9. **Bases que deja el Rol A para el Rol C (no tocar, solo usar)**
+   - `src/api/client.js`: funciones `apiGet`, `apiPost`, `apiPut`, `apiDelete` con `API_BASE_URL` ya configurada
+   - `src/api/endpoints.js`: todas las rutas del backend centralizadas (`endpoints.auth.login`, `endpoints.auth.register`, `endpoints.usuarios.byId`, `endpoints.pedidos.*`, etc.)
+   - `src/api/adapters.js`: funciones `mapEstadoPedido`, `mapUsuario`, `mapProducto`, `mapOrderResponse`
+   - `src/api/authGuard.js`: función `requireAuth(rolesPermitidos)` para proteger vistas
+   - `src/tienda/login/login.js`: ejemplo de cómo llamar a `POST /api/login` y guardar `token` + `usuarioActivo` en `localStorage`
+   - `src/tienda/registro/registro.js`: ejemplo de cómo llamar a `POST /api/registro`
+   - El Rol C debe reutilizar estos archivos sin modificarlos, solo consumirlos
+
+**Entrega del Rol A (Parte 1):** Pull request parcial o rama lista con `src/api/` funcional, login y registro integrados, y vista de login del admin creada.
 
 ---
 
-## <a name="rol-b-naya-integracion-de-catalogo-y-detalle-de-productos"></a>Rol B (Naya) — Integración de Catálogo y Detalle de Productos (Dificultad: 3/5)
+## <a name="rol-b-naya-integracion-de-catalogo-y-detalle-de-productos"></a>Rol B (Naya) — Integración de Catálogo, Detalle y Carrito (Dificultad: 3/5)
 
-**Objetivo:** Que la tienda muestre productos reales del backend en lugar de JSON estático.
+**Objetivo:** Que la tienda muestre productos reales del backend, que el detalle funcione y que el carrito esté listo para conectarse al checkout del Rol C.
 
 ### Tareas
 
@@ -123,22 +139,28 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - `obtenerPorCategoria(categoria)` → `GET /api/productos?categoria=...`
    - `obtenerDisponibles()` → `GET /api/productos?disponibles=true`
 
-2. **Conectar `src/js/productos.js`** (o `src/js/velas.js`)
+2. **Conectar VISTA `src/js/productos.js`** (o `src/js/velas.js`)
    - Reemplazar `fetch(productos.json)` por llamada al service
    - Mantener `window.productos` y evento `productos-listadas` como puente temporal
 
-3. **Conectar `src/tienda/catalogo/catalogo.js`**
+3. **Conectar VISTA `src/tienda/catalogo/catalogo.js`**
    - Cargar productos desde la API al entrar
    - Seguir filtrando/ordenando en el front
 
-4. **Conectar `src/tienda/catalogo/producto/producto.js`**
+4. **Conectar VISTA `src/tienda/catalogo/producto/producto.js`**
    - Buscar por `slug` en el módulo de productos
    - Mostrar estado "no encontrado" si no existe
 
-5. **Deprecar JSON estático**
+5. **Preparar carrito de compras (VISTA `src/js/carrito.js`) para el Rol C**
+   - Leer y escribir `lumina-carrito` en `localStorage` (array de `{ productId, quantity }`)
+   - Funciones: `agregarAlCarrito(id)`, `cambiarCantidad(id, delta)`, `eliminarItem(id)`, `vaciarCarrito()`, `obtenerCarrito()`
+   - Calcular totales locales (subtotal, IVA 19%, total) como referencia visual
+   - **No conectar aún al backend de pedidos** — el Rol C hará el `POST /api/pedidos` usando estos items
+
+6. **Deprecar JSON estático**
    - Dejar de usar `productos.json` / `velas.json` en runtime
 
-**Entrega del Rol B:** PR con catálogo y detalle funcionando contra el backend.
+**Entrega del Rol B:** PR con catálogo, detalle y carrito funcionando (carrito en localStorage, listo para que el Rol C lo consuma en el checkout).
 
 ---
 
@@ -159,46 +181,41 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - `listarPedidosPorUsuario(usuarioId)` → `GET /api/pedidos?usuarioId=`
    - `actualizarEstado(id, estado)` → `PUT /api/pedidos/{id}/estado`
 
-3. **Conectar `src/tienda/registro/registro.js`**
-   - Llamar al service de registro
-   - Al éxito: guardar `UserResponse` en `usuarioActivo` (sin contraseña)
-   - Redirigir según rol
-
-4. **Conectar `src/componentes/checkout-modal/checkout-modal.js`**
+3. **Conectar VISTA `src/componentes/checkout-modal/checkout-modal.js`**
    - Validar que exista sesión (`usuarioActivo.id`); si no, redirigir al login
    - Llamar `POST /api/pedidos` en lugar de generar `L-####` y guardar en `localStorage`
    - Mostrar totales del `OrderResponse` del backend
    - Enviar `couponCode` si aplica
 
-5. **Conectar `src/tienda/mi-cuenta/pedidos/pedidos.js`**
+4. **Conectar VISTA `src/tienda/mi-cuenta/pedidos/pedidos.js`**
    - Llamar `GET /api/pedidos?usuarioId=`
    - Renderizar usando el mapa de estados (PENDING → Pendiente, etc.)
    - Dejar de mezclar `pedidos.json` con `lumina-pedidos`
 
-6. **Conectar `src/js/main.js` y `src/tienda/mi-cuenta/info/`**
+5. **Conectar VISTA `src/js/main.js` y VISTA `src/tienda/mi-cuenta/info/`**
    - Leer `usuarioActivo` con `fullName`, `phone`, `email`
    - Eliminar bloque de contraseña en "Mi cuenta"
 
-7. **Proteger vistas de mi-cuenta contra acceso no autenticado**
-   - Llamar a `requireAuth(['CUSTOMER', 'ADMIN', 'STAFF'])` al inicio de `src/tienda/mi-cuenta/info/`, `src/tienda/mi-cuenta/pedidos/` y `src/tienda/mi-cuenta/favoritos/`
+6. **Proteger vistas de mi-cuenta contra acceso no autenticado**
+   - Llamar a `requireAuth(['CUSTOMER', 'ADMIN', 'STAFF'])` al inicio de VISTA `src/tienda/mi-cuenta/info/`, VISTA `src/tienda/mi-cuenta/pedidos/` y VISTA `src/tienda/mi-cuenta/favoritos/`
    - Si no hay sesión activa, redirigir a `src/tienda/login/index.html`
    - Reutilizar `src/api/authGuard.js` creado en el Rol A
 
-8. **Nota sobre el carrito de compras**
+7. **Nota sobre el carrito de compras**
    - El carrito permanece en `localStorage` y NO se asocia a la sesión del usuario ni al backend.
    - Funciona como carrito de invitado: se puede agregar productos sin iniciar sesión.
    - Al hacer checkout (`POST /api/pedidos`), se envía el `userId` del usuario autenticado. Si no hay sesión, el frontend debe solicitar login o registro antes de finalizar la compra.
    - El carrito se pierde si el usuario limpia el `localStorage`, cambia de navegador o de dispositivo.
 
-9. **Cerrar sesión (Logout)**
+8. **Cerrar sesión (Logout)**
    - Agregar botón de "Cerrar sesión" en el header (`src/js/main.js`) o en la vista de mi-cuenta
    - Al hacer clic: borrar `token` y `usuarioActivo` de `localStorage`, redirigir a `src/tienda/login/index.html`
    - Validar que el botón solo se muestre cuando hay sesión activa
 
-10. **Header que refleje el estado de autenticación**
-    - Editar `src/js/main.js` para leer `usuarioActivo` y mostrar el nombre del usuario logueado
-    - Mostrar/ocultar enlaces según el estado de autenticación (ej. "Mi cuenta" vs "Iniciar sesión")
-    - Mostrar/ocultar enlaces de administración según el rol (`ADMIN`/`STAFF` vs `CUSTOMER`)
+9. **Header que refleje el estado de autenticación**
+    - Editar VISTA `src/js/main.js` para leer `usuarioActivo` y mostrar el nombre del usuario logueado
+   - Mostrar/ocultar enlaces según el estado de autenticación (ej. "Mi cuenta" vs "Iniciar sesión")
+   - Mostrar/ocultar enlaces de administración según el rol (`ADMIN`/`STAFF` vs `CUSTOMER`)
 
 **Entrega del Rol C:** PR con autenticación, checkout, mis pedidos, logout y header con estado de autenticación funcionando contra el backend.
 
@@ -210,11 +227,11 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 ### Tareas
 
-1. **Conectar `src/admin/productos/productos.js`**
+1. **Conectar VISTA `src/admin/productos/productos.js`**
    - Cargar `GET /api/productos` al entrar
    - Renderizar todos los productos (no solo los de `localStorage`)
 
-2. **Conectar `src/admin/producto-formulario/producto-formulario.js`**
+2. **Conectar VISTA `src/admin/producto-formulario/producto-formulario.js`**
    - `POST /api/productos` con payload adaptado
    - Agregar campos faltantes: `stock` (requerido) y `available` (checkbox, default `true`)
    - Usar el `value` del `<select>` de categoría, no el `textContent`
@@ -227,10 +244,15 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - Llamar `DELETE /api/productos/{id}` con confirmación
    - Manejar error `409` (producto con dependencias)
 
-5. **Manejo de errores**
+5. **Conectar VISTA `src/admin/producto-detalle/producto-detalle.js`**
+   - Cargar `GET /api/productos/{id}` al entrar
+   - Mostrar todos los campos del producto (incluyendo `stock`, `available`, `description`)
+   - Mostrar botones de editar y eliminar
+
+6. **Manejo de errores**
    - Mapear `ApiError.details` a los campos del formulario
 
-6. **Eliminar lógica obsoleta**
+7. **Eliminar lógica obsoleta**
    - Eliminar `lumina-productos` de `localStorage` y su mezcla en el módulo de productos
 
 **Entrega del Rol D:** PR con admin CRUD funcionando contra el backend.
