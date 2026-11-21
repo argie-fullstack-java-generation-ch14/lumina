@@ -178,6 +178,12 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - Si no hay sesión activa, redirigir a `src/tienda/login/index.html`
    - Reutilizar `src/api/authGuard.js` creado en el Rol A
 
+8. **Nota sobre el carrito de compras**
+   - El carrito permanece en `localStorage` y NO se asocia a la sesión del usuario ni al backend.
+   - Funciona como carrito de invitado: se puede agregar productos sin iniciar sesión.
+   - Al hacer checkout (`POST /api/pedidos`), se envía el `userId` del usuario autenticado. Si no hay sesión, el frontend debe solicitar login o registro antes de finalizar la compra.
+   - El carrito se pierde si el usuario limpia el `localStorage`, cambia de navegador o de dispositivo.
+
 **Entrega del Rol C:** PR con autenticación, checkout y mis pedidos funcionando contra el backend.
 
 ---
