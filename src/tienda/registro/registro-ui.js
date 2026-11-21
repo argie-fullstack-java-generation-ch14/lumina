@@ -1,54 +1,34 @@
-// Lumina · Registro
+// Lumina · Registro · UI
 // ------------------------------------------------------------
-// Conectado a la API del backend para registro de usuarios.
-// Usa apiPost(endpoints.auth.register, {...}) para crear cuenta.
+// Interfaz del formulario: validaciones, marcado de errores,
+// animación de éxito y toggle de mostrar/ocultar contraseña.
 
-import { apiPost } from "../../api/client.js";
-import { endpoints } from "../../api/endpoints.js";
+import { registerUser } from "./registro-back.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector('#register-form');
-  const alertBox = document.querySelector('#register-alert');
-  const layout = document.querySelector('#register-layout');
-  const done = document.querySelector('#register-done');
-  const doneTitle = document.querySelector('#register-done-title');
-  const doneLoginLink = document.querySelector('.register-login-link');
-  const submitButton = document.querySelector('#register-submit');
-  const starsCanvas = document.querySelector('#register-stars');
+  const form = document.querySelector("#register-form");
+  const alertBox = document.querySelector("#register-alert");
+  const layout = document.querySelector("#register-layout");
+  const done = document.querySelector("#register-done");
+  const doneTitle = document.querySelector("#register-done-title");
+  const doneLoginLink = document.querySelector(".register-login-link");
+  const submitButton = document.querySelector("#register-submit");
+  const starsCanvas = document.querySelector("#register-stars");
 
-  const nameInput = document.querySelector('#register-name');
-  const phoneInput = document.querySelector('#register-phone');
-  const emailInput = document.querySelector('#register-email');
-  const passwordInput = document.querySelector('#register-password');
-  const confirmInput = document.querySelector('#register-confirm');
+  const nameInput = document.querySelector("#register-name");
+  const phoneInput = document.querySelector("#register-phone");
+  const emailInput = document.querySelector("#register-email");
+  const passwordInput = document.querySelector("#register-password");
+  const confirmInput = document.querySelector("#register-confirm");
 
-  const usersKey = 'usuarios';
-  const successText = 'Registro exitoso, ahora eres parte de Lumina';
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const successText = "Registro exitoso, ahora eres parte de Lumina";
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   let triedToSend = false;
 
-  function getUsers() {
-    try {
-      return JSON.parse(localStorage.getItem(usersKey)) || [];
-    } catch (error) {
-      return [];
-    }
-  }
-
-  function saveUser(user) {
-    const users = getUsers();
-    users.push(user);
-    localStorage.setItem(usersKey, JSON.stringify(users));
-  }
-
-  function emailExists(email) {
-    return getUsers().some((user) => user.email === email);
-  }
-
   function cleanPhone(value) {
-    let phone = value.replace(/[\s()-]/g, '');
-    if (phone.startsWith('+57')) {
+    let phone = value.replace(/[\s()-]/g, "");
+    if (phone.startsWith("+57")) {
       phone = phone.slice(3);
     }
     return phone;
@@ -56,63 +36,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function validateName(value) {
     const name = value.trim();
-    if (name === '') {
-      return 'Escribe tu nombre completo.';
+    if (name === "") {
+      return "Escribe tu nombre completo.";
     }
     if (!/^[\p{L}][\p{L}\s'.-]*$/u.test(name)) {
-      return 'El nombre solo puede tener letras y espacios.';
+      return "El nombre solo puede tener letras y espacios.";
     }
     if (name.split(/\s+/).length < 2) {
-      return 'Escribe tu nombre y tu apellido.';
+      return "Escribe tu nombre y tu apellido.";
     }
-    return '';
+    return "";
   }
 
   function validatePhone(value) {
-    if (value.trim() === '') {
-      return 'Escribe tu número de teléfono.';
+    if (value.trim() === "") {
+      return "Escribe tu número de teléfono.";
     }
     if (!/^3\d{9}$/.test(cleanPhone(value))) {
-      return 'El teléfono debe tener 10 números y empezar por 3, por ejemplo 300 123 4567.';
+      return "El teléfono debe tener 10 números y empezar por 3, por ejemplo 300 123 4567.";
     }
-    return '';
+    return "";
   }
 
   function validateEmail(value) {
     const email = value.trim().toLowerCase();
-    if (email === '') {
-      return 'Escribe tu correo electrónico.';
+    if (email === "") {
+      return "Escribe tu correo electrónico.";
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-      return 'Escribe un correo válido, por ejemplo nombre@correo.com.';
+      return "Escribe un correo válido, por ejemplo nombre@correo.com.";
     }
-    if (emailExists(email)) {
-      return 'Ese correo ya está registrado. Usa otro correo.';
-    }
-    return '';
+    return "";
   }
 
   function validatePassword(value) {
-    if (value === '') {
-      return 'Escribe una contraseña.';
+    if (value === "") {
+      return "Escribe una contraseña.";
     }
     if (value.length < 8) {
-      return 'La contraseña debe tener mínimo 8 caracteres.';
+      return "La contraseña debe tener mínimo 8 caracteres.";
     }
     if (!/[A-Za-z]/.test(value) || !/\d/.test(value)) {
-      return 'La contraseña debe tener letras y números.';
+      return "La contraseña debe tener letras y números.";
     }
-    return '';
+    return "";
   }
 
   function validateConfirm(value) {
-    if (value === '') {
-      return 'Confirma tu contraseña.';
+    if (value === "") {
+      return "Confirma tu contraseña.";
     }
     if (value !== passwordInput.value) {
-      return 'Las contraseñas no coinciden.';
+      return "Las contraseñas no coinciden.";
     }
-    return '';
+    return "";
   }
 
   const fields = [
@@ -120,14 +97,14 @@ document.addEventListener("DOMContentLoaded", () => {
     { input: phoneInput, validate: validatePhone },
     { input: emailInput, validate: validateEmail },
     { input: passwordInput, validate: validatePassword },
-    { input: confirmInput, validate: validateConfirm }
+    { input: confirmInput, validate: validateConfirm },
   ];
 
   function getErrors() {
     const errors = [];
     fields.forEach((field) => {
       const message = field.validate(field.input.value);
-      if (message !== '') {
+      if (message !== "") {
         errors.push({ input: field.input, message: message });
       }
     });
@@ -137,17 +114,17 @@ document.addEventListener("DOMContentLoaded", () => {
   function markFields(errors) {
     fields.forEach((field) => {
       const hasError = errors.some((error) => error.input === field.input);
-      const fieldEl = field.input.closest('.register-field');
-      fieldEl.classList.toggle('has-error', hasError);
-      field.input.setAttribute('aria-invalid', hasError ? 'true' : 'false');
+      const fieldEl = field.input.closest(".register-field");
+      fieldEl.classList.toggle("has-error", hasError);
+      field.input.setAttribute("aria-invalid", hasError ? "true" : "false");
 
-      const existing = fieldEl.querySelector('.register-error');
+      const existing = fieldEl.querySelector(".register-error");
       if (existing) existing.remove();
 
       if (hasError) {
         const message = errors.find((error) => error.input === field.input).message;
-        const errorEl = document.createElement('p');
-        errorEl.className = 'register-error';
+        const errorEl = document.createElement("p");
+        errorEl.className = "register-error";
         errorEl.textContent = message;
         fieldEl.appendChild(errorEl);
       }
@@ -155,15 +132,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showAlert(errors) {
-    alertBox.innerHTML = '';
+    alertBox.innerHTML = "";
   }
 
   function createUser() {
     return {
-      fullName: nameInput.value.trim().replace(/\s+/g, ' '),
+      fullName: nameInput.value.trim().replace(/\s+/g, " "),
       phone: cleanPhone(phoneInput.value),
       email: emailInput.value.trim().toLowerCase(),
-      password: passwordInput.value
+      password: passwordInput.value,
     };
   }
 
@@ -174,14 +151,17 @@ document.addEventListener("DOMContentLoaded", () => {
   let smoke = null;
   const stars = createStars(starsCanvas);
 
-  if (typeof window.createSplashCursor === 'function' && !reducedMotion) {
-    const smokeCanvas = document.createElement('canvas');
-    smokeCanvas.className = 'page-smoke';
-    smokeCanvas.setAttribute('aria-hidden', 'true');
+  if (
+    typeof window.createSplashCursor === "function" &&
+    !reducedMotion
+  ) {
+    const smokeCanvas = document.createElement("canvas");
+    smokeCanvas.className = "page-smoke";
+    smokeCanvas.setAttribute("aria-hidden", "true");
     document.body.appendChild(smokeCanvas);
 
     smoke = window.createSplashCursor(smokeCanvas, {
-      colors: ['#8f78d9'],
+      colors: ["#8f78d9"],
       rainbow: false,
       intensity: 0.2,
       size: 1.1,
@@ -191,30 +171,30 @@ document.addEventListener("DOMContentLoaded", () => {
       momentum: 1.2,
       shading: 0.5,
       glow: 0,
-      quality: 'medium',
+      quality: "medium",
       clickSplash: false,
       intro: false,
       contained: false,
-      theme: 'light'
+      theme: "light",
     });
   }
 
   function showSuccessText() {
-    doneTitle.textContent = '';
-    doneTitle.setAttribute('aria-label', successText);
+    doneTitle.textContent = "";
+    doneTitle.setAttribute("aria-label", successText);
 
     let index = 0;
     let lastLetter = null;
 
-    successText.split(' ').forEach((word) => {
-      const wordSpan = document.createElement('span');
-      wordSpan.className = 'register-word';
-      wordSpan.setAttribute('aria-hidden', 'true');
+    successText.split(" ").forEach((word) => {
+      const wordSpan = document.createElement("span");
+      wordSpan.className = "register-word";
+      wordSpan.setAttribute("aria-hidden", "true");
 
       for (const letter of word) {
-        const letterSpan = document.createElement('span');
-        letterSpan.className = 'register-letter';
-        letterSpan.style.setProperty('--i', index);
+        const letterSpan = document.createElement("span");
+        letterSpan.className = "register-letter";
+        letterSpan.style.setProperty("--i", index);
         letterSpan.textContent = letter;
         wordSpan.appendChild(letterSpan);
         lastLetter = letterSpan;
@@ -222,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       doneTitle.appendChild(wordSpan);
-      doneTitle.appendChild(document.createTextNode(' '));
+      doneTitle.appendChild(document.createTextNode(" "));
       index++;
     });
 
@@ -230,16 +210,20 @@ document.addEventListener("DOMContentLoaded", () => {
     doneTitle.focus();
 
     if (reducedMotion) {
-      doneLoginLink.classList.add('is-visible');
+      doneLoginLink.classList.add("is-visible");
       return;
     }
 
     if (lastLetter) {
-      lastLetter.addEventListener('animationend', () => {
-        doneLoginLink.classList.add('is-visible');
-      }, { once: true });
+      lastLetter.addEventListener(
+        "animationend",
+        () => {
+          doneLoginLink.classList.add("is-visible");
+        },
+        { once: true }
+      );
     } else {
-      doneLoginLink.classList.add('is-visible');
+      doneLoginLink.classList.add("is-visible");
     }
   }
 
@@ -255,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    layout.classList.add('is-leaving');
+    layout.classList.add("is-leaving");
     await wait(900);
     layout.hidden = true;
     window.scrollTo(0, 0);
@@ -267,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showSuccessText();
   }
 
-  form.addEventListener('submit', async (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     triedToSend = true;
 
@@ -276,7 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showAlert(errors);
 
     if (errors.length > 0) {
-      alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      alertBox.scrollIntoView({ behavior: "smooth", block: "center" });
       errors[0].input.focus({ preventScroll: true });
       return;
     }
@@ -286,25 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.reset();
 
     try {
-      const response = await apiPost(endpoints.auth.register, {
-        fullName: user.fullName,
-        phone: user.phone,
-        email: user.email,
-        password: user.password,
-      });
-
-      // Guardar usuario autenticado (sin contraseña)
-      localStorage.setItem(
-        "usuarioActivo",
-        JSON.stringify({
-          id: response.id,
-          fullName: response.fullName,
-          phone: response.phone,
-          email: response.email,
-          role: response.role,
-        })
-      );
-
+      await registerUser(user);
       await playEnding();
     } catch (error) {
       submitButton.disabled = false;
@@ -318,7 +284,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (existing) existing.remove();
         const errorEl = document.createElement("p");
         errorEl.className = "register-error";
-        errorEl.textContent = error.message || "Este correo ya está registrado.";
+        errorEl.textContent =
+          error.message || "Este correo ya está registrado.";
         fieldEl.appendChild(errorEl);
         emailInput.focus({ preventScroll: true });
       } else if (error.status === 400) {
@@ -341,7 +308,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   fields.forEach((field) => {
-    field.input.addEventListener('input', () => {
+    field.input.addEventListener("input", () => {
       if (!triedToSend) {
         return;
       }
@@ -352,21 +319,21 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    field.input.addEventListener('blur', () => {
-      const fieldEl = field.input.closest('.register-field');
+    field.input.addEventListener("blur", () => {
+      const fieldEl = field.input.closest(".register-field");
       const message = field.validate(field.input.value);
-      const existing = fieldEl.querySelector('.register-error');
+      const existing = fieldEl.querySelector(".register-error");
 
-      if (message === '') {
-        fieldEl.classList.remove('has-error');
-        field.input.setAttribute('aria-invalid', 'false');
+      if (message === "") {
+        fieldEl.classList.remove("has-error");
+        field.input.setAttribute("aria-invalid", "false");
         if (existing) existing.remove();
       } else {
-        fieldEl.classList.add('has-error');
-        field.input.setAttribute('aria-invalid', 'true');
+        fieldEl.classList.add("has-error");
+        field.input.setAttribute("aria-invalid", "true");
         if (!existing) {
-          const errorEl = document.createElement('p');
-          errorEl.className = 'register-error';
+          const errorEl = document.createElement("p");
+          errorEl.className = "register-error";
           errorEl.textContent = message;
           fieldEl.appendChild(errorEl);
         } else {
@@ -376,9 +343,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
-initRegisterForm();
-
 
 // Mostrar y ocultar contraseñas
 document.addEventListener("DOMContentLoaded", () => {
