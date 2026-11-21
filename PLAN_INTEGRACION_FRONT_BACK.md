@@ -65,41 +65,41 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 ### Tareas
 
 1. ✅ **Crear `src/api/client.js`**
-   - Constante `API_BASE_URL` (default `http://localhost:8080`, sobreescribible por `window.LUMINA_API_URL` o variable de entorno)
-   - Funciones genéricas `apiGet`, `apiPost`, `apiPut`, `apiDelete`
-   - Headers JSON automáticos
-   - Inyección opcional del token `Authorization: Bearer <token>` desde `localStorage`
-   - Parseo centralizado de errores `ApiError` (`{ status, error, message, details, timestamp }`)
+   - ✅ Constante `API_BASE_URL` (default `http://localhost:8080`, sobreescribible por `window.LUMINA_API_URL` o variable de entorno)
+   - ✅ Funciones genéricas `apiGet`, `apiPost`, `apiPut`, `apiDelete`
+   - ✅ Headers JSON automáticos
+   - ✅ Inyección opcional del token `Authorization: Bearer <token>` desde `localStorage`
+   - ✅ Parseo centralizado de errores `ApiError` (`{ status, error, message, details, timestamp }`)
 
 2. ✅ **Crear `src/api/endpoints.js`**
-   - Centralizar todas las rutas del backend:
-     - `/api/productos`, `/api/productos/{id}`, `/api/productos/slug/{slug}`
-     - `/api/registro`, `/api/login`
-     - `/api/usuarios/{id}`
-     - `/api/pedidos`, `/api/pedidos?usuarioId=`, `/api/pedidos/{id}/estado`
+   - ✅ Centralizar todas las rutas del backend:
+     - ✅ `/api/productos`, `/api/productos/{id}`, `/api/productos/slug/{slug}`
+     - ✅ `/api/registro`, `/api/login`
+     - ✅ `/api/usuarios/{id}`
+     - ✅ `/api/pedidos`, `/api/pedidos?usuarioId=`, `/api/pedidos/{id}/estado`
 
 3. ✅ **Crear `src/api/adapters.js`**
-   - Funciones de mapeo backend → front y front → backend
-   - Mapeo de estados de pedido: `PENDING` → `Pendiente`, `CONFIRMED` → `Confirmado`, etc.
-   - Mapeo de usuario: `fullName` ↔ `nombreCompleto`, `phone` ↔ `telefono`
-   - Función para extraer `orderNumber` como `numeroOrden`
+   - ✅ Funciones de mapeo backend → front y front → backend
+   - ✅ Mapeo de estados de pedido: `PENDING` → `Pendiente`, `CONFIRMED` → `Confirmado`, etc.
+   - ✅ Mapeo de usuario: `fullName` ↔ `nombreCompleto`, `phone` ↔ `telefono`
+   - ✅ Función para extraer `orderNumber` como `numeroOrden`
 
 4. ✅ **Preparar la vista de login para administración**
-   - `src/tienda/login/login.js`: llamar `POST /api/login` con `{ email, password }`
-   - Al éxito: guardar `token` y `user` (sin contraseña) en `localStorage`
-   - Redireccionar al panel de administración si el rol es `ADMIN` o `STAFF`; si es `CUSTOMER`, redirigir a tienda
-   - Mostrar error genérico 401 sin revelar si el correo existe
+   - ✅ `src/tienda/login/login.js`: llamar `POST /api/login` con `{ email, password }`
+   - ✅ Al éxito: guardar `token` y `user` (sin contraseña) en `localStorage`
+   - ✅ Redireccionar al panel de administración si el rol es `ADMIN` o `STAFF`; si es `CUSTOMER`, redirigir a tienda
+   - ✅ Mostrar error genérico 401 sin revelar si el correo existe
 
 5. ✅ **Verificar compilación/arranque del front**
-   - Correr Live Server en `http://localhost:5500` **o** `npx serve` en el puerto deseado (ej. `npx serve -l 3000`)
-   - Confirmar que CORS funciona con el backend
+   - ✅ Correr Live Server en `http://localhost:5500` **o** `npx serve` en el puerto deseado (ej. `npx serve -l 3000`)
+   - ✅ Confirmar que CORS funciona con el backend
 
 6. ✅ **Crear vista de login para el módulo de administración**
-   - Crear `src/admin/login/login.html` con formulario de inicio de sesión
-   - Crear `src/admin/login/login.js` con llamada a `POST /api/login`
-   - Al éxito: guardar `token` y `usuarioActivo` en `localStorage`, redirigir a `src/admin/productos/index.html`
-   - Mostrar error genérico 401 sin revelar si el correo existe
-   - Reutilizar `src/api/client.js` y `src/api/endpoints.js` creados en el Rol A
+   - ✅ Crear `src/admin/login/login.html` con formulario de inicio de sesión
+   - ✅ Crear `src/admin/login/login.js` con llamada a `POST /api/login`
+   - ✅ Al éxito: guardar `token` y `usuarioActivo` en `localStorage`, redirigir a `src/admin/productos/index.html`
+   - ✅ Mostrar error genérico 401 sin revelar si el correo existe
+   - ✅ Reutilizar `src/api/client.js` y `src/api/endpoints.js` creados en el Rol A
 
 7. **Proteger vistas del administración contra acceso no autorizado**
    - Crear `src/api/authGuard.js` con función `requireAuth(rolesPermitidos)`
