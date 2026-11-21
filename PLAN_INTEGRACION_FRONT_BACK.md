@@ -50,7 +50,7 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 | Rol | Fase | Archivos clave | Dificultad |
 |-----|------|----------------|------------|
-| [**A (Argie, Parte 1)**](#rol-a-argie-parte-1-bases-de-integracion) | Base + Login + Auth header + Logout | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/api/authGuard.js`, `src/tienda/login/login.js`, `src/tienda/registro/registro.js`, `src/admin/login/login.html`, `src/admin/login/login.js`, `src/js/main.js` | 4/5 |
+| Rol A (Argie, Parte 1) | Base + Login + Auth header + Logout | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/api/authGuard.js`, `src/api/services/usuarios.service.js`, `src/tienda/login/login.js`, `src/tienda/registro/registro-ui.js`, `src/tienda/registro/registro-back.js`, `src/admin/login/login.js`, `src/js/main.js` | 4/5 |
 | [**B (Naya)**](#rol-b-naya-integracion-de-catalogo-y-detalle-de-productos) | Catálogo + Carrito | `src/api/services/productos.service.js`, `src/js/productos.js`, `src/js/carrito.js`, `src/tienda/catalogo/` | 3/5 |
 | [**C (Nicole)**](#rol-c-nicole-integracion-de-autenticacion-y-pedidos) | Auth + Pedidos | `src/api/services/usuarios.service.js`, `src/api/services/pedidos.service.js`, `src/componentes/checkout-modal/`, `src/tienda/mi-cuenta/pedidos/` | 3/5 |
 | [**D (Pedro)**](#rol-d-pedro-integracion-del-panel-de-administracion) | Admin | `src/admin/productos/`, `src/admin/producto-formulario/`, `src/admin/producto-detalle/` | 4/5 |
@@ -85,18 +85,21 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - ✅ Función para extraer `orderNumber` como `numeroOrden`
 
 4. ✅ **Preparar la vista de login para administración**
-   - ✅ `src/tienda/login/login.js`: llamar `POST /api/login` con `{ email, password }`
+   - ✅ `src/tienda/login/login.js`: llamar `POST /api/login` vía `usuarios.service.js` (`login()`)
+   - ✅ `src/admin/login/login.js`: llamar `POST /api/login` vía `usuarios.service.js` (`login()`)
    - ✅ Al éxito: guardar `token` y `user` (sin contraseña) en `localStorage`
-   - ✅ Redireccionar al panel de administración si el rol es `ADMIN` o `STAFF`; si es `CUSTOMER`, redirigir a tienda
+   - ✅ Redireccionar al panel de administración si el rol es `ADMIN` o `STAFF`; si es `CUSTOMER`, redirigir a tienda/mi-cuenta
    - ✅ Mostrar error genérico 401 sin revelar si el correo existe
+   - ✅ Reutilizar `src/api/client.js` y `src/api/endpoints.js` creados en el Rol A
+   - ✅ Eliminar lógica duplicada de `apiPost` local en `admin/login/login.js`
 
 5. ✅ **Verificar compilación/arranque del front**
    - ✅ Correr Live Server en `http://localhost:5500` **o** `npx serve` en el puerto deseado (ej. `npx serve -l 3000`)
    - ✅ Confirmar que CORS funciona con el backend
 
 6. ✅ **Crear vista de login para el módulo de administración**
-   - ✅ Crear `src/admin/login/login.html` con formulario de inicio de sesión
-   - ✅ Crear `src/admin/login/login.js` con llamada a `POST /api/login`
+   - ✅ `src/admin/login/login.html` con formulario de inicio de sesión (ya existía)
+   - ✅ `src/admin/login/login.js` con llamada a `POST /api/login` vía `usuarios.service.js`
    - ✅ Al éxito: guardar `token` y `usuarioActivo` en `localStorage`, redirigir a `src/admin/productos/index.html`
    - ✅ Mostrar error genérico 401 sin revelar si el correo existe
    - ✅ Reutilizar `src/api/client.js` y `src/api/endpoints.js` creados en el Rol A
@@ -108,18 +111,21 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - ✅ Llamar a `requireAuth(['ADMIN', 'STAFF'])` al inicio de cada vista del panel de administración
 
 8. ✅ **Conectar la página de registro al backend**
-   - ✅ Editar `src/tienda/registro/registro.js`
-   - ✅ Llamar `apiPost(endpoints.auth.register, { fullName, phone, email, password })`
-   - ✅ Al éxito: guardar `UserResponse` en `usuarioActivo` (sin contraseña), redirigir según rol
+   - ✅ Dividir en `src/tienda/registro/registro-ui.js` (UI, validaciones, animación, toggle ojito) y `src/tienda/registro/registro-back.js` (llamada a API)
+   - ✅ `registro-back.js` llama `registrar()` de `src/api/services/usuarios.service.js` → `POST /api/registro`
+   - ✅ Al éxito: guardar `UserResponse` en `usuarioActivo` (sin contraseña), ejecutar animación `playEnding()` y mostrar link "Iniciar sesión" (sin redireccionar automáticamente)
    - ✅ Mostrar errores de validación (`400`, `409`) en el formulario correspondiente
+   - ✅ Toggle de mostrar/ocultar contraseña funciona en ambos campos (contraseña y confirmar)
+   - ✅ Script cargado con `type="module"` en `index.html` para permitir `import`
 
 9. ✅ **Bases que deja el Rol A para el Rol C (no tocar, solo usar)**
    - ✅ `src/api/client.js`: funciones `apiGet`, `apiPost`, `apiPut`, `apiDelete` con `API_BASE_URL` ya configurada
    - ✅ `src/api/endpoints.js`: todas las rutas del backend centralizadas (`endpoints.auth.login`, `endpoints.auth.register`, `endpoints.usuarios.byId`, `endpoints.pedidos.*`, etc.)
    - ✅ `src/api/adapters.js`: funciones `mapEstadoPedido`, `mapUsuario`, `mapProducto`, `mapOrderResponse`
    - ✅ `src/api/authGuard.js`: función `requireAuth(rolesPermitidos)` para proteger vistas
+   - ✅ `src/api/services/usuarios.service.js`: `registrar()`, `login()`, `obtenerUsuario()`, `actualizarUsuario()` — reutilizar para autenticación y usuarios
    - ✅ `src/tienda/login/login.js`: ejemplo de cómo llamar a `POST /api/login` y guardar `token` + `usuarioActivo` en `localStorage`
-   - ✅ `src/tienda/registro/registro.js`: ejemplo de cómo llamar a `POST /api/registro`
+   - ✅ `src/tienda/registro/registro-back.js`: ejemplo de cómo llamar a `POST /api/registro`
    - El Rol C debe reutilizar estos archivos sin modificarlos, solo consumirlos
 
 10. ✅ **Cerrar sesión (Logout)**
@@ -129,8 +135,10 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 11. ✅ **Header que refleje el estado de autenticación**
     - ✅ Editar VISTA `src/js/main.js` para leer `usuarioActivo` y mostrar el nombre del usuario logueado
+    - ✅ Definir `APP_BASE` en `src/js/main.js` (`window.APP_BASE || window.location.origin`) para construir URLs absolutas de login y mi-cuenta (ya definido también en `src/js/ui.js`)
     - ✅ Mostrar/ocultar enlaces según el estado de autenticación (ej. "Mi cuenta" vs "Iniciar sesión")
     - ✅ Mostrar/ocultar enlaces de administración según el rol (`ADMIN`/`STAFF` vs `CUSTOMER`)
+    - ✅ Al cerrar sesión: borrar `token` y `usuarioActivo` de `localStorage`, redirigir a `src/tienda/login/index.html`
 
 **Entrega del Rol A (Parte 1):** Pull request parcial o rama lista con `src/api/` funcional, login y registro integrados, y vista de login del admin creada.
 
