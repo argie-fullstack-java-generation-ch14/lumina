@@ -94,24 +94,24 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - Correr Live Server en `http://localhost:5500` **o** `npx serve` en el puerto deseado (ej. `npx serve -l 3000`)
    - Confirmar que CORS funciona con el backend
 
-6. **Proteger vistas del administración contra acceso no autorizado**
-   - Crear `src/api/authGuard.js` con función `requireAuth(rolesPermitidos)`
-   - Verificar que exista `token` en `localStorage` y que el rol del `usuarioActivo` esté en `rolesPermitidos` (ej. `['ADMIN', 'STAFF']`)
-   - Si no hay sesión o el rol no autoriza, redirigir a `src/tienda/login/index.html`
-   - Llamar a `requireAuth(['ADMIN', 'STAFF'])` al inicio de cada vista del panel de administración
-
-7. **Conectar la página de registro al backend**
-   - Editar `src/tienda/registro/registro.js`
-   - Llamar `apiPost(endpoints.auth.register, { fullName, phone, email, password })`
-   - Al éxito: guardar `UserResponse` en `usuarioActivo` (sin contraseña), redirigir según rol
-   - Mostrar errores de validación (`400`, `409`) en el formulario correspondiente
-
-8. **Crear vista de login para el módulo de administración**
+6. **Crear vista de login para el módulo de administración**
    - Crear `src/admin/login/login.html` con formulario de inicio de sesión
    - Crear `src/admin/login/login.js` con llamada a `POST /api/login`
    - Al éxito: guardar `token` y `usuarioActivo` en `localStorage`, redirigir a `src/admin/productos/index.html`
    - Mostrar error genérico 401 sin revelar si el correo existe
    - Reutilizar `src/api/client.js` y `src/api/endpoints.js` creados en el Rol A
+
+7. **Proteger vistas del administración contra acceso no autorizado**
+   - Crear `src/api/authGuard.js` con función `requireAuth(rolesPermitidos)`
+   - Verificar que exista `token` en `localStorage` y que el rol del `usuarioActivo` esté en `rolesPermitidos` (ej. `['ADMIN', 'STAFF']`)
+   - Si no hay sesión o el rol no autoriza, redirigir a `src/tienda/login/index.html`
+   - Llamar a `requireAuth(['ADMIN', 'STAFF'])` al inicio de cada vista del panel de administración
+
+8. **Conectar la página de registro al backend**
+   - Editar `src/tienda/registro/registro.js`
+   - Llamar `apiPost(endpoints.auth.register, { fullName, phone, email, password })`
+   - Al éxito: guardar `UserResponse` en `usuarioActivo` (sin contraseña), redirigir según rol
+   - Mostrar errores de validación (`400`, `409`) en el formulario correspondiente
 
 9. **Bases que deja el Rol A para el Rol C (no tocar, solo usar)**
    - `src/api/client.js`: funciones `apiGet`, `apiPost`, `apiPut`, `apiDelete` con `API_BASE_URL` ya configurada
