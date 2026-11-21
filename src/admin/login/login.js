@@ -1,6 +1,3 @@
-import { apiPost } from "../../../api/client.js";
-import { endpoints } from "../../../api/endpoints.js";
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("#login-form");
   const emailInput = document.querySelector("#login-email");
@@ -8,17 +5,44 @@ document.addEventListener("DOMContentLoaded", () => {
   const alertBox = document.querySelector("#login-alert");
   const togglePassword = document.querySelector("#toggle-password");
 
+  if (!form || !emailInput || !passwordInput || !alertBox || !togglePassword) {
+    console.error("Algún elemento del DOM no se encontró:", {
+      form: !!form,
+      emailInput: !!emailInput,
+      passwordInput: !!passwordInput,
+      alertBox: !!alertBox,
+      togglePassword: !!togglePassword,
+    });
+    return;
+  }
+
+  const API_BASE_URL = window.LUMINA_API_URL || "http://localhost:8080";
+
+  async function apiPost(path, body) {
+    const response = await fetch(`${API_BASE_URL}${path}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      const error = new Error(data.message || "Error en la petición");
+      error.status = response.status;
+      error.error = data.error;
+      error.details = data.details;
+      throw error;
+    }
+    return data;
+  }
+
   // Mostrar u ocultar contraseña
   togglePassword.addEventListener("click", () => {
     const isPassword = passwordInput.type === "password";
-
     passwordInput.type = isPassword ? "text" : "password";
-
     togglePassword.setAttribute(
       "aria-label",
       isPassword ? "Ocultar contraseña" : "Mostrar contraseña"
     );
-
     togglePassword.setAttribute("aria-pressed", String(isPassword));
   });
 
@@ -29,8 +53,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const email = emailInput.value.trim().toLowerCase();
     const password = passwordInput.value;
 
+    if (!email || !password) {
+      alertBox.innerHTML = `
+        <div class="alert alert-danger" role="alert">
+          Por favor ingresa correo y contraseña.
+        </div>
+      `;
+      return;
+    }
+
     try {
-      const data = await apiPost(endpoints.auth.login, { email, password });
+      const data = await apiPost("/api/login", { email, password });
 
       // Verificar que el usuario tenga rol de administrador o staff
       if (data.user.role !== "ADMIN" && data.user.role !== "STAFF") {
