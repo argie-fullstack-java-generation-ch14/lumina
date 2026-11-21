@@ -174,7 +174,7 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 ---
 
-## <a name="rol-c-nicole-integracion-de-autenticacion-y-pedidos"></a>Rol C (Nicole) — Integración de Autenticación y Pedidos (Checkout + Mis Pedidos) (Dificultad: 4/5)
+## <a name="rol-c-nicole-integracion-de-autenticacion-y-pedidos"></a>Rol C (Nicole) — Integración de Autenticación y Pedidos (Checkout + Mis Pedidos) (Dificultad: 3/5)
 
 **Objetivo:** Que registro, login, checkout y "mis pedidos" usen el backend real.
 
