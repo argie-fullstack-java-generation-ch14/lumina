@@ -1,12 +1,12 @@
 # Plan de Integración Front-Back — Lumina
 
 **Backend:** `http://localhost:8080/api/...` (Spring Boot 3, MySQL, JWT implementado)  
-**Frontend:** `lumina/` (HTML/CSS/JS puro, Live Server)  
+**Frontend:** `lumina/` (HTML/CSS/JS puro, Live Server o `npx serve`)  
 **Rama sugerida:** `feature/integracion-front-back` (desde `main`)  
 
 ---
 
-## Rol A (Argie) — Parte 1: Bases de integración ⭐⭐ (Dificultad: 2/5)
+## Rol A (Argie) — Parte 1: Bases de integración (Dificultad: 2/5)
 
 **Objetivo:** Dejar lista la infraestructura mínima para que los demás roles solo conecten vistas con APIs, sin preocuparse por configuración de red, base URL o manejo de errores.
 
@@ -39,14 +39,14 @@
    - Mostrar error genérico 401 sin revelar si el correo existe
 
 5. **Verificar compilación/arranque del front**
-   - Correr Live Server en `http://localhost:5500`
+   - Correr Live Server en `http://localhost:5500` **o** `npx serve` en el puerto deseado (ej. `npx serve -l 3000`)
    - Confirmar que CORS funciona con el backend
 
 **Entrega del Rol A (Parte 1):** Pull request parcial o rama lista con `src/api/` funcional y login integrado.
 
 ---
 
-## Rol B — Integración de Catálogo y Detalle de Productos ⭐⭐⭐ (Dificultad: 3/5)
+## Rol B — Integración de Catálogo y Detalle de Productos (Dificultad: 3/5)
 
 **Objetivo:** Que la tienda muestre productos reales del backend en lugar de JSON estático.
 
@@ -78,7 +78,7 @@
 
 ---
 
-## Rol C — Integración de Autenticación y Pedidos (Checkout + Mis Pedidos) ⭐⭐⭐⭐ (Dificultad: 4/5)
+## Rol C — Integración de Autenticación y Pedidos (Checkout + Mis Pedidos) (Dificultad: 4/5)
 
 **Objetivo:** Que registro, login, checkout y "mis pedidos" usen el backend real.
 
@@ -119,7 +119,7 @@
 
 ---
 
-## Rol D — Integración del Panel de Administración (CRUD Productos) ⭐⭐⭐⭐ (Dificultad: 4/5)
+## Rol D — Integración del Panel de Administración (CRUD Productos) (Dificultad: 4/5)
 
 **Objetivo:** Que el admin gestione productos reales a través del backend.
 
@@ -152,7 +152,7 @@
 
 ---
 
-## Rol A (Argie) — Parte 2: Unificación y Merge ⭐⭐⭐⭐⭐ (Dificultad: 5/5)
+## Rol A (Argie) — Parte 2: Unificación y Merge (Dificultad: 5/5)
 
 **Objetivo:** Unir los avances de B, C y D en la rama base, verificar que todo junto funcione, y hacer el PR a `main`.
 
@@ -167,7 +167,7 @@
    - Resolver conflictos si los hay
 
 3. **Verificación final**
-   - Arrancar frontend con Live Server y backend en `http://localhost:8080`
+   - Arrancar frontend con Live Server en `http://localhost:5500` **o** `npx serve` en el puerto deseado, y backend en `http://localhost:8080`
    - Ejecutar smoke test end-to-end:
      - Registro → login → ver productos → agregar al carrito → checkout → ver pedido en "Mis pedidos"
      - Login como ADMIN → crear/editar/eliminar producto → verse en tienda
