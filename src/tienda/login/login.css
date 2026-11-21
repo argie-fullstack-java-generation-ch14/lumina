@@ -91,6 +91,7 @@
 .login-field input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.65) inset !important;
   -webkit-text-fill-color: var(--negro-acentuado) !important;
+  font-family: var(--fuente-texto) !important;
 }
 
 .login-field input:focus {
