@@ -8,7 +8,7 @@
 
 ## Rama de trabajo
 
-El refactor nace de la rama base `refactor/capa-integration`, creada desde `main`. Cada integrante crea su rama hija a partir de `refactor/capa-integration`, trabaja solo en sus archivos y abre un Pull Request hacia esa misma rama base. Si no hay conflictos, se hace merge directamente a `refactor/capa-integration`; si hay conflictos, se resuelven y luego se hace el merge. Solo al final, con todos los roles integrados y el build verde, `refactor/capa-integration` se fusiona a `main`.
+El refactor nace de la rama base `integracion/front-back`, creada desde `main`. Cada integrante crea su rama hija a partir de `integracion/front-back`, trabaja solo en sus archivos y abre un Pull Request hacia esa misma rama base. Si no hay conflictos, se hace merge directamente a `integracion/front-back`; si hay conflictos, se resuelven y luego se hace el merge. Solo al final, con todos los roles integrados y el build verde, `integracion/front-back` se fusiona a `main`.
 
 ## Estrategia de ramas y Git
 
@@ -17,32 +17,32 @@ El refactor nace de la rama base `refactor/capa-integration`, creada desde `main
    ```bash
    git switch main
    git pull
-   git switch -c refactor/capa-integration
-   git push -u origin refactor/capa-integration
+   git switch -c integracion/front-back
+   git push -u origin integracion/front-back
    ```
 
-2. Cada integrante crea su rama desde `refactor/capa-integration`:
+2. Cada integrante crea su rama desde `integracion/front-back`:
 
    ```bash
-   git switch refactor/capa-integration
+   git switch integracion/front-back
    git pull
-   git switch -c refactor/integracion-front-argie   # ejemplo para el Rol A
+   git switch -c integracion/bases-login-argie   # ejemplo para el Rol A
    ```
 
 3. Nombres sugeridos de rama:
 
    | Rol | Rama |
    |-----|------|
-   | A | `refactor/integracion-front-argie` |
-   | B | `refactor/integracion-front-naya` |
-   | C | `refactor/integracion-front-nicole` |
-   | D | `refactor/integracion-front-pedro` |
+   | A | `integracion/bases-login-argie` |
+   | B | `integracion/catalogo-naya` |
+   | C | `integracion/auth-y-pedidos-nicole` |
+   | D | `integracion/admin-pedro` |
 
-4. Cada integrante trabaja solo en los archivos de su rol y abre un PR hacia `refactor/capa-integration`. Si el PR no tiene conflictos, se hace merge directamente; si tiene conflictos, se resuelven y luego se hace el merge. No es necesaria la aprobación formal del PR por temas de tiempo.
+4. Cada integrante trabaja solo en los archivos de su rol y abre un PR hacia `integracion/front-back`. Si el PR no tiene conflictos, se hace merge directamente; si tiene conflictos, se resuelven y luego se hace el merge. No es necesaria la aprobación formal del PR por temas de tiempo.
 
 5. El build y el smoke test se ejecutan al final, con todos los roles integrados.
 
-6. Si todo pasa, `refactor/capa-integration` se fusiona a `main`.
+6. Si todo pasa, `integracion/front-back` se fusiona a `main`.
 
 ---
 
