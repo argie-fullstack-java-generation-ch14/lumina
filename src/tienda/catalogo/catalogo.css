@@ -516,8 +516,8 @@
 
 .catalog-grid .candle-heading h3 {
     margin: 0;
-    color: #171513;
-    font-family: inherit;
+    color: var(--cafe-lumina);
+    font-family: var(--fuente-titulos);
     font-size: 15px;
     font-weight: 700;
     line-height: 1.25;
@@ -592,8 +592,8 @@
 
 .catalog-grid .candle-price {
     margin: 0;
-    color: #3B2D2D;
-    font-family: inherit;
+    color: var(--cafe-lumina);
+    font-family: var(--fuente-titulos);
     font-size: 18px;
     font-weight: 700;
     line-height: 1.2;
