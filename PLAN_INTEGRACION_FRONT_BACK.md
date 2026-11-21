@@ -34,9 +34,9 @@ El refactor nace de la rama base `refactor/capa-integration`, creada desde `main
    | Rol | Rama |
    |-----|------|
    | A | `refactor/integracion-front-argie` |
-   | B | `front-naya` |
-   | C | `front-nicole` |
-   | D | `pedro` |
+   | B | `refactor/integracion-front-naya` |
+   | C | `refactor/integracion-front-nicole` |
+   | D | `refactor/integracion-front-pedro` |
 
 4. Cada integrante trabaja solo en los archivos de su rol y abre un PR hacia `refactor/capa-integration`. Si el PR no tiene conflictos, se hace merge directamente; si tiene conflictos, se resuelven y luego se hace el merge. No es necesaria la aprobación formal del PR por temas de tiempo.
 
