@@ -94,7 +94,7 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - Correr Live Server en `http://localhost:5500` **o** `npx serve` en el puerto deseado (ej. `npx serve -l 3000`)
    - Confirmar que CORS funciona con el backend
 
-6. **Crear vista de login para el módulo de administración**
+6. ✅ **Crear vista de login para el módulo de administración**
    - Crear `src/admin/login/login.html` con formulario de inicio de sesión
    - Crear `src/admin/login/login.js` con llamada a `POST /api/login`
    - Al éxito: guardar `token` y `usuarioActivo` en `localStorage`, redirigir a `src/admin/productos/index.html`
