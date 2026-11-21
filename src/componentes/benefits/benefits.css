@@ -14,6 +14,7 @@
   color: #F7F6F4;
   padding-left: 20px;
   font-weight: 300;
+  font-family: var(--fuente-texto);
 }
 
 .benefits-card-div {
@@ -161,6 +162,7 @@
 
   .benefits-card p {
     font-size: 14px;
+    font-family: var(--fuente-texto);
   }
 }
 
@@ -172,5 +174,6 @@
 
   .benefits-card p {
     font-size: 14px;
+    font-family: var(--fuente-texto);
   }
 }

@@ -1,26 +1,3 @@
-.btn-agregar-vela {
-	background-color: var(--cafe-lumina);
-	color: #FFFFFF;
-	font-size: 0.85rem;
-	font-weight: 600;
-	padding: 0.7rem 1.5rem;
-	border-radius: 50px;
-	border: none;
-	cursor: pointer;
-	font-family: inherit;
-	transition: background-color 0.25s ease, transform 0.2s ease;
-}
-
-.btn-agregar-vela:hover,
-.btn-agregar-vela:focus {
-	background-color: #554342;
-	color: #FFFFFF;
-}
-
-.btn-agregar-vela:active {
-	transform: translateY(0);
-}
-
 /* Estado vacío — mismo estilo que el carrito */
 .placeholder-wrap {
 	grid-column: 1 / -1;
@@ -48,6 +25,23 @@
 .product-info {
 	font-size: 0.9rem;
 	color: var(--negro-relajacion);
+	font-family: var(--fuente-texto);
+}
+
+.candle-category,
+.candle-scent,
+.candle-weight,
+.candle-description {
+	font-family: var(--fuente-texto);
+}
+
+.candle-title,
+.candle-price {
+	font-family: var(--fuente-titulos);
+}
+
+.texto-admin {
+	font-family: var(--fuente-texto);
 }
 
 .btn-checkout {
@@ -70,6 +64,10 @@
 	background-color: var(--celeste-apagado);
 	color: #FFFFFF;
 	text-decoration: none;
+}
+
+.candle-card {
+	cursor: pointer;
 }
 
 h1 {

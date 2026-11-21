@@ -83,7 +83,7 @@
 		};
 
 		heading.append(
-			createTextElement("h3", "", product.name),
+			createTextElement("h3", "candle-title", product.name),
 			createTextElement(
 				"span",
 				`candle-category ${infoCategoria.clase}`,
@@ -107,6 +107,11 @@
 		content.append(heading, details, description, purchase);
 		card.append(imageContainer, content);
 		productList.append(card);
+
+		card.addEventListener("click", (event) => {
+			if (event.target.closest("button")) return;
+			window.location.href = `../producto-detalle/index.html?id=${product.id}`;
+		});
 	}
 
 	const products = loadProducts();
