@@ -50,11 +50,40 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 | Rol | Fase | Archivos clave | Dificultad |
 |-----|------|----------------|------------|
-| Rol A (Argie, Parte 1) | Base + Login + Auth header + Logout | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/api/authGuard.js`, `src/api/services/usuarios.service.js`, `src/tienda/login/login.js`, `src/tienda/registro/registro-ui.js`, `src/tienda/registro/registro-back.js`, `src/admin/login/login.js`, `src/js/main.js` | 4/5 |
+| [**Rol A (Argie, Parte 1)**](#rol-a-argie-parte-1-bases-de-integracion) | Base + Login + Auth header + Logout | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/api/authGuard.js`, `src/api/services/usuarios.service.js`, `src/tienda/login/login.js`, `src/tienda/registro/registro-ui.js`, `src/tienda/registro/registro-back.js`, `src/admin/login/login.js`, `src/js/main.js` | 4/5 |
 | [**B (Naya)**](#rol-b-naya-integracion-de-catalogo-y-detalle-de-productos) | Catálogo + Carrito | `src/api/services/productos.service.js`, `src/js/productos.js`, `src/js/carrito.js`, `src/tienda/catalogo/` | 3/5 |
 | [**C (Nicole)**](#rol-c-nicole-integracion-de-autenticacion-y-pedidos) | Auth + Pedidos | `src/api/services/usuarios.service.js`, `src/api/services/pedidos.service.js`, `src/componentes/checkout-modal/`, `src/tienda/mi-cuenta/pedidos/` | 3/5 |
 | [**D (Pedro)**](#rol-d-pedro-integracion-del-panel-de-administracion) | Admin | `src/admin/productos/`, `src/admin/producto-formulario/`, `src/admin/producto-detalle/` | 4/5 |
 | [**A (Argie, Parte 2)**](#rol-a-argie-parte-2-unificacion-y-merge) | Unificación | Rama `feature/integracion-completa`, PR a `main`, smoke test final | 5/5 |
+
+---
+
+## Notas para los Roles B, C y D — Base dejada por el Rol A
+
+**1. Reutilizar, no duplicar**
+- `src/api/services/usuarios.service.js` ya tiene `registrar()`, `login()`, `obtenerUsuario()`, `actualizarUsuario()`. No creen lógica de login/registro duplicada en sus vistas.
+- `src/api/authGuard.js` ya tiene `requireAuth(rolesPermitidos)`. Úsenlo para proteger vistas (Rol C en mi-cuenta, Rol D en admin).
+- `src/api/client.js` y `src/api/endpoints.js` ya están listos. No los modifiquen salvo que sea estrictamente necesario.
+
+**2. Módulos ES**
+- Cualquier archivo que use `import`/`export` debe cargarse en el HTML con `<script type="module">`. Si no, el navegador lanza `SyntaxError` y nada del script se ejecuta.
+
+**3. Estructura de registro**
+- El registro se dividió en `src/tienda/registro/registro-ui.js` (interfaz, validaciones, animación, toggle de ojito) y `src/tienda/registro/registro-back.js` (llamada a `registrar()` del servicio). `index.html` importa `registro-ui.js`.
+
+**4. `APP_BASE`**
+- Ya está definido en `src/js/ui.js` y redefinido explícitamente en `src/js/main.js`. No lo redeclaren en otros archivos para evitar `Identifier 'APP_BASE' has already been declared`.
+
+**5. Logout**
+- El botón de cerrar sesión en `src/js/main.js` borra tanto `token` como `usuarioActivo` de `localStorage`. Si agregan otro botón de logout, hagan lo mismo.
+
+**6. Estado de protección actual**
+- ✅ `src/tienda/mi-cuenta/index.html` protegido con `requireAuth()`.
+- ❌ Subpáginas de mi-cuenta (`info/`, `pedidos/`, `favoritos/`) **no** están protegidas si se acceden directo por URL (pendiente para Rol C).
+- ❌ Vistas de admin (`src/admin/productos/index.html`, `src/admin/producto-detalle/index.html`) **no** están protegidas (pendiente para Rol D, tarea 8).
+
+**7. Rama de trabajo**
+- Partan de `integracion/bases-login-argie`. Cada uno crea su rama hija desde ahí y abre su PR hacia `integracion/front-back`.
 
 ---
 
