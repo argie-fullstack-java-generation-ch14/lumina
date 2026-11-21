@@ -1200,3 +1200,12 @@
     line-height: 1.6;
     margin-bottom: 0;
 }
+
+/* Fuente del título y texto del compromiso sostenible (proyecto) */
+.sustainability-card h3 {
+    font-family: var(--fuente-titulos) !important;
+}
+
+.sustainability-card p {
+    font-family: var(--fuente-texto) !important;
+}
