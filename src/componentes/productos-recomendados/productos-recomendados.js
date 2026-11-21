@@ -71,7 +71,10 @@ function crearSeccionRecomendados(productosRecomendados) {
 // 6 productos aleatorios de categorías que no son de temporada
 function obtenerProductosRecomendados(cantidad = 6) {
   const candidatas = window.productos.filter(
-    (producto) => !CATEGORIAS_TEMPORADA.includes(producto.category)
+    (producto) =>
+      !CATEGORIAS_TEMPORADA.includes(
+        String(producto.category ?? "").trim().toLowerCase()
+      )
   );
 
   return [...candidatas].sort(() => Math.random() - 0.5).slice(0, cantidad);

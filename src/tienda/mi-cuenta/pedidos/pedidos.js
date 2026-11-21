@@ -48,10 +48,57 @@ function obtenerTotalesPedido(pedido) {
   return calcularTotalesPedido(pedido.items ?? []);
 }
 
+const ESTADOS_LEGACY = {
+  PENDIENTE: "PENDING",
+  COMPLETADA: "COMPLETED",
+  CANCELADA: "CANCELLED"
+};
+
+// Los pedidos guardados con la versión anterior del checkout usaban otro
+// formato (productos/numeroOrden/estado/abierto). Los normalizamos al formato
+// actual (items/orderNumber/status/open) para poder renderizarlos.
+function normalizarPedido(pedido) {
+  if (!pedido || typeof pedido !== "object") return null;
+
+  const items = Array.isArray(pedido.items)
+    ? pedido.items
+    : Array.isArray(pedido.productos)
+      ? pedido.productos.map((producto) => {
+          const unitPrice = producto.unitPrice ?? producto.price ?? 0;
+          const quantity = producto.quantity ?? 1;
+          return {
+            productId: producto.productId ?? producto.id,
+            productName: producto.productName ?? producto.name ?? "",
+            unitPrice,
+            quantity,
+            lineTotal: producto.lineTotal ?? unitPrice * quantity
+          };
+        })
+      : [];
+
+  const totalesLegacy = pedido.totales ?? {};
+
+  return {
+    ...pedido,
+    orderNumber: pedido.orderNumber ?? pedido.numeroOrden ?? "",
+    createdAt: pedido.createdAt ?? "",
+    fecha: pedido.fecha ?? "",
+    status: pedido.status ?? ESTADOS_LEGACY[pedido.estado] ?? pedido.estado ?? "",
+    open: pedido.open ?? pedido.abierto ?? false,
+    subtotal: pedido.subtotal ?? totalesLegacy.subtotal ?? 0,
+    discountTotal:
+      pedido.discountTotal ?? totalesLegacy.discountTotal ?? totalesLegacy.descuento ?? 0,
+    taxTotal: pedido.taxTotal ?? totalesLegacy.taxTotal ?? totalesLegacy.iva ?? 0,
+    total: pedido.total ?? totalesLegacy.total ?? 0,
+    items
+  };
+}
+
 function obtenerPedidosGuardados() {
   try {
     const datos = JSON.parse(localStorage.getItem(PEDIDOS_GUARDADOS_KEY) || "[]");
-    return Array.isArray(datos) ? datos : [];
+    if (!Array.isArray(datos)) return [];
+    return datos.map(normalizarPedido).filter(Boolean);
   } catch (error) {
     console.error("Error al leer pedidos guardados:", error);
     return [];
@@ -106,7 +153,10 @@ window.renderPedidos = async function renderPedidos() {
     const pedidosJson = await response.json();
 
     // Los pedidos realizados por el usuario van primero (los más recientes arriba).
-    const todos = [...pedidosGuardados, ...pedidosJson];
+    const pedidosJsonNormalizados = Array.isArray(pedidosJson)
+      ? pedidosJson.map(normalizarPedido).filter(Boolean)
+      : [];
+    const todos = [...pedidosGuardados, ...pedidosJsonNormalizados];
 
     renderPedidosConDatos(todos);
   } catch (error) {
