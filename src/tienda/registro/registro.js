@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showSuccessText();
   }
 
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
     triedToSend = true;
 
@@ -380,7 +380,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-}
+});
 
 initRegisterForm();
 
@@ -388,14 +388,14 @@ initRegisterForm();
 // Mostrar y ocultar contraseñas
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".register-password-toggle").forEach((button) => {
-  button.addEventListener("click", () => {
-    const targetId = button.getAttribute("data-target");
-    const input = document.getElementById(targetId);
+    button.addEventListener("click", () => {
+      const targetId = button.getAttribute("data-target");
+      const input = document.getElementById(targetId);
 
-    if (!input) return;
+      if (!input) return;
 
-    const mostrar = input.type === "password";
-    input.type = mostrar ? "text" : "password";
-  });
+      const mostrar = input.type === "password";
+      input.type = mostrar ? "text" : "password";
+    });
   });
 });
