@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Redireccionar según rol
       if (data.user.role === "ADMIN" || data.user.role === "STAFF") {
-        window.location.href = "../admin/productos/index.html";
+        window.location.href = "../../admin/productos/";
       } else {
         window.location.href = "../mi-cuenta/index.html";
       }
