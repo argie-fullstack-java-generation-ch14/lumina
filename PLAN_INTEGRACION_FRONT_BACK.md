@@ -107,19 +107,19 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - ✅ Si no hay sesión o el rol no autoriza, redirigir a `src/tienda/login/index.html`
    - ✅ Llamar a `requireAuth(['ADMIN', 'STAFF'])` al inicio de cada vista del panel de administración
 
-8. **Conectar la página de registro al backend**
-   - Editar `src/tienda/registro/registro.js`
-   - Llamar `apiPost(endpoints.auth.register, { fullName, phone, email, password })`
-   - Al éxito: guardar `UserResponse` en `usuarioActivo` (sin contraseña), redirigir según rol
-   - Mostrar errores de validación (`400`, `409`) en el formulario correspondiente
+8. ✅ **Conectar la página de registro al backend**
+   - ✅ Editar `src/tienda/registro/registro.js`
+   - ✅ Llamar `apiPost(endpoints.auth.register, { fullName, phone, email, password })`
+   - ✅ Al éxito: guardar `UserResponse` en `usuarioActivo` (sin contraseña), redirigir según rol
+   - ✅ Mostrar errores de validación (`400`, `409`) en el formulario correspondiente
 
-9. **Bases que deja el Rol A para el Rol C (no tocar, solo usar)**
-   - `src/api/client.js`: funciones `apiGet`, `apiPost`, `apiPut`, `apiDelete` con `API_BASE_URL` ya configurada
-   - `src/api/endpoints.js`: todas las rutas del backend centralizadas (`endpoints.auth.login`, `endpoints.auth.register`, `endpoints.usuarios.byId`, `endpoints.pedidos.*`, etc.)
-   - `src/api/adapters.js`: funciones `mapEstadoPedido`, `mapUsuario`, `mapProducto`, `mapOrderResponse`
-   - `src/api/authGuard.js`: función `requireAuth(rolesPermitidos)` para proteger vistas
-   - `src/tienda/login/login.js`: ejemplo de cómo llamar a `POST /api/login` y guardar `token` + `usuarioActivo` en `localStorage`
-   - `src/tienda/registro/registro.js`: ejemplo de cómo llamar a `POST /api/registro`
+9. ✅ **Bases que deja el Rol A para el Rol C (no tocar, solo usar)**
+   - ✅ `src/api/client.js`: funciones `apiGet`, `apiPost`, `apiPut`, `apiDelete` con `API_BASE_URL` ya configurada
+   - ✅ `src/api/endpoints.js`: todas las rutas del backend centralizadas (`endpoints.auth.login`, `endpoints.auth.register`, `endpoints.usuarios.byId`, `endpoints.pedidos.*`, etc.)
+   - ✅ `src/api/adapters.js`: funciones `mapEstadoPedido`, `mapUsuario`, `mapProducto`, `mapOrderResponse`
+   - ✅ `src/api/authGuard.js`: función `requireAuth(rolesPermitidos)` para proteger vistas
+   - ✅ `src/tienda/login/login.js`: ejemplo de cómo llamar a `POST /api/login` y guardar `token` + `usuarioActivo` en `localStorage`
+   - ✅ `src/tienda/registro/registro.js`: ejemplo de cómo llamar a `POST /api/registro`
    - El Rol C debe reutilizar estos archivos sin modificarlos, solo consumirlos
 
 **Entrega del Rol A (Parte 1):** Pull request parcial o rama lista con `src/api/` funcional, login y registro integrados, y vista de login del admin creada.
