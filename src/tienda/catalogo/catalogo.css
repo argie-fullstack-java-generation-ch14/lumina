@@ -40,6 +40,7 @@
     color: var(--celeste-apagado, #374F59);
     font-size: 12px;
     font-weight: 600;
+    font-family: var(--fuente-texto);
     text-align: right;
     text-decoration: none;
     white-space: nowrap;
