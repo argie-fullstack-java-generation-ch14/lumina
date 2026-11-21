@@ -1,7 +1,12 @@
-// Lumina · registro
-// Solo esta página.
+// Lumina · Registro
+// ------------------------------------------------------------
+// Conectado a la API del backend para registro de usuarios.
+// Usa apiPost(endpoints.auth.register, {...}) para crear cuenta.
 
-function initRegisterForm() {
+import { apiPost } from "../../api/client.js";
+import { endpoints } from "../../api/endpoints.js";
+
+document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector('#register-form');
   const alertBox = document.querySelector('#register-alert');
   const layout = document.querySelector('#register-layout');
@@ -277,12 +282,67 @@ function initRegisterForm() {
     }
 
     const user = createUser();
-    saveUser(user);
-    console.log(JSON.stringify(user, null, 2));
-
     submitButton.disabled = true;
     form.reset();
-    playEnding();
+
+    try {
+      const response = await apiPost(endpoints.auth.register, {
+        fullName: user.fullName,
+        phone: user.phone,
+        email: user.email,
+        password: user.password,
+      });
+
+      // Guardar usuario autenticado (sin contraseña)
+      localStorage.setItem(
+        "usuarioActivo",
+        JSON.stringify({
+          id: response.id,
+          fullName: response.fullName,
+          phone: response.phone,
+          email: response.email,
+          role: response.role,
+        })
+      );
+
+      // Redireccionar según rol
+      if (response.role === "ADMIN" || response.role === "STAFF") {
+        window.location.href = "../../admin/productos/";
+      } else {
+        window.location.href = "../mi-cuenta/index.html";
+      }
+    } catch (error) {
+      submitButton.disabled = false;
+
+      if (error.status === 409) {
+        // Email duplicado
+        emailInput.setAttribute("aria-invalid", "true");
+        const fieldEl = emailInput.closest(".register-field");
+        fieldEl.classList.add("has-error");
+        const existing = fieldEl.querySelector(".register-error");
+        if (existing) existing.remove();
+        const errorEl = document.createElement("p");
+        errorEl.className = "register-error";
+        errorEl.textContent = error.message || "Este correo ya está registrado.";
+        fieldEl.appendChild(errorEl);
+        emailInput.focus({ preventScroll: true });
+      } else if (error.status === 400) {
+        // Errores de validación
+        alertBox.innerHTML = `
+          <div class="alert alert-danger" role="alert">
+            ${error.message || "Datos inválidos. Revisa el formulario."}
+          </div>
+        `;
+        alertBox.scrollIntoView({ behavior: "smooth", block: "center" });
+      } else {
+        alertBox.innerHTML = `
+          <div class="alert alert-danger" role="alert">
+            Ocurrió un error al registrar. Inténtalo de nuevo.
+          </div>
+        `;
+        alertBox.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
   });
 
   fields.forEach((field) => {
