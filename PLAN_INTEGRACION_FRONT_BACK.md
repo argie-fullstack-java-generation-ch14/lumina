@@ -50,7 +50,7 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 | Rol | Fase | Archivos clave | Dificultad |
 |-----|------|----------------|------------|
-| [**A (Argie, Parte 1)**](#rol-a-argie-parte-1-bases-de-integracion) | Base + Login | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/api/authGuard.js`, `src/tienda/login/login.js` | 2/5 |
+| [**A (Argie, Parte 1)**](#rol-a-argie-parte-1-bases-de-integracion) | Base + Login | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/api/authGuard.js`, `src/tienda/login/login.js`, `src/tienda/registro/registro.js` | 2/5 |
 | [**B (Naya)**](#rol-b-naya-integracion-de-catalogo-y-detalle-de-productos) | Catálogo | `src/api/services/productos.service.js`, `src/js/productos.js`, `src/tienda/catalogo/` | 3/5 |
 | [**C (Nicole)**](#rol-c-nicole-integracion-de-autenticacion-y-pedidos) | Auth + Pedidos | `src/api/services/usuarios.service.js`, `src/api/services/pedidos.service.js`, `src/tienda/registro/`, `src/componentes/checkout-modal/`, `src/tienda/mi-cuenta/pedidos/` | 4/5 |
 | [**D (Pedro)**](#rol-d-pedro-integracion-del-panel-de-administracion) | Admin | `src/admin/productos/`, `src/admin/producto-formulario/` | 4/5 |
@@ -100,7 +100,13 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - Si no hay sesión o el rol no autoriza, redirigir a `src/tienda/login/index.html`
    - Llamar a `requireAuth(['ADMIN', 'STAFF'])` al inicio de cada vista del panel de administración
 
-**Entrega del Rol A (Parte 1):** Pull request parcial o rama lista con `src/api/` funcional y login integrado.
+7. **Conectar la página de registro al backend**
+   - Editar `src/tienda/registro/registro.js`
+   - Llamar `apiPost(endpoints.auth.register, { fullName, phone, email, password })`
+   - Al éxito: guardar `UserResponse` en `usuarioActivo` (sin contraseña), redirigir según rol
+   - Mostrar errores de validación (`400`, `409`) en el formulario correspondiente
+
+**Entrega del Rol A (Parte 1):** Pull request parcial o rama lista con `src/api/` funcional, login y registro integrados.
 
 ---
 
@@ -184,7 +190,17 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - Al hacer checkout (`POST /api/pedidos`), se envía el `userId` del usuario autenticado. Si no hay sesión, el frontend debe solicitar login o registro antes de finalizar la compra.
    - El carrito se pierde si el usuario limpia el `localStorage`, cambia de navegador o de dispositivo.
 
-**Entrega del Rol C:** PR con autenticación, checkout y mis pedidos funcionando contra el backend.
+9. **Cerrar sesión (Logout)**
+   - Agregar botón de "Cerrar sesión" en el header (`src/js/main.js`) o en la vista de mi-cuenta
+   - Al hacer clic: borrar `token` y `usuarioActivo` de `localStorage`, redirigir a `src/tienda/login/index.html`
+   - Validar que el botón solo se muestre cuando hay sesión activa
+
+10. **Header que refleje el estado de autenticación**
+    - Editar `src/js/main.js` para leer `usuarioActivo` y mostrar el nombre del usuario logueado
+    - Mostrar/ocultar enlaces según el estado de autenticación (ej. "Mi cuenta" vs "Iniciar sesión")
+    - Mostrar/ocultar enlaces de administración según el rol (`ADMIN`/`STAFF` vs `CUSTOMER`)
+
+**Entrega del Rol C:** PR con autenticación, checkout, mis pedidos, logout y header con estado de autenticación funcionando contra el backend.
 
 ---
 
@@ -245,7 +261,13 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 4. **Limpiar `localStorage` / JSON obsoletos** (Fase 5 del documento)
    - `lumina-productos`, `lumina-pedidos`, `usuarios`, `usuarioActivo` (si ya no se usan)
 
-5. **Hacer commit y push**
+5. **Manejo automático de token expirado (401)**
+   - En `src/api/client.js`, agregar interceptores de respuesta que detecten código 401
+   - Al recibir 401: borrar `token` y `usuarioActivo` de `localStorage`, redirigir a `src/tienda/login/index.html`
+   - Mostrar mensaje genérico de "Sesión expirada, inicia sesión nuevamente"
+   - Probar que el flujo de expiración funcione en el smoke test
+
+6. **Hacer commit y push**
    - `git add . && git commit -m "feat(integracion): front-back completo"`
    - `git push origin feature/integracion-completa`
 
