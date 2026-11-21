@@ -46,7 +46,19 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 ---
 
-## Rol A (Argie) — Parte 1: Bases de integración (Dificultad: 2/5)
+## Resumen de entregables por Rol
+
+| Rol | Fase | Archivos clave | Dificultad | Enlace |
+|-----|------|----------------|------------|--------|
+| **A (Argie, Parte 1)** | Base + Login | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/tienda/login/login.js` | 2/5 | [Ver sección](#rol-a-argie-parte-1-bases-de-integracion) |
+| **B (Naya)** | Catálogo | `src/api/services/productos.service.js`, `src/js/productos.js`, `src/tienda/catalogo/` | 3/5 | [Ver sección](#rol-b-naya-integracion-de-catalogo-y-detalle-de-productos) |
+| **C (Nicole)** | Auth + Pedidos | `src/api/services/usuarios.service.js`, `src/api/services/pedidos.service.js`, `src/tienda/registro/`, `src/componentes/checkout-modal/`, `src/tienda/mi-cuenta/pedidos/` | 4/5 | [Ver sección](#rol-c-nicole-integracion-de-autenticacion-y-pedidos) |
+| **D (Pedro)** | Admin | `src/admin/productos/`, `src/admin/producto-formulario/` | 4/5 | [Ver sección](#rol-d-pedro-integracion-del-panel-de-administracion) |
+| **A (Argie, Parte 2)** | Unificación | Rama `feature/integracion-completa`, PR a `main`, smoke test final | 5/5 | [Ver sección](#rol-a-argie-parte-2-unificacion-y-merge) |
+
+---
+
+## <a name="rol-a-argie-parte-1-bases-de-integracion"></a>Rol A (Argie) — Parte 1: Bases de integración (Dificultad: 2/5)
 
 **Objetivo:** Dejar lista la infraestructura mínima para que los demás roles solo conecten vistas con APIs, sin preocuparse por configuración de red, base URL o manejo de errores.
 
@@ -86,7 +98,7 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 ---
 
-## Rol B (Naya) — Integración de Catálogo y Detalle de Productos (Dificultad: 3/5)
+## <a name="rol-b-naya-integracion-de-catalogo-y-detalle-de-productos"></a>Rol B (Naya) — Integración de Catálogo y Detalle de Productos (Dificultad: 3/5)
 
 **Objetivo:** Que la tienda muestre productos reales del backend en lugar de JSON estático.
 
@@ -118,7 +130,7 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 ---
 
-## Rol C (Nicole) — Integración de Autenticación y Pedidos (Checkout + Mis Pedidos) (Dificultad: 4/5)
+## <a name="rol-c-nicole-integracion-de-autenticacion-y-pedidos"></a>Rol C (Nicole) — Integración de Autenticación y Pedidos (Checkout + Mis Pedidos) (Dificultad: 4/5)
 
 **Objetivo:** Que registro, login, checkout y "mis pedidos" usen el backend real.
 
@@ -159,7 +171,7 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 ---
 
-## Rol D (Pedro) — Integración del Panel de Administración (CRUD Productos) (Dificultad: 4/5)
+## <a name="rol-d-pedro-integracion-del-panel-de-administracion"></a>Rol D (Pedro) — Integración del Panel de Administración (CRUD Productos) (Dificultad: 4/5)
 
 **Objetivo:** Que el admin gestione productos reales a través del backend.
 
@@ -192,7 +204,7 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 ---
 
-## Rol A (Argie) — Parte 2: Unificación y Merge (Dificultad: 5/5)
+## <a name="rol-a-argie-parte-2-unificacion-y-merge"></a>Rol A (Argie) — Parte 2: Unificación y Merge (Dificultad: 5/5)
 
 **Objetivo:** Unir los avances de B, C y D en la rama base, verificar que todo junto funcione, y hacer el PR a `main`.
 
@@ -223,18 +235,6 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 6. **Abrir Pull Request hacia `main`**
    - Revisar que todos los checks del checklist de aceptación (`INTEGRACION_API.md` sección 9) pasen
    - Mergear a `main`
-
----
-
-## Resumen de entregables por Rol
-
-| Rol | Fase | Archivos clave | Dificultad |
-|-----|------|----------------|------------|
-| **A (Argie, Parte 1)** | Base + Login | `src/api/client.js`, `src/api/endpoints.js`, `src/api/adapters.js`, `src/tienda/login/login.js` | 2/5 |
-| **B (Naya)** | Catálogo | `src/api/services/productos.service.js`, `src/js/productos.js`, `src/tienda/catalogo/` | 3/5 |
-| **C (Nicole)** | Auth + Pedidos | `src/api/services/usuarios.service.js`, `src/api/services/pedidos.service.js`, `src/tienda/registro/`, `src/componentes/checkout-modal/`, `src/tienda/mi-cuenta/pedidos/` | 4/5 |
-| **D (Pedro)** | Admin | `src/admin/productos/`, `src/admin/producto-formulario/` | 4/5 |
-| **A (Argie, Parte 2)** | Unificación | Rama `feature/integracion-completa`, PR a `main`, smoke test final | 5/5 |
 
 ---
 
