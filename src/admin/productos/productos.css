@@ -3,11 +3,11 @@
 	color: #FFFFFF;
 	font-size: 0.85rem;
 	font-weight: 600;
+	font-family: var(--fuente-texto);
 	padding: 0.7rem 1.5rem;
 	border-radius: 50px;
 	border: none;
 	cursor: pointer;
-	font-family: inherit;
 	transition: background-color 0.25s ease, transform 0.2s ease;
 }
 
@@ -48,6 +48,11 @@
 .product-info {
 	font-size: 0.9rem;
 	color: var(--negro-relajacion);
+	font-family: var(--fuente-texto);
+}
+
+.texto-admin {
+	font-family: var(--fuente-texto);
 }
 
 .btn-checkout {
@@ -70,6 +75,10 @@
 	background-color: var(--celeste-apagado);
 	color: #FFFFFF;
 	text-decoration: none;
+}
+
+.candle-card {
+	cursor: pointer;
 }
 
 h1 {
