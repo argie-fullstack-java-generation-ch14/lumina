@@ -263,7 +263,14 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 7. **Eliminar lógica obsoleta**
    - Eliminar `lumina-productos` de `localStorage` y su mezcla en el módulo de productos
 
-**Entrega del Rol D:** PR con admin CRUD funcionando contra el backend.
+8. **Proteger vistas del panel de administración**
+   - Agregar `<script type="module">` con `import { requireAuth } from "../../api/authGuard.js"; requireAuth(["ADMIN", "STAFF"]);` al inicio de cada vista del admin:
+     - `src/admin/productos/index.html`
+     - `src/admin/producto-detalle/index.html`
+   - Si no hay sesión activa o el rol no es `ADMIN`/`STAFF`, redirigir a `src/tienda/login/index.html`
+   - Reutilizar `src/api/authGuard.js` creado en el Rol A
+
+**Entrega del Rol D:** PR con admin CRUD funcionando contra el backend y todas las vistas protegidas contra acceso no autorizado.
 
 ---
 
