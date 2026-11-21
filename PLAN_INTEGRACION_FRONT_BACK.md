@@ -64,33 +64,33 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 ### Tareas
 
-1. **Crear `src/api/client.js`**
+1. ✅ **Crear `src/api/client.js`**
    - Constante `API_BASE_URL` (default `http://localhost:8080`, sobreescribible por `window.LUMINA_API_URL` o variable de entorno)
    - Funciones genéricas `apiGet`, `apiPost`, `apiPut`, `apiDelete`
    - Headers JSON automáticos
    - Inyección opcional del token `Authorization: Bearer <token>` desde `localStorage`
    - Parseo centralizado de errores `ApiError` (`{ status, error, message, details, timestamp }`)
 
-2. **Crear `src/api/endpoints.js`**
+2. ✅ **Crear `src/api/endpoints.js`**
    - Centralizar todas las rutas del backend:
      - `/api/productos`, `/api/productos/{id}`, `/api/productos/slug/{slug}`
      - `/api/registro`, `/api/login`
      - `/api/usuarios/{id}`
      - `/api/pedidos`, `/api/pedidos?usuarioId=`, `/api/pedidos/{id}/estado`
 
-3. **Crear `src/api/adapters.js`**
+3. ✅ **Crear `src/api/adapters.js`**
    - Funciones de mapeo backend → front y front → backend
    - Mapeo de estados de pedido: `PENDING` → `Pendiente`, `CONFIRMED` → `Confirmado`, etc.
    - Mapeo de usuario: `fullName` ↔ `nombreCompleto`, `phone` ↔ `telefono`
    - Función para extraer `orderNumber` como `numeroOrden`
 
-4. **Preparar la vista de login para administración**
+4. ✅ **Preparar la vista de login para administración**
    - `src/tienda/login/login.js`: llamar `POST /api/login` con `{ email, password }`
    - Al éxito: guardar `token` y `user` (sin contraseña) en `localStorage`
    - Redireccionar al panel de administración si el rol es `ADMIN` o `STAFF`; si es `CUSTOMER`, redirigir a tienda
    - Mostrar error genérico 401 sin revelar si el correo existe
 
-5. **Verificar compilación/arranque del front**
+5. ✅ **Verificar compilación/arranque del front**
    - Correr Live Server en `http://localhost:5500` **o** `npx serve` en el puerto deseado (ej. `npx serve -l 3000`)
    - Confirmar que CORS funciona con el backend
 
@@ -106,7 +106,7 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - Al éxito: guardar `UserResponse` en `usuarioActivo` (sin contraseña), redirigir según rol
    - Mostrar errores de validación (`400`, `409`) en el formulario correspondiente
 
-**Entrega del Rol A (Parte 1):** Pull request parcial o rama lista con `src/api/` funcional, login y registro integrados.
+**Entrega del Rol A (Parte 1):** Pull request parcial o rama lista con `src/api/` funcional y login integrado.
 
 ---
 
@@ -271,7 +271,7 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - `git add . && git commit -m "feat(integracion): front-back completo"`
    - `git push origin feature/integracion-completa`
 
-6. **Abrir Pull Request hacia `main`**
+7. **Abrir Pull Request hacia `main`**
    - Revisar que todos los checks del checklist de aceptación (`INTEGRACION_API.md` sección 9) pasen
    - Mergear a `main`
 
