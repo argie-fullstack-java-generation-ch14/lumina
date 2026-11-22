@@ -16,6 +16,11 @@
   <link rel="stylesheet" href="../../tienda/catalogo/catalogo.css">
   <link rel="stylesheet" href="productos.css">
   <link rel="stylesheet" href="../producto-formulario/producto-formulario.css">
+
+  <script type="module">
+    import { requireAuth } from "../../api/authGuard.js";
+    requireAuth(["ADMIN", "STAFF"]);
+  </script>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
