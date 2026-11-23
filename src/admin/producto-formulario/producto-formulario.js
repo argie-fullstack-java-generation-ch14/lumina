@@ -19,6 +19,14 @@ window.initProductForm = () => {
 			}
 		},
 		{
+			input: modal.querySelector("#product-color"),
+			validate(value) {
+				if (value === "") return "Escribe el color de la vela.";
+				if (value.length < 2) return "El color debe tener al menos 2 caracteres.";
+				return "";
+			}
+		},
+		{
 			input: modal.querySelector("#product-scent"),
 			validate(value) {
 				if (value === "") return "Escribe el aroma de la vela.";
@@ -49,6 +57,15 @@ window.initProductForm = () => {
 			}
 		},
 		{
+			input: modal.querySelector("#product-stock"),
+			validate(value) {
+				if (value === "") return "Escribe el stock disponible.";
+				const stock = Number(value);
+				if (!Number.isInteger(stock) || stock < 0) return "El stock debe ser un número entero mayor o igual a 0.";
+				return "";
+			}
+		},
+		{
 			input: modal.querySelector("#product-description"),
 			validate(value) {
 				if (value === "") return "Escribe una descripción.";
@@ -70,22 +87,15 @@ window.initProductForm = () => {
 				}
 				return "";
 			}
-		},
-		{
-			input: modal.querySelector("#product-color"),
-			validate(value) {
-				if (value === "") return "Escribe el color de la vela.";
-				if (value.length < 2) return "El color debe tener al menos 2 caracteres.";
-				return "";
-			}
 		}
 	];
 
 	function showError(input, message) {
+		if (!input) return;
 		const field = input.closest(".product-form-field");
 		const error = modal.querySelector(`#${input.id}-error`);
-		error.textContent = message;
-		field.classList.toggle("has-error", message !== "");
+		if (error) error.textContent = message;
+		if (field) field.classList.toggle("has-error", message !== "");
 	}
 
 	function checkField(field) {
@@ -104,32 +114,87 @@ window.initProductForm = () => {
 		return false;
 	}
 
-	form.addEventListener("submit", (event) => {
+	const fieldMap = {
+		name: "product-name",
+		nombre: "product-name",
+		color: "product-color",
+		scent: "product-scent",
+		aroma: "product-scent",
+		category: "product-category",
+		categoria: "product-category",
+		weightGrams: "product-weight",
+		peso: "product-weight",
+		price: "product-price",
+		precio: "product-price",
+		stock: "product-stock",
+		available: "product-available",
+		description: "product-description",
+		descripcion: "product-description",
+		imageUrl: "product-image",
+		imagen: "product-image"
+	};
+
+	window.showProductFormErrors = (apiError) => {
+		if (!apiError) return;
+
+		if (Array.isArray(apiError.details) && apiError.details.length > 0) {
+			let firstInvalid = null;
+			apiError.details.forEach((detail) => {
+				const separatorIndex = detail.indexOf(":");
+				if (separatorIndex !== -1) {
+					const fieldName = detail.substring(0, separatorIndex).trim();
+					const msg = detail.substring(separatorIndex + 1).trim();
+					const inputId = fieldMap[fieldName] || `product-${fieldName}`;
+					const inputEl = modal.querySelector(`#${inputId}`);
+					if (inputEl) {
+						showError(inputEl, msg);
+						if (!firstInvalid) firstInvalid = inputEl;
+					}
+				}
+			});
+			if (firstInvalid) firstInvalid.focus();
+		} else if (apiError.message) {
+			const nameInput = modal.querySelector("#product-name");
+			if (nameInput) {
+				showError(nameInput, apiError.message);
+				nameInput.focus();
+			}
+		}
+	};
+
+	form.addEventListener("submit", async (event) => {
 		event.preventDefault();
 		if (!checkForm()) return;
 
-		const name = fields[0].input.value.trim();
+		const nameInput = modal.querySelector("#product-name");
+		const name = nameInput.value.trim();
+		const availableInput = modal.querySelector("#product-available");
+
 		const product = {
 			name,
-			slug: name.toLowerCase().replace(/\s+/g, "-"),
-			imageUrl: fields[6].input.value.trim(),
-			color: fields[7].input.value.trim(),
-			scent: fields[1].input.value.trim(),
-			category: fields[2].input.value.trim(),
-			weightGrams: Number(fields[3].input.value),
-			price: Number(fields[4].input.value),
-			description: fields[5].input.value.trim()
+			slug: name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""),
+			imageUrl: modal.querySelector("#product-image").value.trim(),
+			color: modal.querySelector("#product-color").value.trim(),
+			scent: modal.querySelector("#product-scent").value.trim(),
+			category: modal.querySelector("#product-category").value.trim(),
+			weightGrams: Number(modal.querySelector("#product-weight").value),
+			price: Number(modal.querySelector("#product-price").value),
+			stock: Number(modal.querySelector("#product-stock").value),
+			available: availableInput ? availableInput.checked : true,
+			description: modal.querySelector("#product-description").value.trim()
 		};
 
 		if (editingId !== null) {
-			window.dispatchEvent(
-				new CustomEvent("product-updated", { detail: { id: editingId, product } })
-			);
+			// Modo edición: llamar directamente a la función del detalle
+			if (typeof window.actualizarProductoEnBackend === "function") {
+				await window.actualizarProductoEnBackend(editingId, product);
+			} else {
+				alert("Error: No se puede actualizar el producto.");
+			}
 		} else {
+			// Modo creación: emitir evento para que el listado lo maneje
 			window.dispatchEvent(new CustomEvent("product-created", { detail: product }));
 		}
-
-		bootstrap.Modal.getOrCreateInstance(modal).hide();
 	});
 
 	fields.forEach((field) => {
@@ -145,9 +210,14 @@ window.initProductForm = () => {
 	modal.addEventListener("hidden.bs.modal", () => {
 		form.reset();
 		fields.forEach((field) => showError(field.input, ""));
+		const availableInput = modal.querySelector("#product-available");
+		if (availableInput) availableInput.checked = true;
 		editingId = null;
 		if (title) title.textContent = "Agregar producto";
-		if (submitButton) submitButton.textContent = "Agregar producto";
+		if (submitButton) {
+			submitButton.disabled = false;
+			submitButton.textContent = "Agregar producto";
+		}
 	});
 
 	function preloadProduct(product) {
@@ -158,6 +228,7 @@ window.initProductForm = () => {
 			"product-category": product.category,
 			"product-weight": product.weightGrams != null ? String(product.weightGrams) : "",
 			"product-price": product.price != null ? String(product.price) : "",
+			"product-stock": product.stock != null ? String(product.stock) : "0",
 			"product-description": product.description,
 			"product-image": product.imageUrl
 		};
@@ -167,14 +238,37 @@ window.initProductForm = () => {
 			if (input) input.value = value ?? "";
 		});
 
+		const availableInput = modal.querySelector("#product-available");
+		if (availableInput) {
+			availableInput.checked = product.available !== false;
+		}
+
 		fields.forEach((field) => showError(field.input, ""));
 		editingId = product.id;
 		if (title) title.textContent = "Editar producto";
-		if (submitButton) submitButton.textContent = "Guardar cambios";
+		if (submitButton) {
+			submitButton.disabled = false;
+			submitButton.textContent = "Guardar cambios";
+		}
 	}
 
 	window.openProductFormForEdit = (product) => {
 		preloadProduct(product);
 		bootstrap.Modal.getOrCreateInstance(modal).show();
+	};
+
+	window.closeProductForm = () => {
+		bootstrap.Modal.getOrCreateInstance(modal).hide();
+	};
+
+	window.showFormErrors = (error) => {
+		if (!error) return;
+		if (error.status === 409) {
+			alert("No se puede eliminar el producto porque tiene órdenes asociadas.");
+		} else if (error.status === 403) {
+			alert("No tienes permisos para realizar esta acción.");
+		} else {
+			alert(error.message || "Ocurrió un error inesperado.");
+		}
 	};
 };
