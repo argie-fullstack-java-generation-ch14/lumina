@@ -162,7 +162,7 @@ window.initProductForm = () => {
 		}
 	};
 
-	form.addEventListener("submit", (event) => {
+	form.addEventListener("submit", async (event) => {
 		event.preventDefault();
 		if (!checkForm()) return;
 
@@ -172,12 +172,7 @@ window.initProductForm = () => {
 
 		const product = {
 			name,
-			slug: name
-				.toLowerCase()
-				.normalize("NFD")
-				.replace(/[\u0300-\u036f]/g, "")
-				.replace(/[^a-z0-9]+/g, "-")
-				.replace(/^-+|-+$/g, ""),
+			slug: name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""),
 			imageUrl: modal.querySelector("#product-image").value.trim(),
 			color: modal.querySelector("#product-color").value.trim(),
 			scent: modal.querySelector("#product-scent").value.trim(),
@@ -190,10 +185,14 @@ window.initProductForm = () => {
 		};
 
 		if (editingId !== null) {
-			window.dispatchEvent(
-				new CustomEvent("product-updated", { detail: { id: editingId, product } })
-			);
+			// Modo edición: llamar directamente a la función del detalle
+			if (typeof window.actualizarProductoEnBackend === "function") {
+				await window.actualizarProductoEnBackend(editingId, product);
+			} else {
+				alert("Error: No se puede actualizar el producto.");
+			}
 		} else {
+			// Modo creación: emitir evento para que el listado lo maneje
 			window.dispatchEvent(new CustomEvent("product-created", { detail: product }));
 		}
 	});
@@ -260,5 +259,16 @@ window.initProductForm = () => {
 
 	window.closeProductForm = () => {
 		bootstrap.Modal.getOrCreateInstance(modal).hide();
+	};
+
+	window.showFormErrors = (error) => {
+		if (!error) return;
+		if (error.status === 409) {
+			alert("No se puede eliminar el producto porque tiene órdenes asociadas.");
+		} else if (error.status === 403) {
+			alert("No tienes permisos para realizar esta acción.");
+		} else {
+			alert(error.message || "Ocurrió un error inesperado.");
+		}
 	};
 };

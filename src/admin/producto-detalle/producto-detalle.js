@@ -1,122 +1,143 @@
+import { obtenerPorId, actualizarProducto, eliminarProducto } from "../../api/services/productos.service.js";
 import { obtenerClaseCategoria, obtenerLabelCategoria } from "../../js/productos.js";
-
-const PRODUCTS_STORAGE_KEY = "lumina-productos";
 
 let productoActual = null;
 
-function loadProducts() {
-  try {
-    const savedProducts = localStorage.getItem(PRODUCTS_STORAGE_KEY);
-    const parsedProducts = savedProducts ? JSON.parse(savedProducts) : [];
-    return Array.isArray(parsedProducts) ? parsedProducts : [];
-  } catch (error) {
-    console.error("No se pudieron recuperar los productos:", error);
-    return [];
-  }
-}
-
-function saveProducts(products) {
-  try {
-    localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
-  } catch (error) {
-    console.error("No se pudieron guardar los productos:", error);
-  }
-}
-
 function renderProducto(producto) {
-  document.getElementById("producto-nombre").textContent = producto.name;
-  document.title = `${producto.name} · Lumina`;
+	document.getElementById("producto-nombre").textContent = producto.name;
+	document.title = `${producto.name} · Lumina`;
 
-  const categoria = document.getElementById("producto-categoria");
-  categoria.textContent = obtenerLabelCategoria(producto.category);
-  categoria.className = `candle-category ${obtenerClaseCategoria(producto.category)}`;
+	const categoria = document.getElementById("producto-categoria");
+	categoria.textContent = obtenerLabelCategoria(producto.category);
+	categoria.className = `candle-category ${obtenerClaseCategoria(producto.category)}`;
 
-  document.getElementById("producto-aroma").textContent = producto.scent;
-  document.getElementById("producto-peso").textContent = `${producto.weightGrams}g`;
-  document.getElementById("producto-color").textContent = producto.color;
-  document.getElementById("producto-descripcion").textContent = producto.description;
-  document.getElementById("producto-precio").textContent =
-    `$ ${Number(producto.price).toLocaleString("es-CO")}`;
+	document.getElementById("producto-aroma").textContent = producto.scent || "Sin aroma";
+	document.getElementById("producto-peso").textContent = `${producto.weightGrams}g`;
+	document.getElementById("producto-color").textContent = producto.color;
+	document.getElementById("producto-descripcion").textContent = producto.description;
+	document.getElementById("producto-precio").textContent = `$ ${Number(producto.price).toLocaleString("es-CO")}`;
+	document.getElementById("producto-stock").textContent = producto.stock != null ? `${producto.stock} unidades` : "Sin registro";
 
-  const imagen = document.querySelector(".producto-imagen-wrapper-img");
-  imagen.src = producto.imageUrl;
-  imagen.alt = `Vela Lumina ${producto.name}`;
+	const availableEl = document.getElementById("producto-available");
+	const isAvailable = producto.available !== false;
+	availableEl.textContent = isAvailable ? "Disponible" : "No disponible";
+	availableEl.className = `badge ${isAvailable ? "bg-success" : "bg-secondary"}`;
+
+	const imagen = document.querySelector(".producto-imagen-wrapper-img");
+	imagen.src = producto.imageUrl;
+	imagen.alt = `Vela Lumina ${producto.name}`;
 }
 
-function initProductoDetalle() {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
+function showViewError(message) {
+	document.getElementById("producto-nombre").textContent = "Producto no encontrado";
+	document.getElementById("producto-descripcion").textContent = message;
+	document.getElementById("btn-editar-producto").disabled = true;
+	document.getElementById("btn-eliminar-producto").disabled = true;
+}
 
-  const products = loadProducts();
-  productoActual = products.find((producto) => producto.id === Number(id)) || products[0];
+async function eliminarProductoActual() {
+	try {
+		await eliminarProducto(productoActual.id);
+		window.location.href = "../productos/index.html";
+	} catch (error) {
+		console.error("Error al eliminar producto:", error);
+		if (error.status === 409) {
+			alert("No se puede eliminar el producto porque tiene órdenes asociadas.");
+		} else if (error.status === 403) {
+			alert("No tienes permisos para eliminar productos.");
+		} else {
+			alert(error.message || "Ocurrió un error al eliminar el producto.");
+		}
+	}
+}
 
-  if (!productoActual) {
-    document.getElementById("producto-nombre").textContent = "Producto no encontrado";
-    return;
-  }
+async function actualizarProductoEnBackend(id, product) {
+	try {
+		productoActual = await actualizarProducto(id, product);
+		renderProducto(productoActual);
+		if (typeof window.closeProductForm === "function") {
+			window.closeProductForm();
+		}
+	} catch (error) {
+		console.error("Error al actualizar producto:", error);
+		if (error.status === 403) {
+			alert("No tienes permisos para editar productos.");
+		} else if (typeof window.showProductFormErrors === "function") {
+			window.showProductFormErrors(error);
+		} else {
+			alert(error.message || "Error al actualizar el producto.");
+		}
+	}
+}
 
-  renderProducto(productoActual);
+async function cargarProducto() {
+	const id = Number(new URLSearchParams(window.location.search).get("id"));
+	if (!id || Number.isNaN(id)) {
+		showViewError("No se especificó un producto válido.");
+		return;
+	}
 
-  const btnEditar = document.getElementById("btn-editar-producto");
-  if (btnEditar) {
-    btnEditar.addEventListener("click", () => {
-      if (typeof window.openProductFormForEdit === "function") {
-        window.openProductFormForEdit(productoActual);
-      }
-    });
-  }
+	try {
+		productoActual = await obtenerPorId(id);
+		if (!productoActual) {
+			showViewError("El producto solicitado no existe.");
+			return;
+		}
+		renderProducto(productoActual);
+		configurarEventos();
+	} catch (error) {
+		console.error("Error al obtener el producto:", error);
+		showViewError(error.message || "No se pudo conectar con el backend.");
+	}
+}
 
-  const btnEliminar = document.getElementById("btn-eliminar-producto");
-  const confirmModalEl = document.getElementById("confirmDeleteModal");
-  const confirmNameEl = document.getElementById("confirmDeleteName");
-  const btnConfirmDelete = document.getElementById("btn-confirm-delete");
-  const deleteModal = confirmModalEl ? new bootstrap.Modal(confirmModalEl) : null;
+function configurarEventos() {
+	document.getElementById("btn-editar-producto").addEventListener("click", () => {
+		if (typeof window.openProductFormForEdit === "function") {
+			window.openProductFormForEdit(productoActual);
+		}
+	});
 
-  if (btnEliminar && deleteModal && btnConfirmDelete) {
-    btnEliminar.addEventListener("click", () => {
-      if (confirmNameEl) confirmNameEl.textContent = productoActual.name;
-      deleteModal.show();
-    });
+	const confirmModalEl = document.getElementById("confirmDeleteModal");
+	const deleteModal = confirmModalEl ? new bootstrap.Modal(confirmModalEl) : null;
 
-    btnConfirmDelete.addEventListener("click", () => {
-      const products = loadProducts();
-      const filtered = products.filter((p) => p.id !== productoActual.id);
-      saveProducts(filtered);
-      deleteModal.hide();
-      window.location.href = "../productos/index.html";
-    });
-  }
+	document.getElementById("btn-eliminar-producto").addEventListener("click", () => {
+		document.getElementById("confirmDeleteName").textContent = productoActual.name;
+		deleteModal.show();
+	});
 
-  window.addEventListener("product-updated", (event) => {
-    const { id: updatedId, product } = event.detail;
-    const updatedProducts = loadProducts();
-    const index = updatedProducts.findIndex((producto) => producto.id === updatedId);
-    if (index === -1) return;
-
-    updatedProducts[index] = { ...updatedProducts[index], ...product };
-    saveProducts(updatedProducts);
-    productoActual = updatedProducts[index];
-    renderProducto(productoActual);
-  });
+	document.getElementById("btn-confirm-delete").addEventListener("click", async () => {
+		const btn = document.getElementById("btn-confirm-delete");
+		btn.disabled = true;
+		btn.textContent = "Eliminando...";
+		await eliminarProductoActual();
+		btn.disabled = false;
+		btn.textContent = "Eliminar";
+	});
 }
 
 async function initModal() {
-  const mount = document.querySelector("#productFormModalMount");
-  if (!mount) return;
+	const mount = document.querySelector("#productFormModalMount");
+	if (!mount) return;
 
-  const modalUrl = new URL("../producto-formulario/modal.html", import.meta.url);
+	const modalUrl = new URL("../producto-formulario/modal.html", import.meta.url);
 
-  try {
-    const response = await fetch(modalUrl);
-    if (!response.ok) {
-      throw new Error(`No se pudo cargar el formulario (${response.status}).`);
-    }
-    mount.innerHTML = await response.text();
-    window.initProductForm();
-  } catch (error) {
-    console.error(error);
-  }
+	try {
+		const response = await fetch(modalUrl);
+		if (!response.ok) throw new Error(`No se pudo cargar el formulario (${response.status}).`);
+		mount.innerHTML = await response.text();
+		window.initProductForm();
+	} catch (error) {
+		console.error(error);
+	}
 }
 
-initProductoDetalle();
-initModal();
+async function init() {
+	await initModal();
+	await cargarProducto();
+}
+
+// Exportar función para el formulario
+window.actualizarProductoEnBackend = actualizarProductoEnBackend;
+
+init();
