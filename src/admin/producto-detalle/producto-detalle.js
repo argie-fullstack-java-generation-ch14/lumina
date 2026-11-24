@@ -38,7 +38,7 @@ function showViewError(message) {
 async function eliminarProductoActual() {
 	try {
 		await eliminarProducto(productoActual.id);
-		window.location.href = "../productos/index.html";
+		window.location.href = "../productos/";
 	} catch (error) {
 		console.error("Error al eliminar producto:", error);
 		if (error.status === 409) {

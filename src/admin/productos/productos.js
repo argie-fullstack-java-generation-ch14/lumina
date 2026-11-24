@@ -116,7 +116,7 @@ function renderProduct(product) {
 
 	card.addEventListener("click", (event) => {
 		if (event.target.closest("button")) return;
-		window.location.href = `../producto-detalle/index.html?id=${product.id}`;
+		window.location.href = `../producto-detalle/?id=${product.id}`;
 	});
 }
 
