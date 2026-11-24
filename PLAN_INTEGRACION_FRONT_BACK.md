@@ -197,12 +197,12 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 ### Tareas
 
-1. **Implementar `src/api/services/productos.service.js`**
-   - `obtenerTodas()` → `GET /api/productos`
-   - `obtenerPorId(id)` → `GET /api/productos/{id}`
-   - `obtenerPorSlug(slug)` → `GET /api/productos/slug/{slug}`
-   - `obtenerPorCategoria(categoria)` → `GET /api/productos?categoria=...`
-   - `obtenerDisponibles()` → `GET /api/productos?disponibles=true`
+1. ✅ **Implementar `src/api/services/productos.service.js`**
+   - ✅ `obtenerTodas()` → `GET /api/productos`
+   - ✅ `obtenerPorId(id)` → `GET /api/productos/{id}`
+   - ✅ `obtenerPorSlug(slug)` → `GET /api/productos/slug/{slug}`
+   - ✅ `obtenerPorCategoria(categoria)` → `GET /api/productos?categoria=...`
+   - ✅ `obtenerDisponibles()` → `GET /api/productos?disponibles=true`
 
 2. **Conectar VISTA `src/js/productos.js`** (o `src/js/velas.js`)
    - Reemplazar `fetch(productos.json)` por llamada al service
