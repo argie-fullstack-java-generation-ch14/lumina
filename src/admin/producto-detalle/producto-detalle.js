@@ -1,5 +1,6 @@
 import { obtenerPorId, actualizarProducto, eliminarProducto } from "../../api/services/productos.service.js";
 import { obtenerClaseCategoria, obtenerLabelCategoria } from "../../js/productos.js";
+import { mostrarProductoActualizado, mostrarErrorProducto } from "../../api/productoFeedback.js";
 
 let productoActual = null;
 
@@ -58,14 +59,16 @@ async function actualizarProductoEnBackend(id, product) {
 		if (typeof window.closeProductForm === "function") {
 			window.closeProductForm();
 		}
+		mostrarProductoActualizado();
 	} catch (error) {
 		console.error("Error al actualizar producto:", error);
 		if (error.status === 403) {
-			alert("No tienes permisos para editar productos.");
-		} else if (typeof window.showProductFormErrors === "function") {
+			mostrarErrorProducto("No tienes permisos para editar productos.");
+		} else if (error.status === 400 && typeof window.showProductFormErrors === "function") {
 			window.showProductFormErrors(error);
+			mostrarErrorProducto("Revisa los campos marcados en el formulario.");
 		} else {
-			alert(error.message || "Error al actualizar el producto.");
+			mostrarErrorProducto(error.message || "No se pudo actualizar el producto.");
 		}
 	}
 }
