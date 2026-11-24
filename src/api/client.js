@@ -5,17 +5,35 @@
 
 const API_BASE_URL = window.LUMINA_API_URL || "http://localhost:8080";
 
-async function handleResponse(response) {
+function esRutaAutenticacion(path) {
+  return path.includes("/api/login") || path.includes("/api/registro");
+}
+
+function redirigirALogin() {
+  const esAdmin = window.location.pathname.includes("/admin/");
+  window.location.href = esAdmin
+    ? "/src/admin/login/index.html"
+    : "/src/tienda/login/index.html";
+}
+
+async function handleResponse(response, path = "") {
   const contentType = response.headers.get("content-type") || "";
   const isJson = contentType.includes("application/json");
   const data = isJson ? await response.json() : await response.text();
 
   if (!response.ok) {
-    const error = new Error(data.message || "Error en la petición");
+    if (response.status === 401 && !esRutaAutenticacion(path)) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("usuarioActivo");
+      redirigirALogin();
+    }
+
+    const message = (data && typeof data === "object" && data.message) || "Error en la petición";
+    const error = new Error(message);
     error.status = response.status;
-    error.error = data.error;
-    error.details = data.details;
-    error.timestamp = data.timestamp;
+    error.error = data && data.error;
+    error.details = data && data.details;
+    error.timestamp = data && data.timestamp;
     throw error;
   }
 
@@ -35,7 +53,7 @@ export async function apiGet(path, token) {
     method: "GET",
     headers: getAuthHeaders(token)
   });
-  return handleResponse(response);
+  return handleResponse(response, path);
 }
 
 export async function apiPost(path, body, token) {
@@ -44,7 +62,7 @@ export async function apiPost(path, body, token) {
     headers: getAuthHeaders(token),
     body: JSON.stringify(body)
   });
-  return handleResponse(response);
+  return handleResponse(response, path);
 }
 
 export async function apiPut(path, body, token) {
@@ -53,7 +71,7 @@ export async function apiPut(path, body, token) {
     headers: getAuthHeaders(token),
     body: JSON.stringify(body)
   });
-  return handleResponse(response);
+  return handleResponse(response, path);
 }
 
 export async function apiDelete(path, token) {
@@ -61,7 +79,7 @@ export async function apiDelete(path, token) {
     method: "DELETE",
     headers: getAuthHeaders(token)
   });
-  return handleResponse(response);
+  return handleResponse(response, path);
 }
 
 export { API_BASE_URL };
