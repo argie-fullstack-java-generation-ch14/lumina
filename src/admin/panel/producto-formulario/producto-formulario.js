@@ -5,6 +5,15 @@ window.initProductForm = () => {
 	const form = modal?.querySelector("#product-form");
 	if (!modal || !form) return;
 
+	// Evitar que la rueda del mouse cambie el valor de inputs numéricos
+	// (interfiere con el scroll de la página)
+	const numberInputs = modal.querySelectorAll('input[type="number"]');
+	numberInputs.forEach((input) => {
+		input.addEventListener("wheel", (e) => {
+			e.preventDefault();
+		}, { passive: false });
+	});
+
 	const title = modal.querySelector("#productFormModalLabel");
 	const submitButton = form.querySelector('button[type="submit"]');
 	let editingId = null;
