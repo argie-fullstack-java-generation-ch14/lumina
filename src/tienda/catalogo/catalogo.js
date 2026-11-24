@@ -270,7 +270,7 @@ window.addEventListener(
 );
 
 
-// Escuchar cambios en los filtros.
+/// Escuchar cambios en los filtros.
 document.querySelectorAll(
     'input[name="category"], input[name="scent"]'
 ).forEach(input => {
@@ -278,8 +278,7 @@ document.querySelectorAll(
         "change",
         actualizarCatalogo
     );
-);
-
+});
 
 // Ordenar productos.
 if (selectorOrden) {
