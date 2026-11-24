@@ -105,11 +105,11 @@ function initCandleForm() {
       id: catalogo.length + 1,
       name: nameField.input.value.trim(),
       slug: createSlug(nameField.input.value),
-      img: "https://gstatic.com/images",
+      imageUrl: "https://gstatic.com/images",
       scent: scentField.input.value.trim(),
       color: colorField.input.value.trim(),
-      category: categoryField.input.selectedOptions[0].textContent.trim(),
-      weight: Number(weightField.input.value),
+      category: categoryField.input.value.trim(),
+      weightGrams: Number(weightField.input.value),
       description: descriptionField.input.value.trim(),
       price: Number(priceField.input.value)
     };

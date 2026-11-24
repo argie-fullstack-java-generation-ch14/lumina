@@ -15,6 +15,20 @@
   pointer-events: none;
 }
 
+/* Aparición sutil al agregar un favorito */
+.cart-item-card.fade-in {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeInItem 0.5s ease forwards;
+}
+
+@keyframes fadeInItem {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Botón agregar al carrito (adaptado del catálogo/carrusel) */
 .cart-item-card .add-to-cart {
   display: inline-flex;
@@ -40,10 +54,16 @@
 
 .product-img {
   width: 100%;
-  max-width: 130px;
-  aspect-ratio: 1 / 1;
+  height: 200px;
   object-fit: cover;
   border-radius: 12px;
+}
+
+@media screen and (min-width: 1024px) {
+  .product-img {
+    width: 100%;
+    height: 150px;
+  }
 }
 
 .product-title {
@@ -53,7 +73,16 @@
   color: var(--cafe-lumina);
 }
 
+/* Imagen y título enlazan al detalle del producto */
+.product-link {
+  display: inline-block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .product-info {
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
   font-size: 0.9rem;
   color: var(--negro-relajacion);
 }

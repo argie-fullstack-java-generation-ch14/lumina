@@ -274,11 +274,8 @@
 }
 
 /* ---------- Humo que sigue al cursor ---------- */
-
-/* Canvas fijo: cubre toda la ventana y deja pasar los clics.
- * z-index bajo el de los modales de Bootstrap (1055) para no taparlos. */
 .page-smoke {
-  position: fixed;
+  position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;

@@ -5,7 +5,8 @@
 //   1) El título aparece letra por letra, como humo que se condensa.
 //   2) La frase de bienvenida sube letra por letra (idea del SplitText de React Bits,
 //      pero hecha solo con CSS y JS, sin GSAP).
-//   3) Humo suave que sigue al cursor por toda la página (el motor está en splash-cursor.js).
+//   3) Humo suave que sigue al cursor, solo dentro de la sección del banner
+//      (en la home queda confinado a section#inicio; el motor está en splash-cursor.js).
 //
 // Nota: en la home este archivo se carga DESPUÉS de que el HTML ya existe,
 // por eso no usamos DOMContentLoaded: arrancamos directo.
@@ -113,15 +114,17 @@
 
 
   /* ==========================================================
-   * 3) HUMO QUE SIGUE AL CURSOR (en toda la página)
+   * 3) HUMO QUE SIGUE AL CURSOR (solo en la sección del banner)
    * El motor (simulación de fluidos con WebGL) está en splash-cursor.js.
-   * Creamos un canvas fijo que cubre toda la ventana y no estorba los clics.
+   * El canvas vive dentro del banner: con contained el humo solo
+   * aparece cuando el cursor está sobre esa sección y no en el
+   * resto de la página.
    * ========================================================== */
   if (typeof window.createSplashCursor === "function" && !reducedMotion) {
     const smokeCanvas = document.createElement("canvas");
     smokeCanvas.className = "page-smoke";
     smokeCanvas.setAttribute("aria-hidden", "true");
-    document.body.appendChild(smokeCanvas);
+    hero.appendChild(smokeCanvas);
 
     window.createSplashCursor(smokeCanvas, {
       colors: ["#8f78d9"], // morado
@@ -137,7 +140,7 @@
       quality: "medium",
       clickSplash: false,  // sin explosión al hacer clic
       intro: true,         // una pasada de humo al cargar
-      contained: false,    // por toda la ventana, no solo en el banner
+      contained: true,     // el humo no sale de la sección del banner
       theme: "light",      // "light" se ve sobre fondos claros
     });
   }

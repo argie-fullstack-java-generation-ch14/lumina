@@ -58,6 +58,7 @@
   max-width: 28rem;
   font-size: 1.125rem;
   line-height: 1.5;
+  font-family: var(--fuente-texto);
   color: var(--negro-relajacion);
 }
 
@@ -102,6 +103,7 @@
 .register-label {
   font-size: 0.875rem;
   font-weight: 600;
+  font-family: var(--fuente-texto);
   color: var(--negro-relajacion);
 }
 
@@ -115,6 +117,7 @@
   border: 1px solid #d9c9be;
   border-radius: 9px;
   outline: none;
+  font-family: var(--fuente-texto);
 }
 
 /* Evita que el autofill del navegador sobreescriba el fondo */
@@ -124,6 +127,7 @@
 .register-input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.65) inset !important;
   -webkit-text-fill-color: var(--negro-acentuado) !important;
+  font-family: var(--fuente-texto) !important;
 }
 
 .register-input::placeholder {
@@ -176,6 +180,7 @@
 .register-help {
   margin: 0;
   font-size: 0.8125rem;
+  font-family: var(--fuente-texto);
   color: var(--negro-relajacion);
   opacity: 0.8;
 }
@@ -183,6 +188,7 @@
 .register-error {
   margin: 0;
   font-size: 0.8125rem;
+  font-family: var(--fuente-texto);
   line-height: 1.4;
   color: var(--naranja-apagado);
 }
@@ -220,8 +226,9 @@
   width: 100%;
   min-height: 48px;
   padding: 0.75rem 1.75rem;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
+  font-family: var(--fuente-texto);
   color: #F7F6F4;
   background-color: #354F56;
   border: none;
@@ -311,6 +318,7 @@
   padding: 0.75rem 1.75rem;
   font-size: 1rem;
   font-weight: 600;
+  font-family: var(--fuente-texto);
   color: #F7F6F4;
   background-color: #354F56;
   border: none;
@@ -379,5 +387,44 @@
   .register-letter {
     opacity: 1;
     animation: none;
+  }
+}
+
+.register-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.register-has-account {
+  margin: 0;
+  font-size: 0.875rem;
+  font-family: var(--fuente-texto);
+  color: var(--negro-relajacion);
+  text-align: center;
+}
+
+.register-has-account a {
+  color: var(--cafe-lumina);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.register-has-account a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .register-actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.5rem;
+  }
+
+  .register-has-account {
+    text-align: left;
+    margin: 0;
   }
 }

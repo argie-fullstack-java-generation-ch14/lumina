@@ -5,14 +5,15 @@
 	const mount = document.querySelector("#productFormModalMount");
 	const productList = document.querySelector("#product-list");
 
-	const categoryClasses = {
-		"Amor propio": "category-amor-propio",
-		Bienestar: "category-bienestar",
-		Descanso: "category-descanso",
-		Halloween: "category-halloween",
-		"Intención": "category-intencion",
-		Mindfulness: "category-mindfulness",
-		Navidad: "category-navidad"
+	const categoryInfo = {
+		bienestar: { label: "Bienestar", clase: "category-bienestar" },
+		descanso: { label: "Descanso", clase: "category-descanso" },
+		mindfulness: { label: "Mindfulness", clase: "category-mindfulness" },
+		intencion: { label: "Intención", clase: "category-intencion" },
+		"amor-propio": { label: "Amor propio", clase: "category-amor-propio" },
+		halloween: { label: "Halloween", clase: "category-halloween" },
+		navidad: { label: "Navidad", clase: "category-navidad" },
+		rituales: { label: "Rituales", clase: "category-rituales" }
 	};
 
 	function loadProducts() {
@@ -41,6 +42,20 @@
 		return element;
 	}
 
+	function renderEmptyState() {
+		if (!productList) return;
+
+		productList.innerHTML = `
+			<div class="col-10 mx-auto placeholder-wrap">
+				<article class="card cart-empty p-5 text-center">
+					<i class="fa-solid fa-face-frown mb-3" aria-hidden="true"></i>
+					<h2 class="product-title mb-2">Sin productos creados</h2>
+					<p class="product-info mb-4">Agrega tu primer producto para comenzar.</p>
+				</article>
+			</div>
+		`;
+	}
+
 	function renderProduct(product) {
 		if (!productList) return;
 
@@ -52,7 +67,7 @@
 
 		const image = document.createElement("img");
 		image.className = "candle-image";
-		image.src = product.img;
+		image.src = product.imageUrl;
 		image.alt = `Vela Lumina ${product.name}`;
 		image.loading = "lazy";
 		imageContainer.append(image);
@@ -62,16 +77,25 @@
 
 		const heading = document.createElement("div");
 		heading.className = "candle-heading";
+		const infoCategoria = categoryInfo[product.category] || {
+			label: product.category,
+			clase: "category-default"
+		};
+
 		heading.append(
-			createTextElement("h3", "", product.name),
-			createTextElement("span", `candle-category ${categoryClasses[product.category] || "category-default"}`, product.category)
+			createTextElement("h3", "candle-title", product.name),
+			createTextElement(
+				"span",
+				`candle-category ${infoCategoria.clase}`,
+				infoCategoria.label
+			)
 		);
 
 		const details = document.createElement("div");
 		details.className = "candle-details";
 		details.append(
 			createTextElement("span", "candle-scent", product.scent),
-			createTextElement("span", "candle-weight", `${product.weight} g`)
+			createTextElement("span", "candle-weight", `${product.weightGrams} g`)
 		);
 
 		const description = createTextElement("p", "candle-description", product.description);
@@ -83,10 +107,20 @@
 		content.append(heading, details, description, purchase);
 		card.append(imageContainer, content);
 		productList.append(card);
+
+		card.addEventListener("click", (event) => {
+			if (event.target.closest("button")) return;
+			window.location.href = `../producto-detalle/index.html?id=${product.id}`;
+		});
 	}
 
 	const products = loadProducts();
-	products.forEach(renderProduct);
+
+	if (products.length === 0) {
+		renderEmptyState();
+	} else {
+		products.forEach(renderProduct);
+	}
 
 	window.addEventListener("product-created", (event) => {
 		const product = {
@@ -96,6 +130,11 @@
 
 		products.push(product);
 		saveProducts();
+
+		if (products.length === 1) {
+			productList.innerHTML = "";
+		}
+
 		renderProduct(product);
 	});
 

@@ -1104,10 +1104,10 @@ Object.entries(routes).forEach(([selector, path]) => {
 
 Las rutas son relativas a `src/`, igual que en los componentes. El CSS y el JS de
 cada página se cargan una sola vez: `injectStyles()` e `injectScripts()` ignoran lo
-que ya está en la página. Por eso cada módulo envuelve su contenido en un `<main>`
-y su script arranca con la guarda `document.readyState` (ver
-`tienda/nosotros/nosotros.js`): al inyectarse, el evento `DOMContentLoaded` ya
-ocurrió.
+que ya está en la página. Por eso cada módulo envuelve su contenido en un `<main>`:
+`renderSection` extrae solo ese bloque. Los `<script>` se inyectan como etiquetas
+normales al final del `<body>` con `async = false`: corren de inmediato y en orden,
+cuando el HTML de la sección ya está en el DOM.
 
 ### Carrito compartido entre páginas
 
@@ -1122,6 +1122,206 @@ Si no, el carrito se vacía al cambiar de página.
 El modal de confirmación vive en `tienda/carrito/index.html`. Al confirmar, el pedido se
 guarda en `localStorage` para que `tienda/pedidos/index.html` lo muestre. Temporal: ver Fase 2
 en el README.
+
+### El catálogo: un solo módulo de datos con top-level `await`
+
+El catálogo de velas no lo pide cada página por su cuenta: hay **una única capa de
+datos**, `js/velas.js`. Al ser un módulo ES, puede usar `await` en el nivel
+superior: el navegador no ejecuta lo que depende de él hasta que el JSON llegó.
+
+```js
+// js/velas.js
+const response = await fetch(new URL("../data/velas.json", import.meta.url));
+export const velas = await response.json();
+```
+
+Ese módulo hace tres cosas: carga `velas.json` **una sola vez** por visita (un
+solo `fetch`, sin importar cuántas páginas o componentes consuman el catálogo), lo
+exporta como única fuente de verdad (`import { velas } from
+"../../js/velas.js"`, como hace `tienda/catalogo/catalogo.js`) y lo publica en
+`window.velas` para los scripts clásicos, que no usan `import`.
+
+Consecuencia práctica: la ruta del JSON vive en **un solo archivo**. Ningún
+consumidor sabe dónde está `velas.json` ni cómo se carga; solo saben que pueden
+leer `velas`.
+
+### Evento `velas-listadas`: sincronizar scripts sin depender del orden
+
+`velas.js` es un módulo ES con top-level `await`: se ejecuta diferido, cuando el
+JSON ya llegó. Sus consumidores (`js/carrito.js`, `js/favoritos.js`, los
+componentes que pintan velas) son scripts clásicos que corren de inmediato y no
+pueden saber si el catálogo ya está disponible cuando arrancan.
+
+La solución es un mini event-bus hecho a mano. El emisor:
+
+```js
+// js/velas.js
+window.velas = velas;
+window.dispatchEvent(new CustomEvent("velas-listadas"));
+```
+
+Y cada suscriptor usa el mismo patrón:
+
+```js
+// ej. js/carrito.js
+if (window.velas) {
+  initCarrito();
+} else {
+  window.addEventListener("velas-listadas", initCarrito, { once: true });
+}
+```
+
+Consecuencia práctica: cada página puede incluir los `<script>` en el orden que
+sea sin romper nada, y ningún consumidor necesita saber dónde está el `<script>`
+de `velas.js` respecto al suyo.
+
+Emisor: `js/velas.js`. Suscriptores: `js/carrito.js`, `js/favoritos.js`,
+`componentes/productos-recomendados/productos-recomendados.js`,
+`tienda/catalogo/favoritos-de-temporada/favoritos-de-temporada.js`.
+
+### Rutas ancladas al script, no a la página
+
+El mismo script corre en páginas anidadas a distinta profundidad:
+`src/index.html`, `src/tienda/carrito/index.html`,
+`src/tienda/catalogo/producto/index.html`. Si un script resolviera sus rutas
+contra la página actual (`location.href`), cada página daría un resultado
+distinto.
+
+Por eso cada script calcula su base a partir de **su propia URL** —
+`document.currentScript.src` en los scripts clásicos, `import.meta.url` en los
+módulos ES — y de ahí deriva URLs absolutas que son las mismas desde cualquier
+página:
+
+```js
+// js/carrito.js (script clásico)
+const CARRITO_URL = new URL(
+  "../tienda/carrito/index.html",
+  new URL(".", document.currentScript.src).href
+).href;
+
+// tienda/blog/blog.js (módulo ES)
+const BLOG_DIR = new URL(".", import.meta.url).href;
+export const ARTICULO_URL = new URL("articulo/", BLOG_DIR).href;
+```
+
+Otros ejemplos: `js/ui.js` (`APP_BASE` → `COMPONENTS_BASE`) y
+`tienda/catalogo/catalogo.js` (`CATALOGO_DIR` → `PRODUCTO_URL`). Esta técnica no
+es exclusiva de `ui.js`: es el patrón que hace portable todo el sitio multi-nivel.
+
+El complemento está en la inyección: cuando `ui.js` inyecta HTML traído con
+`fetch()`, reescribe los enlaces e imágenes relativos del fragmento
+(`resolveLinks` / `resolveModulePaths`) para que también apunten al lugar
+correcto. Regla práctica: los enlaces se escriben una vez, relativos a la carpeta
+del script, y funcionan desde cualquier página.
+
+### Detalle por query param: `?slug=`
+
+Para tener N artículos no hacen falta N archivos HTML ni un enrutador: una sola
+**página plantilla** (`tienda/blog/articulo/index.html`) sirve a todos. Su módulo
+lee el identificador de la URL, resuelve el contenido contra el JSON y renderiza:
+
+```js
+// tienda/blog/articulo/articulo.js (resumen)
+const slug = new URLSearchParams(window.location.search).get("slug") || "";
+// ... fetch de data/articulos.json y articulos.find((a) => a.slug === slug)
+```
+
+Tres estados en `init()`: sin slug → "no encontrado"; slug inexistente → "no
+encontrado"; slug válido → renderiza el artículo y actualiza `document.title`.
+
+Los enlaces hacia el detalle se construyen con `encodeURIComponent` para que el
+slug viaje seguro en la URL: `tienda/catalogo/catalogo.js` (cards del catálogo),
+`componentes/carrusel/carrusel.js` (cards del carrusel) y
+`componentes/blog-card/blog-card.js` (cards del blog).
+
+El detalle de producto (`tienda/catalogo/producto/`) ya recibe `?slug=` en la URL
+— los enlaces del catálogo y del carrusel ya apuntan así — pero `producto.js`
+está vacío y el HTML tiene bloques wireframe con TODO. Pendiente: que lea el
+`?slug=`, resuelva la vela contra el catálogo y renderice, igual que hace
+`articulo.js`.
+
+### Preload del CSS de la home (truco loadCSS)
+
+La home inyecta el contenido de 6 secciones con `renderSection`, y cada sección
+(plus header, footer y carrusel) trae su propio CSS. Si ese CSS solo se cargara
+al inyectar — cuando `ui.js` añade el `<link>` después del `fetch()` — la home
+mostraría un instante de contenido sin estilos (*FOUC*).
+
+El `<head>` de `src/index.html` lo previene con el truco clásico *loadCSS*:
+
+```html
+<link rel="preload" href="tienda/inicio/inicio.css" as="style"
+      onload="this.rel='stylesheet'">
+```
+
+Dos fases en una línea:
+
+- `rel="preload" as="style"`: el navegador descarga el CSS con prioridad alta
+  **sin bloquear el render** ni aplicarlo.
+- `onload="this.rel='stylesheet'"`: al terminar la descarga, el propio `<link>`
+  cambia su `rel` y el CSS se aplica.
+
+Es decir, el CSS de cada sección ya está (o casi) en el navegador cuando
+`renderSection` inyecta su HTML, que viaja por `fetch()` aparte. Resultado: la
+home con 6 secciones inyectadas no se queda en blanco ni parpadea. Y por si el
+CSS llegara dos veces, `injectStyles()` deduplica por URL absoluta antes de
+añadir el `<link>`.
+
+### localStorage: entrada no confiable
+
+El carrito y los favoritos viven en `localStorage`, que es texto editable por
+cualquiera (el usuario, otra pestaña, una extensión). Tratarlo como fuente
+confiable rompería la página con un JSON corrupto o inyectaría productos
+fantasma que ya no existen en el catálogo.
+
+Al cargar (`js/carrito.js`), el contenido nunca se usa tal cual: se valida y
+normaliza de arriba abajo.
+
+```js
+// js/carrito.js (resumen)
+const datos = JSON.parse(carritoGuardado);        // dentro de try/catch
+if (!Array.isArray(datos)) return [];              // debe ser un array
+
+return datos
+  .filter(item =>
+    velas.some(vela => vela.id === Number(item.id)) &&   // el producto existe en el catálogo
+    Number.isInteger(Number(item.quantity)) &&
+    Number(item.quantity) > 0                            // cantidad entera y positiva
+  )
+  .map(item => ({
+    id: Number(item.id),
+    quantity: Math.min(99, Number(item.quantity))        // tope de cantidad
+  }));
+```
+
+Si algo falla — JSON roto, formato inesperado — se devuelve un carrito vacío y
+la página renderiza normal. `js/favoritos.js` aplica la misma normalización sobre
+su clave.
+
+Claves del ecosistema: `lumina-carrito`, `lumina-favoritos`, `usuarios`,
+`usuarioActivo`. Todas temporales: en Fase 2 pasan a la API.
+
+### El carrusel infinito sin librería
+
+`componentes/carrusel/carrusel.js` implementa a mano lo que un carrusel de
+librería da gratis:
+
+- **Loop infinito**: duplica la pista (`base + base`), mide el ciclo con
+  `offsetLeft` y repite hasta llenar el ancho visible (tope 8 repeticiones).
+- **Wrap del scroll**: al pasar el ciclo, `scrollLeft` retrocede un ciclo
+  completo — visualmente infinito, con scroll nativo.
+- **Drag vs click**: las cards navegan al detalle, pero solo con un toque real.
+  Un `WeakMap` guarda dónde empezó el `pointerdown` y en el `click` se compara:
+  si el dedo se movió más de 6px o cambió el `scrollLeft`, fue un arrastre y no
+  navega.
+- **Autoplay respetuoso**: `setInterval` que se pausa al hacer hover y que no
+  corre si el usuario tiene `prefers-reduced-motion` activado.
+- **Idempotente**: un flag (`pista.dataset.carruselListo`) evita duplicar
+  listeners si el carrusel se re-monta.
+
+> La versión de estas estrategias con el enfoque de hallazgos y decisiones está
+> en el README, en
+> ["Estrategias técnicas del proyecto"](../README.md#estrategias-técnicas-del-proyecto).
 
 ## Responsive
 

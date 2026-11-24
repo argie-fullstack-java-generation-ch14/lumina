@@ -1,19 +1,23 @@
-// Se ejecuta solo cuando el catálogo de velas está disponible.
+const CATEGORIAS_TEMPORADA = ["halloween", "navidad"];
+
+const normalizarCategoria = (valor) =>
+  String(valor ?? "").trim().toLowerCase();
+
+// Se ejecuta solo cuando el catálogo de productos está disponible.
 function initFavoritosDeTemporada() {
-  const velasDeTemporada = [
-    ...window.velas.filter(vela => vela.category === "Halloween"),
-    ...window.velas.filter(vela => vela.category === "Navidad")
-  ];
+  const productosDeTemporada = window.productos.filter((producto) =>
+    CATEGORIAS_TEMPORADA.includes(normalizarCategoria(producto.category))
+  );
 
   crearCarrusel("#favoritas-carrusel", {
-    velas: velasDeTemporada
+    velas: productosDeTemporada
   });
 }
 
-if (window.velas) {
+if (window.productos) {
   initFavoritosDeTemporada();
 } else {
-  window.addEventListener("velas-listadas", initFavoritosDeTemporada, {
+  window.addEventListener("productos-listadas", initFavoritosDeTemporada, {
     once: true,
   });
 }

@@ -5,6 +5,10 @@ window.initProductForm = () => {
 	const form = modal?.querySelector("#product-form");
 	if (!modal || !form) return;
 
+	const title = modal.querySelector("#productFormModalLabel");
+	const submitButton = form.querySelector('button[type="submit"]');
+	let editingId = null;
+
 	const fields = [
 		{
 			input: modal.querySelector("#product-name"),
@@ -108,17 +112,23 @@ window.initProductForm = () => {
 		const product = {
 			name,
 			slug: name.toLowerCase().replace(/\s+/g, "-"),
-			img: fields[6].input.value.trim(),
+			imageUrl: fields[6].input.value.trim(),
 			color: fields[7].input.value.trim(),
 			scent: fields[1].input.value.trim(),
-			category: fields[2].input.selectedOptions[0].textContent.trim(),
-			weight: Number(fields[3].input.value),
+			category: fields[2].input.value.trim(),
+			weightGrams: Number(fields[3].input.value),
 			price: Number(fields[4].input.value),
 			description: fields[5].input.value.trim()
 		};
 
-		console.log("Vela creada:", product);
-		window.dispatchEvent(new CustomEvent("product-created", { detail: product }));
+		if (editingId !== null) {
+			window.dispatchEvent(
+				new CustomEvent("product-updated", { detail: { id: editingId, product } })
+			);
+		} else {
+			window.dispatchEvent(new CustomEvent("product-created", { detail: product }));
+		}
+
 		bootstrap.Modal.getOrCreateInstance(modal).hide();
 	});
 
@@ -135,5 +145,36 @@ window.initProductForm = () => {
 	modal.addEventListener("hidden.bs.modal", () => {
 		form.reset();
 		fields.forEach((field) => showError(field.input, ""));
+		editingId = null;
+		if (title) title.textContent = "Agregar producto";
+		if (submitButton) submitButton.textContent = "Agregar producto";
 	});
+
+	function preloadProduct(product) {
+		const values = {
+			"product-name": product.name,
+			"product-color": product.color,
+			"product-scent": product.scent,
+			"product-category": product.category,
+			"product-weight": product.weightGrams != null ? String(product.weightGrams) : "",
+			"product-price": product.price != null ? String(product.price) : "",
+			"product-description": product.description,
+			"product-image": product.imageUrl
+		};
+
+		Object.entries(values).forEach(([key, value]) => {
+			const input = modal.querySelector(`#${key}`);
+			if (input) input.value = value ?? "";
+		});
+
+		fields.forEach((field) => showError(field.input, ""));
+		editingId = product.id;
+		if (title) title.textContent = "Editar producto";
+		if (submitButton) submitButton.textContent = "Guardar cambios";
+	}
+
+	window.openProductFormForEdit = (product) => {
+		preloadProduct(product);
+		bootstrap.Modal.getOrCreateInstance(modal).show();
+	};
 };

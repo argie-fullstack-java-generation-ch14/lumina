@@ -3,23 +3,23 @@ const PRODUCTO_URL_CARRUSEL = CARRUSEL_SCRIPT
   ? new URL("../../tienda/catalogo/producto/", CARRUSEL_SCRIPT).href
   : null;
 
-function crearCardCarrusel(vela) {
-  const claseCategoria = obtenerClaseCategoria(vela.category);
+function crearCardCarrusel(producto) {
+  const claseCategoria = obtenerClaseCategoria(producto.category);
 
   return `
-    <div class="carousel-item" data-slug="${vela.slug}">
+    <div class="carousel-item" data-slug="${producto.slug}">
       <img class="carousel-item__img"
-        src="${vela.img}"
-        alt="Vela Lumina ${vela.name}">
+        src="${producto.imageUrl}"
+        alt="Vela Lumina ${producto.name}">
 
       <button
         class="favorite-button"
         type="button"
-        data-product-id="${vela.id}"
-        aria-label="${esFavorito(vela.id) ? `Quitar ${vela.name} de favoritos` : `Agregar ${vela.name} a favoritos`}"
-        aria-pressed="${esFavorito(vela.id)}">
+        data-product-id="${producto.id}"
+        aria-label="${esFavorito(producto.id) ? `Quitar ${producto.name} de favoritos` : `Agregar ${producto.name} a favoritos`}"
+        aria-pressed="${esFavorito(producto.id)}">
 
-        <i class="fa-${esFavorito(vela.id) ? "solid" : "regular"} fa-heart"
+        <i class="fa-${esFavorito(producto.id) ? "solid" : "regular"} fa-heart"
            aria-hidden="true"></i>
 
       </button>
@@ -27,10 +27,10 @@ function crearCardCarrusel(vela) {
       <div class="candle-content">
 
         <div class="candle-heading">
-          <h3>${vela.name}</h3>
+          <h3>${producto.name}</h3>
 
           <span class="candle-category ${claseCategoria}">
-            ${vela.category}
+            ${obtenerLabelCategoria(producto.category)}
           </span>
         </div>
 
@@ -38,29 +38,29 @@ function crearCardCarrusel(vela) {
 
           <span class="candle-scent">
             <i class="fa-solid fa-bottle-droplet" aria-hidden="true"></i>
-            ${vela.scent}
+            ${producto.scent}
           </span>
 
           <span class="candle-weight">
-            ${vela.weight}g
+            ${producto.weightGrams}g
           </span>
 
         </div>
 
         <p class="candle-description">
-          ${vela.description}
+          ${producto.description}
         </p>
 
         <div class="candle-purchase">
           <p class="candle-price">
-            $ ${vela.price.toLocaleString("es-CO")}
+            $ ${producto.price.toLocaleString("es-CO")}
           </p>
 
           <button
             class="add-to-cart"
             type="button"
-            data-product-id="${vela.id}"
-            aria-label="Agregar ${vela.name} al carrito">
+            data-product-id="${producto.id}"
+            aria-label="Agregar ${producto.name} al carrito">
             Agregar al carrito
           </button>
         </div>
@@ -187,9 +187,9 @@ function crearCarrusel(selector, opciones = {}) {
     return null;
   }
 
-  const velas = opciones.velas;
+  const productos = opciones.velas;
 
-  if (!Array.isArray(velas) || velas.length === 0) {
+  if (!Array.isArray(productos) || productos.length === 0) {
     return null;
   }
 
@@ -220,7 +220,7 @@ function crearCarrusel(selector, opciones = {}) {
   const pista = montaje.querySelector(".carousel");
   const contenedor = montaje.querySelector(".carousel__container");
 
-  const base = velas.map(crearCardCarrusel).join("");
+  const base = productos.map(crearCardCarrusel).join("");
 
 
   contenedor.innerHTML = base + base;

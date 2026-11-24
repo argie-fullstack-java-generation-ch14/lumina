@@ -24,6 +24,7 @@
 .benefit-item p {
   font-size: 12px;
   font-weight: 200;
+  font-family: var(--fuente-texto);
 }
 
 @media screen and (max-width: 767.98px) {
@@ -47,5 +48,6 @@
 
   .benefit-item p {
     font-size: 11px;
+    font-family: var(--fuente-texto);
   }
 }

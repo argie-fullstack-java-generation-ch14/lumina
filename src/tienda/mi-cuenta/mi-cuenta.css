@@ -32,6 +32,12 @@ body:has(#v-pills-tab) {
   min-height: 70vh;
 }
 
+@media screen and (max-width: 767px) {
+  #v-pills-tabContent .tab-pane {
+    padding-top: 1.5rem;
+  }
+}
+
 /* TÍTULOS */
 #v-pills-account h3,
 #v-pills-orders h3,

@@ -1,30 +1,44 @@
 // Lumina · item-favoritos
 // Componente: tarjeta de un artículo de favoritos.
-// Espera: item con la estructura de velas.js (id, name, img, scent,
-// weight, color, price). Los favoritos no manejan cantidad.
+// Espera: item con la estructura de productos.js (id, name, imageUrl, scent,
+// weightGrams, color, price). Los favoritos no manejan cantidad.
+
+// Ruta a la página de detalle del producto, resuelta desde la carpeta
+// de este script (componentes/favoritos/item-favoritos/ → src/): sube 3 niveles.
+const PRODUCTO_URL = new URL(
+  "../../../tienda/catalogo/producto/",
+  new URL(".", document.currentScript.src).href
+).href;
 
 function crearItemFavorito(item) {
+  const urlDetalle = `${PRODUCTO_URL}?slug=${encodeURIComponent(item.slug)}`;
+
   return `
     <article class="card cart-item-card p-3" data-favorito-id="${item.id}">
 
       <div class="row align-items-center g-3">
 
-          <div class="col-12 col-md-3 col-lg-2 text-center">
-              <img
-                  src="${item.img}"
-                  alt="Vela ${item.name}"
-                  class="img-fluid product-img"
-                  loading="lazy"
-              >
+          <div class="col-12 col-md-4 col-xl-3 text-center">
+              <a class="product-link" href="${urlDetalle}"
+                 aria-label="Ver detalles de ${item.name}">
+                   <img
+                       src="${item.imageUrl}"
+                       alt="Vela ${item.name}"
+                       class="img-fluid product-img"
+                       loading="lazy"
+                   >
+              </a>
           </div>
 
-          <div class="col-12 col-md-4 col-lg-4">
-              <h2 class="product-title mb-2">${item.name}</h2>
+          <div class="col-12 col-md-8 col-xl-5">
+              <h2 class="product-title mb-2">
+                  <a class="product-link" href="${urlDetalle}">${item.name}</a>
+              </h2>
               <p class="product-info mb-1">
                   <strong>Aroma:</strong> ${item.scent}
               </p>
               <p class="product-info mb-1">
-                  <strong>Peso:</strong> ${item.weight}g
+                  <strong>Peso:</strong> ${item.weightGrams}g
               </p>
               <p class="product-info mb-1">
                   <strong>Color:</strong> ${item.color}
@@ -34,7 +48,7 @@ function crearItemFavorito(item) {
               </p>
           </div>
 
-          <div class="col-12 col-md-5 col-lg-6 pe-0 d-flex justify-content-end align-items-center gap-4">
+          <div class="col-12 col-xl-4 pe-0 d-flex justify-content-end align-items-center gap-4">
               <button
                   class="add-to-cart"
                   type="button"

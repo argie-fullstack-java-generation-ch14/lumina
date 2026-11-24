@@ -155,10 +155,10 @@ function initRegisterForm() {
 
   function createUser() {
     return {
-      nombreCompleto: nameInput.value.trim().replace(/\s+/g, ' '),
-      telefono: cleanPhone(phoneInput.value),
+      fullName: nameInput.value.trim().replace(/\s+/g, ' '),
+      phone: cleanPhone(phoneInput.value),
       email: emailInput.value.trim().toLowerCase(),
-      contrasena: passwordInput.value
+      password: passwordInput.value
     };
   }
 

@@ -1,0 +1,73 @@
+[
+  {
+    "orderNumber": "L-1236",
+    "createdAt": "2026-11-13T00:00:00",
+    "status": "PENDING",
+    "open": true,
+    "subtotal": 24000,
+    "discountTotal": 0,
+    "taxTotal": 4560,
+    "total": 28560,
+    "items": [
+      {
+        "productId": 11,
+        "productName": "Noche de Paz",
+        "unitPrice": 12000,
+        "quantity": 1,
+        "lineTotal": 12000
+      },
+      {
+        "productId": 12,
+        "productName": "Pinos del Bosque",
+        "unitPrice": 12000,
+        "quantity": 1,
+        "lineTotal": 12000
+      }
+    ]
+  },
+  {
+    "orderNumber": "L-1235",
+    "createdAt": "2026-11-02T00:00:00",
+    "status": "COMPLETED",
+    "open": false,
+    "subtotal": 12000,
+    "discountTotal": 0,
+    "taxTotal": 2280,
+    "total": 14280,
+    "items": [
+      {
+        "productId": 9,
+        "productName": "Armonía",
+        "unitPrice": 12000,
+        "quantity": 1,
+        "lineTotal": 12000
+      }
+    ]
+  },
+  {
+    "orderNumber": "L-1234",
+    "createdAt": "2026-10-31T00:00:00",
+    "status": "COMPLETED",
+    "open": false,
+    "subtotal": 24000,
+    "discountTotal": 0,
+    "taxTotal": 4560,
+    "total": 28560,
+    "items": [
+      {
+        "productId": 18,
+        "productName": "Calabaza Dorada",
+        "unitPrice": 12000,
+        "quantity": 1,
+        "lineTotal": 12000
+      },
+      {
+        "productId": 19,
+        "productName": "Hechizo de Luna",
+        "unitPrice": 12000,
+        "quantity": 1,
+        "lineTotal": 12000
+      }
+    ]
+  }
+]

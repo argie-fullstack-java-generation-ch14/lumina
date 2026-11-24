@@ -3,7 +3,7 @@
   background-color: var(--naranja-claro);
   border: 1px solid var(--naranja-acentuado);
   border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(59, 44, 44, 0.05);
+  box-shadow: none;
 }
 
 .summary-title {
@@ -83,6 +83,33 @@
   box-shadow: 0 0 0 0.2rem rgba(55, 79, 89, 0.15);
 }
 
+/* Feedback de campo vacío / cupón inválido (mismo estilo del form de registro) */
+.coupon-error {
+  margin: 0.25rem 0 0;
+  font-family: var(--fuente-texto, "Montserrat", system-ui, sans-serif);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--naranja-apagado);
+}
+
+.coupon-error::before {
+  content: "";
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--naranja-apagado);
+}
+
+.coupon-error:empty {
+  display: none;
+}
+
+.coupon-field.has-error .coupon-input {
+  border-color: var(--naranja-apagado);
+}
+
 .btn-apply {
   background-color: var(--celeste-apagado);
   color: #FFFFFF;
@@ -109,6 +136,34 @@
   border-radius: 40px;
   border: none;
   cursor: pointer;
+}
+
+.btn-checkout:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-seguir-comprando {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  background-color: transparent;
+  color: var(--naranja-apagado);
+  font-family: var(--fuente-texto);
+  font-weight: 600;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 50px;
+  border: 1px solid var(--naranja-apagado);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-seguir-comprando:hover {
+  background-color: rgba(173, 120, 78, 0.08);
+  color: var(--naranja-apagado);
+  border-color: var(--naranja-apagado);
 }
 
 @media screen and (min-width: 768px) {
