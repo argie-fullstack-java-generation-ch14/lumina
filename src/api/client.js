@@ -3,17 +3,12 @@
 // Cliente HTTP basado en fetch para consumir la API REST de Lumina.
 // Backend: http://localhost:8080/api/...
 
+import { mostrarSesionExpirada, resolverLoginDestino } from "./sessionExpired.js";
+
 const API_BASE_URL = window.LUMINA_API_URL || "http://localhost:8080";
 
 function esRutaAutenticacion(path) {
   return path.includes("/api/login") || path.includes("/api/registro");
-}
-
-function redirigirALogin() {
-  const esAdmin = window.location.pathname.includes("/admin/");
-  window.location.href = esAdmin
-    ? "/src/admin/login/index.html"
-    : "/src/tienda/login/index.html";
 }
 
 async function handleResponse(response, path = "") {
@@ -23,9 +18,10 @@ async function handleResponse(response, path = "") {
 
   if (!response.ok) {
     if (response.status === 401 && !esRutaAutenticacion(path)) {
+      const destino = resolverLoginDestino();
       localStorage.removeItem("token");
       localStorage.removeItem("usuarioActivo");
-      redirigirALogin();
+      mostrarSesionExpirada(destino);
     }
 
     const message = (data && typeof data === "object" && data.message) || "Error en la petición";

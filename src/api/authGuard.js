@@ -4,6 +4,8 @@
  * Lee el token y los datos del usuario desde localStorage.
  */
 
+import { mostrarSesionExpirada, resolverLoginDestino } from "./sessionExpired.js";
+
 function redirigirALogin() {
   const esAdmin = window.location.pathname.includes("/admin/");
   window.location.href = esAdmin
@@ -36,9 +38,10 @@ export function requireAuth(rolesPermitidos = []) {
 
   // 2. Verificar que el token no esté vencido
   if (tokenExpirado(token)) {
+    const destino = resolverLoginDestino();
     localStorage.removeItem("token");
     localStorage.removeItem("usuarioActivo");
-    redirigirALogin();
+    mostrarSesionExpirada(destino);
     return false;
   }
 
