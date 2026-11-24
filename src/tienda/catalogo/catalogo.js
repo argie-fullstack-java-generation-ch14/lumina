@@ -18,10 +18,6 @@ if (location.pathname.includes("catalogo")) {
     document.getElementById("catalogo-completo")?.classList.add("catalogo-margin");
 }
 
-// Datos de los productos del catalogo: viven en js/velas.json, cargados
-// por js/velas.js (misma estructura de datos para el carrusel de la
-// home y el modulo de favoritas de temporada).
-const catalogo = { catalogo: velas };
 
 
 // Crear la tarjeta de una vela.
@@ -38,7 +34,7 @@ function crearVela(vela) {
 
                 <img
                     class="candle-image"
-                    src="${vela.img}"
+                    src="${vela.imageUrl}"
                     alt="Vela Lumina ${vela.name}"
                     loading="lazy"
                 >
@@ -76,7 +72,7 @@ function crearVela(vela) {
                     </span>
 
                     <span class="candle-weight">
-                        ${vela.weight}g
+                        ${vela.weightGrams}g
                     </span>
 
                 </div>
@@ -158,7 +154,7 @@ function actualizarCatalogo() {
         )
     ).map(input => input.value.toLowerCase());
 
-    let productosFiltrados = catalogo.catalogo.filter(vela => {
+   let productosFiltrados = velas.filter(vela => {
         const categoria = vela.category.toLowerCase();
         const aroma = vela.scent.toLowerCase();
 
@@ -225,6 +221,7 @@ function actualizarCatalogo() {
 
 // Mostrar los productos al cargar la pagina.
 actualizarCatalogo();
+window.addEventListener("velas-listadas", actualizarCatalogo);
 
 
 // Escuchar cambios en los filtros.
