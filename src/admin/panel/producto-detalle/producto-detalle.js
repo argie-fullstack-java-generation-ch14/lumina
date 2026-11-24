@@ -1,6 +1,6 @@
 import { obtenerPorId, actualizarProducto, eliminarProducto } from "../../../api/services/productos.service.js";
 import { obtenerClaseCategoria, obtenerLabelCategoria } from "../../../js/productos.js";
-import { mostrarProductoActualizado, mostrarErrorProducto } from "../../../api/productoFeedback.js";
+import { mostrarProductoActualizado, mostrarProductoEliminado, mostrarErrorProducto } from "../../../api/productoFeedback.js";
 
 let productoActual = null;
 
