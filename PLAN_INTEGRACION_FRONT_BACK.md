@@ -282,42 +282,42 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 ### Tareas
 
-1. **Conectar VISTA `src/admin/productos/productos.js`**
-   - Cargar `GET /api/productos` al entrar
-   - Renderizar todos los productos (no solo los de `localStorage`)
+1. ✅ **Conectar VISTA `src/admin/productos/productos.js`**
+   - ✅ Cargar `GET /api/productos` al entrar
+   - ✅ Renderizar todos los productos (no solo los de `localStorage`)
 
-2. **Conectar VISTA `src/admin/producto-formulario/producto-formulario.js`**
-   - `POST /api/productos` con payload adaptado
-   - Agregar campos faltantes: `stock` (requerido) y `available` (checkbox, default `true`)
-   - Usar el `value` del `<select>` de categoría, no el `textContent`
+2. ✅ **Conectar VISTA `src/admin/producto-formulario/producto-formulario.js`**
+   - ✅ `POST /api/productos` con payload adaptado
+   - ✅ Agregar campos faltantes: `stock` (requerido) y `available` (checkbox, default `true`)
+   - ✅ Usar el `value` del `<select>` de categoría, no el `textContent`
 
-3. **Agregar botón Editar por producto**
-   - Abrir modal precargado
-   - Llamar `PUT /api/productos/{id}`
+3. ✅ **Agregar botón Editar por producto**
+   - ✅ Abrir modal precargado
+   - ✅ Llamar `PUT /api/productos/{id}`
 
-4. **Agregar botón Eliminar por producto**
-   - Llamar `DELETE /api/productos/{id}` con confirmación
-   - Manejar error `409` (producto con dependencias)
+4. ✅ **Agregar botón Eliminar por producto**
+   - ✅ Llamar `DELETE /api/productos/{id}` con confirmación
+   - ✅ Manejar error `409` (producto con dependencias)
 
-5. **Conectar VISTA `src/admin/producto-detalle/producto-detalle.js`**
-   - Cargar `GET /api/productos/{id}` al entrar
-   - Mostrar todos los campos del producto (incluyendo `stock`, `available`, `description`)
-   - Mostrar botones de editar y eliminar
+5. ✅ **Conectar VISTA `src/admin/producto-detalle/producto-detalle.js`**
+   - ✅ Cargar `GET /api/productos/{id}` al entrar
+   - ✅ Mostrar todos los campos del producto (incluyendo `stock`, `available`, `description`)
+   - ✅ Mostrar botones de editar y eliminar
 
-6. **Manejo de errores**
-   - Mapear `ApiError.details` a los campos del formulario
+6. ✅ **Manejo de errores**
+   - ✅ Mapear `ApiError.details` a los campos del formulario
 
-7. **Eliminar lógica obsoleta**
-   - Eliminar `lumina-productos` de `localStorage` y su mezcla en el módulo de productos
+7. ✅ **Eliminar lógica obsoleta**
+   - ✅ Eliminar `lumina-productos` de `localStorage` y su mezcla en el módulo de productos
 
-8. **Proteger vistas del panel de administración**
-   - Agregar `<script type="module">` con `import { requireAuth } from "../../api/authGuard.js"; requireAuth(["ADMIN", "STAFF"]);` al inicio de cada vista del admin:
-     - `src/admin/productos/index.html`
-     - `src/admin/producto-detalle/index.html`
-   - Si no hay sesión activa o el rol no es `ADMIN`/`STAFF`, redirigir a `src/tienda/login/index.html`
-   - Reutilizar `src/api/authGuard.js` creado en el Rol A
+8. ✅ **Proteger vistas del panel de administración**
+   - ✅ Agregar `<script type="module">` con `import { requireAuth } from "../../api/authGuard.js"; requireAuth(["ADMIN", "STAFF"]);` al inicio de cada vista del admin:
+     - ✅ `src/admin/productos/index.html`
+     - ✅ `src/admin/producto-detalle/index.html`
+   - ✅ Si no hay sesión activa o el rol no es `ADMIN`/`STAFF`, redirigir a `src/tienda/login/index.html`
+   - ✅ Reutilizar `src/api/authGuard.js` creado en el Rol A
 
-**Entrega del Rol D:** PR con admin CRUD funcionando contra el backend y todas las vistas protegidas contra acceso no autorizado.
+**Entrega del Rol D:** ✅ PR con admin CRUD funcionando contra el backend y todas las vistas protegidas contra acceso no autorizado.
 
 ---
 
