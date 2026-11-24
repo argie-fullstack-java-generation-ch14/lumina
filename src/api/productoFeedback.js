@@ -164,6 +164,18 @@ export function mostrarProductoActualizado(onAceptar) {
   construirModal("Producto actualizado", "El producto se guardó con éxito.", "exito", onAceptar);
 }
 
+export function mostrarProductoCreado(onAceptar) {
+  if (mostrada) return;
+  mostrada = true;
+  construirModal("Producto creado", "El producto se creó con éxito.", "exito", onAceptar);
+}
+
+export function mostrarProductoEliminado(onAceptar) {
+  if (mostrada) return;
+  mostrada = true;
+  construirModal("Producto eliminado", "El producto se eliminó con éxito.", "exito", onAceptar);
+}
+
 export function mostrarErrorProducto(mensaje, onAceptar) {
   if (mostrada) return;
   mostrada = true;

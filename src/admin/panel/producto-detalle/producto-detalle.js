@@ -39,15 +39,17 @@ function showViewError(message) {
 async function eliminarProductoActual() {
 	try {
 		await eliminarProducto(productoActual.id);
-		window.location.href = "../productos/";
+		mostrarProductoEliminado(() => {
+			window.location.href = "../index.html";
+		});
 	} catch (error) {
 		console.error("Error al eliminar producto:", error);
 		if (error.status === 409) {
-			alert("No se puede eliminar el producto porque tiene órdenes asociadas.");
+			mostrarErrorProducto("No se puede eliminar el producto porque tiene órdenes asociadas.");
 		} else if (error.status === 403) {
-			alert("No tienes permisos para eliminar productos.");
+			mostrarErrorProducto("No tienes permisos para eliminar productos.");
 		} else {
-			alert(error.message || "Ocurrió un error al eliminar el producto.");
+			mostrarErrorProducto(error.message || "No se pudo eliminar el producto.");
 		}
 	}
 }

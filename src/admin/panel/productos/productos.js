@@ -3,6 +3,7 @@
 
 import { obtenerTodas, crearProducto } from "../../../api/services/productos.service.js";
 import { obtenerClaseCategoria, obtenerLabelCategoria } from "../../../js/productos.js";
+import { mostrarProductoCreado, mostrarErrorProducto } from "../../../api/productoFeedback.js";
 
 const mount = document.querySelector("#productFormModalMount");
 const productList = document.querySelector("#product-list");
@@ -116,7 +117,7 @@ function renderProduct(product) {
 
 	card.addEventListener("click", (event) => {
 		if (event.target.closest("button")) return;
-		window.location.href = `../producto-detalle/?id=${product.id}`;
+		window.location.href = `./producto-detalle/?id=${product.id}`;
 	});
 }
 
@@ -145,13 +146,13 @@ window.addEventListener("product-created", async (event) => {
 			window.closeProductForm();
 		}
 		await cargarProductos();
+		mostrarProductoCreado();
 	} catch (error) {
 		console.error("Error al crear producto en backend:", error);
 		if (typeof window.showProductFormErrors === "function") {
 			window.showProductFormErrors(error);
-		} else {
-			alert(error.message || "Error al crear el producto.");
 		}
+		mostrarErrorProducto(error.message || "Error al crear el producto.");
 	}
 });
 
