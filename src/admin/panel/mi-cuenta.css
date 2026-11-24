@@ -1,0 +1,76 @@
+
+/* FONDO GENERAL */
+body:has(#panel-tabs) {
+  background-image:
+    linear-gradient(rgba(250, 247, 243, 0.15), rgba(250, 247, 243, 0.15)),
+    url("https://res.cloudinary.com/zj7mojiw/image/upload/v1794409332/Pausa_navide%C3%B1a_con_velas_Lumina.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* MENÚ LATERAL */
+#panel-tabs {
+  background-color: rgba(255, 250, 246, 0.55) !important;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+#panel-tabs .nav-link {
+  color: var(--celeste-apagado);
+  background-color: transparent;
+}
+
+#panel-tabs .nav-link.active {
+  background-color: rgba(53, 79, 86, 0.90);
+  color: #F7F1E9;
+}
+
+/* CONTENIDO */
+#panel-tabContent {
+  min-height: 70vh;
+}
+
+@media screen and (max-width: 767px) {
+  #panel-tabContent .tab-pane {
+    padding-top: 1.5rem;
+  }
+}
+
+/* TÍTULOS */
+#panel-info h3,
+#panel-pedidos h3,
+#panel-favoritos h3,
+#panel-productos h3 {
+  color: var(--cafe-lumina, #3B2C2C);
+  font-family: var(--fuente-titulos, Georgia, serif);
+}
+
+#panel-favoritos .btn-clear-favoritos {
+  color: var(--cafe-lumina);
+}
+
+#panel-favoritos .btn-clear-favoritos:hover {
+  opacity: 0.8;
+}
+
+/* Items de favoritos con la misma transparencia que .info-cuenta */
+#panel-favoritos .cart-item-card {
+  background-color: rgba(255, 250, 246, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+/* Mobile: apilar título y botón de Productos uno debajo del otro */
+@media screen and (max-width: 767px) {
+  #panel-productos .row.mb-4 > .col-12 > .d-flex {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem;
+  }
+
+  #panel-productos .btn.btn-agregar-vela {
+    margin-top: 1rem;
+    align-self: flex-start;
+  }
+}

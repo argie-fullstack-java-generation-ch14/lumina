@@ -1,8 +1,8 @@
 // Lumina · admin/productos
 // Conexión con la API REST del backend para listar y crear productos.
 
-import { obtenerTodas, crearProducto } from "../../api/services/productos.service.js";
-import { obtenerClaseCategoria, obtenerLabelCategoria } from "../../js/productos.js";
+import { obtenerTodas, crearProducto } from "../../../api/services/productos.service.js";
+import { obtenerClaseCategoria, obtenerLabelCategoria } from "../../../js/productos.js";
 
 const mount = document.querySelector("#productFormModalMount");
 const productList = document.querySelector("#product-list");

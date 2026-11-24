@@ -2,53 +2,11 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0; url=../panel/index.html">
   <title>Productos · Lumina</title>
-  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
-  <!-- Bootstrap va primero: su Reboot no debe pisar tus estilos -->
-  <link rel="stylesheet" href="../../css/bootstrap.min.css">
-
-  <link rel="stylesheet" href="../../css/main.css">
-  <link rel="stylesheet" href="../../css/components.css">
-  <link rel="stylesheet" href="../../tienda/catalogo/catalogo.css">
-  <link rel="stylesheet" href="productos.css">
-  <link rel="stylesheet" href="../producto-formulario/producto-formulario.css">
-
-  <script type="module">
-    import { requireAuth } from "../../api/authGuard.js";
-    requireAuth(["ADMIN", "STAFF"]);
-  </script>
 </head>
-<body class="d-flex flex-column min-vh-100">
-
-  <header id="header"></header>
-
-  <main class="container py-4 flex-grow-1">
-    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
-      <div>
-        <h1 class="h2 mb-1">Productos</h1>
-        <p class="mb-0 texto-admin">Administra las velas de Lumina.</p>
-      </div>
-      <button class="btn-agregar-vela" type="button" data-bs-toggle="modal" data-bs-target="#productFormModal">
-        Agregar producto
-      </button>
-    </div>
-    <div class="catalog-grid" id="product-list"></div>
-  </main>
-
-  <div id="productFormModalMount"></div>
-
-  <footer id="footer"></footer>
-
-  <!-- Bootstrap va primero: el modal usa su API -->
-  <script src="../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../js/ui.js"></script>
-  <script src="../../js/main.js"></script>
-  <script src="../../js/auth.js"></script>
-  <script src="../producto-formulario/producto-formulario.js"></script>
-  <script type="module" src="productos.js"></script>
+<body>
+  <p>Redirigiendo al panel de productos&hellip;</p>
+  <a href="../panel/index.html">Ir al panel de productos</a>
 </body>
 </html>
