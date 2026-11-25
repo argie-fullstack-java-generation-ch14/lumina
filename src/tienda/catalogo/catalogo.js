@@ -22,7 +22,7 @@ if (location.pathname.includes("catalogo")) {
 
 // Datos de los productos del catálogo.
 // Los productos son cargados por js/productos.js.
-const catalogo = { catalogo: productos };
+
 
 // Crear la tarjeta de un producto.
 function crearVela(producto) {
@@ -172,7 +172,7 @@ function actualizarCatalogo() {
         )
     ).map(input => normalizar(input.value));
 
-    let productosFiltrados = catalogo.catalogo.filter(producto => {
+    let productosFiltrados = productos.filter(producto => {
 
         const categoria = normalizar(producto.category);
         const aroma = normalizar(producto.scent);
@@ -265,7 +265,7 @@ actualizarCatalogo();
 
 // Actualizar catálogo cuando los productos sean cargados.
 window.addEventListener(
-    "velas-listadas",
+    "productos-listadas",
     actualizarCatalogo
 );
 

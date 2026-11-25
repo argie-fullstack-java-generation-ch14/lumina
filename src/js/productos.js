@@ -1,56 +1,109 @@
+
+import { productosService } from "../api/services/productos.service.js";
+
 export let productos = [];
 
-try {
-  const response = await fetch(new URL("../data/productos.json", import.meta.url));
-  productos = await response.json();
-} catch (error) {
-  console.warn("No se pudieron cargar los productos desde productos.json:", error);
-  productos = [];
-}
-
-// Fusionar productos creados desde el panel de admin (guardados en localStorage)
-try {
-  const productosCreados = JSON.parse(localStorage.getItem("lumina-productos") || "[]");
-
-  if (Array.isArray(productosCreados) && productosCreados.length > 0) {
-    const maxId = productos.reduce((max, producto) => Math.max(max, Number(producto.id) || 0), 0);
-
-    productosCreados.forEach((producto, index) => {
-      if (!producto.id || productos.some((p) => p.id === producto.id)) {
-        producto.id = maxId + index + 1;
-      }
-    });
-
-    productos.push(...productosCreados);
-  }
-} catch (error) {
-  console.warn("No se pudieron cargar los productos creados desde el admin:", error);
-}
-
 export const CATEGORIAS = [
-  { value: "bienestar", label: "Bienestar", clase: "category-bienestar" },
-  { value: "descanso", label: "Descanso", clase: "category-descanso" },
-  { value: "mindfulness", label: "Mindfulness", clase: "category-mindfulness" },
-  { value: "intencion", label: "Intención", clase: "category-intencion" },
-  { value: "amor-propio", label: "Amor propio", clase: "category-amor-propio" },
-  { value: "halloween", label: "Halloween", clase: "category-halloween" },
-  { value: "navidad", label: "Navidad", clase: "category-navidad" },
-  { value: "rituales", label: "Rituales", clase: "category-rituales" },
+    { value: "bienestar", label: "Bienestar", clase: "category-bienestar" },
+    { value: "descanso", label: "Descanso", clase: "category-descanso" },
+    { value: "mindfulness", label: "Mindfulness", clase: "category-mindfulness" },
+    { value: "intencion", label: "Intención", clase: "category-intencion" },
+    { value: "amor-propio", label: "Amor propio", clase: "category-amor-propio" },
+    { value: "halloween", label: "Halloween", clase: "category-halloween" },
+    { value: "navidad", label: "Navidad", clase: "category-navidad" },
+    { value: "rituales", label: "Rituales", clase: "category-rituales" },
 ];
 
 export function obtenerLabelCategoria(value) {
-  const encontrada = CATEGORIAS.find((categoria) => categoria.value === value);
-  return encontrada ? encontrada.label : value;
+    const encontrada = CATEGORIAS.find(
+        categoria => categoria.value === value
+    );
+
+    return encontrada ? encontrada.label : value;
 }
 
 export function obtenerClaseCategoria(value) {
-  const encontrada = CATEGORIAS.find((categoria) => categoria.value === value);
-  return encontrada ? encontrada.clase : "category-default";
+    const encontrada = CATEGORIAS.find(
+        categoria => categoria.value === value
+    );
+
+    return encontrada ? encontrada.clase : "category-default";
 }
 
-window.productos = productos;
+// Cargar productos desde el backend.
+async function cargarProductos() {
+    window.productosCargando = true;
+
+    const respuesta = await productosService.obtenerTodas();
+
+    if (!respuesta.ok) {
+        console.error(
+            "Error cargando productos desde la API:",
+            respuesta.error
+        );
+
+        productos = [];
+        window.productos = productos;
+        window.productosCargando = false;
+
+        window.dispatchEvent(
+            new CustomEvent("productos-listadas")
+        );
+
+        return;
+    }
+
+    productos = respuesta.data || [];
+
+    // Fusionar productos creados desde el panel de administración.
+    try {
+        const productosCreados = JSON.parse(
+            localStorage.getItem("lumina-productos") || "[]"
+        );
+
+        if (
+            Array.isArray(productosCreados) &&
+            productosCreados.length > 0
+        ) {
+            const maxId = productos.reduce(
+                (max, producto) =>
+                    Math.max(max, Number(producto.id) || 0),
+                0
+            );
+
+            productosCreados.forEach((producto, index) => {
+                if (
+                    !producto.id ||
+                    productos.some(p => p.id === producto.id)
+                ) {
+                    producto.id = maxId + index + 1;
+                }
+            });
+
+            productos.push(...productosCreados);
+        }
+    } catch (error) {
+        console.warn(
+            "No se pudieron cargar los productos creados desde el admin:",
+            error
+        );
+    }
+
+    // Exponer productos y funciones globales utilizadas por otros módulos.
+    window.productos = productos;
+    window.obtenerClaseCategoria = obtenerClaseCategoria;
+    window.obtenerLabelCategoria = obtenerLabelCategoria;
+
+    // Notificar que los productos ya están disponibles.
+    window.productosCargando = false;
+
+    window.dispatchEvent(
+        new CustomEvent("productos-listadas")
+    );
+}
+
+// Exponer funciones globales utilizadas por otros módulos.
 window.obtenerClaseCategoria = obtenerClaseCategoria;
 window.obtenerLabelCategoria = obtenerLabelCategoria;
 
-// Notifica a los demás módulos que el catálogo de productos ya está disponible.
-window.dispatchEvent(new CustomEvent("productos-listadas"));
+cargarProductos();

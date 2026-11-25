@@ -65,4 +65,8 @@ function initProducto() {
   });
 }
 
-initProducto();
+window.addEventListener("productos-listadas", initProducto);
+
+if (!window.productosCargando && productos.length > 0) {
+  initProducto();
+}
