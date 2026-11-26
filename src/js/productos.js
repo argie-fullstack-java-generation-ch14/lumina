@@ -1,10 +1,17 @@
+// Lumina · Módulo de productos
+// ------------------------------------------------------------
+// Carga los productos desde la API del backend y los expone
+// para el catálogo, detalle, carrito y otros módulos.
+// Reutiliza src/api/services/productos.service.js (Rol B).
+
+import { obtenerTodas } from "../../api/services/productos.service.js";
+
 export let productos = [];
 
 try {
-  const response = await fetch(new URL("../data/productos.json", import.meta.url));
-  productos = await response.json();
+  productos = await obtenerTodas();
 } catch (error) {
-  console.warn("No se pudieron cargar los productos desde productos.json:", error);
+  console.warn("No se pudieron cargar los productos desde el backend:", error);
   productos = [];
 }
 

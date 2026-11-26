@@ -204,26 +204,26 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
    - ✅ `obtenerPorCategoria(categoria)` → `GET /api/productos?categoria=...`
    - ✅ `obtenerDisponibles()` → `GET /api/productos?disponibles=true`
 
-2. **Conectar VISTA `src/js/productos.js`** (o `src/js/velas.js`)
-   - Reemplazar `fetch(productos.json)` por llamada al service
-   - Mantener `window.productos` y evento `productos-listadas` como puente temporal
+2. ✅ **Conectar VISTA `src/js/productos.js`** (o `src/js/velas.js`)
+   - ✅ Reemplazar `fetch(productos.json)` por llamada al service
+   - ✅ Mantener `window.productos` y evento `productos-listadas` como puente temporal
 
-3. **Conectar VISTA `src/tienda/catalogo/catalogo.js`**
-   - Cargar productos desde la API al entrar
-   - Seguir filtrando/ordenando en el front
+3. ✅ **Conectar VISTA `src/tienda/catalogo/catalogo.js`**
+   - ✅ Cargar productos desde la API al entrar
+   - ✅ Seguir filtrando/ordenando en el front
 
-4. **Conectar VISTA `src/tienda/catalogo/producto/producto.js`**
-   - Buscar por `slug` en el módulo de productos
-   - Mostrar estado "no encontrado" si no existe
+4. ✅ **Conectar VISTA `src/tienda/catalogo/producto/producto.js`**
+   - ✅ Buscar por `slug` en el módulo de productos
+   - ✅ Mostrar estado "no encontrado" si no existe
 
-5. **Preparar carrito de compras (VISTA `src/js/carrito.js`) para el Rol C**
-   - Leer y escribir `lumina-carrito` en `localStorage` (array de `{ productId, quantity }`)
-   - Funciones: `agregarAlCarrito(id)`, `cambiarCantidad(id, delta)`, `eliminarItem(id)`, `vaciarCarrito()`, `obtenerCarrito()`
-   - Calcular totales locales (subtotal, IVA 19%, total) como referencia visual
-   - **No conectar aún al backend de pedidos** — el Rol C hará el `POST /api/pedidos` usando estos items
+5. ✅ **Preparar carrito de compras (VISTA `src/js/carrito.js`) para el Rol C**
+   - ✅ Leer y escribir `lumina-carrito` en `localStorage` (array de `{ productId, quantity }`)
+   - ✅ Funciones: `agregarAlCarrito(id)`, `cambiarCantidad(id, delta)`, `eliminarItem(id)`, `vaciarCarrito()`, `obtenerProductosCarrito()` (equivalente a `obtenerCarrito()`)
+   - ✅ Calcular totales locales (subtotal, IVA 19%, total) como referencia visual
+   - ✅ **No conectar aún al backend de pedidos** — el Rol C hará el `POST /api/pedidos` usando estos items
 
-6. **Deprecar JSON estático**
-   - Dejar de usar `productos.json` / `velas.json` en runtime
+6. ✅ **Deprecar JSON estático**
+   - ✅ Dejar de usar `productos.json` / `velas.json` en runtime
 
 **Entrega del Rol B:** PR con catálogo, detalle y carrito funcionando (carrito en localStorage, listo para que el Rol C lo consuma en el checkout).
 
