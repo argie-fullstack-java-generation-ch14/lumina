@@ -67,15 +67,32 @@
     el.addEventListener("hidden.bs.modal", resetCheckout);
 
     if (form) {
-      form.addEventListener("submit", (event) => {
+      form.addEventListener("submit", async (event) => {
         event.preventDefault();
+
+        // Verificar que exista sesión
+        const token = localStorage.getItem("token");
+        const usuarioActivo = localStorage.getItem("usuarioActivo");
+
+        if (!token || !usuarioActivo) {
+          alert("Debes iniciar sesión para realizar una compra.");
+          const loginUrl = new URL("tienda/login/index.html", new URL(".", document.currentScript.src).href).href;
+          window.location.href = loginUrl;
+          return;
+        }
+
+        const usuario = JSON.parse(usuarioActivo);
 
         const numero = `L-${Math.floor(1000 + Math.random() * 9000)}`;
         if (orderNumber) {
           orderNumber.textContent = numero;
         }
 
-        // Guarda el pedido en localStorage para que aparezca en "Mis pedidos".
+        // Obtener cupón si se aplicó
+        const cuponInput = document.getElementById("couponInput");
+        const couponCode = cuponInput ? cuponInput.value.trim() : undefined;
+
+        // Llamar al backend para crear el pedido
         if (
           typeof obtenerProductosCarrito === "function" &&
           typeof calcularTotales === "function"
@@ -83,35 +100,32 @@
           const productosCarrito = obtenerProductosCarrito();
           const totales = calcularTotales(productosCarrito);
 
-          const pedido = {
-            orderNumber: numero,
-            createdAt: new Date().toISOString(),
-            status: "PENDING",
-            open: true,
-            subtotal: totales.subtotal,
-            discountTotal: totales.discountTotal,
-            taxTotal: totales.taxTotal,
-            total: totales.total,
-            items: productosCarrito.map((p) => ({
-              productId: p.id,
-              productName: p.name,
-              unitPrice: p.price,
-              quantity: p.quantity,
-              lineTotal: p.price * p.quantity
-            }))
-          };
-
-          let guardados = [];
           try {
-            guardados = JSON.parse(localStorage.getItem(PEDIDOS_GUARDADOS_KEY) || "[]");
-            if (!Array.isArray(guardados)) guardados = [];
-          } catch (error) {
-            console.error("Error al leer pedidos guardados:", error);
-            guardados = [];
-          }
+            const { crearPedido } = await import("../../api/services/pedidos.service.js");
 
-          guardados.unshift(pedido);
-          localStorage.setItem(PEDIDOS_GUARDADOS_KEY, JSON.stringify(guardados));
+            const pedidoResponse = await crearPedido({
+              usuarioId: usuario.id,
+              items: productosCarrito.map((p) => ({
+                productId: p.id,
+                quantity: p.quantity
+              })),
+              couponCode
+            }, token);
+
+            // Mostrar número de orden real del backend
+            if (orderNumber && pedidoResponse.orderNumber) {
+              orderNumber.textContent = pedidoResponse.orderNumber;
+            }
+          } catch (error) {
+            console.error("Error al crear pedido:", error);
+            alert("Error al procesar el pedido. Intenta de nuevo.");
+            return;
+          }
+        } else {
+          // Fallback si no hay funciones del carrito
+          if (orderNumber) {
+            orderNumber.textContent = numero;
+          }
         }
 
         if (form) {

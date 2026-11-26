@@ -235,42 +235,36 @@ El refactor nace de la rama base `integracion/front-back`, creada desde `main`. 
 
 ### Tareas
 
-1. **Implementar `src/api/services/usuarios.service.js`**
-   - `registrar(data)` → `POST /api/registro`
-   - `login(data)` → `POST /api/login`
-   - `obtenerUsuario(id)` → `GET /api/usuarios/{id}`
-   - `actualizarUsuario(id, data)` → `PUT /api/usuarios/{id}`
+1. ✅ **Implementar `src/api/services/usuarios.service.js`**
+   - ✅ `registrar(data)` → `POST /api/registro`
+   - ✅ `login(data)` → `POST /api/login`
+   - ✅ `obtenerUsuario(id)` → `GET /api/usuarios/{id}`
+   - ✅ `actualizarUsuario(id, data)` → `PUT /api/usuarios/{id}`
 
-2. **Implementar `src/api/services/pedidos.service.js`**
-   - `crearPedido(data)` → `POST /api/pedidos`
-   - `listarPedidosPorUsuario(usuarioId)` → `GET /api/pedidos?usuarioId=`
-   - `actualizarEstado(id, estado)` → `PUT /api/pedidos/{id}/estado`
+2. ✅ **Implementar `src/api/services/pedidos.service.js`**
+   - ✅ `crearPedido(data)` → `POST /api/pedidos`
+   - ✅ `listarPedidosPorUsuario(usuarioId)` → `GET /api/pedidos?usuarioId=`
+   - ✅ `actualizarEstado(id, estado)` → `PUT /api/pedidos/{id}/estado`
 
-3. **Conectar VISTA `src/componentes/checkout-modal/checkout-modal.js`**
-   - Validar que exista sesión (`usuarioActivo.id`); si no, redirigir al login
-   - Llamar `POST /api/pedidos` en lugar de generar `L-####` y guardar en `localStorage`
-   - Mostrar totales del `OrderResponse` del backend
-   - Enviar `couponCode` si aplica
+3. ✅ **Conectar VISTA `src/componentes/checkout-modal/checkout-modal.js`**
+   - ✅ Validar que exista sesión (`usuarioActivo.id`); si no, redirigir al login
+   - ✅ Llamar `POST /api/pedidos` en lugar de generar `L-####` y guardar en `localStorage`
+   - ✅ Mostrar totales del `OrderResponse` del backend
+   - ✅ Enviar `couponCode` si aplica
 
-4. **Conectar VISTA `src/tienda/mi-cuenta/pedidos/pedidos.js`**
-   - Llamar `GET /api/pedidos?usuarioId=`
-   - Renderizar usando el mapa de estados (PENDING → Pendiente, etc.)
-   - Dejar de mezclar `pedidos.json` con `lumina-pedidos`
+4. ✅ **Conectar VISTA `src/tienda/mi-cuenta/pedidos/pedidos.js`**
+   - ✅ Llamar `GET /api/pedidos?usuarioId=`
+   - ✅ Renderizar usando el mapa de estados (PENDING → Pendiente, etc.)
+   - ✅ Dejar de mezclar `pedidos.json` con `lumina-pedidos`
 
-5. **Conectar VISTA `src/js/main.js` y VISTA `src/tienda/mi-cuenta/info/`**
-   - Leer `usuarioActivo` con `fullName`, `phone`, `email`
-   - Eliminar bloque de contraseña en "Mi cuenta"
+5. ✅ **Conectar VISTA `src/js/main.js` y VISTA `src/tienda/mi-cuenta/info/`**
+   - ✅ Leer `usuarioActivo` con `fullName`, `phone`, `email`
+   - ✅ Eliminar bloque de contraseña en "Mi cuenta"
 
-6. **Proteger vistas de mi-cuenta contra acceso no autenticado**
-   - Llamar a `requireAuth(['CUSTOMER', 'ADMIN', 'STAFF'])` al inicio de VISTA `src/tienda/mi-cuenta/info/`, VISTA `src/tienda/mi-cuenta/pedidos/` y VISTA `src/tienda/mi-cuenta/favoritos/`
-   - Si no hay sesión activa, redirigir a `src/tienda/login/index.html`
-   - Reutilizar `src/api/authGuard.js` creado en el Rol A
-
-7. **Nota sobre el carrito de compras**
-   - El carrito permanece en `localStorage` y NO se asocia a la sesión del usuario ni al backend.
-   - Funciona como carrito de invitado: se puede agregar productos sin iniciar sesión.
-   - Al hacer checkout (`POST /api/pedidos`), se envía el `userId` del usuario autenticado. Si no hay sesión, el frontend debe solicitar login o registro antes de finalizar la compra.
-   - El carrito se pierde si el usuario limpia el `localStorage`, cambia de navegador o de dispositivo.
+6. ✅ **Proteger vistas de mi-cuenta contra acceso no autenticado**
+   - ✅ Llamar a `requireAuth(['CUSTOMER', 'ADMIN', 'STAFF'])` al inicio de VISTA `src/tienda/mi-cuenta/info/`, VISTA `src/tienda/mi-cuenta/pedidos/` y VISTA `src/tienda/mi-cuenta/favoritos/`
+   - ✅ Si no hay sesión activa, redirigir a `src/tienda/login/index.html`
+   - ✅ Reutilizar `src/api/authGuard.js` creado en el Rol A
 
 **Entrega del Rol C:** PR con autenticación, checkout y mis pedidos funcionando contra el backend.
 
