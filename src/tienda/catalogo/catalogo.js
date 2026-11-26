@@ -6,22 +6,22 @@
 const CATALOGO_DIR = new URL(".", import.meta.url).href;
 const PRODUCTO_URL = new URL("producto/", CATALOGO_DIR).href;
 
-import { productos, obtenerClaseCategoria, obtenerLabelCategoria } from "../../js/productos.js";
+import {
+    productos,
+    obtenerClaseCategoria,
+    obtenerLabelCategoria
+} from "../../js/productos.js";
 
 // El enlace "Explora todo el catálogo" solo tiene sentido cuando el catálogo
 // se muestra desde el inicio; en esta misma página se oculta.
-// (En la home el catálogo se inyecta pero el pathname es del index raíz.)
-// La clase "pagina-catalogo" permite estilos exclusivos cuando la ruta
-// contiene "catalogo".
 if (location.pathname.includes("catalogo")) {
     document.querySelector(".view-all-link")?.remove();
-    document.getElementById("catalogo-completo")?.classList.add("catalogo-margin");
+    document.getElementById("catalogo-completo")
+        ?.classList.add("catalogo-margin");
 }
 
-// Datos de los productos del catálogo: viven en js/productos.json, cargados
-// por js/productos.js (misma estructura de datos para el carrusel de la
-// home y el módulo de favoritas de temporada).
-const catalogo = { catalogo: productos };
+// Datos de los productos del catálogo.
+// Los productos son cargados por js/productos.js.
 
 
 // Crear la tarjeta de un producto.
@@ -49,7 +49,9 @@ function crearVela(producto) {
                 class="favorite-button"
                 type="button"
                 data-product-id="${producto.id}"
-                aria-label="${esFavorito(producto.id) ? `Quitar ${producto.name} de favoritos` : `Agregar ${producto.name} a favoritos`}"
+                aria-label="${esFavorito(producto.id)
+                    ? `Quitar ${producto.name} de favoritos`
+                    : `Agregar ${producto.name} a favoritos`}"
                 aria-pressed="${esFavorito(producto.id)}">
 
                 <i class="fa-${esFavorito(producto.id) ? "solid" : "regular"} fa-heart"
@@ -63,7 +65,9 @@ function crearVela(producto) {
                     <h3>${producto.name}</h3>
 
                     <span class="candle-category ${claseCategoria}">
-                        ${producto.category}
+                        ${obtenerLabelCategoria
+                            ? obtenerLabelCategoria(producto.category)
+                            : producto.category}
                     </span>
                 </div>
 
@@ -133,9 +137,11 @@ const esPaginaPrincipal =
     document.body.dataset.page === "home";
 
 
-// Comparaciones sin tildes: "Intención" y "intencion" deben coincidir.
+// Comparaciones sin tildes:
+// "Intención" e "intencion" deben coincidir.
 function normalizar(texto) {
-    return texto
+    return (texto || "")
+        .toString()
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
@@ -144,10 +150,9 @@ function normalizar(texto) {
 
 // Aplicar filtros y ordenamiento.
 function actualizarCatalogo() {
-    // Reintenta encontrar el contenedor: en la home este script puede
-    // ejecutarse antes de que la sección del catálogo se termine de
-    // inyectar (el módulo de favoritas de temporada también lo carga),
-    // y una captura única con null dejaría el grid vacío hasta recargar.
+
+    // Reintenta encontrar el contenedor por si el catálogo
+    // fue inyectado dinámicamente en la página principal.
     const contenedor = contenedorCatalogo ||
         document.getElementById("catalog-container");
 
@@ -167,7 +172,8 @@ function actualizarCatalogo() {
         )
     ).map(input => normalizar(input.value));
 
-    let productosFiltrados = catalogo.catalogo.filter(producto => {
+    let productosFiltrados = productos.filter(producto => {
+
         const categoria = normalizar(producto.category);
         const aroma = normalizar(producto.scent);
 
@@ -186,6 +192,8 @@ function actualizarCatalogo() {
         return coincideCategoria && coincideAroma;
     });
 
+
+    // Ordenamiento de productos.
     const orden = selectorOrden
         ? selectorOrden.value
         : "default";
@@ -194,25 +202,30 @@ function actualizarCatalogo() {
         productosFiltrados.sort((a, b) =>
             a.name.localeCompare(b.name, "es")
         );
+
     } else if (orden === "name-desc") {
         productosFiltrados.sort((a, b) =>
             b.name.localeCompare(a.name, "es")
         );
+
     } else if (orden === "price-asc") {
         productosFiltrados.sort((a, b) =>
             a.price - b.price
         );
+
     } else if (orden === "price-desc") {
         productosFiltrados.sort((a, b) =>
             b.price - a.price
         );
     }
 
-    // En la pagina principal mostrar solo 8 productos.
-    // En las demas paginas mostrar todos los productos filtrados.
+
+    // En la página principal mostrar solo 8 productos.
+    // En las demás páginas mostrar todos los filtrados.
     const productosVisibles = esPaginaPrincipal
         ? productosFiltrados.slice(0, 8)
         : productosFiltrados;
+
 
     console.log(
         "Productos mostrados:",
@@ -224,35 +237,48 @@ function actualizarCatalogo() {
         }))
     );
 
-    // Mostrar los productos en pantalla.
+
+    // Mostrar productos en pantalla.
     contenedor.innerHTML = productosVisibles
         .map(crearVela)
         .join("");
 
-    // Actualizar el contador de productos visibles.
+
+    // Actualizar contador de productos.
     if (contadorProductos) {
         contadorProductos.textContent =
             `${productosVisibles.length} productos encontrados`;
     }
 
-    // Mostrar mensaje si no hay productos.
+
+    // Mostrar mensaje cuando no hay resultados.
     if (mensajeVacio) {
-        mensajeVacio.hidden = productosVisibles.length > 0;
+        mensajeVacio.hidden =
+            productosVisibles.length > 0;
     }
 }
 
 
-// Mostrar los productos al cargar la pagina.
+// Mostrar productos al cargar la página.
 actualizarCatalogo();
 
 
-// Escuchar cambios en los filtros.
+// Actualizar catálogo cuando los productos sean cargados.
+window.addEventListener(
+    "productos-listadas",
+    actualizarCatalogo
+);
+
+
+/// Escuchar cambios en los filtros.
 document.querySelectorAll(
     'input[name="category"], input[name="scent"]'
 ).forEach(input => {
-    input.addEventListener("change", actualizarCatalogo);
+    input.addEventListener(
+        "change",
+        actualizarCatalogo
+    );
 });
-
 
 // Ordenar productos.
 if (selectorOrden) {
@@ -263,9 +289,10 @@ if (selectorOrden) {
 }
 
 
-// Limpiar filtros y restablecer el orden.
+// Limpiar filtros y restablecer orden.
 if (botonLimpiar) {
     botonLimpiar.addEventListener("click", function () {
+
         document.querySelectorAll(
             'input[name="category"], input[name="scent"]'
         ).forEach(input => {
@@ -282,11 +309,15 @@ if (botonLimpiar) {
 
 
 // El corazón de favoritos se maneja globalmente en js/favoritos.js
-// (guarda el producto en "lumina-favoritos" y pinta el corazón).
+// (guarda los productos en "lumina-favoritos" y pinta el corazón).
+
 
 // Agregar productos al carrito desde el catálogo.
 document.addEventListener("click", function (evento) {
-    const boton = evento.target.closest("#catalog-container .add-to-cart");
+
+    const boton = evento.target.closest(
+        "#catalog-container .add-to-cart"
+    );
 
     if (!boton) {
         return;

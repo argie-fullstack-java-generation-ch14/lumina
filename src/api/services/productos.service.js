@@ -7,7 +7,7 @@ import { apiGet, apiPost, apiPut, apiDelete } from "../client.js";
 import { endpoints } from "../endpoints.js";
 
 function getToken() {
-  return localStorage.getItem("token") || undefined;
+    return localStorage.getItem("token") || undefined;
 }
 
 /**
@@ -15,7 +15,7 @@ function getToken() {
  * GET /api/productos
  */
 export async function obtenerTodas() {
-  return apiGet(endpoints.productos.all);
+    return apiGet(endpoints.productos.all);
 }
 
 /**
@@ -23,7 +23,7 @@ export async function obtenerTodas() {
  * GET /api/productos/{id}
  */
 export async function obtenerPorId(id) {
-  return apiGet(endpoints.productos.byId(id));
+    return apiGet(endpoints.productos.byId(id));
 }
 
 /**
@@ -31,7 +31,7 @@ export async function obtenerPorId(id) {
  * GET /api/productos/slug/{slug}
  */
 export async function obtenerPorSlug(slug) {
-  return apiGet(endpoints.productos.bySlug(slug));
+    return apiGet(endpoints.productos.bySlug(slug));
 }
 
 /**
@@ -39,7 +39,7 @@ export async function obtenerPorSlug(slug) {
  * GET /api/productos?categoria={categoria}
  */
 export async function obtenerPorCategoria(categoria) {
-  return apiGet(endpoints.productos.byCategory(categoria));
+    return apiGet(endpoints.productos.byCategory(categoria));
 }
 
 /**
@@ -47,7 +47,7 @@ export async function obtenerPorCategoria(categoria) {
  * GET /api/productos?disponibles=true
  */
 export async function obtenerDisponibles() {
-  return apiGet(endpoints.productos.available);
+    return apiGet(endpoints.productos.available);
 }
 
 /**
@@ -55,7 +55,7 @@ export async function obtenerDisponibles() {
  * POST /api/productos
  */
 export async function crearProducto(data) {
-  return apiPost(endpoints.productos.all, data, getToken());
+    return apiPost(endpoints.productos.all, data, getToken());
 }
 
 /**
@@ -63,7 +63,7 @@ export async function crearProducto(data) {
  * PUT /api/productos/{id}
  */
 export async function actualizarProducto(id, data) {
-  return apiPut(endpoints.productos.byId(id), data, getToken());
+    return apiPut(endpoints.productos.byId(id), data, getToken());
 }
 
 /**
@@ -71,16 +71,16 @@ export async function actualizarProducto(id, data) {
  * DELETE /api/productos/{id}
  */
 export async function eliminarProducto(id) {
-  return apiDelete(endpoints.productos.byId(id), getToken());
+    return apiDelete(endpoints.productos.byId(id), getToken());
 }
 
 export default {
-  obtenerTodas,
-  obtenerPorId,
-  obtenerPorSlug,
-  obtenerPorCategoria,
-  obtenerDisponibles,
-  crearProducto,
-  actualizarProducto,
-  eliminarProducto,
+    obtenerTodas,
+    obtenerPorId,
+    obtenerPorSlug,
+    obtenerPorCategoria,
+    obtenerDisponibles,
+    crearProducto,
+    actualizarProducto,
+    eliminarProducto,
 };
