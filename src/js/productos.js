@@ -4,7 +4,7 @@
 // para el catálogo, detalle, carrito y otros módulos.
 // Reutiliza src/api/services/productos.service.js (Rol B).
 
-import { obtenerTodas } from "../../api/services/productos.service.js";
+import { obtenerTodas } from "../api/services/productos.service.js";
 
 export let productos = [];
 
@@ -65,12 +65,12 @@ export function obtenerClaseCategoria(value) {
 async function cargarProductos() {
     window.productosCargando = true;
 
-    const respuesta = await productosService.obtenerTodas();
-
-    if (!respuesta.ok) {
+    try {
+        productos = await obtenerTodas();
+    } catch (error) {
         console.error(
             "Error cargando productos desde la API:",
-            respuesta.error
+            error
         );
 
         productos = [];
@@ -84,7 +84,7 @@ async function cargarProductos() {
         return;
     }
 
-    productos = respuesta.data || [];
+    productos = Array.isArray(productos) ? productos : [];
 
     // Fusionar productos creados desde el panel de administración.
     try {
