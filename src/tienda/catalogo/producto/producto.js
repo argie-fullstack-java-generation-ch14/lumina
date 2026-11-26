@@ -2,14 +2,16 @@ import { productos, obtenerClaseCategoria, obtenerLabelCategoria } from "../../.
 
 function initProducto() {
   const params = new URLSearchParams(window.location.search);
-  const slug = params.get("slug");
-  const producto =
-    productos.find((p) => p.slug === slug) ?? productos[0];
+const slug = params.get("slug");
+const producto =
+  productos.find((p) => p.slug === slug);
 
-  if (!producto) {
-    document.getElementById("producto-nombre").textContent = "Producto no encontrado";
-    return;
-  }
+if (!producto) {
+  document.getElementById("producto-nombre").textContent = "Producto no encontrado";
+  document.getElementById("producto-descripcion").textContent = "El producto solicitado no existe.";
+  document.title = "Producto no encontrado · Lumina";
+  return;
+}
 
   document.getElementById("producto-nombre").textContent = producto.name;
 

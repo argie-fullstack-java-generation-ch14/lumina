@@ -1,9 +1,10 @@
 // Lumina · mi cuenta · pedidos
-// Carga los pedidos desde src/data/pedidos.json y los que el usuario ha
+// Carga los pedidos desde el backend y los que el usuario ha
 // realizado (guardados en localStorage al pagar) y los renderiza con el
 // componente item-mis-pedidos, que reutiliza el resumen de compra del carrito.
 
-const PEDIDOS_URL = new URL("../../../data/pedidos.json", document.currentScript.src).href;
+import { listarPedidosPorUsuario } from "../../../../api/services/pedidos.service.js";
+
 const PEDIDOS_GUARDADOS_KEY = "lumina-pedidos";
 const IVA_TASA_PEDIDOS = 0.19;
 
@@ -140,22 +141,29 @@ window.renderPedidos = async function renderPedidos() {
     return;
   }
 
+  // Obtener el usuario autenticado
+  let usuarioId = null;
   try {
-    const [response, pedidosGuardados] = await Promise.all([
-      fetch(PEDIDOS_URL),
-      Promise.resolve(obtenerPedidosGuardados())
-    ]);
+    const usuario = JSON.parse(localStorage.getItem("usuarioActivo") || "null");
+    if (usuario && usuario.id) {
+      usuarioId = usuario.id;
+    }
+  } catch (error) {
+    console.error("Error al recuperar el usuario:", error);
+  }
 
-    if (!response.ok) {
-      throw new Error(`Error ${response.status} al cargar pedidos.json`);
+  try {
+    const pedidosGuardados = obtenerPedidosGuardados();
+
+    let pedidosJsonNormalizados = [];
+    if (usuarioId) {
+      const pedidosJson = await listarPedidosPorUsuario(usuarioId);
+      pedidosJsonNormalizados = Array.isArray(pedidosJson)
+        ? pedidosJson.map(normalizarPedido).filter(Boolean)
+        : [];
     }
 
-    const pedidosJson = await response.json();
-
     // Los pedidos realizados por el usuario van primero (los más recientes arriba).
-    const pedidosJsonNormalizados = Array.isArray(pedidosJson)
-      ? pedidosJson.map(normalizarPedido).filter(Boolean)
-      : [];
     const todos = [...pedidosGuardados, ...pedidosJsonNormalizados];
 
     renderPedidosConDatos(todos);

@@ -63,6 +63,7 @@ function initHeader() {
 
   // Rutas desde la carpeta src/.
   const loginUrl = new URL("tienda/login/index.html", APP_BASE).href;
+  const adminUrl = new URL("admin/panel/index.html", APP_BASE).href;
   const accountUrl = new URL("tienda/mi-cuenta/index.html", APP_BASE).href;
 
   // Recupera el usuario que inició sesión.
@@ -99,7 +100,10 @@ function initHeader() {
     }
 
     accountLink.onclick = () => {
-      window.location.href = accountUrl;
+      const destino = user && (user.role === "ADMIN" || user.role === "STAFF")
+        ? adminUrl
+        : accountUrl;
+      window.location.href = destino;
     };
 
     // Muestra el botón Cerrar sesión.
@@ -124,6 +128,7 @@ function initHeader() {
   // Acción para cerrar sesión.
   logoutButton.onclick = () => {
     localStorage.removeItem("usuarioActivo");
+    localStorage.removeItem("token");
     window.location.href = loginUrl;
   };
 }

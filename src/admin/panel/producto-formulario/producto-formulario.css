@@ -87,6 +87,17 @@
 	box-shadow: 0 0 0 3px rgba(128, 109, 101, 0.12);
 }
 
+/* Ocultar flechas (spinners) de inputs numéricos para evitar interferir con el scroll */
+.product-form-input[type="number"]::-webkit-inner-spin-button,
+.product-form-input[type="number"]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.product-form-input[type="number"] {
+	-moz-appearance: textfield;
+}
+
 .product-form-textarea {
 	min-height: 8.5rem;
 	resize: vertical;
@@ -172,4 +183,42 @@
 
 .btn-agregar-vela:active {
 	transform: translateY(0);
+}
+
+/* Switch "Disponible para venta" con paleta de colores Lumina */
+.product-form-field .form-check-input[type="checkbox"] {
+	width: 2.5rem;
+	height: 1.25rem;
+	background-color: #d1c7bd;
+	border-radius: 1.25rem;
+	border: none;
+	appearance: none;
+	position: relative;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+}
+
+.product-form-field .form-check-input[type="checkbox"]::after {
+	content: "";
+	position: absolute;
+	top: 0.1875rem;
+	left: 0.1875rem;
+	width: 0.875rem;
+	height: 0.875rem;
+	background-color: #ffffff;
+	border-radius: 50%;
+	transition: transform 0.2s ease;
+}
+
+.product-form-field .form-check-input[type="checkbox"]:checked {
+	background-color: var(--naranja-apagado, #AD784E);
+}
+
+.product-form-field .form-check-input[type="checkbox"]:checked::after {
+	transform: translateX(1.25rem);
+}
+
+.product-form-field .form-check-input[type="checkbox"]:focus {
+	box-shadow: 0 0 0 3px rgba(173, 120, 78, 0.35);
+	outline: none;
 }

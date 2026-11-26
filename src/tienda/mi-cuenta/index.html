@@ -108,6 +108,10 @@
   <footer id="footer"></footer>
 
   <!-- Scripts generales -->
+  <script type="module">
+    import { requireAuth } from "../../api/authGuard.js";
+    requireAuth();
+  </script>
   <script src="../../js/bootstrap.bundle.min.js"></script>
   <script src="../../js/ui.js"></script>
   <script src="../../js/main.js"></script>

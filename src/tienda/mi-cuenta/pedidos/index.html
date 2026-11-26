@@ -1,3 +1,8 @@
+<script type="module">
+  import { requireAuth } from "../../../api/authGuard.js";
+  requireAuth(["CUSTOMER", "ADMIN", "STAFF"]);
+</script>
+
 <div class="row mb-4">
   <div class="col-12 d-flex justify-content-between align-items-center">
     <h3 class="mb-0 fw-bold">Mis pedidos</h3>

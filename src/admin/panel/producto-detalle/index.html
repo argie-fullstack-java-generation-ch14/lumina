@@ -4,21 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detalle de producto · Lumina</title>
-  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="../../../assets/icons/favicon.svg">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../css/main.css">
-  <link rel="stylesheet" href="../../css/components.css">
+  <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../css/main.css">
+  <link rel="stylesheet" href="../../../css/components.css">
   <link rel="stylesheet" href="../producto-formulario/producto-formulario.css">
   <link rel="stylesheet" href="producto-detalle.css">
+
+  <script type="module">
+    import { requireAuth } from "../../../api/authGuard.js";
+    requireAuth(["ADMIN", "STAFF"]);
+  </script>
 </head>
 <body>
   <header id="header"></header>
   <main class="container my-5">
     <div class="container my-5">
       <div class="producto-toolbar">
-        <a class="articulo-volver" href="../productos/index.html">
+		<a class="articulo-volver" href="../index.html">
           <i class="ri-arrow-left-line"></i> Volver al listado
         </a>
         <div class="producto-acciones">
@@ -51,6 +56,8 @@
                   <li><strong>Aroma:</strong> <span id="producto-aroma"></span></li>
                   <li><strong>Peso:</strong> <span id="producto-peso"></span></li>
                   <li><strong>Color:</strong> <span id="producto-color"></span></li>
+                  <li><strong>Stock:</strong> <span id="producto-stock"></span></li>
+                  <li><strong>Estado:</strong> <span id="producto-available" class="badge bg-success"></span></li>
                 </ul>
               </div>
               <div class="producto-desc-block">
@@ -88,9 +95,9 @@
   </div>
 
   <footer id="footer"></footer>
-  <script src="../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../js/ui.js"></script>
-  <script src="../../js/main.js"></script>
+  <script src="../../../js/bootstrap.bundle.min.js"></script>
+  <script src="../../../js/ui.js"></script>
+  <script src="../../../js/main.js"></script>
   <script src="../producto-formulario/producto-formulario.js"></script>
   <script type="module" src="producto-detalle.js"></script>
 </body>

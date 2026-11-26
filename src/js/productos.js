@@ -1,7 +1,38 @@
+// Lumina · Módulo de productos
+// ------------------------------------------------------------
+// Carga los productos desde la API del backend y los expone
+// para el catálogo, detalle, carrito y otros módulos.
+// Reutiliza src/api/services/productos.service.js (Rol B).
 
-import { productosService } from "../api/services/productos.service.js";
+import { obtenerTodas } from "../../api/services/productos.service.js";
 
 export let productos = [];
+
+try {
+    productos = await obtenerTodas();
+} catch (error) {
+    console.warn("No se pudieron cargar los productos desde el backend:", error);
+    productos = [];
+}
+
+// Fusionar productos creados desde el panel de admin (guardados en localStorage)
+try {
+    const productosCreados = JSON.parse(localStorage.getItem("lumina-productos") || "[]");
+
+    if (Array.isArray(productosCreados) && productosCreados.length > 0) {
+        const maxId = productos.reduce((max, producto) => Math.max(max, Number(producto.id) || 0), 0);
+
+        productosCreados.forEach((producto, index) => {
+            if (!producto.id || productos.some((p) => p.id === producto.id)) {
+                producto.id = maxId + index + 1;
+            }
+        });
+
+        productos.push(...productosCreados);
+    }
+} catch (error) {
+    console.warn("No se pudieron cargar los productos creados desde el admin:", error);
+}
 
 export const CATEGORIAS = [
     { value: "bienestar", label: "Bienestar", clase: "category-bienestar" },

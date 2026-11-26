@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración · Lumina</title>
+  <link rel="icon" type="image/svg+image" href="../../assets/icons/favicon.svg">
+
+  <!-- Remix Icon -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+
+  <!-- Estilos generales -->
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/components.css">
+
+  <!-- Estilos del panel -->
+  <link rel="stylesheet" href="mi-cuenta.css">
+  <link rel="stylesheet" href="info/info.css">
+  <link rel="stylesheet" href="pedidos/pedidos.css">
+  <link rel="stylesheet" href="productos/productos.css">
+  <link rel="stylesheet" href="producto-detalle/producto-detalle.css">
+  <link rel="stylesheet" href="producto-formulario/producto-formulario.css">
+
+  <!-- Estilos de módulos compartidos -->
+  <link rel="stylesheet" href="../../tienda/catalogo/catalogo.css">
+  <link rel="stylesheet" href="../../componentes/carrito/resumen-compra/resumen-compra.css">
+  <link rel="stylesheet" href="../../componentes/favoritos/item-favoritos/item-favoritos.css">
+  <link rel="stylesheet" href="../../tienda/favoritos/favoritos.css">
+
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header id="header"></header>
+
+  <main class="container my-5">
+    <div class="row">
+
+      <!-- Menú lateral -->
+      <div class="col-md-4">
+        <div class="nav flex-column nav-pills p-3 rounded-4" id="panel-tabs" role="tablist"
+          aria-orientation="vertical">
+
+          <!-- Productos (primera pestaña, activa por defecto) -->
+          <button class="nav-link active text-start py-3 mb-2 d-flex align-items-center" id="panel-tab-productos"
+            data-bs-toggle="pill" data-bs-target="#panel-productos" type="button" role="tab"
+            aria-controls="panel-productos" aria-selected="true">
+
+            <i class="ri-candle-line me-2"></i>
+            Productos
+          </button>
+
+          <!-- Información de la cuenta -->
+          <button class="nav-link text-start py-3 mb-2 d-flex align-items-center" id="panel-tab-info"
+            data-bs-toggle="pill" data-bs-target="#panel-info" type="button" role="tab"
+            aria-controls="panel-info" aria-selected="false">
+
+            <i class="ri-user-line me-2"></i>
+            Mi Información
+          </button>
+
+          <!-- Pedidos -->
+          <button class="nav-link text-start py-3 mb-2 d-flex align-items-center" id="panel-tab-pedidos"
+            data-bs-toggle="pill" data-bs-target="#panel-pedidos" type="button" role="tab"
+            aria-controls="panel-pedidos" aria-selected="false">
+
+            <i class="ri-shopping-bag-3-line me-2"></i>
+            Mis pedidos
+          </button>
+
+          <!-- Favoritos -->
+          <button class="nav-link text-start py-3 d-flex align-items-center" id="panel-tab-favoritos"
+            data-bs-toggle="pill" data-bs-target="#panel-favoritos" type="button" role="tab"
+            aria-controls="panel-favoritos" aria-selected="false">
+
+            <i class="ri-heart-line me-2"></i>
+            Favoritos
+          </button>
+
+        </div>
+      </div>
+
+      <!-- Contenido de las secciones -->
+      <div class="col-md-8">
+        <div class="tab-content" id="panel-tabContent">
+
+          <!-- Productos -->
+          <div class="tab-pane fade show active" id="panel-productos" role="tabpanel"
+            aria-labelledby="panel-tab-productos">
+
+            <div class="row mb-4">
+              <div class="col-12 d-flex justify-content-between align-items-start">
+                <div>
+                  <h3 class="mb-1 fw-bold">Productos</h3>
+                  <p class="mb-0 texto-admin">Administra las velas de Lumina.</p>
+                </div>
+                <button class="btn btn-agregar-vela" type="button" data-bs-toggle="modal"
+                  data-bs-target="#productFormModal">Agregar producto</button>
+              </div>
+            </div>
+
+            <div class="catalog-grid" id="product-list"></div>
+
+          </div>
+
+          <!-- Información de la cuenta -->
+          <div class="tab-pane fade" id="panel-info" role="tabpanel" aria-labelledby="panel-tab-info">
+
+            <h3 class="mb-4 fw-bold">Información de la cuenta</h3>
+            <div class="info-cuenta">
+              <form id="form-info-cuenta">
+                <div class="mb-3">
+                  <label for="info-nombre" class="form-label">Nombre completo</label>
+                  <input type="text" class="form-control" id="info-nombre" readonly>
+                </div>
+                <div class="mb-3">
+                  <label for="info-email" class="form-label">Correo electrónico</label>
+                  <input type="email" class="form-control" id="info-email" readonly>
+                </div>
+                <div class="mb-3">
+                  <label for="info-telefono" class="form-label">Número de teléfono</label>
+                  <input type="tel" class="form-control" id="info-telefono" readonly>
+                </div>
+              </form>
+            </div>
+
+          </div>
+
+          <!-- Mis pedidos -->
+          <div class="tab-pane fade" id="panel-pedidos" role="tabpanel" aria-labelledby="panel-tab-pedidos">
+
+            <div class="row mb-4">
+              <div class="col-12 d-flex justify-content-between align-items-center">
+                <h3 class="mb-0 fw-bold">Mis pedidos</h3>
+                <a href="../catalogo/index.html" class="btn btn-clear-favoritos d-flex align-items-center gap-2">
+                  <i class="ri-arrow-left-line"></i>
+                  <span>Ir al catálogo</span>
+                </a>
+              </div>
+            </div>
+            <div class="accordion pedidos-accordion" id="accordionPedidos"></div>
+
+          </div>
+
+          <!-- Favoritos -->
+          <div class="tab-pane fade" id="panel-favoritos" role="tabpanel" aria-labelledby="panel-tab-favoritos">
+
+            <div class="row mb-4">
+              <div class="col-12 d-flex justify-content-between align-items-center">
+                <h3 class="mb-0 fw-bold">Favoritos</h3>
+                <button type="button" class="btn btn-clear-favoritos d-flex align-items-center gap-2"
+                  data-action="clear-favoritos">
+                  <i class="fa-solid fa-trash-can"></i>
+                  <span>Vaciar favoritos</span>
+                </button>
+              </div>
+            </div>
+            <div id="favoritos-items-container" class="d-flex flex-column gap-3 cart-items-container"></div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer"></footer>
+
+  <!-- Mount del modal de formulario de producto -->
+  <div id="productFormModalMount"></div>
+
+  <!-- Scripts generales -->
+  <script type="module">
+    import { requireAuth } from "../../api/authGuard.js";
+    requireAuth(["ADMIN", "STAFF"]);
+  </script>
+  <script src="../../js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/ui.js"></script>
+  <script src="../../js/main.js"></script>
+  <script src="../../js/auth.js"></script>
+
+  <!-- Catálogo de productos (tienda, necesario por admin/productos.js) -->
+  <script type="module" src="../../js/productos.js"></script>
+  <script src="../../js/carrito.js"></script>
+
+  <!-- Scripts del módulo Productos (admin) -->
+  <script type="module" src="productos/productos.js"></script>
+  <script src="producto-formulario/producto-formulario.js"></script>
+
+  <!-- Scripts del módulo Pedidos -->
+  <script src="pedidos/pedidos.js"></script>
+
+  <!-- Scripts del módulo Información -->
+  <script src="info/info.js"></script>
+
+  <!-- Scripts de favoritos -->
+  <script src="../../componentes/favoritos/item-favoritos/item-favoritos.js"></script>
+  <script src="../../js/favoritos.js"></script>
+  <script src="../../tienda/favoritos/favoritos.js"></script>
+
+  <!-- Scripts del carrito y mis pedidos -->
+  <script src="../../componentes/carrito/resumen-compra/resumen-compra.js"></script>
+  <script src="../../componentes/item-mis-pedidos/item-mis-pedidos.js"></script>
+
+  <!-- Orquestador del panel -->
+  <script src="mi-cuenta.js"></script>
+
+</body>
+
+</html>

@@ -11,7 +11,7 @@
  */
 @import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Montserrat:wght@400;500;600&display=swap");
 
-@font-face {
+/* @font-face {
   font-family: "Recoleta";
   src: local("Recoleta"),
     local("Recoleta Regular"),
@@ -21,7 +21,7 @@
   font-weight: 400;
   font-style: normal;
   font-display: swap;
-}
+} */
 
 /* --- PALETA DE COLORES LUMINA --- */
 :root {
