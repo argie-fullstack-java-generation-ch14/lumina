@@ -3,7 +3,7 @@
 // realizado (guardados en localStorage al pagar) y los renderiza con el
 // componente item-mis-pedidos, que reutiliza el resumen de compra del carrito.
 
-import { listarPedidosPorUsuario } from "../../../../api/services/pedidos.service.js";
+import { listarPedidosPorUsuario } from "../../../api/services/pedidos.service.js";
 
 const PEDIDOS_GUARDADOS_KEY = "lumina-pedidos";
 const IVA_TASA_PEDIDOS = 0.19;
